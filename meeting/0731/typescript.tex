@@ -1,0 +1,300 @@
+\documentclass{beamer}
+
+% テーマとカラーテーマの選択
+\usetheme{Madrid} % または他のテーマ
+\usecolortheme{beaver} % または他のカラーテーマ
+
+% 日本語対応
+\usepackage{luatexja} % LuaTeX を使用
+\usepackage[ipaex]{luatexja-preset} % IPAexフォントを使用 (適宜変更)
+\usepackage{amsmath} % 数式用（必要であれば）
+\usepackage{alltt} % コードスニペット用
+
+% タイトル情報
+\title{TypeScript \& React 入門}
+\subtitle{モダンウェブサイト開発への道}
+\author{小林\ 紹子} % あなたの名前に変更
+\date{\today}
+
+\begin{document}
+
+% --------------------------------------------------
+% ページ1: タイトルスライド
+% --------------------------------------------------
+\begin{frame}
+    \titlepage
+\end{frame}
+
+% --------------------------------------------------
+% ページ2: はじめに - ウェブ開発の役割
+% --------------------------------------------------
+\begin{frame}
+    \frametitle{はじめに - ウェブ開発の役割}
+    \begin{itemize}
+        \item ウェブサイト開発、大きく2つの領域。
+        \begin{itemize}
+            \item \textbf{フロントエンド}:
+                \begin{itemize}
+                    \item ユーザーが使う画面（UI）。
+                    \item ブラウザで動き、操作に反応。
+                    \item React、TypeScriptが活躍。
+                \end{itemize}
+            \item \textbf{バックエンド}:
+                \begin{itemize}
+                    \item サーバー側の処理、データ管理。
+                    \item データベース連携、API提供。
+                    \item Node.js、Pythonなどが活躍。
+                \end{itemize}
+        \end{itemize}
+        \item 今回は\textbf{フロントエンド開発の強力な味方}、TypeScriptとReactに焦点を当てる。
+    \end{itemize}
+\end{frame}
+
+% --------------------------------------------------
+% ページ3: TypeScriptとは
+% --------------------------------------------------
+\begin{frame}
+    \frametitle{TypeScriptとは}
+    \begin{itemize}
+        \item \textbf{JavaScriptのスーパーセット}。
+            \begin{itemize}
+                \item JavaScriptの機能を全て含む上位互換言語。
+                \item 既存のJavaScriptコードはそのままTypeScriptとしても有効。
+            \end{itemize}
+        \item \textbf{静的型付けの導入}。
+            \begin{itemize}
+                \item 変数や関数の型を定義。
+                \item コード実行前のエラー検出が可能。
+            \end{itemize}
+        \item \textbf{主な機能}:
+            \begin{itemize}
+                \item \textbf{型注釈}: 変数に型を明示。
+                \item \textbf{インターフェース}: オブジェクト構造の定義。
+                \item \textbf{型推論}: 型の自動判別。
+            \end{itemize}
+        \item \textbf{Node.jsとの関連}:
+            \begin{itemize}
+                \item Node.jsでもTypeScriptを利用し、サーバーサイドの堅牢性を強化。
+            \end{itemize}
+    \end{itemize}
+\end{frame}
+
+% --------------------------------------------------
+% ページ4: TypeScriptのメリット
+% --------------------------------------------------
+\begin{frame}
+    \frametitle{TypeScriptのメリット}
+    \begin{itemize}
+        \item \textbf{堅牢性}:
+            \begin{itemize}
+                \item 型によるバグ早期発見。
+                \item 大規模アプリでも安定した開発。
+            \end{itemize}
+        \item \textbf{開発生産性}:
+            \begin{itemize}
+                \item エディタの強力な補完、エラーチェック。
+                \item 安全なコード改修（リファクタリング）。
+            \end{itemize}
+        \item \textbf{保守性}:
+            \begin{itemize}
+                \item コードの意図が明確で理解しやすい。
+                \item 大規模プロジェクト、複数人開発向き。
+            \end{itemize}
+        \item \textbf{可読性}:
+            \begin{itemize}
+                \item 型情報によるコードの明確化。
+            \end{itemize}
+        \item \textbf{JavaScript開発全般への恩恵}:
+            \begin{itemize}
+                \item フロントエンド、Node.jsなどのバックエンド開発でもメリット享受。
+            \end{itemize}
+    \end{itemize}
+\end{frame}
+
+% --------------------------------------------------
+% ページ5: Reactとは
+% --------------------------------------------------
+\begin{frame}
+    \frametitle{Reactとは}
+    \begin{itemize}
+        \item \textbf{UI構築のためのJavaScriptライブラリ}。
+            \begin{itemize}
+                \item Facebook（現Meta）が開発。
+                \item ウェブページの見た目（UI）作成に特化。
+            \end{itemize}
+        \item \textbf{コンポーネント指向}。
+            \begin{itemize}
+                \item UIを「再利用可能な独立した部品（コンポーネント）」に分割。
+                \item 部品を組み合わせ、複雑なUIを効率的に構築。
+            \end{itemize}
+        \item \textbf{仮想DOM (Virtual DOM)}。
+            \begin{itemize}
+                \item 実際のDOMの軽量なコピー。
+                \item UI変更時、仮想DOMで差分計算、必要な部分だけ更新。
+                \item 高速なUI描画を実現。
+            \end{itemize}
+        \item \textbf{宣言的UI}。
+            \begin{itemize}
+                \item UIが「どうあるべきか」を記述。
+                \item コードが直感的で理解しやすい。
+            \end{itemize}
+    \end{itemize}
+\end{frame}
+
+% --------------------------------------------------
+% ページ6: Reactの主な概念
+% --------------------------------------------------
+\begin{frame}
+    \frametitle{Reactの主な概念}
+    \begin{itemize}
+        \item \textbf{コンポーネント}:
+            \begin{itemize}
+                \item UIの最小単位。関数コンポーネントが主流。
+                \item 例: ボタン、ヘッダー、商品カードなど。
+                \begin{alltt}
+function MyButton() {
+  return <button>クリック</button>;
+}
+                \end{alltt}
+            \end{itemize}
+        \item \textbf{JSX (JavaScript XML)}:
+            \begin{itemize}
+                \item JavaScript中にHTMLのような構文を書く拡張機能。
+                \item React要素を作成。
+                \begin{alltt}
+const element = <h1>Hello, React!</h1>;
+                \end{alltt}
+            \end{itemize}
+        \item \textbf{State (状態)}:
+            \begin{itemize}
+                \item コンポーネントが持つ、変化するデータ。
+                \item 例: カウンターの値、フォーム入力値。
+            \end{itemize}
+        \item \textbf{Props (プロパティ)}:
+            \begin{itemize}
+                \item 親から子へデータを渡す仕組み。
+                \item 例: ボタンのテキスト、画像のURL。
+            \end{itemize}
+    \end{itemize}
+\end{frame}
+
+% --------------------------------------------------
+% ページ7: Reactのメリット
+% --------------------------------------------------
+\begin{frame}
+    \frametitle{Reactのメリット}
+    \begin{itemize}
+        \item \textbf{開発効率}:
+            \begin{itemize}
+                \item コンポーネント再利用で開発時間短縮。
+                \item 大規模UIでも効率的な開発。
+            \end{itemize}
+        \item \textbf{保守性}:
+            \begin{itemize}
+                \item コンポーネントごとの責務が明確で、変更が容易。
+                \item 変更の影響範囲が限定され、バグのリスクを低減。
+            \end{itemize}
+        \item \textbf{パフォーマンス}:
+            \begin{itemize}
+                \item 仮想DOMによる効率的なUI更新で、ユーザー体験向上。
+                \item スムーズなアニメーション、高速ページ遷移。
+            \end{itemize}
+        \item \textbf{宣言的UI}:
+            \begin{itemize}
+                \item コードが直感的で理解しやすい。
+                \item 複雑なUIロジックも簡潔に表現。
+            \end{itemize}
+        \item \textbf{優れたユーザー体験}:
+            \begin{itemize}
+                \item インタラクティブで滑らかなUI提供。
+            \end{itemize}
+    \end{itemize}
+\end{frame}
+
+% --------------------------------------------------
+% ページ8: TypeScriptとReactの組み合わせ - 最強のフロントエンド
+% --------------------------------------------------
+\begin{frame}
+    \frametitle{TypeScriptとReactの組み合わせ - 最強のフロントエンド}
+    \begin{itemize}
+        \item \textbf{型安全なReactアプリケーション開発}:
+            \begin{itemize}
+                \item ReactのPropsやStateにTypeScriptの型定義を適用。
+                \item コンポーネント間のデータ受け渡しにおける型エラーを開発段階で防止。
+                \item 例:
+                \begin{alltt}
+interface UserProps {
+  name: string;
+  age: number;
+}
+const UserProfile: React.FC<UserProps> = ({ name, age }) => {
+  return <p>{name} ({age}歳)</p>;
+};
+                \end{alltt}
+            \end{itemize}
+        \item \textbf{大規模フロントエンド開発の生産性・信頼性向上}:
+            \begin{itemize}
+                \item 複雑なUIを持つアプリでも、TypeScriptの型システムが品質を担保。
+            \end{itemize}
+        \item \textbf{開発ツール連携強化}:
+            \begin{itemize}
+                \item VS Codeなどで強力な補完、リアルタイムエラーチェック。
+            \end{itemize}
+    \end{itemize}
+\end{frame}
+
+% --------------------------------------------------
+% ページ9: Node.jsとの関係、それぞれの強み
+% --------------------------------------------------
+\begin{frame}
+    \frametitle{Node.jsとの関係、それぞれの強み}
+    \begin{itemize}
+        \item \textbf{Node.js}:
+            \begin{itemize}
+                \item \textbf{役割}: \textbf{サーバーサイド}処理、API構築、データベース連携。
+                \item \textbf{強み}:
+                    \begin{itemize}
+                        \item JavaScriptでサーバーサイド記述、\textbf{フルスタック開発}を容易に。
+                        \item 非同期I/Oに強く、リアルタイムアプリなどに適応。
+                    \end{itemize}
+                \item \textbf{TypeScriptとの組み合わせ}: Node.jsアプリでもTypeScript導入で、バックエンドも型安全に開発。
+            \end{itemize}
+        \item \textbf{TypeScript \& React}:
+            \begin{itemize}
+                \item \textbf{役割}: 高度な\textbf{ユーザーインターフェース}構築、ユーザー体験向上。
+                \item \textbf{強み}:
+                    \begin{itemize}
+                        \item 宣言的UI、コンポーネントによる再利用性、仮想DOMによる効率的なUI更新。
+                        \item TypeScriptによる型安全開発がフロントエンド開発の複雑さを大幅軽減。
+                    \end{itemize}
+            \end{itemize}
+        \item \textbf{結論}:
+            \begin{itemize}
+                \item \textbf{競合ではなく}、ウェブサイト全体を構築するための\textbf{異なる役割を持つ、補完しあうツール}。
+                \item Node.jsでAPIを構築し、TypeScriptとReactでそのAPIを利用するフロントエンド開発が現代の一般的パターン。
+            \end{itemize}
+    \end{itemize}
+\end{frame}
+
+% --------------------------------------------------
+% ページ10: まとめ - 次のステップへ / 質疑応答
+% --------------------------------------------------
+\begin{frame}
+    \frametitle{まとめ - 次のステップへ}
+    \begin{itemize}
+        \item \textbf{TypeScript}と\textbf{React}は、現代ウェブ開発において\textbf{堅牢}で\textbf{インタラクティブ}なフロントエンド構築に不可欠なツール。
+        \item Node.jsなどバックエンド技術との組み合わせで、より強力で高機能なウェブアプリ構築が可能。
+        \item \textbf{次のステップ}:
+            \begin{itemize}
+                \item 公式ドキュメントの参照:
+                    \begin{itemize}
+                        \item React: \url{https://react.dev/}
+                        \item TypeScript: \url{https://www.typescriptlang.org/}
+                    \end{itemize}
+                \item 簡単なTodoリストアプリなど、実際に手を動かすこと。
+            \end{itemize}
+    \end{itemize}
+    \vfill % 垂直方向のスペースを埋める
+\end{frame}
+
+\end{document}
