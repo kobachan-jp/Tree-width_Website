@@ -67,3 +67,49 @@ function compare(a, b) {
     return a === b ? 0 : a > b ? 1 : -1;
 }
 console.log(compare('b', 'a'));
+//2025-08-26 pp.58
+function error(message) {
+    throw new Error(message);
+}
+function foo(x) {
+    if (typeof x === 'string') {
+        return true;
+    }
+    else if (typeof x === 'number') {
+        return false;
+    }
+    return error('Never happens');
+}
+var PageType;
+(function (PageType) {
+    PageType[PageType["ViewProfile"] = 0] = "ViewProfile";
+    PageType[PageType["EditProfile"] = 1] = "EditProfile";
+    PageType[PageType["ChangePassword"] = 2] = "ChangePassword";
+})(PageType || (PageType = {}));
+var getTitleText = function (type) {
+    switch (type) {
+        case PageType.ViewProfile:
+            return 'Setting';
+        case PageType.EditProfile:
+            return 'Edit Profile';
+        case PageType.ChangePassword:
+            return 'Change Password';
+        default:
+            var wrongType = type;
+            throw new Error("".concat(wrongType, " is not in Pagetype"));
+    }
+};
+console.log(getTitleText(PageType.ViewProfile)); // => Setting
+console.log(getTitleText(PageType.EditProfile)); // => Edit Profile
+console.log(getTitleText(PageType.ChangePassword)); // => Change Password
+function getProperty(obj, key) {
+    return obj[key];
+}
+var user = {
+    name: 'Takuya',
+    age: 36,
+    email: 'test@example.com'
+};
+var userName = getProperty(user, 'name');
+console.log(userName);
+//const userGender = getProperty(user, 'gender')
