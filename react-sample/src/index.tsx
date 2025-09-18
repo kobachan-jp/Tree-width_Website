@@ -9,6 +9,8 @@ import Message from './components/Message';
 import Parent from './components/ContainerSample';
 import Parents from './components/ContainerSample2';
 import Page from './components/ContextSample';
+import Counter from './ReactSample/useState';
+import Counter2 from './ReactSample/useReducer';
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 root.render(
@@ -20,6 +22,8 @@ root.render(
     <Parent />
     <Parents />
     <Page />
+    <Counter initialValue={0} />
+    <Counter2 initialValue={0} />
   </React.StrictMode>
 );
 
