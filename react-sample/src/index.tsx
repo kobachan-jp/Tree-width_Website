@@ -6,11 +6,12 @@ import reportWebVitals from './reportWebVitals';
 import Hello from './components/Hello';
 import Name from './components/Name';
 import Message from './components/Message';
-import Parent from './components/ContainerSample';
+//import Parent from './components/ContainerSample';
 import Parents from './components/ContainerSample2';
 import Page from './components/ContextSample';
 import Counter from './ReactSample/useState';
 import Counter2 from './ReactSample/useReducer';
+import { Parent2 } from './components/Parent2';
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 root.render(
@@ -19,7 +20,7 @@ root.render(
     <Hello />
     <Name />
     <Message />
-    <Parent />
+    <Parent2 />
     <Parents />
     <Page />
     <Counter initialValue={0} />
