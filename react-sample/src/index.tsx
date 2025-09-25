@@ -15,8 +15,8 @@ import { Parent2 } from './components/Parent2';
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 root.render(
+  //以下はJSXタグ（JavaScriptやTypescript中にHTMLタグをそのまま書き込めるもの)
   <React.StrictMode>
-    {/*AppからHelloに置き換える*/}
     <Hello />
     <Name />
     <Message />

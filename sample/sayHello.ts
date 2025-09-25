@@ -203,4 +203,3 @@ const userName = getProperty(user,'name')
 console.log(userName)
 //const userGender = getProperty(user, 'gender')
 
-
