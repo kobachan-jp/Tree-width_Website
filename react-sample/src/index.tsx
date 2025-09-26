@@ -12,6 +12,7 @@ import Page from './components/ContextSample';
 import Counter from './ReactSample/useState';
 import Counter2 from './ReactSample/useReducer';
 import { Parent2 } from './components/Parent2';
+import { Parent } from './ReactSample/useCallback';
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 root.render(
@@ -25,6 +26,7 @@ root.render(
     <Page />
     <Counter initialValue={0} />
     <Counter2 initialValue={0} />
+    <Parent />
   </React.StrictMode>
 );
 
