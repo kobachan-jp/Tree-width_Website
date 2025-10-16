@@ -41,7 +41,7 @@ export default function GraphPage() {
 
   return (
     <div style={{ width: "100%", height: "100vh" }}>
-      <h2 style={{ textAlign: "center" }}>問題: 頂点を選択してください</h2>
+      <h2 style={{ textAlign: "center" }}>問題</h2>
       <ReactFlow
         nodes={styledNodes}
         edges={edges}
