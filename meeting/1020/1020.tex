@@ -8,6 +8,9 @@
 \usepackage{bm}
 \usepackage{setspace}
 \usepackage{caption}
+\usepackage{hyperref}
+\usepackage{natbib}
+\bibliographystyle{unsrt}
 
 \usetheme{LightTheme}
 \setbeamertemplate{footline}[frame number]
@@ -114,6 +117,36 @@
         \item 今後のためにもまずは基本的なWebアプリケーションについての仕組みを説明します...
     \end{itemize}
 \end{frame}
+
+\begin{frame}{クライアントとサーバー}
+    \begin{itemize}
+        \setlength{\parskip}{1.5em}
+        \item \textbf{クライアント}：サーバーに指示を出すデバイス（例：PC, スマートフォン）\cite{server-client}.
+        \item \textbf{サーバー}：\\サービスや機能を提供するコンピュータ.クライアントから要求された形に情報を加工したり,保存したりする役割がある.
+                                サーバーにも役割によって種類がある.\\
+        \vspace{1em}                                
+        \begin{itemize}
+            \setlength{\parskip}{1em}
+            \item Webサーバー：Web関連のサービスを提供しているコンピュータ.
+            \item メールサーバー：メール関連のサービスを提供しているコンピュータ.
+            \item DNSサーバー：URLをIPアドレスに変換するコンピュータ.
+        \end{itemize}                                
+      {\tiny [1]サーバーとは？クライアントとは？それぞれの違い\url{https://menter.jp/blog/server-and-client}}  
+        
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{リクエストとレスポンス}
+    \begin{itemize}
+            \setlength{\parskip}{1.5em}
+            \item Webサイトを閲覧する際にクライアントからサーバーに通信することを「\textbf{リクエスト}」と呼ぶ.
+            \item サーバーがリクエストを受け, クライアントに返答することを「\textbf{レスポンス}」と呼ぶ.
+    \end{itemize}
+    \begin{figure}
+        \includegraphics[scale=0.4]{server-and-client.png}
+    \end{figure}
+\end{frame}
+
 \begin{frame}{WebアプリケーションとWebサイトの違い}
     \begin{itemize}
         \setlength{\parskip}{1.5em}
@@ -128,134 +161,93 @@
     \end{itemize}
 \end{frame}
 
-\begin{frame}{サーバーとクライアント}
+\begin{frame}{データベース}
+    \begin{itemize}
+        \setlength{\parskip}{1.5em}
+        
+        \begin{columns}
+        \begin{column}{0.55\textwidth}
+        \item \textbf{データベース}：\\            
+        \begin{itemize}
+            \setlength{\parskip}{1em}
+            \item 構造化した情報,データの組織的な集合\cite{database}.
+            \item 通常はコンピュータ・システムに電子的に格納.
+            \item \textbf{データベース管理システム（DBMS）}で制御.
+        \end{itemize}
+        \end{column}            
+        \begin{column}{0.3\textwidth}
+            \begin{figure}
+                \includegraphics[scale=0.2]{database.png}
+            \end{figure}
+        \end{column}
+        \end{columns}
+        \item \textbf{データベース管理システム（Database Management System）}：\\
+        \begin{itemize}
+            \setlength{\parskip}{1em}
+            \item データベースとそのエンドユーザー・プログラムの間でインタフェースとして機能.
+            \item データベースの監視・制御を容易にする.
+            \item 例）MySQL
+        \end{itemize}
+    \end{itemize}
+    {\tiny \cite{database}データベースとは\url{www.oracle.com/jp/database/what-is-database/}}  
+\end{frame}
+
+\begin{frame}{Webアプリケーションの流れ}
+    \begin{figure}
+        \includegraphics[scale=0.4]{websystem.png}
+    \end{figure}
+\end{frame}
+
+\begin{frame}{WebサーバーとAPサーバー}
+    \begin{itemize}
+        \setlength{\parskip}{1.5em}
+        \item \textbf{Webサーバー}：\\
+        \begin{itemize}
+            \setlength{\parskip}{1em}
+            \item HTTPリクエストを受け取る\cite{webserver}.
+            \item HTMLやCSS,画像などでレスポンスを返す.
+        \end{itemize}
+        \item \textbf{APサーバー(Webアプリケーションサーバー)}：\\
+        \begin{itemize}
+            \setlength{\parskip}{1em}
+            \item Webサーバから受け取った情報を処理\cite{apserver}.
+            \item 必要に応じてデータベースサーバにアクセス.
+            \item 動的コンテンツの生成・管理.
+        \end{itemize}
+    \end{itemize}
+    \textbf{Webサーバはユーザーとの窓口.\\APサーバはユーザーのリクエストに応じた対応をおこなうバックヤード.}
+\end{frame}
+
+\begin{frame}[allowframebreaks]{Webサイトがブラウザに表示されるまでの大まかな流れ}
+    \begin{enumerate}
+        \setlength{\parskip}{1em}
+        \item Webサーバーにアクセスしてリクエストを送信.
+        \item Webサーバーがリクエストを受け取り,解析.
+        \item APサーバーが処理を実行.（DB問い合わせなど）
+        \item DBから情報を取得.
+        \begin{figure}
+            \includegraphics[scale=0.21]{webfloat.png}
+        \end{figure}
+        \item 静的なHTMLとJavascriptコード or JSONなどのデータをWebサーバーに返す.
+        \item Webサーバーがレスポンスとしてクライアントに送信.
+        \item ブラウザ（クライアント）がHTMLを解析.DOMツリーを構築.
+        \item CSSを読み込み,解析.CSSOMツリーを構築.
+        \begin{figure}
+            \includegraphics[scale=0.19]{webfloat.png}
+        \end{figure}
+        \item Javascriptを読み込み実行.動的な処理（データ取得・DOM操作など）を行う.
+        \item DOMツリーとCSSOMツリーを合成してレンダーツリーを構築.
+        \item レイアウト計算・ペイント.
+        \item 画面にレンダリング.
+        \begin{figure}
+            \includegraphics[scale=0.20]{webfloat.png}
+        \end{figure}
+    \end{enumerate}
     
 \end{frame}
-\end{document}
-\begin{frame}{学習システム構築の目的}
-    \begin{itemize}
-        \setlength{\itemsep}{2em}
-        \item 
-    \end{itemize}
-\end{frame}
 
-\begin{frame}{memo関数とuseCallbackの関係}
-    \begin{itemize}
-        \setlength{\itemsep}{2em}
-        \item memo関数
-        \begin{itemize}
-            \item propsが同じであれば再描画をスキップする.
-        \end{itemize}
-        \item useCallback
-        \begin{itemize}
-            \item 関数の参照をメモ化.
-            \item 依存配列が変わらない限り,同じ関数オブジェクトを再利用.
-            \item 再レンダーされても「新しい関数が作られる」ことはない.
-        \end{itemize}
-    \end{itemize} 
-    \rightarrowfill useCallbackとmemo関数を同時に使うことで再描画を防げる.
-
-\end{frame}
-\begin{frame}
-    \begin{figure}
-        \includegraphics[scale = 0.5]{useCallback1.png}
-    \end{figure}
-    \begin{figure}
-        \includegraphics[scale = 0.5]{useCallback2.png}
-    \end{figure}
-\end{frame}
-
-\section{Next.jsとReact}
-
-\begin{frame}[allowframebreaks]{Next.jsとReact}
-    \begin{itemize}
-        \setlength{\itemsep}{2em}
-        \item Next.js : Reactをベースに開発されたフレームワーク.
-        \item React : Javascriptにおけるライブラリの一つ.
-    \end{itemize}
-    \vspace{2em}
-    ライブラリ：\\開発時に使われるコードの集まり.作業を簡略化するための関数や定義・クラスの集まり.\\
-    フレームワーク:\\テンプレートのようなもの.ログイン機能や決算機能など必要な機能がデフォルトで揃っている.\\
-    \Rightarrow Next.jsはReactライブラリのフレームワーク
-    \begin{figure}
-        \includegraphics[scale=0.5]{Next.js_and_React.png}
-        \caption{ReactとNext.js}
-    \end{figure}
-\end{frame}
-
-\begin{frame}[allowframebreaks]{Next.jsの特徴}
-    \begin{itemize}
-        \item RCS(React Server Components)
-        \begin{itemize}
-             \setlength{\itemsep}{2em}
-            \item Reactは従来SSR(Server Side Rendering)を行ってきた.
-            \item SSR : 全てのコンポーネントをサーバーでHTMLに変換する.
-            \item RCSでは、それをサーバーで実行する部分とクライアントで実行する部分を分けることができる.
-            \item これにより,無駄なリロードが減る.
-        \end{itemize}
-        \newpage
-        \item App Router
-        \begin{itemize}
-            \item ディレクトリ構造がそのままURLの構造になる.
-            \item ルーティングは/app配下のディレクトリベースで行う.
-            \item page.tsxでルートの画面,router.tsxでAPIエンドポイントを書くなどファイル規約がある.
-            \begin{figure}
-                \includegraphics[scale=0.35]{AppRouter.png}
-            \end{figure}
-        \end{itemize}
-    \end{itemize}
-\end{frame}
-
-\section{作業経過}
-\begin{frame}{環境構築}
-    \begin{itemize}
-        \setlength{\itemsep}{1em}
-        \item npmをインストール（sudo apt npm）version : v22.15.0
-        \item Next.jsをインストール（npx create-next-app@latest --ts next-sample）version：v22.15.0
-        \item ここでTurbopackが開発サーバークラッシュしてるとエラーがでた.
-        \item \rightarrow nodemoduleとpackage.jsonを削除
-        \item npm i で再インストールするとうまくいった.
-        \item npm run devで初期画面がでてきた.（http://localhost:3000）
-    \end{itemize}    
-\end{frame}
-
-\begin{frame}{画面描画}
-    \begin{itemize}
-        \setlength{\itemsep}{2em}
-        \item React Flow : インタラクティブなダイアグラムを簡単に実装できる.
-        \item npm install reactflow
-        \item 作れはしたが、もともとチャートフロウなどを書く用に作られたものだったので上手な図形は作れず.
-    \end{itemize}
-\end{frame}
-
-\begin{frame}[allowframebreaks]{コード}
-    \begin{figure}
-        \includegraphics[scale=0.6]{graph1.png}
-        \includegraphics[scale=0.6]{graph2.png}
-    \end{figure}
-\end{frame}
-
-\begin{frame}{○×問題}
-    \begin{itemize}
-        \setlength{\itemsep}{2em}
-        \item まずはバックエンド・フロントエンドに問題・回答を書いた.
-        \item JSONで答えをサーバからもらって判断する.
-        \item 将来的にはデータベースから問題を取得するようにする.
-    \end{itemize}
-\end{frame}
-
-\begin{frame}[allowframebreaks]{フロントエンド(page.tsx)}
-    \includegraphics[scale=0.6]{q1.png}
-    \includegraphics[scale=0.6]{q2.png}
-    \includegraphics[scale=0.6]{q3.png}
-    \includegraphics[scale=0.6]{q4.png}
-\end{frame}
-
-\begin{frame}[allowframebreaks]{バックエンド(route.tsx)}
-    \includegraphics[scale=0.6]{check1.png}
-    \includegraphics[scale=0.6]{check2.png}
-    \includegraphics[scale=0.6]{check3.png}
+\begin{frame}[allowframebreaks]{参考文献}
+    \small
+    \bibliography{refs}    
 \end{frame}
 \end{document}
-
-

@@ -1,0 +1,25 @@
+\begin{thebibliography}{1}
+
+\bibitem{server-client}
+MENTER編集者.
+\newblock
+  サーバーとは？クライアントとは？それぞれの違い.
+\newblock \url{https://menter.jp/blog/server-and-client}, (参照日 =
+  2025/10/22).
+
+\bibitem{database}
+データベースとは.
+\newblock \url{https://www.oracle.com/jp/database/what-is-database/},
+  (参照日 = 2025/10/22).
+
+\bibitem{webserver}
+Webアプリケーションサーバとは？webサーバとの違いや3層構造についても解説.
+\newblock \url{https://dx.nid.co.jp/column/what-is-a-web-application-server},
+  (参照日 = 2025/10/22).
+
+\bibitem{apserver}
+Apサーバーとは?
+\newblock \url{https://cmc-japan.co.jp/blog/ap-server/}, (参照日 =
+  2025/10/22).
+
+\end{thebibliography}
