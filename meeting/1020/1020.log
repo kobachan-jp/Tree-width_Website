@@ -1,4 +1,4 @@
-This is LuaHBTeX, Version 1.17.0 (TeX Live 2023/Debian)  (format=lualatex 2025.8.1)  26 OCT 2025 16:15
+This is LuaHBTeX, Version 1.17.0 (TeX Live 2023/Debian)  (format=lualatex 2025.8.1)  26 OCT 2025 16:23
  restricted system commands enabled.
 **1020.tex
 (./1020.tex
@@ -1413,19 +1413,19 @@ Package luatex.def Info: webfloat.png  used on input line 253.
 ] [19
 
 ]
-Overfull \vbox (28.52475pt too high) detected at line 293
+Overfull \vbox (3.97475pt too high) detected at line 292
  []
 
 [20
 
 ]
-Overfull \vbox (14.62473pt too high) detected at line 317
+Overfull \vbox (14.62473pt too high) detected at line 316
  []
 
 [21
 
 ]
-Overfull \vbox (4.62473pt too high) detected at line 340
+Overfull \vbox (4.62473pt too high) detected at line 339
  []
 
 [22
@@ -1433,7 +1433,7 @@ Overfull \vbox (4.62473pt too high) detected at line 340
 ] [23
 
 ]
-Overfull \vbox (36.62473pt too high) detected at line 375
+Overfull \vbox (36.62473pt too high) detected at line 374
  []
 
 [24
@@ -1484,7 +1484,7 @@ Here is how much of LuaTeX's memory you used:
 y, 373 glyph, 9822 attribute, 63 glue_spec, 937 attribute_list, 8 write, 53 user
 _defined, 4 pdf_start_link, 4 pdf_end_link, 5 pdf_dest, 4 pdf_action, 20 pdf_col
 orstack nodes
-   avail lists: 1:16,2:21159,3:497,4:613,5:107,6:48,7:1596,8:60,9:779,10:37,11:4
+   avail lists: 1:16,2:21159,3:497,4:613,5:107,6:48,7:1596,8:60,9:769,10:37,11:4
 5
  46673 multiletter control sequences out of 65536+600000
  104 fonts using 59793743 bytes
@@ -1497,7 +1497,7 @@ blic/lm/lmmono8-regular.otf></usr/share/texlive/texmf-dist/fonts/opentype/public
 .otf></usr/share/texmf/fonts/opentype/public/lm/lmsans10-regular.otf></usr/share
 /texlive/texmf-dist/fonts/opentype/public/haranoaji/HaranoAjiMincho-Regular.otf>
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb>
-Output written on 1020.pdf (29 pages, 336067 bytes).
+Output written on 1020.pdf (29 pages, 336064 bytes).
 
 PDF statistics: 324 PDF objects out of 1000 (max. 8388607)
  251 compressed objects within 3 object streams
