@@ -12,7 +12,7 @@
 \usepackage{natbib}
 \bibliographystyle{unsrt}
 
-\usetheme{Pittsburgh}
+\usetheme{LightTheme}
 \setbeamertemplate{footline}[frame number]
 \setbeamertemplate{navigation symbols}{}
 \setlength{\baselineskip}{10pt}
@@ -226,27 +226,31 @@
         \item Webサーバーがリクエストを受け取り,解析.
         \item APサーバーが処理を実行.（DB問い合わせなど）
         \begin{figure}
-            \includegraphics[scale=0.21]{webfloat.png}
+            \includegraphics[scale=0.25]{webfloat.png}
         \end{figure}
+        \newpage
         \item DBから情報を取得.
         
         \item 静的なHTMLとJavascriptコード or JSONなどのデータをWebサーバーに返す.
         \item Webサーバーがレスポンスとしてクライアントに送信.
         \begin{figure}
-            \includegraphics[scale=0.19]{webfloat.png}
+            \includegraphics[scale=0.25]{webfloat.png}
         \end{figure}
+        \newpage
         \item ブラウザ（クライアント）がHTMLを解析.DOMツリーを構築.
+
         \item CSSを読み込み,解析.CSSOMツリーを構築.
         
         \item Javascriptを読み込み実行.動的な処理（データ取得・DOM操作など）を行う.
         \begin{figure}
-            \includegraphics[scale=0.20]{webfloat.png}
+            \includegraphics[scale=0.25]{webfloat.png}
         \end{figure}
+        \newpage
         \item DOMツリーとCSSOMツリーを合成してレンダーツリーを構築.
         \item レイアウト計算・ペイント.
         \item 画面にレンダリング.
         \begin{figure}
-            \includegraphics[scale=0.20]{webfloat.png}
+            \includegraphics[scale=0.25]{webfloat.png}
         \end{figure}
     \end{enumerate}
     
