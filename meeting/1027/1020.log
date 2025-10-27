@@ -1,4 +1,4 @@
-This is LuaHBTeX, Version 1.22.0 (TeX Live 2025)  (format=lualatex 2025.4.24)  27 OCT 2025 12:31
+This is LuaHBTeX, Version 1.22.0 (TeX Live 2025)  (format=lualatex 2025.4.24)  27 OCT 2025 19:40
  restricted system commands enabled.
 **1020.tex
 (./1020.tex
@@ -1673,19 +1673,12 @@ Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 LaTeX2e <2024-11-01> patch level 2
 L3 programming layer <2025-03-26>
  ***********
-
-
-Package rerunfilecheck Warning: File `1020.out' has changed.
-(rerunfilecheck)                Rerun to get outlines right
-(rerunfilecheck)                or use package `bookmark'.
-
-Package rerunfilecheck Info: Checksums for `1020.out':
-(rerunfilecheck)             Before: F8DFF5EABBC5693D3AB04244726AD004;1859
-(rerunfilecheck)             After:  DED7CB205B988F30C1A24C56DB2F73E0;1859.
+Package rerunfilecheck Info: File `1020.out' has not changed.
+(rerunfilecheck)             Checksum: 769256BCAAD948DB4AF8A186C02C2120;1864.
 )
 
 Here is how much of LuaTeX's memory you used:
- 29878 strings out of 471941
+ 29866 strings out of 471941
  125244,953878 words of node,token memory allocated
  28481 words of node memory still in use:
    61 hlist, 8 vlist, 91 rule, 5 local_par, 8 math, 240 glue, 10 kern, 89 penalt
@@ -1694,17 +1687,9 @@ _defined, 4 pdf_start_link, 4 pdf_end_link, 5 pdf_dest, 4 pdf_action, 20 pdf_col
 orstack nodes
    avail lists: 1:19,2:17340,3:1062,4:620,5:128,6:46,7:1693,8:60,9:819,10:37,11:
 45
- 55405 multiletter control sequences out of 65536+600000
+ 55397 multiletter control sequences out of 65536+600000
  104 fonts using 63445743 bytes
  104i,13n,115p,1847b,982s stack positions out of 10000i,1000n,20000p,200000b,200000s
-
-warning  (pdf backend): unreferenced destination with name 'Outline0.4.4.28'
-
-warning  (pdf backend): unreferenced destination with name 'Outline0.4.3.26'
-
-warning  (pdf backend): unreferenced destination with name 'Outline0.4.2.25'
-
-warning  (pdf backend): unreferenced destination with name 'Outline0.4.1.23'
 </usr/local/texlive/2025/texmf-dist/fonts/opentype/public/lm/lmmono10-regular.ot
 f></usr/local/texlive/2025/texmf-dist/fonts/opentype/public/lm/lmsans10-bold.otf
 ></usr/local/texlive/2025/texmf-dist/fonts/opentype/public/lm/lmmono8-regular.ot
@@ -1715,10 +1700,10 @@ lmsans8-regular.otf></usr/local/texlive/2025/texmf-dist/fonts/opentype/public/lm
 /lmsans10-regular.otf></usr/local/texlive/2025/texmf-dist/fonts/opentype/public/
 haranoaji/HaranoAjiMincho-Regular.otf></usr/local/texlive/2025/texmf-dist/fonts/
 type1/public/amsfonts/cm/cmsy10.pfb>
-Output written on 1020.pdf (29 pages, 354556 bytes).
+Output written on 1020.pdf (29 pages, 353920 bytes).
 
-PDF statistics: 328 PDF objects out of 1000 (max. 8388607)
- 255 compressed objects within 3 object streams
- 80 named destinations out of 1000 (max. 131072)
+PDF statistics: 324 PDF objects out of 1000 (max. 8388607)
+ 251 compressed objects within 3 object streams
+ 76 named destinations out of 1000 (max. 131072)
  120 words of extra memory for PDF output out of 10000 (max. 100000000)
 
