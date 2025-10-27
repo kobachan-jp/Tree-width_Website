@@ -12,7 +12,7 @@
 \usepackage{natbib}
 \bibliographystyle{unsrt}
 
-\usetheme{LightTheme}
+\usetheme{Pittsburgh}
 \setbeamertemplate{footline}[frame number]
 \setbeamertemplate{navigation symbols}{}
 \setlength{\baselineskip}{10pt}
@@ -118,6 +118,7 @@
     \end{itemize}
 \end{frame}
 
+\subsection{基本的なWebサイトの構成}
 \begin{frame}{クライアントとサーバー}
     \begin{itemize}
         \setlength{\parskip}{1.5em}
@@ -160,7 +161,7 @@
         \end{enumerate}
     \end{itemize}
 \end{frame}
-
+\subsection{データベース}
 \begin{frame}{データベース}
     \begin{itemize}
         \setlength{\parskip}{1.5em}
@@ -217,25 +218,30 @@
     \end{itemize}
     \textbf{Webサーバはユーザーとの窓口.\\APサーバはユーザーのリクエストに応じた対応をおこなうバックヤード.}
 \end{frame}
-
+\subsection{Webアプリケーションの流れ}
 \begin{frame}[allowframebreaks]{Webサイトがブラウザに表示されるまでの大まかな流れ}
     \begin{enumerate}
         \setlength{\parskip}{1em}
         \item Webサーバーにアクセスしてリクエストを送信.
         \item Webサーバーがリクエストを受け取り,解析.
         \item APサーバーが処理を実行.（DB問い合わせなど）
-        \item DBから情報を取得.
         \begin{figure}
             \includegraphics[scale=0.21]{webfloat.png}
         \end{figure}
+        \item DBから情報を取得.
+        
         \item 静的なHTMLとJavascriptコード or JSONなどのデータをWebサーバーに返す.
         \item Webサーバーがレスポンスとしてクライアントに送信.
-        \item ブラウザ（クライアント）がHTMLを解析.DOMツリーを構築.
-        \item CSSを読み込み,解析.CSSOMツリーを構築.
         \begin{figure}
             \includegraphics[scale=0.19]{webfloat.png}
         \end{figure}
+        \item ブラウザ（クライアント）がHTMLを解析.DOMツリーを構築.
+        \item CSSを読み込み,解析.CSSOMツリーを構築.
+        
         \item Javascriptを読み込み実行.動的な処理（データ取得・DOM操作など）を行う.
+        \begin{figure}
+            \includegraphics[scale=0.20]{webfloat.png}
+        \end{figure}
         \item DOMツリーとCSSOMツリーを合成してレンダーツリーを構築.
         \item レイアウト計算・ペイント.
         \item 画面にレンダリング.
@@ -244,6 +250,169 @@
         \end{figure}
     \end{enumerate}
     
+\end{frame}
+\section{サーバーが返すHTMLについて}
+\subsection{SSR（Server Side Rendring）}
+
+\begin{frame}{SSR（Server Side Rendring）}
+    サーバーが返すHTMLにもどの程度の完成度にするか違いがある.\\
+    \begin{itemize}
+        \setlength{\parskip}{1em}
+        \item \textbf{SSR（Server Side Rendring）}
+        \begin{itemize}
+            \setlength{\parskip}{1em}
+            \item 登場：2000年代前半～中盤.（PHP, Ruby on Railsなど）
+            \item ユーザーがページを開く度にサーバーがHTMLを「最初から全部生成」して返す.
+            \item クリックなどの遷移も毎回サーバーにリクエスト.
+            \item ブラウザはHTMLを受け取ってDOMツリーを作る.
+        \end{itemize}
+        \item \textbf{特徴}
+        \begin{itemize}
+            \setlength{\parskip}{1em}
+            \item 表示が遅い（ページ全体を毎回描きなおす）.
+            \item SEO（検索エンジン対策）には強い.
+        \end{itemize}
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{React}
+    \begin{itemize}
+        \setlength{\parskip}{1em}
+        \item 2011年Facebook社（現Meta社）のソフトエンジニアがReactの前進となるプロトタイプを開発.2013年にオープンソース化.
+        \item 画面の見た目を管理するための仕組みをライブラリ化したもの.
+        \item HTMLを直接書かず,「状態に応じてUIを自動で作る」仕組みを持つ.
+        \item 特徴
+        \begin{itemize}
+            \setlength{\parskip}{1em}
+            \item 宣言的View：あらかじめ変更される部分を｛｝で囲むなど変更されない部分と区別して設計.
+            \item コンポーネントベース：部品を組み立てるように作成する.容易＋再利用可能になる.
+            \item 仮想DOM：実際のDOMを直接操作せず,メモリ上にツリー構造を作り,変化部分だけを検出して更新する.
+        \end{itemize}
+    \end{itemize}    
+\end{frame}
+
+\subsection{SPA（Single Page Application）}
+
+\begin{frame}{SPA（Single Page Application）}
+    \begin{itemize}
+        \setlength{\parskip}{1em}
+        \item\textbf{SPA（Single Page Application）}
+        \begin{itemize}
+            \setlength{\parskip}{1em}
+            \item 登場：2010年代前半～中盤.（React, Angular.Vueなど）
+            \item サーバーから空っぽのHTMLを受け取る.
+            \item ブラウザがJSを読み込み,そこからDOMツリーと仮想DOMツリーを生成.
+            \item ページ遷移はJSが行う（サーバーに行かずにクライアント側で完結）.
+            \item 仮想DOMツリーの更新前と更新後を比べ,そこだけ書き換える.
+        \end{itemize}
+        \item\textbf{特徴}
+        \begin{itemize}
+            \setlength{\parskip}{1em}
+            \item ページ再読み込みがないためサクサク動く.
+            \item 初期表示が遅め（JSが全部読み込まれないと表示できない）.
+            \item SEOに弱い.
+        \end{itemize}
+    \end{itemize}
+\end{frame}
+
+
+\subsection{SSR + React（モダンSSR）}
+\begin{frame}{SSR + React（モダンSSR）}
+    \begin{itemize}
+        \setlength{\parskip}{1em}
+        \item\textbf{SSR + React（モダンSSR）}
+        \begin{itemize}
+            \setlength{\parskip}{1em}
+            \item 登場：2017年頃.（React v16以降（Next.jsなど））
+            \item サーバーがReactコンポーネントを実行してHTML生成を行い,クライアントに送る.
+            \item ブラウザがHTMLを表示.
+            \item 表示後,ReactのJSが実行.\textbf{ハイドレーション}してHTMLに動きをつける.
+        \end{itemize}
+        \item\textbf{特徴}
+        \begin{itemize}
+            \setlength{\parskip}{1em}
+            \item 初期表示が速い（HTMLが最初に出る）.
+            \item SPAのように動的.
+            \item ハイドレーションで「静的HTML\rightarrow 動的操作可能」に.
+        \end{itemize}
+    \end{itemize}
+\end{frame}
+\begin{frame}{ハイドレーション（Hydration）}
+    \begin{itemize}
+        \setlength{\parskip}{1em}
+        \item サーバーサイドで生成されたHTMLは静的なHTML.
+        \item ボタンを押そうが入力があろうが何も起きない.
+        \item クライアント側でHTMLと一緒に送られたJSコードから作ったDOMツリーを再接続することでイベントが可能.
+        \item この再接続することを\textbf{ハイドレーション}という.
+    \end{itemize}
+    
+\end{frame}
+
+
+\subsection{RSC（React Server Components）}
+\begin{frame}{RSC（React Server Components）}
+    \begin{itemize}
+        \setlength{\parskip}{1em}
+        \item\textbf{RSC（React Server Components）}
+        \begin{itemize}
+            \setlength{\parskip}{1em}
+            \item 登場：2023年頃.（Next.js +13）
+            \item Reactコンポーネントのうち,一部をサーバーで実行.
+            \item \rightarrow 今までReactコンポーネントはクライアント側で動くJavascript関数だった.
+            \item クライアント側は一部のUIだけをJSで動かす.
+            \item サーバーでデータ取得や重い処理を行い,HTML部分だけ送信.
+        \end{itemize}
+        \item\textbf{特徴}
+        \begin{itemize}
+            \setlength{\parskip}{1em}
+            \item データ取得が高速（直接サーバーでDBアクセス）.
+            \item JS転送量が減る（クライアントは最小限）.
+            \item SSRよりも効率的・柔軟.
+            \item RSC + クライアントコンポーネントの組み合わせが今の主流.
+        \end{itemize}
+    \end{itemize}
+\end{frame}
+
+\section{進捗状況}
+\begin{frame}{使用技術（現段階）}
+    \begin{itemize}
+        \setlength{\itemsep}{1em}
+        \item Node.js：JavaScriptをサーバーで実行できるようにした環境.
+        \item Next.js：Reactを使ってWebアプリケーションを構築するためのフレームワーク.Node.js上で動作.
+        \item React：UIを作るためのライブラリ.
+        \item React Flow：インタラクティブなダイアグラムを簡単に実装できる.
+    \end{itemize}
+    
+\end{frame}
+\begin{frame}{環境構築}
+    \begin{itemize}
+        \setlength{\itemsep}{1em}
+        \item npmをインストール（sudo apt npm）version : v22.15.0
+        \item Next.jsをインストール（npx create-next-app@latest --ts next-sample）version：v22.15.0
+        \item ここでTurbopackが開発サーバークラッシュしてるとエラーがでた.
+        \item \rightarrow nodemoduleとpackage.jsonを削除
+        \item npm i で再インストールするとうまくいった.
+        \item npm run devで初期画面がでてきた.（http://localhost:3000）
+        \item npm install reactflow
+        \item 作れはしたが、もともとチャートフロウなどを書く用に作られたものだったので上手な図形は作れず.
+    \end{itemize}    
+\end{frame}
+
+\begin{frame}{○×問題}
+    \begin{itemize}
+        \setlength{\itemsep}{1em}
+        \item まずはバックエンド・フロントエンドに問題・回答を書いた.
+        \item JSONで答えをサーバからもらって判断する.
+        \item 将来的にはデータベースから問題を取得するようにする.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{次回までに}
+    \begin{itemize}
+        \setlength{\itemsep}{1em}
+        \item データベースの作成：SQLiteを使用する予定.
+        \item React Flowの調整：上手くいかなかった場合は代替えの技術の調査.
+    \end{itemize}
 \end{frame}
 
 \begin{frame}[allowframebreaks]{参考文献}
