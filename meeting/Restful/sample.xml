@@ -1,0 +1,80 @@
+<devices size="2">
+
+	<link rel="self" href="/devices"/>
+
+	<device id="12345">
+		<link rel="self" href="/devices/12345"/>
+		<deviceFamily>apple-es</deviceFamily>
+		<OSVersion>10.3R2.11</OSVersion>
+		<platform>SRX100B</platform>
+		<serialNumber>32423457</serialNumber>
+		<connectionStatus>up</connectionStatus>
+		<ipAddr>192.168.21.9</ipAddr>
+		<name>apple-srx_200</name>
+		<status>active</status>
+	</device>
+
+	<device id="556677">
+		<link rel="self" href="/devices/556677"/>
+		<deviceFamily>apple-es</deviceFamily>
+		<OSVersion>10.3R2.11</OSVersion>
+		<platform>SRX100B</platform>
+		<serialNumber>6453534</serialNumber>
+		<connectionStatus>up</connectionStatus>
+		<ipAddr>192.168.20.23</ipAddr>
+		<name>apple-srx_200</name>
+		<status>active</status>
+	</device>
+
+</devices>
+
+<device id="12345">
+	<link rel="self" href="/devices/12345"/>
+
+	<id>12345</id>
+	<deviceFamily>apple-es</deviceFamily>
+	<OSVersion>10.0R2.10</OSVersion>
+	<platform>SRX100-LM</platform>
+	<serialNumber>32423457</serialNumber>
+	<name>apple-srx_100_lehar</name>
+	<hostName>apple-srx_100_lehar</hostName>
+	<ipAddr>192.168.21.9</ipAddr>
+	<status>active</status>
+
+	<configurations size="2">
+		<link rel="self" href="/configurations" />
+
+		<configuration id="42342">
+			<link rel="self" href="/configurations/42342" />
+		</configuration>
+
+		<configuration id="675675">
+			<link rel="self" href="/configurations/675675" />
+		</configuration>
+	</configurations>
+
+	<method href="/devices/12345/exec-rpc" rel="rpc"/>
+	<method href="/devices/12345/synch-config"rel="synch device configuration"/>
+</device>
+
+HTTP GET /devices?startIndex=0&size=20
+HTTP GET /configurations?startIndex=0&size=20
+
+HTTP PUT /devices/{id}
+HTTP PUT /configurations/{id}
+
+HTTP/1.1 200 OK
+Content-Type: application/xml
+<configuration id="678678">
+    <link rel="self" href="/configurations/678678" />
+    <content><![CDATA[. updated content here .]]></content>
+    <status>active</status>
+    <link rel="raw configuration content" href="/configurations/678678/raw" />
+</configuration>
+
+HTTP DELETE /devices/{id}
+HTTP DELETE /configurations/{id}
+
+HTTP PUT /devices/{id}/configurations
+
+HTTP DELETE /devices/{id}/configurations/{configId}

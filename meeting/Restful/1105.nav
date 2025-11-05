@@ -1,0 +1,72 @@
+\headcommand {\slideentry {0}{0}{1}{1/1}{}{0}}
+\headcommand {\beamer@framepages {1}{1}}
+\headcommand {\slideentry {0}{0}{2}{2/2}{}{0}}
+\headcommand {\beamer@framepages {2}{2}}
+\headcommand {\beamer@sectionpages {1}{2}}
+\headcommand {\beamer@subsectionpages {1}{2}}
+\headcommand {\sectionentry {1}{概要}{3}{概要}{0}}
+\headcommand {\slideentry {1}{0}{1}{3/3}{}{0}}
+\headcommand {\beamer@framepages {3}{3}}
+\headcommand {\slideentry {1}{0}{2}{4/4}{}{0}}
+\headcommand {\beamer@framepages {4}{4}}
+\headcommand {\beamer@sectionpages {3}{4}}
+\headcommand {\beamer@subsectionpages {3}{4}}
+\headcommand {\sectionentry {2}{Step1. Object Modeling}{5}{Step1. Object Modeling}{0}}
+\headcommand {\slideentry {2}{0}{1}{5/5}{}{0}}
+\headcommand {\beamer@framepages {5}{5}}
+\headcommand {\beamer@sectionpages {5}{5}}
+\headcommand {\beamer@subsectionpages {5}{5}}
+\headcommand {\sectionentry {3}{Step2. Create Model URIs}{6}{Step2. Create Model URIs}{0}}
+\headcommand {\slideentry {3}{0}{1}{6/6}{}{0}}
+\headcommand {\beamer@framepages {6}{6}}
+\headcommand {\slideentry {3}{0}{1}{6/7}{}{0}}
+\headcommand {\beamer@framepages {6}{7}}
+\headcommand {\beamer@sectionpages {6}{7}}
+\headcommand {\beamer@subsectionpages {6}{7}}
+\headcommand {\sectionentry {4}{Step3. Determine Resource Representations}{8}{Step3. Determine Resource Representations}{0}}
+\headcommand {\slideentry {4}{0}{1}{8/8}{}{0}}
+\headcommand {\beamer@framepages {8}{8}}
+\headcommand {\beamer@subsectionpages {8}{8}}
+\headcommand {\beamer@subsectionentry {0}{4}{1}{9}{3.1. Collection Resource}}
+\headcommand {\slideentry {4}{1}{1}{9/9}{3.1. Collection Resource}{0}}
+\headcommand {\beamer@framepages {9}{9}}
+\headcommand {\slideentry {4}{1}{1}{9/10}{3.1. Collection Resource}{0}}
+\headcommand {\beamer@framepages {9}{10}}
+\headcommand {\slideentry {4}{1}{1}{9/11}{3.1. Collection Resource}{0}}
+\headcommand {\beamer@framepages {9}{11}}
+\headcommand {\beamer@subsectionpages {9}{11}}
+\headcommand {\beamer@subsectionentry {0}{4}{2}{12}{3.2. Single Resource}}
+\headcommand {\slideentry {4}{2}{1}{12/12}{3.2. Single Resource}{0}}
+\headcommand {\beamer@framepages {12}{12}}
+\headcommand {\slideentry {4}{2}{1}{12/13}{3.2. Single Resource}{0}}
+\headcommand {\beamer@framepages {12}{13}}
+\headcommand {\slideentry {4}{2}{1}{12/14}{3.2. Single Resource}{0}}
+\headcommand {\beamer@framepages {12}{14}}
+\headcommand {\slideentry {4}{2}{1}{12/15}{3.2. Single Resource}{0}}
+\headcommand {\beamer@framepages {12}{15}}
+\headcommand {\beamer@sectionpages {8}{15}}
+\headcommand {\beamer@subsectionpages {12}{15}}
+\headcommand {\sectionentry {5}{Step4. Assigning HTTP Methods}{16}{Step4. Assigning HTTP Methods}{0}}
+\headcommand {\beamer@subsectionpages {16}{15}}
+\headcommand {\beamer@subsectionentry {0}{5}{1}{16}{データの参照（GET）}}
+\headcommand {\slideentry {5}{1}{1}{16/16}{データの参照（GET）}{0}}
+\headcommand {\beamer@framepages {16}{16}}
+\headcommand {\slideentry {5}{1}{2}{17/17}{データの参照（GET）}{0}}
+\headcommand {\beamer@framepages {17}{17}}
+\headcommand {\beamer@subsectionpages {16}{17}}
+\headcommand {\beamer@subsectionentry {0}{5}{2}{18}{デバイスまたは設定の更新（PUT）}}
+\headcommand {\slideentry {5}{2}{1}{18/18}{デバイスまたは設定の更新（PUT）}{0}}
+\headcommand {\beamer@framepages {18}{18}}
+\headcommand {\beamer@subsectionpages {18}{18}}
+\headcommand {\beamer@subsectionentry {0}{5}{3}{19}{デバイスまたは構成の削除（DELETE）}}
+\headcommand {\slideentry {5}{3}{1}{19/19}{デバイスまたは構成の削除（DELETE）}{0}}
+\headcommand {\beamer@framepages {19}{19}}
+\headcommand {\beamer@subsectionpages {19}{19}}
+\headcommand {\beamer@subsectionentry {0}{5}{4}{20}{設定の適用/削除（PUT/DELETE）}}
+\headcommand {\slideentry {5}{4}{1}{20/20}{設定の適用/削除（PUT/DELETE）}{0}}
+\headcommand {\beamer@framepages {20}{20}}
+\headcommand {\beamer@partpages {1}{20}}
+\headcommand {\beamer@subsectionpages {20}{20}}
+\headcommand {\beamer@sectionpages {16}{20}}
+\headcommand {\beamer@documentpages {20}}
+\headcommand {\gdef \inserttotalframenumber {20}}

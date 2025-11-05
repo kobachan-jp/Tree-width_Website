@@ -1,0 +1,293 @@
+\documentclass[aspectratio=169]{beamer}
+
+
+
+\usepackage{luatexja}
+\usepackage[ipaex]{luatexja-preset} % IPAexフォントを自動設定
+
+\usepackage[T1]{fontenc}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{listings} % コード表示用
+\usepackage{tabularx}
+
+
+\usetheme{LightTheme}
+\setbeamertemplate{footline}[frame number]
+\setbeamertemplate{navigation symbols}{}
+\setlength{\baselineskip}{10pt}
+\setbeamertemplate{caption}[numbered]
+\begin{document}
+
+% Listingの設定（XML例の表示に使用）
+\lstset{
+    language=XML,                 % XMLコードの場合
+    basicstyle=\ttfamily\footnotesize,  % ベースフォント
+    backgroundcolor=\color{gray!10},    % 背景を薄いグレーに
+    frame=single,                 % 枠をつける
+    rulecolor=\color{gray!70},    % 枠線の色
+    numbers=left,                 % 行番号を左に
+    numberstyle=\tiny\color{gray},% 行番号の色
+    keywordstyle=\color{blue},    % キーワードの色
+    stringstyle=\color{orange!80!black},% 文字列の色
+    commentstyle=\color{green!40!black},% コメントの色
+    breaklines=true,              % 長い行を折り返す
+    showstringspaces=false,       % 空白を記号で表示しない
+    tabsize=2,                    % タブ幅
+    captionpos=b                  % キャプションを下に
+}
+
+
+
+\title{How to Design a REST API}
+\author{B4 小林紹子}
+\date{\today}
+
+
+% タイトルスライド
+\begin{frame}
+    \titlepage
+\end{frame}
+
+% 目次
+\begin{frame}{目次}
+    \tableofcontents
+\end{frame}
+
+% ----------------------------------------------------
+% セクション 1: オブジェクト・モデリング
+% ----------------------------------------------------
+\section{概要}
+\begin{frame}{概要}
+  \begin{itemize}
+    \setlength{\parskip}{1.5em}
+    \item RESTを断片的に学ぶことと,実際にアプリケーション開発に適用することは全く別の課題.
+    \item 今回はネットワークベースのアプリケーション向けのREST APIの設計方法を紹介.
+    \item アプリケーションの設計プロセスでRESTの原則を適用させる方法に注目.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{REST APIの4つの設定ステップ}
+    \begin{columns}
+    \begin{column}{0.58\textwidth}
+      \begin{itemize}
+        \setlength{\parskip}{0.5em}
+        \item \textbf{Object Modeling}：\\リソースとして提示するオブジェクトの特定.
+        \item \textbf{Create Resource URIs}：\\APIのエンドポイントとなるリソースURIの決定.
+        \item \textbf{Resource Representations}：\\各URIのリソース表現の設定.
+        \item \textbf{Assign HTTP Methods}：\\可能なすべての操作を決定.それらをHTTPメソッドを介してリソースURIにマッピング.
+      \end{itemize}
+    \end{column}
+    \begin{column}{0.48\textwidth}
+      \begin{figure}
+        \includegraphics[scale=0.35]{StepToDesign.png}
+        \caption{\footnotesize{Step to Design a REST API}}
+      \end{figure}
+    \end{column}
+  \end{columns}
+\end{frame}
+\section{Step1. Object Modeling}
+\begin{frame}{Step1：Object Modeling （リソース特定）}
+    \begin{itemize}
+        \setlength{\parskip}{1em}
+        \item \textbf{目的}:\\アプリケーションで扱うオブジェクト(例：データやデバイス)を特定し,\textbf{リソース}として定義.
+        \item \textbf{主要リソース例}:
+        \begin{itemize}
+            \item \textbf{Devices} (デバイス)
+            \item \textbf{Configurations} (設定)
+        \end{itemize}
+        \item \textbf{リソース同士の関係性}:
+        \begin{itemize}
+            \item ConfigurationはDeviceの\textbf{サブリソース}として機能することも有.
+            \item \textbf{例}：あるデバイスに関する設定は,そのデバイスなしには存在しない.
+        \end{itemize}
+        \item \textbf{識別子}: 全てのリソースは一意の識別子（例: \texttt{id}）を持つ.
+    \end{itemize}
+\end{frame}
+
+% ----------------------------------------------------
+% セクション 2: リソースURIの作成
+% ----------------------------------------------------
+\section{Step2. Create Model URIs}
+\begin{frame}[allowframebreaks]{Step2：Create Model URIs（リソースURIの作成）}
+    \begin{itemize}
+      \setlength{\parskip}{1.5em}
+        \item \textbf{目的}：リソースの関係に基づき,URIの構造を決定.
+        \item \textbf{設計原則}: URIはリソースを識別する\textbf{名詞}であるべき.
+        \item \textbf{禁止事項}: URIに\textbf{操作（動詞）を含めない}.\\(\texttt{/getDevice}や\texttt{/createConfiguration}などは不適切).
+    \end{itemize}
+    \vspace{0.3em}
+    \begin{block}{URI構造の決定}
+        \begin{enumerate}
+          \setlength{\parskip}{0.5em}
+            \item \textbf{トップレベル・コレクション}: 複数形の名詞を使用.
+            \begin{itemize}
+                \item \texttt{/devices}
+                \item \texttt{/configurations}
+            \end{itemize}
+            \item \textbf{単一リソース}: コレクションにIDを付加.
+            \begin{itemize}
+                \item \texttt{/devices/\{id\}}
+                \item \texttt{/configurations/\{id\}}
+            \end{itemize}
+            \item \textbf{サブリソース}: 親リソースのパスの下に配置.
+            \begin{itemize}
+                \item \texttt{/devices/\{id\}/configurations}
+                \item \texttt{/devices/\{id\}/configurations/\{configId\}}
+            \end{itemize}
+        \end{enumerate}
+    \end{block}
+    \small{※今回は,デバイスをトップレベルリソースとし,設定がデバイスのサブリソースとする.}
+\end{frame}
+
+
+% ----------------------------------------------------
+% セクション 3: リソース表現の決定（HATEOAS）
+% ----------------------------------------------------
+\section{Step3. Determine Resource Representations}
+\begin{frame}{Step3. \Large{Determine Resource Representations（リソース表現の決定）}}
+  \begin{itemize}
+    \setlength{\parskip}{1.5em}
+    \item Step2まででリソースURIが決定された.
+    \item 今回はそのリソース表現（データ形式）に取り組む.
+    \item ほとんどは\textbf{XML},\textbf{JSON}で定義される.
+    \item 今回はXMLの例を見ていく.
+  \end{itemize}
+\end{frame}
+
+\subsection{3.1. Collection Resource}
+\begin{frame}[allowframebreaks]{3.1. コレクションリソースの場合（例: \texttt{/devices}）}
+    \begin{itemize}
+        \setlength{\parskip}{2em}
+        \item \textbf{内容}: \textbf{最も重要な情報のみ}を含め,完全な詳細は省略.
+        \item \textbf{目的}: レスポンスのペイロードサイズを小さく保ち,パフォーマンスを向上.
+        \item サブコレクションの場合は,プライマリ・コレクションのサブセットであるため,プライマリ・コレクションと異なるデータフィールドを作成しない.同じ表現フィールドを使用.
+    \end{itemize}
+        \newpage
+        \lstinputlisting[firstline=1, lastline=29, ,language=XML]{sample.xml} % 元テキストのXML例をシミュレート
+\end{frame}
+
+\subsection{3.2. Single Resource}
+\begin{frame}[allowframebreaks]{3.2. 単一リソースの場合（例: \texttt{/devices/\{id\}}）}
+    \begin{itemize}
+      \setlength{\parskip}{1em}
+        \item \textbf{内容}: \textbf{完全な情報}を全て含める.
+        \item サブリソースや関連する操作へのリンクリストも含める.
+        \item これによりHATEOASにすることが可能.
+    \end{itemize}
+    \begin{block}{HATEOAS (Hypermedia As The Engine Of Application State)}
+        \begin{itemize}
+            \item クライアントは,APIの\textbf{次に取り得る操作}を,リソース表現に含まれる\textbf{リンク}を通じて動的に発見できるべき.
+        \end{itemize}
+    \end{block}
+    \newpage
+    \lstinputlisting[firstline=31, lastline=58, ,language=XML]{sample.xml} % 元テキストのXML例をシミュレート
+    \newpage
+    \begin{itemize}
+        \item \textbf{単一デバイスリソースの例}:
+        \begin{itemize}
+          \setlength{\parskip}{1em}
+            \item サブリソース（Configuration）へのリンクを含める.
+            \item そのリソースに対して実行可能なカスタム操作を\texttt{<method>}タグで示す.
+        \end{itemize}
+        \lstinputlisting[firstline=51, lastline=58, ,language=XML]{sample.xml} % 元テキストのXML例をシミュレート
+    \end{itemize}
+\end{frame}
+
+
+
+
+% ----------------------------------------------------
+% セクション 4: HTTPメソッドの割り当て
+% ----------------------------------------------------
+\section{Step4. Assigning HTTP Methods}
+\subsection{データの参照（GET）}
+
+
+\begin{frame}[allowframebreaks]{データの参照（GET）}
+  \begin{itemize}
+    \setlength{\parskip}{1.5em}
+    \item リソースURIとその表現が確定したので,アプリケーションで可能なすべての操作を決定し,それらをリソースURIにマッピングする.\\
+    \item 操作の性質（参照、作成、更新、削除）に基づき、適切なHTTPメソッド（\textbf{べき等性}を考慮）を選択.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{データの参照（GET）}
+データの取得には,すべて\textbf{GET}メソッドを使用（安全かつべき等）.
+
+\renewcommand{\arraystretch}{1.5}
+\begin{tabularx}{\textwidth}{|l|l|X|}
+
+\hline
+\textbf{対象} & \textbf{URIの例} & \textbf{備考} \\
+\hline
+\hline
+\textbf{全コレクション} & \texttt{/devices} & \footnotesize{サイズが大きい場合は,\texttt{?startIndex=\dots}で範囲選択可能.}\\
+\hline
+\textbf{特定デバイス} & \texttt{/devices/\{id\}} & \textbf{完全な情報}を返す.\\
+\hline
+\textbf{サブコレクション} & \texttt{/devices/\{id\}/configurations} & 特定のデバイスに紐づく設定リスト.\\
+\hline
+\end{tabularx}
+\vspace{2em}
+\lstinputlisting[firstline=60, lastline=62 ,language=XML]{sample.xml} % 元テキストのXML例をシミュレート
+\end{frame}
+
+% ----------------------------------------------------------------------
+
+% --- 4.6 ---
+\subsection{デバイスまたは設定の更新（PUT）}
+\begin{frame}{デバイスまたは設定の更新（PUT）}
+  更新操作はべき等な操作であるため,\textbf{PUT} メソッドを使用.
+
+  \lstinputlisting[firstline=63, lastline=64 ,language=XML]{sample.xml} % 元テキストのXML例をシミュレート
+
+PUT メソッドのレスポンス例：
+\lstinputlisting[firstline=66, lastline=73 ,language=XML]{sample.xml} % 元テキストのXML例をシミュレート
+
+
+\end{frame}
+
+% --- 4.7 ---
+\subsection{デバイスまたは構成の削除（DELETE）}
+\begin{frame}{4.7. デバイスまたは構成の削除}
+削除操作は常にDELETEを使用.
+
+\lstinputlisting[firstline=75, lastline=76 ,language=XML]{sample.xml} % 元テキストのXML例をシミュレート
+
+削除が成功した場合のレスポンス：
+\begin{itemize}
+  \item 非同期削除（キュー登録）→ \texttt{202 Accepted}
+  \item 同期削除（即時削除）→ \texttt{200 OK} または \texttt{204 No Content}
+\end{itemize}
+
+非同期操作では，成功／失敗を追跡するために \textbf{タスクID} を返す．
+
+\bigskip
+
+※サブリソース削除時は挙動を検討すべき．\\
+一般的には「\textbf{ソフトデリート}」を行う.（ステータスを \texttt{INACTIVE} に設定．）\\
+これにより他の参照を消す必要がなくなる．
+
+
+\end{frame}
+
+% --- 4.8 ---
+\subsection{設定の適用/削除（PUT/DELETE）}
+\begin{frame}{4.8. 設定の適用／削除（PUT/DELETE）}
+実際のアプリケーションでは，構成をデバイスに適用または削除する操作が必要．\\
+この場合も冪等性を保つために \textbf{PUT} と \textbf{DELETE} を使用．\\
+\bigskip
+設定をデバイスに適用
+\lstinputlisting[firstline=78, lastline=78 ,language=XML]{sample.xml} % 元テキストのXML例をシミュレート
+
+設定をデバイスから削除
+\lstinputlisting[firstline=80, lastline=80 ,language=XML]{sample.xml} % 元テキストのXML例をシミュレート
+
+\bigskip
+設定そのものを削除するのではなく，デバイスとの関連付けを解除する操作である．
+
+\end{frame}
+
+
+\end{document}
