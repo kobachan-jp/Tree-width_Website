@@ -1,0 +1,21 @@
+\frametitle{4.8: カスタム操作（設定の適用/解除）}\framesubtitle{リソースの状態遷移をべき等性で管理}
+
+\begin{itemize}
+    \item 設定の適用・解除は、リソースのCRUDとは異なる**状態遷移**を伴います。
+    \item これらの操作も\textbf{べき等}な性質があるため、\texttt{PUT}と\texttt{DELETE}を使用します。
+\end{itemize}
+
+\vspace{0.3cm}
+
+\textbf{操作の定義:}
+\begin{itemize}
+    \item \textbf{適用 (Apply Configuration):}
+    \begin{block}{HTTP PUT}
+    \texttt{/devices/\{id\}/configurations}
+    \end{block}
+    \item \textbf{解除 (Remove Configuration from Device):}
+    \begin{block}{HTTP DELETE}
+    \texttt{/devices/\{id\}/configurations/\{configId\}}
+    \end{block}
+\end{itemize}
+

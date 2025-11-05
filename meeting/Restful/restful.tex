@@ -1,0 +1,216 @@
+\documentclass[aspectratio=169]{beamer}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{graphicx}
+\usepackage{luatexja} 
+\usepackage{comment}
+\usepackage{bm}
+\usepackage{setspace}
+\usepackage{caption}
+\usepackage{hyperref}
+\usepackage{natbib}
+\bibliographystyle{unsrt}
+
+\usetheme{LightTheme}
+\setbeamertemplate{footline}[frame number]
+\setbeamertemplate{navigation symbols}{}
+\setlength{\baselineskip}{10pt}
+\begin{document}
+
+% タイトルフレーム
+\title{\Large 木幅アルゴリズムの学習システムの構築}
+\subtitle{進捗状況} 
+\author{\small B4 小林紹子} % 必要に応じて変更・削除
+\date{\small\today} % 必要に応じて変更・削除
+
+\begin{frame}
+    \titlepage
+\end{frame}
+
+\begin{frame}{目次}
+    \tableofcontents
+\end{frame}
+
+\section{データベースの構築}
+
+\begin{frame}{データベースの使用技術}
+    \begin{itemize}
+        \setlength{\parskip}{1.5em}
+        \item \textbf{Prisma ORM}
+        \item \textbf{SQlite}
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Prisma}
+    \begin{itemize}
+        \setlength{\parskip}{1.5em}
+        \item Node.jsとTypescript向けのオープンソースのORM\cite{prisma}.
+        \item ORM（Object Relational Mapping）：プログラミング言語のエンティティ (オブジェクト) とそれに対応するデータベース要素との関係を抽象化するプロセス\cite{orm}.\\
+        \rightarrowfill SQL文を直接書く必要がなく,データベース操作を簡単にしてくれる.
+        \item \textbf{特徴}
+        \begin{itemize}
+            \setlength{\parskip}{1.5em}
+            \item 型安全性：Typescriptとの相性がいいため,コンパイル時にエラーを検出しやすい.
+            \item 直感的なAPI：SQLを書く必要がなく,オブジェクトを操作する感覚でデータベース操作が可能.
+            \item データベース非依存：MySQL, SQliteなど様々なDBMSに対応.
+        \end{itemize}
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Prisma ORMの機能}
+    \begin{itemize}
+        \setlength{\parskip}{1em}
+        \item \textbf{Prisma Client}：アプリからDBを操作するためのライブラリ.
+        \item \textbf{Prisma Migrate}：データベースの変更記録と,schema.prismaに書いた内容をDBに反映する技術.
+        \item \textbf{Prisma Schema}：テーブル構造やデータベースの種類を定義するファイル.
+        
+    \end{itemize}
+    \rightarrow これらをschema.prismaというファイルに書いてDB操作していく.
+\end{frame}
+
+\begin{frame}{React}
+    \begin{itemize}
+        \setlength{\parskip}{1em}
+        \item 2011年Facebook社（現Meta社）のソフトエンジニアがReactの前進となるプロトタイプを開発.2013年にオープンソース化.
+        \item 画面の見た目を管理するための仕組みをライブラリ化したもの.
+        \item HTMLを直接書かず,「状態に応じてUIを自動で作る」仕組みを持つ.
+        \item 特徴
+        \begin{itemize}
+            \setlength{\parskip}{1em}
+            \item 宣言的View：あらかじめ変更される部分を｛｝で囲むなど変更されない部分と区別して設計.
+            \item コンポーネントベース：部品を組み立てるように作成する.容易＋再利用可能になる.
+            \item 仮想DOM：実際のDOMを直接操作せず,メモリ上にツリー構造を作り,変化部分だけを検出して更新する.
+        \end{itemize}
+    \end{itemize}    
+\end{frame}
+
+\subsection{SPA（Single Page Application）}
+
+\begin{frame}{SPA（Single Page Application）}
+    \begin{itemize}
+        \setlength{\parskip}{1em}
+        \item\textbf{SPA（Single Page Application）}
+        \begin{itemize}
+            \setlength{\parskip}{1em}
+            \item 登場：2010年代前半～中盤.（React, Angular.Vueなど）
+            \item サーバーから空っぽのHTMLを受け取る.
+            \item ブラウザがJSを読み込み,そこからDOMツリーと仮想DOMツリーを生成.
+            \item ページ遷移はJSが行う（サーバーに行かずにクライアント側で完結）.
+            \item 仮想DOMツリーの更新前と更新後を比べ,そこだけ書き換える.
+        \end{itemize}
+        \item\textbf{特徴}
+        \begin{itemize}
+            \setlength{\parskip}{1em}
+            \item ページ再読み込みがないためサクサク動く.
+            \item 初期表示が遅め（JSが全部読み込まれないと表示できない）.
+            \item SEOに弱い.
+        \end{itemize}
+    \end{itemize}
+\end{frame}
+
+
+\subsection{SSR + React（モダンSSR）}
+\begin{frame}{SSR + React（モダンSSR）}
+    \begin{itemize}
+        \setlength{\parskip}{1em}
+        \item\textbf{SSR + React（モダンSSR）}
+        \begin{itemize}
+            \setlength{\parskip}{1em}
+            \item 登場：2017年頃.（React v16以降（Next.jsなど））
+            \item サーバーがReactコンポーネントを実行してHTML生成を行い,クライアントに送る.
+            \item ブラウザがHTMLを表示.
+            \item 表示後,ReactのJSが実行.\textbf{ハイドレーション}してHTMLに動きをつける.
+        \end{itemize}
+        \item\textbf{特徴}
+        \begin{itemize}
+            \setlength{\parskip}{1em}
+            \item 初期表示が速い（HTMLが最初に出る）.
+            \item SPAのように動的.
+            \item ハイドレーションで「静的HTML\rightarrow 動的操作可能」に.
+        \end{itemize}
+    \end{itemize}
+\end{frame}
+\begin{frame}{ハイドレーション（Hydration）}
+    \begin{itemize}
+        \setlength{\parskip}{1em}
+        \item サーバーサイドで生成されたHTMLは静的なHTML.
+        \item ボタンを押そうが入力があろうが何も起きない.
+        \item クライアント側でHTMLと一緒に送られたJSコードから作ったDOMツリーを再接続することでイベントが可能.
+        \item この再接続することを\textbf{ハイドレーション}という.
+    \end{itemize}
+    
+\end{frame}
+
+
+\subsection{RSC（React Server Components）}
+\begin{frame}{RSC（React Server Components）}
+    \begin{itemize}
+        \setlength{\parskip}{1em}
+        \item\textbf{RSC（React Server Components）}
+        \begin{itemize}
+            \setlength{\parskip}{1em}
+            \item 登場：2023年頃.（Next.js +13）
+            \item Reactコンポーネントのうち,一部をサーバーで実行.
+            \item \rightarrow 今までReactコンポーネントはクライアント側で動くJavascript関数だった.
+            \item クライアント側は一部のUIだけをJSで動かす.
+            \item サーバーでデータ取得や重い処理を行い,HTML部分だけ送信.
+        \end{itemize}
+        \item\textbf{特徴}
+        \begin{itemize}
+            \setlength{\parskip}{1em}
+            \item データ取得が高速（直接サーバーでDBアクセス）.
+            \item JS転送量が減る（クライアントは最小限）.
+            \item SSRよりも効率的・柔軟.
+            \item RSC + クライアントコンポーネントの組み合わせが今の主流.
+        \end{itemize}
+    \end{itemize}
+\end{frame}
+
+\section{進捗状況}
+\begin{frame}{使用技術（現段階）}
+    \begin{itemize}
+        \setlength{\itemsep}{1em}
+        \item Node.js：JavaScriptをサーバーで実行できるようにした環境.
+        \item Next.js：Reactを使ってWebアプリケーションを構築するためのフレームワーク.Node.js上で動作.
+        \item React：UIを作るためのライブラリ.
+        \item React Flow：インタラクティブなダイアグラムを簡単に実装できる.
+    \end{itemize}
+    
+\end{frame}
+\begin{frame}{環境構築}
+    \begin{itemize}
+        \setlength{\itemsep}{1em}
+        \item npmをインストール（sudo apt npm）version : v22.15.0
+        \item Next.jsをインストール（npx create-next-app@latest --ts next-sample）version：v22.15.0
+        \item ここでTurbopackが開発サーバークラッシュしてるとエラーがでた.
+        \item \rightarrow nodemoduleとpackage.jsonを削除
+        \item npm i で再インストールするとうまくいった.
+        \item npm run devで初期画面がでてきた.（http://localhost:3000）
+        \item npm install reactflow
+        \item 作れはしたが、もともとチャートフロウなどを書く用に作られたものだったので上手な図形は作れず.
+    \end{itemize}    
+\end{frame}
+
+\begin{frame}{○×問題}
+    \begin{itemize}
+        \setlength{\itemsep}{1em}
+        \item まずはバックエンド・フロントエンドに問題・回答を書いた.
+        \item JSONで答えをサーバからもらって判断する.
+        \item 将来的にはデータベースから問題を取得するようにする.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{次回までに}
+    \begin{itemize}
+        \setlength{\itemsep}{1em}
+        \item データベースの作成：SQLiteを使用する予定.
+        \item React Flowの調整：上手くいかなかった場合は代替えの技術の調査.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}[allowframebreaks]{参考文献}
+    \small
+    \bibliography{refs}    
+\end{frame}
+\end{document}
