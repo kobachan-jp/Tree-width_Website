@@ -1,4 +1,4 @@
-This is LuaHBTeX, Version 1.22.0 (TeX Live 2025)  (format=lualatex 2025.4.24)  5 NOV 2025 14:30
+This is LuaHBTeX, Version 1.22.0 (TeX Live 2025)  (format=lualatex 2025.4.24)  5 NOV 2025 14:59
  restricted system commands enabled.
 **1105.tex
 (./1105.tex
@@ -1866,6 +1866,10 @@ Removing  `ltj.listings_unicode' from `process_input_buffer'.
 [20
 
 ]
+
+[21
+
+]
 \tf@nav=\write7
 
 \openout7 = 1105.nav
@@ -1885,15 +1889,15 @@ Package rerunfilecheck Info: File `1105.out' has not changed.
 )
 
 Here is how much of LuaTeX's memory you used:
- 32748 strings out of 471941
+ 32753 strings out of 471941
  746604,1373583 words of node,token memory allocated
- 56947 words of node memory still in use:
-   686 hlist, 8 vlist, 378 rule, 23 disc, 12 local_par, 507 glue, 278 kern, 41 p
-enalty, 235 glyph, 16107 attribute, 65 glue_spec, 1776 attribute_list, 6 write, 
-681 user_defined, 342 pdf_colorstack nodes
-   avail lists: 1:38,2:144655,3:1108,4:22872,5:6753,6:72,7:9040,8:3,9:20335,10:3
-6,11:591
- 58190 multiletter control sequences out of 65536+600000
+ 7238 words of node memory still in use:
+   28 hlist, 8 vlist, 11 rule, 9 disc, 3 local_par, 2 math, 43 glue, 8 kern, 16 
+penalty, 98 glyph, 2268 attribute, 65 glue_spec, 235 attribute_list, 4 write, 34
+ user_defined, 16 pdf_colorstack nodes
+   avail lists: 1:38,2:160035,3:1135,4:23845,5:7024,6:81,7:9639,8:3,9:21360,10:3
+6,11:605
+ 58193 multiletter control sequences out of 65536+600000
  129 fonts using 64941063 bytes
  104i,13n,122p,1897b,1338s stack positions out of 10000i,1000n,20000p,200000b,200000s
 {/usr/local/texlive/2025/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}</usr/local/tex
@@ -1908,10 +1912,10 @@ r/local/texlive/2025/texmf-dist/fonts/type1/public/lm/lmssbx10.pfb></usr/local/t
 exlive/2025/texmf-dist/fonts/type1/public/lm/lmtt10.pfb></usr/local/texlive/2025
 /texmf-dist/fonts/type1/public/lm/lmtt12.pfb></usr/local/texlive/2025/texmf-dist
 /fonts/type1/public/lm/lmtt9.pfb>
-Output written on 1105.pdf (20 pages, 736798 bytes).
+Output written on 1105.pdf (21 pages, 739000 bytes).
 
-PDF statistics: 237 PDF objects out of 1000 (max. 8388607)
- 189 compressed objects within 2 object streams
- 52 named destinations out of 1000 (max. 131072)
+PDF statistics: 243 PDF objects out of 1000 (max. 8388607)
+ 194 compressed objects within 2 object streams
+ 54 named destinations out of 1000 (max. 131072)
  104 words of extra memory for PDF output out of 10000 (max. 100000000)
 
