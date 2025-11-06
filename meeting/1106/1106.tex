@@ -16,6 +16,23 @@
 \setbeamertemplate{footline}[frame number]
 \setbeamertemplate{navigation symbols}{}
 \setlength{\baselineskip}{10pt}
+
+\usepackage{listings}
+\usepackage{xcolor}
+
+\lstset{
+  basicstyle=\ttfamily\footnotesize,
+  keywordstyle=\color{blue}\bfseries,
+  stringstyle=\color{orange},
+  commentstyle=\color{gray},
+  showstringspaces=false,
+  frame=single,
+  breaklines=true,
+  numbers=left,
+  numberstyle=\tiny,
+}
+
+
 \begin{document}
 
 % タイトルフレーム
@@ -32,7 +49,18 @@
     \tableofcontents
 \end{frame}
 
-\section{データベースの構築}
+
+\section{画像生成について}
+\begin{frame}{react-graph-visについて}
+    \begin{itemize}
+        \setlength{\parskip}{1.5em}
+        \item 調べた結果,画像を自動で作成するのは難しそう.
+        \item 画像を事前に保存してデータベース登録する方法になる.
+        \item したがって,React Flowを使用する方向.
+        \item うまく図形になるように調整の仕方を調査する.
+    \end{itemize}
+\end{frame}
+\section{データベース使用技術}
 
 \begin{frame}{データベースの使用技術}
     \begin{itemize}
@@ -41,16 +69,16 @@
         \item \textbf{SQlite}
     \end{itemize}
 \end{frame}
-
+\subsection{Prisma}
 \begin{frame}{Prisma}
     \begin{itemize}
         \setlength{\parskip}{1.5em}
         \item Node.jsとTypescript向けのオープンソースのORM\cite{prisma}.
-        \item ORM（Object Relational Mapping）：プログラミング言語のエンティティ (オブジェクト) とそれに対応するデータベース要素との関係を抽象化するプロセス\cite{orm}.\\
+        \item ORM（Object Relational Mapping）：\\プログラミング言語のエンティティ (オブジェクト) とそれに対応するデータベース要素との関係を抽象化するプロセス\cite{orm}.\\
         \rightarrowfill SQL文を直接書く必要がなく,データベース操作を簡単にしてくれる.
         \item \textbf{特徴}
         \begin{itemize}
-            \setlength{\parskip}{1.5em}
+            \setlength{\parskip}{1em}
             \item 型安全性：Typescriptとの相性がいいため,コンパイル時にエラーを検出しやすい.
             \item 直感的なAPI：SQLを書く必要がなく,オブジェクトを操作する感覚でデータベース操作が可能.
             \item データベース非依存：MySQL, SQliteなど様々なDBMSに対応.
@@ -68,147 +96,247 @@
     \end{itemize}
     \rightarrow これらをschema.prismaというファイルに書いてDB操作していく.
 \end{frame}
-
-\begin{frame}{React}
+\subsection{SQLite}
+\begin{frame}{SQLite}
     \begin{itemize}
-        \setlength{\parskip}{1em}
-        \item 2011年Facebook社（現Meta社）のソフトエンジニアがReactの前進となるプロトタイプを開発.2013年にオープンソース化.
-        \item 画面の見た目を管理するための仕組みをライブラリ化したもの.
-        \item HTMLを直接書かず,「状態に応じてUIを自動で作る」仕組みを持つ.
-        \item 特徴
-        \begin{itemize}
-            \setlength{\parskip}{1em}
-            \item 宣言的View：あらかじめ変更される部分を｛｝で囲むなど変更されない部分と区別して設計.
-            \item コンポーネントベース：部品を組み立てるように作成する.容易＋再利用可能になる.
-            \item 仮想DOM：実際のDOMを直接操作せず,メモリ上にツリー構造を作り,変化部分だけを検出して更新する.
-        \end{itemize}
+        \setlength{\parskip}{1.5em}
+        \item オープンソースで軽量のRDBMS.
+        \item サーバーとしてではなくアプリケーションに組み込むことで利用.
+        \item ライブラリとして使用可能なため設定不要な\textbf{自己完結型システム}.
+        \item マルチプラットフォームに対応（Linux, Windows, iOSなど）.
+        \item 1つのテーブルカラムの中に,複数のデータ型を格納可能.
     \end{itemize}    
 \end{frame}
 
-\subsection{SPA（Single Page Application）}
+\section{データベース構築の流れ}
+\begin{frame}[allowframebreaks]{Next.js + React + Prisma + SQLite によるデータベース構築の流れ}
+    \begin{enumerate}
+        \item \textbf{Prisma のセットアップ}  
+        \begin{itemize}
+            \item パッケージをインストール  
+            \item 初期化コマンドで \texttt{schema.prisma} を生成  
+            \item SQLite と接続設定を行う
+        \end{itemize}
 
-\begin{frame}{SPA（Single Page Application）}
+        \item \textbf{スキーマ定義（DB設計）}  
+        \begin{itemize}
+            \item \texttt{prisma/schema.prisma} にモデルを記述  
+            \item 例：Problem テーブル（id, text, image, answer）
+        \end{itemize}
+
+        \item \textbf{マイグレーション実行}  
+        \begin{itemize}
+            \item \texttt{npx prisma migrate dev --name init}  
+            \item スキーマをもとにSQLiteファイル（\texttt{dev.db}）を生成
+        \end{itemize}
+
+        \item \textbf{Prisma Client 生成}  
+        \begin{itemize}
+            \item TypeScript からDB操作が可能になる  
+            \item \texttt{@prisma/client} を利用
+        \end{itemize}
+
+        \item \textbf{Next.js API Routes の作成}  
+        \begin{itemize}
+            \item \texttt{app/api/problems/route.ts} にAPIを定義  
+            \item \texttt{GET}：データ取得，\texttt{POST}：データ登録
+        \end{itemize}
+
+        \item \textbf{フロントエンド（React）でデータ表示}  
+        \begin{itemize}
+            \item \texttt{fetch("/api/problems")} でサーバーから取得  
+            \item 問題文や画像を動的に表示
+        \end{itemize}
+    \end{enumerate}
+\end{frame}
+
+\begin{frame}{システム構成図（概要）}
+    \begin{center}
+        \begin{tikzpicture}[node distance=1.5cm, auto]
+            % Nodes
+            \node[draw, rounded corners, fill=blue!10, minimum width=3cm, minimum height=1cm] (frontend) {React (Next.js Frontend)};
+            \node[draw, rounded corners, fill=green!10, minimum width=3cm, minimum height=1cm, right=of frontend] (api) {Next.js API Route};
+            \node[draw, rounded corners, fill=orange!10, minimum width=3cm, minimum height=1cm, right=of api] (db) {SQLite + Prisma};
+
+            % Arrows
+            \draw[->, thick] (frontend) -- node[above,yshift=6mm]{fetch()} (api);
+            \draw[->, thick] (api) -- node[above,yshift=6mm]{Prisma Query} (db);
+        \end{tikzpicture}
+    \end{center}
+    \vspace{1em}
     \begin{itemize}
-        \setlength{\parskip}{1em}
-        \item\textbf{SPA（Single Page Application）}
-        \begin{itemize}
-            \setlength{\parskip}{1em}
-            \item 登場：2010年代前半～中盤.（React, Angular.Vueなど）
-            \item サーバーから空っぽのHTMLを受け取る.
-            \item ブラウザがJSを読み込み,そこからDOMツリーと仮想DOMツリーを生成.
-            \item ページ遷移はJSが行う（サーバーに行かずにクライアント側で完結）.
-            \item 仮想DOMツリーの更新前と更新後を比べ,そこだけ書き換える.
-        \end{itemize}
-        \item\textbf{特徴}
-        \begin{itemize}
-            \setlength{\parskip}{1em}
-            \item ページ再読み込みがないためサクサク動く.
-            \item 初期表示が遅め（JSが全部読み込まれないと表示できない）.
-            \item SEOに弱い.
-        \end{itemize}
+        \item フロント（React）: UI表示・ユーザ入力
+        \item APIルート（Next.js）: DB操作用の中間層
+        \item Prisma + SQLite: データ永続化
     \end{itemize}
 \end{frame}
 
+\begin{frame}{ファイル構造}
 
-\subsection{SSR + React（モダンSSR）}
-\begin{frame}{SSR + React（モダンSSR）}
-    \begin{itemize}
-        \setlength{\parskip}{1em}
-        \item\textbf{SSR + React（モダンSSR）}
-        \begin{itemize}
-            \setlength{\parskip}{1em}
-            \item 登場：2017年頃.（React v16以降（Next.jsなど））
-            \item サーバーがReactコンポーネントを実行してHTML生成を行い,クライアントに送る.
-            \item ブラウザがHTMLを表示.
-            \item 表示後,ReactのJSが実行.\textbf{ハイドレーション}してHTMLに動きをつける.
-        \end{itemize}
-        \item\textbf{特徴}
-        \begin{itemize}
-            \setlength{\parskip}{1em}
-            \item 初期表示が速い（HTMLが最初に出る）.
-            \item SPAのように動的.
-            \item ハイドレーションで「静的HTML\rightarrow 動的操作可能」に.
-        \end{itemize}
-    \end{itemize}
+app/\\
+ ├── api/\\
+ │   ├── problems/\\
+ │   │   ├── route.ts          ← GET, POST (出題・解答API)\\
+ │   └── generate/\\
+ │       ├── route.ts          ← 問題をDBに追加するAPI\\
+ ├── components/\\
+ │   └── ProblemCard.tsx       ← 問題表示用コンポーネント\\
+ ├── lib/\\
+ │   └── prisma.ts             ← Prismaクライアント\\
+ ├── src/\\
+      └── page.tsx                  ← 問題ページ (React Flow埋め込み)\\
+
 \end{frame}
-\begin{frame}{ハイドレーション（Hydration）}
-    \begin{itemize}
-        \setlength{\parskip}{1em}
-        \item サーバーサイドで生成されたHTMLは静的なHTML.
-        \item ボタンを押そうが入力があろうが何も起きない.
-        \item クライアント側でHTMLと一緒に送られたJSコードから作ったDOMツリーを再接続することでイベントが可能.
-        \item この再接続することを\textbf{ハイドレーション}という.
-    \end{itemize}
+\begin{frame}[fragile]{Step 1: Prisma の初期化}
+\begin{lstlisting}[language=bash]
+# Prisma の導入
+npm install prisma --save-dev
+npx prisma init
+
+# SQLite を使用するように設定 (.env)
+DATABASE_URL="file:./dev.db"
+\end{lstlisting}
+\end{frame}
+
+%------------------------------------------------------
+\begin{frame}[fragile]{Step 2: Prisma スキーマ定義（prisma/schema.prisma）}
+\begin{lstlisting}[language=SQL]
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Problem {
+  id      Int     @id @default(autoincrement())
+  text    String
+  image   String?
+  answer  Boolean
+}
+\end{lstlisting}
+\end{frame}
+
+%------------------------------------------------------
+\begin{frame}[fragile]{Step 3: データベース作成}
+\begin{lstlisting}[language=bash]
+# マイグレーションの作成と反映
+npx prisma migrate dev --name init
+
+# データベースを確認
+npx prisma studio
+\end{lstlisting}
+\end{frame}
+
+%------------------------------------------------------
+\begin{frame}[fragile]{Step 4: Prisma Client の使用（src/lib/prisma.ts）}
+\begin{lstlisting}[language=Java]
+import { PrismaClient } from "@prisma/client";
+const prisma = new PrismaClient();
+
+export default prisma;
+
+\end{lstlisting}
+これにより,どのAPIルートでもDBに接続可能となる.
+\end{frame}
+
+%------------------------------------------------------
+
+\begin{frame}[fragile,allowframebreaks]{Step 5: バックエンド側（src/app/api/problems/route.ts）}
+\begin{lstlisting}[language=Java]
+import { NextResponse } from "next/server";
+import prisma from "@/lib/prisma";
+
+// GET: 問題一覧を取得
+export async function GET() {
+  const problems = await prisma.problem.findMany();
+  return NextResponse.json(problems);
+}
+// POST: 回答を送信し、正誤を判定
+export async function POST(req: Request) {
+  const { id, answer } = await req.json();
+  const problem = await prisma.problem.findUnique({ where: { id } });
+
+  if (!problem) {
+    return NextResponse.json({ correct: false, message: "問題が見つかりません" });
+  }
+
+  const correct = problem.answer === (answer === "true");
+  return NextResponse.json({
+    correct,
+    message: correct ? "正解！" : "不正解",
+  });
+}
+
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile,allowframebreaks]{Step 5: フロントエンドで取得（src/app/problems/page.tsx）}
+\begin{lstlisting}[language=Java]
+"use client";
+import { useEffect, useState } from "react";
+%型定義
+type Problem = {
+  id: number;
+  text: string;
+  image?: string;
+};
+//DBからデータの取得
+export default function ProblemsPage(){
+  const [problems, setProblems] = useState<Problem[]>([]);
+  const [message,setMessage] = useState("");
+
+  useEffect(() => {
+    fetch("/api/problems")
+    .then((res) => res.json())
+    .then((data) => setProblems(data));
+  },[]);
+//回答の送信
+  async function handleAnswer(id: number,answer: boolean) {
+    const res = await fetch("/api/problems",{
+      method: "POST",
+      headers: {"Context-Type": "application/json"},
+      body: JSON.stringify({id,answer}),
+    });
+    const data = await res.json();
+    setMessage(data.message);
     
+  }
+
+return(
+  <div style={{padding: 20}}>
+    <h1>◎× 問題</h1>
+
+    {problems.map((p) => (
+      <div key={p.id} style={{marginBottom: 30}}>
+        <p>{p.text}</p>
+        {p.image && <img src={p.image} alt="問題画像" width={200}></img>}
+        <div>
+          <button onClick={() => handleAnswer(p.id,true)}>◎</button>
+          <button onClick={() => handleAnswer(p.id,false)}></button>
+        </div>
+  </div>
+))}
+  {message && <h3>{message}</h3>}
+  </div>
+);
+}
+\end{lstlisting}
 \end{frame}
-
-
-\subsection{RSC（React Server Components）}
-\begin{frame}{RSC（React Server Components）}
+\section{今後の課題}
+\begin{frame}{今後の課題}
     \begin{itemize}
-        \setlength{\parskip}{1em}
-        \item\textbf{RSC（React Server Components）}
-        \begin{itemize}
-            \setlength{\parskip}{1em}
-            \item 登場：2023年頃.（Next.js +13）
-            \item Reactコンポーネントのうち,一部をサーバーで実行.
-            \item \rightarrow 今までReactコンポーネントはクライアント側で動くJavascript関数だった.
-            \item クライアント側は一部のUIだけをJSで動かす.
-            \item サーバーでデータ取得や重い処理を行い,HTML部分だけ送信.
-        \end{itemize}
-        \item\textbf{特徴}
-        \begin{itemize}
-            \setlength{\parskip}{1em}
-            \item データ取得が高速（直接サーバーでDBアクセス）.
-            \item JS転送量が減る（クライアントは最小限）.
-            \item SSRよりも効率的・柔軟.
-            \item RSC + クライアントコンポーネントの組み合わせが今の主流.
-        \end{itemize}
+         \setlength{\parskip}{1.5em}
+        \item 正解・不正解をそれぞれ個別に出力・保存.
+        \item 画像の出力.
+        \item 今は◎×問題だけだが,数値の入力問題でも正答判定が可能.
+        \item 問題が一覧でなく,ページ分割可能.
     \end{itemize}
 \end{frame}
 
-\section{進捗状況}
-\begin{frame}{使用技術（現段階）}
-    \begin{itemize}
-        \setlength{\itemsep}{1em}
-        \item Node.js：JavaScriptをサーバーで実行できるようにした環境.
-        \item Next.js：Reactを使ってWebアプリケーションを構築するためのフレームワーク.Node.js上で動作.
-        \item React：UIを作るためのライブラリ.
-        \item React Flow：インタラクティブなダイアグラムを簡単に実装できる.
-    \end{itemize}
-    
-\end{frame}
-\begin{frame}{環境構築}
-    \begin{itemize}
-        \setlength{\itemsep}{1em}
-        \item npmをインストール（sudo apt npm）version : v22.15.0
-        \item Next.jsをインストール（npx create-next-app@latest --ts next-sample）version：v22.15.0
-        \item ここでTurbopackが開発サーバークラッシュしてるとエラーがでた.
-        \item \rightarrow nodemoduleとpackage.jsonを削除
-        \item npm i で再インストールするとうまくいった.
-        \item npm run devで初期画面がでてきた.（http://localhost:3000）
-        \item npm install reactflow
-        \item 作れはしたが、もともとチャートフロウなどを書く用に作られたものだったので上手な図形は作れず.
-    \end{itemize}    
-\end{frame}
-
-\begin{frame}{○×問題}
-    \begin{itemize}
-        \setlength{\itemsep}{1em}
-        \item まずはバックエンド・フロントエンドに問題・回答を書いた.
-        \item JSONで答えをサーバからもらって判断する.
-        \item 将来的にはデータベースから問題を取得するようにする.
-    \end{itemize}
-\end{frame}
-
-\begin{frame}{次回までに}
-    \begin{itemize}
-        \setlength{\itemsep}{1em}
-        \item データベースの作成：SQLiteを使用する予定.
-        \item React Flowの調整：上手くいかなかった場合は代替えの技術の調査.
-    \end{itemize}
-\end{frame}
-
+\section{参考文献}
 \begin{frame}[allowframebreaks]{参考文献}
     \small
     \bibliography{refs}    
