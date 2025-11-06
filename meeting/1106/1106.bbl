@@ -1,0 +1,12 @@
+\begin{thebibliography}{1}
+
+\bibitem{prisma}
+Prisma.
+\newblock \url{https://www.prisma.io/docs/}, (参照日 = 2025/10/27).
+
+\bibitem{orm}
+オブジェクトリレーショナルマッピング (orm) とは.
+\newblock \url{https://aws.amazon.com/jp/what-is/object-relational-mapping/},
+  (参照日 = 2025/10/27).
+
+\end{thebibliography}

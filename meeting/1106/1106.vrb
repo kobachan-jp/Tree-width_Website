@@ -1,13 +1,14 @@
+\frametitle{Step 5: フロントエンドで取得（src/app/problems/page.tsx）}
+\begin{lstlisting}[language=Java]
 "use client";
-
 import { useEffect, useState } from "react";
-
+%型定義
 type Problem = {
   id: number;
   text: string;
   image?: string;
 };
-
+//DBからデータの取得
 export default function ProblemsPage(){
   const [problems, setProblems] = useState<Problem[]>([]);
   const [message,setMessage] = useState("");
@@ -17,16 +18,16 @@ export default function ProblemsPage(){
     .then((res) => res.json())
     .then((data) => setProblems(data));
   },[]);
-
+//回答の送信
   async function handleAnswer(id: number,answer: boolean) {
     const res = await fetch("/api/problems",{
       method: "POST",
-      headers: {"Content-Type": "application/json"},
+      headers: {"Context-Type": "application/json"},
       body: JSON.stringify({id,answer}),
     });
     const data = await res.json();
     setMessage(data.message);
-    
+
   }
 
 return(
@@ -38,21 +39,8 @@ return(
         <p>{p.text}</p>
         {p.image && <img src={p.image} alt="問題画像" width={200}></img>}
         <div>
-          <button 
-          onClick={() => handleAnswer(p.id,true)}
-           style={{
-                padding: "8px 16px",
-                fontSize: "1em",
-                cursor: "pointer",
-              }}
-              >◎</button>
-          <button onClick={() => handleAnswer(p.id,false)}
-             style={{
-                padding: "8px 16px",
-                fontSize: "1em",
-                cursor: "pointer",
-              }}
-              >×</button>
+          <button onClick={() => handleAnswer(p.id,true)}>◎</button>
+          <button onClick={() => handleAnswer(p.id,false)}></button>
         </div>
   </div>
 ))}
@@ -60,3 +48,4 @@ return(
   </div>
 );
 }
+\end{lstlisting}
