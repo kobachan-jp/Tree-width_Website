@@ -1,7 +1,6 @@
-\beamer@sectionintoc {1}{画像生成について}{3}{0}{1}
-\beamer@sectionintoc {2}{データベース使用技術}{4}{0}{2}
-\beamer@subsectionintoc {2}{1}{Prisma}{5}{0}{2}
-\beamer@subsectionintoc {2}{2}{SQLite}{7}{0}{2}
-\beamer@sectionintoc {3}{データベース構築の流れ}{8}{0}{3}
-\beamer@sectionintoc {4}{今後の課題}{22}{0}{4}
-\beamer@sectionintoc {5}{参考文献}{23}{0}{5}
+\beamer@sectionintoc {1}{データベース使用技術}{3}{0}{1}
+\beamer@subsectionintoc {1}{1}{Prisma}{4}{0}{1}
+\beamer@subsectionintoc {1}{2}{SQLite}{6}{0}{1}
+\beamer@sectionintoc {2}{データベース構築の流れ}{7}{0}{2}
+\beamer@sectionintoc {3}{今後の課題}{21}{0}{3}
+\beamer@sectionintoc {4}{参考文献}{22}{0}{4}
