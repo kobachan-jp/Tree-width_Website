@@ -167,11 +167,21 @@ export default prisma;
 
 \begin{frame}{前回までの課題点と解決策}
   課題点:\\
-  \begin{itemize}
-    \setlength{\parskip}{1.5em}
-    \item 頂点から出る辺の位置が固定されている.
-    \item 辺同士がぶつかり,綺麗なグラフになっていない.
-  \end{itemize}
+  \begin{columns}
+    \begin{column}{0.48\textwidth}
+      \begin{itemize}
+        \setlength{\parskip}{1.5em}
+        \item 頂点から出る辺の位置が固定されている.
+        \item 辺同士がぶつかり,綺麗なグラフになっていない.
+      \end{itemize}
+    \end{column}
+    \begin{column}{0.48\textwidth}
+     \begin{figure}
+      \includegraphics[scale=0.2]{graph1.png}
+      \caption{今までの生成図形}
+     \end{figure} 
+    \end{column}
+  \end{columns}
   \vspace{2em}
   解決策:\\
   \textbf{\Rightarrow 辺を出す位置を頂点の中心の裏側から出るようにする.}
