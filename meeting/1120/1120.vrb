@@ -1,0 +1,23 @@
+\frametitle{環境変数の流れ（Prisma利用時）}
+\centering
+\begin{tikzpicture}[
+    node distance=2.4cm,
+    every node/.style={align=center, rounded corners, minimum width=2.8cm, minimum height=1cm, font=\scriptsize}
+]
+    % ノード配置
+    \node[draw, fill=blue!10] (env) {\texttt{.env}\\DATABASE\_URL="file:./dev.db"};
+    \node[draw, fill=green!10, right=of env] (process) {\texttt{process.env}\\Node.js環境変数};
+    \node[draw, fill=yellow!10, below right=1.5cm and -8cm of process] (prisma) {PrismaClient\\DB接続時に利用};
+    \node[draw, fill=orange!10, right=of prisma] (db) {Database\\SQLite / PostgreSQLなど};
+
+    % 矢印
+    \draw[->, thick] (env.east) -- node[above, yshift=4pt]{\texttt{dotenv/config}} (process.west);
+    \draw[->, thick] (process.south east) -- node[right, xshift=3pt]{\texttt{process.env.DATABASE\_URL}} (prisma.north west);
+    \draw[->, thick] (prisma.east) -- node[above, yshift=4pt]{接続確立} (db.west);
+\end{tikzpicture}
+
+\vspace{1em}
+\begin{itemize}
+    \item \texttt{dotenv/config} が \texttt{.env} の内容を \texttt{process.env} に展開.
+    \item PrismaClient が \texttt{process.env.DATABASE\_URL} を利用して DB に接続.
+\end{itemize}

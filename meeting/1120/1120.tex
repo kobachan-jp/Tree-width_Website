@@ -1,0 +1,180 @@
+\documentclass[aspectratio=169]{beamer}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{graphicx}
+\usepackage{luatexja} 
+\usepackage{comment}
+\usepackage{bm}
+\usepackage{setspace}
+\usepackage{caption}
+\usepackage{hyperref}
+\usepackage{natbib}
+\bibliographystyle{unsrt}
+
+\usetheme{LightTheme}
+\setbeamertemplate{footline}[frame number]
+\setbeamertemplate{navigation symbols}{}
+\setlength{\baselineskip}{10pt}
+
+\usepackage{listings}
+\usepackage{xcolor}
+
+\lstset{
+  basicstyle=\ttfamily\footnotesize,
+  keywordstyle=\color{blue}\bfseries,
+  stringstyle=\color{orange},
+  commentstyle=\color{gray},
+  showstringspaces=false,
+  frame=single,
+  breaklines=true,
+  numbers=left,
+  numberstyle=\tiny,
+}
+
+\AtBeginSection[]{
+  \begin{frame}{目次}
+    \tableofcontents[currentsection]
+  \end{frame}
+}
+
+
+\begin{document}
+
+% タイトルフレーム
+\title{\Large 木幅アルゴリズムの学習システムの構築}
+\subtitle{データベース連携の修正と画像生成・サーバー選び} 
+\author{\small B4 小林紹子} % 必要に応じて変更・削除
+\date{\small\today} % 必要に応じて変更・削除
+
+\begin{frame}
+    \titlepage
+\end{frame}
+
+\begin{frame}{目次}
+    \tableofcontents
+\end{frame}
+
+\section{データベース連携の修正（prismaの設定ファイルの変更）}
+
+\begin{frame}{WSL環境でのエラー}
+    \begin{itemize}
+      \setlength{\parskip}{1em}
+      \item なぜかWindowsのVScode（WSL）でWebアプリケーションにエラーが出た.
+      \item データベースとNext.jsの統合がうまく行かない.
+      \item .envファイルにある環境変数が読み込まれないことが原因.
+      \item prisma.config.tsに \texttt{import 'dotenv/config'} を追加することで解消できた.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{エラーの原因候補}
+    \begin{enumerate}
+        \setlength{\parskip}{1em}
+        \item Windows上のVSCode＋WSL環境では，環境変数の伝播や
+              改行コードの違いにより，\texttt{.env} が正しく読まれないことがある．
+        \item Prisma CLI は内部で \texttt{dotenv} を呼び出すが，
+              WSL経由では \texttt{process.env} に値が渡らない場合がある．
+        \item Ubuntuネイティブ環境では，シェル経由で
+              正しく環境変数が設定されるため問題が起きなかった．
+    \end{enumerate}
+\end{frame}
+
+\begin{frame}{\texttt{prisma.config.ts} と環境変数の自動読み込み}
+    \begin{itemize}
+        \setlength{\parskip}{1em}
+        \item Prisma~5まででは、CLIが自動的に \texttt{.env} を読み込んでいた.
+        \item Prisma~6以降では，設定をTypeScriptモジュールとして記述する
+              \texttt{prisma.config.ts} が導入された．
+        \item 設定ファイルがTypeScript/ESM モジュールとして扱われる.
+        \item 仕様変更：「TypeScriptモジュールとして読み込まれる設定ファイルからは、.env を自動で読み込まない」
+        \item 理由：ESMモジュール読み込み時に環境変数を暗黙的に扱うと挙動が不明確になるため．
+        \item そのため，明示的に \texttt{import "dotenv/config";} を追加して環境変数を読み込む必要がある．
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Prisma CLIとは}
+    \begin{itemize}
+        \setlength{\parskip}{1em}
+        \item Prismaの各種操作をターミナルから実行するためのコマンド群．
+        \item データベーススキーマの管理やクライアント生成を行う．
+        \item 例：
+        \begin{itemize}
+            \item \texttt{npx prisma init}：初期設定
+            \item \texttt{npx prisma generate}：Prisma Client生成
+            \item \texttt{npx prisma migrate dev}：DBマイグレーション
+            \item \texttt{npx prisma studio}：GUIでデータ確認
+        \end{itemize}
+        \item CLIは内部で \texttt{.env} を読み込んで環境変数を設定する．
+        \item ただしWSL環境ではこの自動読み込みが失敗する場合がある．
+    \end{itemize}
+\end{frame}
+
+
+\begin{frame}[fragile]{解決策}
+  \begin{block}{明示的に .env を読み込む（prisma.config.ts）}
+  \begin{lstlisting}[language=Java]
+import "dotenv/config";
+import { PrismaClient } from "@prisma/client";
+
+const prisma = new PrismaClient();
+export default prisma;
+  \end{lstlisting}
+  \end{block}
+  \vspace{1em}
+  \begin{itemize}
+    \item この1行により、Node.js起動時に \texttt{.env} が読み込まれる.
+    \item PrismaClientが \texttt{process.env.DATABASE\_URL} を利用可能に.
+  \end{itemize}
+\end{frame}
+
+
+\begin{frame}{環境変数と \texttt{process.env}}
+\begin{itemize}
+  \setlength{\parskip}{1em}
+    \item Node.jsにはグローバルオブジェクト \texttt{process} が存在する.
+    \item その中の \texttt{process.env} は, OSや \texttt{.env} ファイルに定義された環境変数を保持.
+    \item 例: \texttt{process.env.DATABASE\_URL} はデータベース接続URLを表す.
+    \item \texttt{dotenv/config} を読み込むことで, \texttt{.env} の内容が \texttt{process.env} に展開される.
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{環境変数の流れ（Prisma利用時）}
+\centering
+\begin{tikzpicture}[
+    node distance=2.4cm,
+    every node/.style={align=center, rounded corners, minimum width=2.8cm, minimum height=1cm, font=\scriptsize}
+]
+    % ノード配置
+    \node[draw, fill=blue!10] (env) {\texttt{.env}\\DATABASE\_URL="file:./dev.db"};
+    \node[draw, fill=green!10, right=of env] (process) {\texttt{process.env}\\Node.js環境変数};
+    \node[draw, fill=yellow!10, below right=1.5cm and -8cm of process] (prisma) {PrismaClient\\DB接続時に利用};
+    \node[draw, fill=orange!10, right=of prisma] (db) {Database\\SQLite / PostgreSQLなど};
+
+    % 矢印
+    \draw[->, thick] (env.east) -- node[above, yshift=4pt]{\texttt{dotenv/config}} (process.west);
+    \draw[->, thick] (process.south east) -- node[right, xshift=3pt]{\texttt{process.env.DATABASE\_URL}} (prisma.north west);
+    \draw[->, thick] (prisma.east) -- node[above, yshift=4pt]{接続確立} (db.west);
+\end{tikzpicture}
+
+\vspace{1em}
+\begin{itemize}
+    \item \texttt{dotenv/config} が \texttt{.env} の内容を \texttt{process.env} に展開.
+    \item PrismaClient が \texttt{process.env.DATABASE\_URL} を利用して DB に接続.
+\end{itemize}
+\end{frame}
+
+\section{React Flowにおける画像生成の修正}
+
+\begin{frame}{前回までの課題点と解決策}
+  課題点:\\
+  \begin{itemize}
+    \setlength{\parskip}{1.5em}
+    \item 頂点から出る辺の位置が固定されている.
+    \item 辺同士がぶつかり,綺麗なグラフになっていない.
+  \end{itemize}
+  \vspace{2em}
+  解決策:\\
+  \textbf{\Rightarrow 辺を出す位置を頂点の中心の裏側から出るようにする.}
+\end{frame}
+\end{document}
+
