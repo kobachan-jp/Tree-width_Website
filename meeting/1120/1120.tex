@@ -186,5 +186,239 @@ export default prisma;
   解決策:\\
   \textbf{\Rightarrow 辺を出す位置を頂点の中心の裏側から出るようにする.}
 \end{frame}
+
+%--------------------------------------------------
+\begin{frame}{React Flow の全体構造}
+\begin{block}{React Flow とは}
+  React Flow は「Node（頂点）」と「Edge（線）」で構成されたグラフを,ブラウザ上で直感的に表示・操作できるライブラリ.
+\end{block}
+
+\begin{itemize}
+   \setlength{\parskip}{0.5em}
+  \item 主な構成要素：
+  \begin{itemize}
+    \item \textbf{Node（ノード）}：丸や四角などの図形.
+    \item \textbf{Edge（エッジ）}：ノード同士をつなぐ線.
+    \item \textbf{Handle（ハンドル）}：ノード上の「線の接続点」.
+    \item \textbf{ReactFlowProvider}：全体の状態（ノード・エッジ・選択状態など）を管理.
+  \end{itemize}
+  \item ノードやエッジの配置・ズームなどは React Flow が自動的に処理.
+  \item 独自の見た目を作るときは \texttt{CustomNode} のようにコンポーネントを定義.
+\end{itemize}
+\end{frame}
+
+%--------------------------------------------------
+\begin{frame}[allowframebreaks]{各構成要素のプロパティ}
+\begin{itemize}
+    \setlength{\parskip}{1em} 
+    \item \textbf{Node} ：
+    \begin{itemize}
+        \setlength{\parskip}{0.3em} 
+        \item id : 一意な識別子.
+        \item type : 表示に使うコンポーネントの種類（例：CustomNode）.
+        \item position : 座標（x, y）.
+        \item data : ノードに渡すカスタムデータ（例：ラベル名など）.
+    \end{itemize}
+
+    \item \textbf{Edge}：
+    \begin{itemize}
+        \setlength{\parskip}{0.3em} 
+        \item source : 出発ノードのid.
+        \item target : 到着ノードのid.
+        \item type : エッジの種類（直線・曲線など）.
+    \end{itemize}
+
+    \newpage
+    \item \textbf{Handle} ：
+    \begin{itemize}
+        \setlength{\parskip}{0.3em} 
+        \item type : "source" または "target"（エッジの出発点／到達点を指定）.
+        \item id : ハンドルの識別子（ノード内で複数ハンドルを区別）.
+        \item position : ハンドルの位置（上・下・左・右）を \texttt{Position.Top / Bottom / Left / Right} で指定.
+        \item style : CSSで見た目をカスタマイズ（例：透明にして中心に配置）.
+        \item isConnectable : 接続を許可するかどうか（true/false）.
+    \end{itemize}
+
+    \vspace{1em}
+    \item \textbf{ReactFlow コンポーネント}がこれらを統合し,描画とイベント処理を行う.
+\end{itemize}
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}[fragile,allowframebreaks]{Node Componentの作成}
+  \textbf{ Node Component（ノードコンポーネント）}：\\
+  「ノード単体の見た目と挙動（色・形・サイズ・ラベル・Handle の配置など）」を定義する場所.
+  \vspace{1em}
+\begin{lstlisting}[language=Java,basicstyle=\ttfamily\small]
+export default function CustomNode({ data, selected }: NodeProps) {
+  return (
+    <div
+      style={{
+        background: selected ? "#FFD700" : "#89CFF0",
+        borderRadius: "50%",
+        width: 40,
+        height: 40,
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        fontWeight: "bold",
+        color: "#000",
+        position: "relative",
+      }}
+    >
+      {data.label}
+
+      <Handle
+        type="source"
+        id="center"
+        position={Position.Right}
+        style={{ ... }}
+      />
+
+      <Handle
+        type="target"
+        id="center"
+        position={Position.Left}
+        style={{ ... }}
+      />
+    </div>
+  )
+}
+\end{lstlisting}
+\end{frame}
+
+%--------------------------------------------------
+\begin{frame}[fragile]{CustomNode の基本構造}
+\begin{columns}
+  \begin{column}{0.48\textwidth}
+\begin{lstlisting}[language=Java,basicstyle=\ttfamily\scriptsize]
+export default function CustomNode(
+  { data, selected }: NodeProps
+) {
+  return (
+    <div>
+      {data.label}
+      <Handle type="source" id="center" />
+      <Handle type="target" id="center" />
+    </div>
+  )
+}
+\end{lstlisting}
+  \end{column}
+
+  \begin{column}{0.48\textwidth}
+  \begin{itemize}
+    \item \textbf{CustomNode}: \\
+    React Flow における「ノード1つの描画定義」を担うコンポーネント.
+    \item \textbf{NodeProps}:  
+    React Flow が各ノードに渡す情報の型.
+    \item 引数 \textbf{data}, \textbf{selected}:  
+    \begin{itemize}
+      \item \textbf{data.label}: ノードのラベル.
+      \item \textbf{selected}: ユーザーが選択中かどうか.
+    \end{itemize}
+    \item \textbf{<Handle>}：\\エッジ接続点.
+    1つのノード内に複数設置できる.
+  \end{itemize}
+  \end{column}
+\end{columns}
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}[fragile]{ノード本体のスタイル}
+\begin{columns}
+  \begin{column}{0.48\textwidth}
+\begin{lstlisting}[language=Java,basicstyle=\ttfamily\scriptsize]
+<div
+  style={{
+    background: selected ? "#FFD700" : "#89CFF0",
+    borderRadius: "50%",
+    width: 40,
+    height: 40,
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    fontWeight: "bold",
+    color: "#000",
+    position: "relative",
+  }}
+>
+  {data.label}
+</div>
+\end{lstlisting}
+  \end{column}
+
+  \begin{column}{0.48\textwidth}
+  \begin{itemize}
+    \item background：
+      \begin{itemize}
+        \item 選択時：金色（\#FFD700）.
+        \item 非選択時：水色（\#89CFF0）.
+      \end{itemize}
+    \item \texttt{borderRadius: "50\%"}：円形ノード.
+    \item width × height：40px × 40px.
+    \item \texttt{display: flex} と中央揃えでラベルを中央配置.
+    \item \texttt{position: "relative"}：\\内部のハンドルを相対的に配置できるようにする.
+  \end{itemize}
+  \end{column}
+\end{columns}
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}[fragile,allowframebreaks]{Handle の役割}
+\begin{columns}
+  \begin{column}{0.48\textwidth}
+\begin{lstlisting}[language=Java,basicstyle=\ttfamily\scriptsize]
+<Handle
+  type="source"
+  id="center"
+  position={Position.Right}
+  style={{
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+    background: "transparent",
+    border: "none",
+  }}
+/>
+
+\end{lstlisting}
+  \end{column}
+
+  \begin{column}{0.58\textwidth}
+  \begin{itemize}
+        \item \texttt{type}:  \\
+          `"source"（線を出す）or "target"（線を受ける）.
+        \item \texttt{position}:\\  
+          接続位置（例：\texttt{Position.Left}, \texttt{Position.Right}）.
+        \item \texttt{id}:  \\
+          エッジの \texttt{sourceHandle} / \texttt{targetHandle} と対応.
+        \item \texttt{style}:  
+          CSS で位置や透明化を指定.
+    \item この例ではどちらの Handle もノード中央に配置.
+    \item 背景を透明にし,見えないが線を接続できる.
+  \end{itemize}
+  \end{column}
+\end{columns}
+\end{frame}
+
+
+%--------------------------------------------------
+\begin{frame}{まとめ：React Flow と CustomNode の関係}
+\begin{block}{まとめ}
+\begin{itemize}
+  \item React Flow は「ノードとエッジ」で構成されるグラフ描画ライブラリ。
+  \item ノードの見た目を自由に作りたいとき、\texttt{CustomNode} を定義する。
+  \item \texttt{Handle} によりノード同士を接続可能。
+  \item 状態管理（選択・移動・接続）は React Flow が自動で行う。
+\end{itemize}
+\end{block}
+\end{frame}
+
 \end{document}
+
+  
 
