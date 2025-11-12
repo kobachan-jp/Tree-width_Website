@@ -25,13 +25,13 @@ export default function CustomNode({ data, selected }: NodeProps) {
       <Handle
         type="source"
         id="center"
-        position={Position.Right} // enumを使う必要がある
+        position={Position.Right} 
         style={{
           top: "50%",
           left: "50%",
-          transform: "translate(-50%, -50%)",
-          background: "transparent",
-          border: "none",
+          transform: "translate(-50%, -50%)",//中心設定（自分の分も中心調整する)
+          background: "transparent",//背景透明科
+          border: "none",//枠線なし
         }}
       />
 
