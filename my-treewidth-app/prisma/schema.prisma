@@ -17,5 +17,5 @@ model Problem{
   id Int @id @default(autoincrement())
   text String
   image String?
-  answer Boolean
+  answer Int
 }
