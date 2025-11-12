@@ -1,0 +1,35 @@
+\frametitle{Handle の役割}
+\begin{columns}
+  \begin{column}{0.48\textwidth}
+\begin{lstlisting}[language=Java,basicstyle=\ttfamily\scriptsize]
+<Handle
+  type="source"
+  id="center"
+  position={Position.Right}
+  style={{
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+    background: "transparent",
+    border: "none",
+  }}
+/>
+
+\end{lstlisting}
+  \end{column}
+
+  \begin{column}{0.58\textwidth}
+  \begin{itemize}
+        \item \texttt{type}:  \\
+          `"source"（線を出す）or "target"（線を受ける）.
+        \item \texttt{position}:\\
+          接続位置（例：\texttt{Position.Left}, \texttt{Position.Right}）.
+        \item \texttt{id}:  \\
+          エッジの \texttt{sourceHandle} / \texttt{targetHandle} と対応.
+        \item \texttt{style}:
+          CSS で位置や透明化を指定.
+    \item この例ではどちらの Handle もノード中央に配置.
+    \item 背景を透明にし,見えないが線を接続できる.
+  \end{itemize}
+  \end{column}
+\end{columns}
