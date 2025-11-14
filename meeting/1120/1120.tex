@@ -10,6 +10,8 @@
 \usepackage{caption}
 \usepackage{hyperref}
 \usepackage{natbib}
+\usepackage{ulem}
+
 \bibliographystyle{unsrt}
 
 \usetheme{LightTheme}
@@ -162,19 +164,80 @@
 		\end{column}
 	\end{columns}
 	\centering $\implies$正答判定結果欄をmapの中に入れる.\\
-  \centering $\implies$しかし,正答判定結果が問題ごとに保存されていない.\\
+	\centering $\implies$しかし,正答判定結果が問題ごとに保存されていない.\\
 \end{frame}
 
-\begin{frame}[fragile,allowframebreaks]{問題別の正答結果を維持させる}
+\begin{frame}[fragile,allowframebreaks]{問題別の正答結果を維持させる（problems/page.tsx）}
+	\begin{enumerate}
+		\setlength{\parskip}{1.5em}
+		\small{
+		\item React Hookと呼ばれる状態管理機能（useState）を用いる\cite{typescript}.
+		\item それぞれの問題の正解を保持できるmap（messages）と更新関数（setMessages）を作成.
+		\item サーバーから用いた正答判定をmessagesに保存させる.
+		      }
+	\end{enumerate}
+
 	\begin{lstlisting}[language=Java,basicstyle=\ttfamily\footnotesize]
-      model Problem{ 
-      id Int @id @default(autoincrement())
-      text String
-      image String?
-      answer Int
-      }  
+     export default function ProblemsPage(){
+  //問題の配列を状態管理
+  const [problems, setProblems] = useState<Problem[]>([]);
+  //正答判定をProblem.idをキーとするmapでbooleanまたはundefinedを管理
+  const [messages,setMessages] = useState<{[id:number]:boolean | undefined}>([]);
+
+  //GETリクエストで問題一覧を取得.
+  useEffect(() => {
+    fetch("/api/problems")
+    //fetchはレスポンスオブジェクトを返すのでJSON型に変換.
+    .then((res) => res.json())
+    .then((data) => setProblems(data));
+  },[]);
+  //回答を送信し、正答判定を取得
+  async function handleAnswer(id: number,answer: number) {
+    const res = await fetch("/api/problems",{
+      method: "POST",
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify({id,answer}),
+    });
+    const data = await res.json();
+    setMessages((prev) => ({
+      //全プロパティをコピー（既存の回答状況をコピー）
+      ...prev,
+      //新たに正答判定を追加
+      [id]:data.correct,
+    }))
+  }
+  return(
+    ...
+    {/*回答判定されている場合のみ判定結果を出力 */}
+        {messages[p.id] !== undefined && (
+        <h3>{messages[p.id] ? "正解！" : "不正解"}</h3>
+        )}
+  )
+}
   \end{lstlisting}
 \end{frame}
+
+\begin{frame}{実行結果}
+	\begin{columns}
+		\begin{column}{0.48\textwidth}
+			\begin{figure}
+				\fbox{\includegraphics[scale=0.25]{judge1.png}}
+				\caption{修正前}
+			\end{figure}
+		\end{column}
+		\begin{column}{0.1\textwidth}
+			\LARGE  $\longrightarrow$
+		\end{column}
+		\begin{column}{0.48\textwidth}
+			\begin{figure}
+				\fbox{\includegraphics[scale=0.25]{judge2.png}}
+				\caption{修正後}
+			\end{figure}
+		\end{column}
+	\end{columns}
+	\centering \textbf{\rightarrow \ 個別に正答判定を出力・保持できるようになった.}
+\end{frame}
+
 
 \section{データベース連携の修正（prismaの設定ファイルの変更）}
 
@@ -526,7 +589,7 @@ export default function CustomNode(
 	\end{columns}
 \end{frame}
 
-\begin{frame}{修正後}
+\begin{frame}{実行結果}
 	\begin{columns}
 		\begin{column}{0.48\textwidth}
 			\begin{figure}
@@ -547,9 +610,27 @@ export default function CustomNode(
 	\centering \textbf{\rightarrow \ グラフらしくすることに成功.}
 \end{frame}
 
+\section{次回までの目標}
 
+\begin{frame}{今回の進捗状況}
+  \begin{enumerate}
+		\setlength{\parskip}{1.5em}
+		\item \sout{◎×問題は正答判定可能だが,数値の入力問題でも正答判定が不可能.}
+		\item \sout{それぞれの問題の正解・不正解が保存されない.}
+		\item \sout{React Flowで思ったようにグラフが描けない.}
+		\item 問題文と画像生成が連携されていない.
+		\item 問題がページ分割されずに一覧で出てくる.
+	\end{enumerate}
+
+  \vspace{1.5em}
+  \textbf{\rightarrow 残りの2つと◎×問題以外にも対応可にさせることに取り組む.}
+\end{frame}
 %--------------------------------------------------
 
+\begin{frame}[allowframebreaks]{参考文献}
+    \small
+    \bibliography{bibtex}
+\end{frame}
 
 
 \end{document}
