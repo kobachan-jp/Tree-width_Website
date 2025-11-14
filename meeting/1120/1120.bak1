@@ -122,11 +122,11 @@
 	\centering $\implies$問題ごとに判定結果表示欄を作り、正答判定を保存できるようにする.
 \end{frame}
 
-\begin{frame}[fragile]{1問ずつ正答判定欄を作成（problems/page.tsx）}
+\begin{frame}[fragile,allowframebreaks]{1問ずつ正答判定欄を作成（problems/page.tsx）}
 	\begin{columns}
 		\begin{column}{0.48\textwidth}
 			修正前：
-			\begin{lstlisting}[language=Java,basicstyle=\ttfamily\tiny]
+			\begin{lstlisting}[language=Java,basicstyle=\ttfamily\scriptsize]
     {problems.map((p) => (
       <div key={p.id} style={{marginBottom: 30}}>
         <p>問題{p.id}</p>
@@ -144,7 +144,7 @@
 
 		\begin{column}{0.48\textwidth}
 			修正後:
-			\begin{lstlisting}[language=Java,basicstyle=\ttfamily\tiny]
+			\begin{lstlisting}[language=Java,basicstyle=\ttfamily\scriptsize]
     {problems.map((p) => (
       <div key={p.id} style={{marginBottom: 30}}>
         <p>問題{p.id}</p>
@@ -155,14 +155,14 @@
         </div>
         {/*mapの中に正答判定結果欄を作成*/}
         <h3>{messages[p.id] ? "正解！" : "不正解"}</h3>
-       </div>
-      )
-    )}
-    \end{lstlisting}
+  </div>
+)
+)}
+  </div>
+  \end{lstlisting}
 		\end{column}
 	\end{columns}
-	\centering $\implies$正答判定結果欄をmapの中に入れる.\\
-  \centering $\implies$しかし,正答判定結果が問題ごとに保存されていない.\\
+\centering $\implies$ mapの中に正答判定結果欄を作成する.
 \end{frame}
 
 \begin{frame}[fragile,allowframebreaks]{問題別の正答結果を維持させる}

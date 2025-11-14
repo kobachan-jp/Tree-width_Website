@@ -155,14 +155,13 @@
         </div>
         {/*mapの中に正答判定結果欄を作成*/}
         <h3>{messages[p.id] ? "正解！" : "不正解"}</h3>
-       </div>
-      )
-    )}
+  </div>
+)
+)}
     \end{lstlisting}
 		\end{column}
 	\end{columns}
-	\centering $\implies$正答判定結果欄をmapの中に入れる.\\
-  \centering $\implies$しかし,正答判定結果が問題ごとに保存されていない.\\
+	\centering $\implies$ 正答判定結果欄をmapの中に入れる.
 \end{frame}
 
 \begin{frame}[fragile,allowframebreaks]{問題別の正答結果を維持させる}
