@@ -1,2 +1,5 @@
-\beamer@sectionintoc {1}{データベース連携の修正（prismaの設定ファイルの変更）}{3}{0}{1}
-\beamer@sectionintoc {2}{React Flowにおける画像生成の修正}{11}{0}{2}
+\beamer@sectionintoc {2}{数値による正答判定可能}{4}{0}{1}
+\beamer@sectionintoc {3}{問題別の正答判定結果保存}{6}{0}{2}
+\beamer@sectionintoc {4}{データベース連携の修正（prismaの設定ファイルの変更）}{13}{0}{3}
+\beamer@sectionintoc {5}{React Flowにおける画像生成の修正}{21}{0}{4}
+\beamer@sectionintoc {6}{次回までの目標}{33}{0}{5}

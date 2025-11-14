@@ -16,7 +16,6 @@ export async function POST(req: Request) {
 
     const correct = problem.answer === answer;
     return NextResponse.json({
-        correct,
-        message: correct ? "正解！" : "不正解",
+        correct
     });
 }

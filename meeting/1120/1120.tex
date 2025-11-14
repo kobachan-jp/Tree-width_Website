@@ -10,6 +10,8 @@
 \usepackage{caption}
 \usepackage{hyperref}
 \usepackage{natbib}
+\usepackage{ulem}
+
 \bibliographystyle{unsrt}
 
 \usetheme{LightTheme}
@@ -43,214 +45,396 @@
 
 % タイトルフレーム
 \title{\Large 木幅アルゴリズムの学習システムの構築}
-\subtitle{データベース連携の修正と画像生成・サーバー選び} 
+\subtitle{データベース連携の修正と画像生成・サーバー選び}
 \author{\small B4 小林紹子} % 必要に応じて変更・削除
 \date{\small\today} % 必要に応じて変更・削除
 
 \begin{frame}
-    \titlepage
+	\titlepage
 \end{frame}
 
 \begin{frame}{目次}
-    \tableofcontents
+	\tableofcontents
 \end{frame}
+
+\section*{前回までの課題}
+\begin{frame}{前回までの課題}
+	\begin{enumerate}
+		\setlength{\parskip}{1.5em}
+		\item ◎×問題は正答判定可能だが,数値の入力問題でも正答判定が不可能.
+		\item それぞれの問題の正解・不正解が保存されない.
+		\item React Flowで思ったようにグラフが描けない.
+		\item 問題文と画像生成が連携されていない.
+		\item 問題がページ分割されずに一覧で出てくる.
+	\end{enumerate}
+\end{frame}
+
+\section{数値による正答判定可能}
+\begin{frame}[fragile]{Problemテーブルの修正}
+	\begin{columns}
+		\begin{column}{0.48\textwidth}
+			修正前:
+			\begin{lstlisting}[language=Java][basicstyle=\ttfamily\small]
+      model Problem{
+      id Int @id @default(autoincrement())
+      text String
+      image String?
+      answer Boolean
+      }
+    \end{lstlisting}
+		\end{column}
+		\begin{column}{0.48\textwidth}
+			変更後：
+			\begin{lstlisting}[language=Java][basicstyle=\ttfamily\small]
+      model Problem{
+      id Int @id @default(autoincrement())
+      text String
+      image String?
+      answer Int
+      }  
+    \end{lstlisting}
+		\end{column}
+	\end{columns}
+	\vspace{3em}
+	\centering  {\color{red}\textbf{\rightarrow answerの型をBoolean型からInt型に変更.}}\\
+	\centering \Rightarrow \ \ まだ問題ページから入力する欄は作れていない.\\
+	\centering \Rightarrow \ \ ◎×問題か入力問題かカテゴリ分けする必要あり.
+
+\end{frame}
+
+\section{問題別の正答判定結果保存}
+
+\begin{frame}{前回までの課題点}
+	\begin{columns}
+		\begin{column}{0.38\textwidth}
+			\begin{figure}
+				\fbox{\includegraphics[scale=0.3]{judge1.png}}
+				\caption{修正前}
+			\end{figure}
+		\end{column}
+		\begin{column}{0.58\textwidth}
+			\begin{itemize}
+				\setlength{\parskip}{1.5em}
+				\item 正答判定結果が問題一覧の最後にある.
+				\item 他の問題を解くと正答判定結果が変化.
+				\item 問いた問題1問1問の結果が保存できていない.
+			\end{itemize}
+		\end{column}
+	\end{columns}
+	\centering $\implies$問題ごとに判定結果表示欄を作り、正答判定を保存できるようにする.
+\end{frame}
+
+\begin{frame}[fragile]{1問ずつ正答判定欄を作成（problems/page.tsx）}
+	\begin{columns}
+		\begin{column}{0.48\textwidth}
+			修正前：
+			\begin{lstlisting}[language=Java,basicstyle=\ttfamily\tiny]
+    {problems.map((p) => (
+      <div key={p.id} style={{marginBottom: 30}}>
+        <p>問題{p.id}</p>
+        <p>{p.text}</p>
+        {p.image && <img src={p.image} alt="問題画像" width={200}></img>}
+        <div>
+          <button ...>×</button>
+        </div>
+  </div>
+      )
+)}
+  <div>{messages[p.id] ? "正解！" : "不正解"}</div>
+  \end{lstlisting}
+		\end{column}
+
+		\begin{column}{0.48\textwidth}
+			修正後:
+			\begin{lstlisting}[language=Java,basicstyle=\ttfamily\tiny]
+    {problems.map((p) => (
+      <div key={p.id} style={{marginBottom: 30}}>
+        <p>問題{p.id}</p>
+        <p>{p.text}</p>
+        ...
+        <div>
+          <button ...>×</button>
+        </div>
+        {/*mapの中に正答判定結果欄を作成*/}
+        <h3>{messages[p.id] ? "正解！" : "不正解"}</h3>
+       </div>
+      )
+    )}
+    \end{lstlisting}
+		\end{column}
+	\end{columns}
+	\centering $\implies$正答判定結果欄をmapの中に入れる.\\
+	\centering $\implies$しかし,正答判定結果が問題ごとに保存されていない.\\
+\end{frame}
+
+\begin{frame}[fragile,allowframebreaks]{問題別の正答結果を維持させる（problems/page.tsx）}
+	\begin{enumerate}
+		\setlength{\parskip}{1.5em}
+		\small{
+		\item React Hookと呼ばれる状態管理機能（useState）を用いる\cite{typescript}.
+		\item それぞれの問題の正解を保持できるmap（messages）と更新関数（setMessages）を作成.
+		\item サーバーから用いた正答判定をmessagesに保存させる.
+		      }
+	\end{enumerate}
+
+	\begin{lstlisting}[language=Java,basicstyle=\ttfamily\footnotesize]
+     export default function ProblemsPage(){
+  //問題の配列を状態管理
+  const [problems, setProblems] = useState<Problem[]>([]);
+  //正答判定をProblem.idをキーとするmapでbooleanまたはundefinedを管理
+  const [messages,setMessages] = useState<{[id:number]:boolean | undefined}>([]);
+
+  //GETリクエストで問題一覧を取得.
+  useEffect(() => {
+    fetch("/api/problems")
+    //fetchはレスポンスオブジェクトを返すのでJSON型に変換.
+    .then((res) => res.json())
+    .then((data) => setProblems(data));
+  },[]);
+  //回答を送信し、正答判定を取得
+  async function handleAnswer(id: number,answer: number) {
+    const res = await fetch("/api/problems",{
+      method: "POST",
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify({id,answer}),
+    });
+    const data = await res.json();
+    setMessages((prev) => ({
+      //全プロパティをコピー（既存の回答状況をコピー）
+      ...prev,
+      //新たに正答判定を追加
+      [id]:data.correct,
+    }))
+  }
+  return(
+    ...
+    {/*回答判定されている場合のみ判定結果を出力 */}
+        {messages[p.id] !== undefined && (
+        <h3>{messages[p.id] ? "正解！" : "不正解"}</h3>
+        )}
+  )
+}
+  \end{lstlisting}
+\end{frame}
+
+\begin{frame}{実行結果}
+	\begin{columns}
+		\begin{column}{0.48\textwidth}
+			\begin{figure}
+				\fbox{\includegraphics[scale=0.25]{judge1.png}}
+				\caption{修正前}
+			\end{figure}
+		\end{column}
+		\begin{column}{0.1\textwidth}
+			\LARGE  $\longrightarrow$
+		\end{column}
+		\begin{column}{0.48\textwidth}
+			\begin{figure}
+				\fbox{\includegraphics[scale=0.25]{judge2.png}}
+				\caption{修正後}
+			\end{figure}
+		\end{column}
+	\end{columns}
+	\centering \textbf{\rightarrow \ 個別に正答判定を出力・保持できるようになった.}
+\end{frame}
+
 
 \section{データベース連携の修正（prismaの設定ファイルの変更）}
 
 \begin{frame}{WSL環境でのエラー}
-    \begin{itemize}
-      \setlength{\parskip}{1em}
-      \item なぜかWindowsのVScode（WSL）でWebアプリケーションにエラーが出た.
-      \item データベースとNext.jsの統合がうまく行かない.
-      \item .envファイルにある環境変数が読み込まれないことが原因.
-      \item prisma.config.tsに \texttt{import 'dotenv/config'} を追加することで解消できた.
-    \end{itemize}
+	\begin{itemize}
+		\setlength{\parskip}{1em}
+		\item なぜかWindowsのVScode（WSL）でWebアプリケーションにエラーが出た.
+		\item データベースとNext.jsの統合がうまく行かない.
+		\item .envファイルにある環境変数が読み込まれないことが原因.
+		\item prisma.config.tsに \texttt{import 'dotenv/config'} を追加することで解消できた.
+	\end{itemize}
 \end{frame}
 
 \begin{frame}{エラーの原因候補}
-    \begin{enumerate}
-        \setlength{\parskip}{1em}
-        \item Windows上のVSCode＋WSL環境では，環境変数の伝播や
-              改行コードの違いにより，\texttt{.env} が正しく読まれないことがある．
-        \item Prisma CLI は内部で \texttt{dotenv} を呼び出すが，
-              WSL経由では \texttt{process.env} に値が渡らない場合がある．
-        \item Ubuntuネイティブ環境では，シェル経由で
-              正しく環境変数が設定されるため問題が起きなかった．
-    \end{enumerate}
+	\begin{enumerate}
+		\setlength{\parskip}{1em}
+		\item Windows上のVSCode＋WSL環境では，環境変数の伝播や
+		      改行コードの違いにより，\texttt{.env} が正しく読まれないことがある．
+		\item Prisma CLI は内部で \texttt{dotenv} を呼び出すが，
+		      WSL経由では \texttt{process.env} に値が渡らない場合がある．
+		\item Ubuntuネイティブ環境では，シェル経由で
+		      正しく環境変数が設定されるため問題が起きなかった．
+	\end{enumerate}
 \end{frame}
 
 \begin{frame}{\texttt{prisma.config.ts} と環境変数の自動読み込み}
-    \begin{itemize}
-        \setlength{\parskip}{1em}
-        \item Prisma~5まででは、CLIが自動的に \texttt{.env} を読み込んでいた.
-        \item Prisma~6以降では，設定をTypeScriptモジュールとして記述する
-              \texttt{prisma.config.ts} が導入された．
-        \item 設定ファイルがTypeScript/ESM モジュールとして扱われる.
-        \item 仕様変更：「TypeScriptモジュールとして読み込まれる設定ファイルからは、.env を自動で読み込まない」
-        \item 理由：ESMモジュール読み込み時に環境変数を暗黙的に扱うと挙動が不明確になるため．
-        \item そのため，明示的に \texttt{import "dotenv/config";} を追加して環境変数を読み込む必要がある．
-    \end{itemize}
+	\begin{itemize}
+		\setlength{\parskip}{1em}
+		\item Prisma~5まででは、CLIが自動的に \texttt{.env} を読み込んでいた.
+		\item Prisma~6以降では，設定をTypeScriptモジュールとして記述する
+		      \texttt{prisma.config.ts} が導入された．
+		\item 設定ファイルがTypeScript/ESM モジュールとして扱われる.
+		\item 仕様変更：「TypeScriptモジュールとして読み込まれる設定ファイルからは、.env を自動で読み込まない」
+		\item 理由：ESMモジュール読み込み時に環境変数を暗黙的に扱うと挙動が不明確になるため．
+		\item そのため，明示的に \texttt{import "dotenv/config";} を追加して環境変数を読み込む必要がある．
+	\end{itemize}
 \end{frame}
 
 \begin{frame}{Prisma CLIとは}
-    \begin{itemize}
-        \setlength{\parskip}{1em}
-        \item Prismaの各種操作をターミナルから実行するためのコマンド群．
-        \item データベーススキーマの管理やクライアント生成を行う．
-        \item 例：
-        \begin{itemize}
-            \item \texttt{npx prisma init}：初期設定
-            \item \texttt{npx prisma generate}：Prisma Client生成
-            \item \texttt{npx prisma migrate dev}：DBマイグレーション
-            \item \texttt{npx prisma studio}：GUIでデータ確認
-        \end{itemize}
-        \item CLIは内部で \texttt{.env} を読み込んで環境変数を設定する．
-        \item ただしWSL環境ではこの自動読み込みが失敗する場合がある．
-    \end{itemize}
+	\begin{itemize}
+		\setlength{\parskip}{1em}
+		\item Prismaの各種操作をターミナルから実行するためのコマンド群．
+		\item データベーススキーマの管理やクライアント生成を行う．
+		\item 例：
+		      \begin{itemize}
+			      \item \texttt{npx prisma init}：初期設定
+			      \item \texttt{npx prisma generate}：Prisma Client生成
+			      \item \texttt{npx prisma migrate dev}：DBマイグレーション
+			      \item \texttt{npx prisma studio}：GUIでデータ確認
+		      \end{itemize}
+		\item CLIは内部で \texttt{.env} を読み込んで環境変数を設定する．
+		\item ただしWSL環境ではこの自動読み込みが失敗する場合がある．
+	\end{itemize}
 \end{frame}
 
 
 \begin{frame}[fragile]{解決策}
-  \begin{block}{明示的に .env を読み込む（prisma.config.ts）}
-  \begin{lstlisting}[language=Java]
+	\begin{block}{明示的に .env を読み込む（prisma.config.ts）}
+		\begin{lstlisting}[language=Java]
 import "dotenv/config";
 import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
 export default prisma;
   \end{lstlisting}
-  \end{block}
-  \vspace{1em}
-  \begin{itemize}
-    \item この1行により、Node.js起動時に \texttt{.env} が読み込まれる.
-    \item PrismaClientが \texttt{process.env.DATABASE\_URL} を利用可能に.
-  \end{itemize}
+	\end{block}
+	\vspace{1em}
+	\begin{itemize}
+		\item この1行により、Node.js起動時に \texttt{.env} が読み込まれる.
+		\item PrismaClientが \texttt{process.env.DATABASE\_URL} を利用可能に.
+	\end{itemize}
 \end{frame}
 
 
 \begin{frame}{環境変数と \texttt{process.env}}
-\begin{itemize}
-  \setlength{\parskip}{1em}
-    \item Node.jsにはグローバルオブジェクト \texttt{process} が存在する.
-    \item その中の \texttt{process.env} は, OSや \texttt{.env} ファイルに定義された環境変数を保持.
-    \item 例: \texttt{process.env.DATABASE\_URL} はデータベース接続URLを表す.
-    \item \texttt{dotenv/config} を読み込むことで, \texttt{.env} の内容が \texttt{process.env} に展開される.
-\end{itemize}
+	\begin{itemize}
+		\setlength{\parskip}{1em}
+		\item Node.jsにはグローバルオブジェクト \texttt{process} が存在する.
+		\item その中の \texttt{process.env} は, OSや \texttt{.env} ファイルに定義された環境変数を保持.
+		\item 例: \texttt{process.env.DATABASE\_URL} はデータベース接続URLを表す.
+		\item \texttt{dotenv/config} を読み込むことで, \texttt{.env} の内容が \texttt{process.env} に展開される.
+	\end{itemize}
 \end{frame}
 
 \begin{frame}[fragile]{環境変数の流れ（Prisma利用時）}
-\centering
-\begin{tikzpicture}[
-    node distance=2.4cm,
-    every node/.style={align=center, rounded corners, minimum width=2.8cm, minimum height=1cm, font=\scriptsize}
-]
-    % ノード配置
-    \node[draw, fill=blue!10] (env) {\texttt{.env}\\DATABASE\_URL="file:./dev.db"};
-    \node[draw, fill=green!10, right=of env] (process) {\texttt{process.env}\\Node.js環境変数};
-    \node[draw, fill=yellow!10, below right=1.5cm and -8cm of process] (prisma) {PrismaClient\\DB接続時に利用};
-    \node[draw, fill=orange!10, right=of prisma] (db) {Database\\SQLite / PostgreSQLなど};
+	\centering
+	\begin{tikzpicture}[
+			node distance=2.4cm,
+			every node/.style={align=center, rounded corners, minimum width=2.8cm, minimum height=1cm, font=\scriptsize}
+		]
+		% ノード配置
+		\node[draw, fill=blue!10] (env) {\texttt{.env}\\DATABASE\_URL="file:./dev.db"};
+		\node[draw, fill=green!10, right=of env] (process) {\texttt{process.env}\\Node.js環境変数};
+		\node[draw, fill=yellow!10, below right=1.5cm and -8cm of process] (prisma) {PrismaClient\\DB接続時に利用};
+		\node[draw, fill=orange!10, right=of prisma] (db) {Database\\SQLite / PostgreSQLなど};
 
-    % 矢印
-    \draw[->, thick] (env.east) -- node[above, yshift=4pt]{\texttt{dotenv/config}} (process.west);
-    \draw[->, thick] (process.south east) -- node[right, xshift=3pt]{\texttt{process.env.DATABASE\_URL}} (prisma.north west);
-    \draw[->, thick] (prisma.east) -- node[above, yshift=4pt]{接続確立} (db.west);
-\end{tikzpicture}
+		% 矢印
+		\draw[->, thick] (env.east) -- node[above, yshift=4pt]{\texttt{dotenv/config}} (process.west);
+		\draw[->, thick] (process.south east) -- node[right, xshift=3pt]{\texttt{process.env.DATABASE\_URL}} (prisma.north west);
+		\draw[->, thick] (prisma.east) -- node[above, yshift=4pt]{接続確立} (db.west);
+	\end{tikzpicture}
 
-\vspace{1em}
-\begin{itemize}
-    \item \texttt{dotenv/config} が \texttt{.env} の内容を \texttt{process.env} に展開.
-    \item PrismaClient が \texttt{process.env.DATABASE\_URL} を利用して DB に接続.
-\end{itemize}
+	\vspace{1em}
+	\begin{itemize}
+		\item \texttt{dotenv/config} が \texttt{.env} の内容を \texttt{process.env} に展開.
+		\item PrismaClient が \texttt{process.env.DATABASE\_URL} を利用して DB に接続.
+	\end{itemize}
 \end{frame}
 
 \section{React Flowにおける画像生成の修正}
 
 \begin{frame}{前回までの課題点と解決策}
-  課題点:\\
-  \begin{columns}
-    \begin{column}{0.48\textwidth}
-      \begin{itemize}
-        \setlength{\parskip}{1.5em}
-        \item 頂点から出る辺の位置が固定されている.
-        \item 辺同士がぶつかり,綺麗なグラフになっていない.
-      \end{itemize}
-    \end{column}
-    \begin{column}{0.48\textwidth}
-     \begin{figure}
-      \includegraphics[scale=0.2]{graph1.png}
-      \caption{今までの生成図形}
-     \end{figure} 
-    \end{column}
-  \end{columns}
-  \vspace{2em}
-  解決策:\\
-  \textbf{\Rightarrow 辺を出す位置を頂点の中心の裏側から出るようにする.}
+	課題点:\\
+	\begin{columns}
+		\begin{column}{0.48\textwidth}
+			\begin{itemize}
+				\setlength{\parskip}{1.5em}
+				\item 頂点から出る辺の位置が固定されている.
+				\item 辺同士がぶつかり,綺麗なグラフになっていない.
+			\end{itemize}
+		\end{column}
+		\begin{column}{0.48\textwidth}
+			\begin{figure}
+				\includegraphics[scale=0.2]{graph1.png}
+				\caption{今までの生成図形}
+			\end{figure}
+		\end{column}
+	\end{columns}
+	\vspace{2em}
+	解決策:\\
+	\textbf{\Rightarrow 辺を出す位置を頂点の中心の裏側から出るようにする.}
 \end{frame}
 
 %--------------------------------------------------
 \begin{frame}{React Flow の全体構造}
-\begin{block}{React Flow とは}
-  React Flow は「Node（頂点）」と「Edge（線）」で構成されたグラフを,ブラウザ上で直感的に表示・操作できるライブラリ.
-\end{block}
+	\begin{block}{React Flow とは}
+		React Flow は「Node（頂点）」と「Edge（線）」で構成されたグラフを,ブラウザ上で直感的に表示・操作できるライブラリ.
+	\end{block}
 
-\begin{itemize}
-   \setlength{\parskip}{0.5em}
-  \item 主な構成要素：
-  \begin{itemize}
-    \item \textbf{Node（ノード）}：丸や四角などの図形.
-    \item \textbf{Edge（エッジ）}：ノード同士をつなぐ線.
-    \item \textbf{Handle（ハンドル）}：ノード上の「線の接続点」.
-    \item \textbf{ReactFlowProvider}：全体の状態（ノード・エッジ・選択状態など）を管理.
-  \end{itemize}
-  \item ノードやエッジの配置・ズームなどは React Flow が自動的に処理.
-  \item 独自の見た目を作るときは \texttt{CustomNode} のようにコンポーネントを定義.
-\end{itemize}
+	\begin{itemize}
+		\setlength{\parskip}{0.5em}
+		\item 主な構成要素：
+		      \begin{itemize}
+			      \item \textbf{Node（ノード）}：丸や四角などの図形.
+			      \item \textbf{Edge（エッジ）}：ノード同士をつなぐ線.
+			      \item \textbf{Handle（ハンドル）}：ノード上の「線の接続点」.
+			      \item \textbf{ReactFlowProvider}：全体の状態（ノード・エッジ・選択状態など）を管理.
+		      \end{itemize}
+		\item ノードやエッジの配置・ズームなどは React Flow が自動的に処理.
+		\item 独自の見た目を作るときは \texttt{CustomNode} のようにコンポーネントを定義.
+	\end{itemize}
 \end{frame}
 
 %--------------------------------------------------
 \begin{frame}[allowframebreaks]{各構成要素のプロパティ}
-\begin{itemize}
-    \setlength{\parskip}{1em} 
-    \item \textbf{Node} ：
-    \begin{itemize}
-        \setlength{\parskip}{0.3em} 
-        \item id : 一意な識別子.
-        \item type : 表示に使うコンポーネントの種類（例：CustomNode）.
-        \item position : 座標（x, y）.
-        \item data : ノードに渡すカスタムデータ（例：ラベル名など）.
-    \end{itemize}
+	\begin{itemize}
+		\setlength{\parskip}{1em}
+		\item \textbf{Node} ：
+		      \begin{itemize}
+			      \setlength{\parskip}{0.3em}
+			      \item id : 一意な識別子.
+			      \item type : 表示に使うコンポーネントの種類（例：CustomNode）.
+			      \item position : 座標（x, y）.
+			      \item data : ノードに渡すカスタムデータ（例：ラベル名など）.
+		      \end{itemize}
 
-    \item \textbf{Edge}：
-    \begin{itemize}
-        \setlength{\parskip}{0.3em} 
-        \item source : 出発ノードのid.
-        \item target : 到着ノードのid.
-        \item type : エッジの種類（直線・曲線など）.
-    \end{itemize}
+		\item \textbf{Edge}：
+		      \begin{itemize}
+			      \setlength{\parskip}{0.3em}
+			      \item source : 出発ノードのid.
+			      \item target : 到着ノードのid.
+			      \item type : エッジの種類（直線・曲線など）.
+		      \end{itemize}
 
-    \newpage
-    \item \textbf{Handle} ：
-    \begin{itemize}
-        \setlength{\parskip}{0.3em} 
-        \item type : "source" または "target"（エッジの出発点／到達点を指定）.
-        \item id : ハンドルの識別子（ノード内で複数ハンドルを区別）.
-        \item position : ハンドルの位置（上・下・左・右）を \texttt{Position.Top / Bottom / Left / Right} で指定.
-        \item style : CSSで見た目をカスタマイズ（例：透明にして中心に配置）.
-        \item isConnectable : 接続を許可するかどうか（true/false）.
-    \end{itemize}
+		      \newpage
+		\item \textbf{Handle} ：
+		      \begin{itemize}
+			      \setlength{\parskip}{0.3em}
+			      \item type : "source" または "target"（エッジの出発点／到達点を指定）.
+			      \item id : ハンドルの識別子（ノード内で複数ハンドルを区別）.
+			      \item position : ハンドルの位置（上・下・左・右）を \texttt{Position.Top / Bottom / Left / Right} で指定.
+			      \item style : CSSで見た目をカスタマイズ（例：透明にして中心に配置）.
+			      \item isConnectable : 接続を許可するかどうか（true/false）.
+		      \end{itemize}
 
-    \vspace{1em}
-    \item \textbf{ReactFlow コンポーネント}がこれらを統合し,描画とイベント処理を行う.
-\end{itemize}
+		      \vspace{1em}
+		\item \textbf{ReactFlow コンポーネント}がこれらを統合し,描画とイベント処理を行う.
+	\end{itemize}
 \end{frame}
 
 
 %--------------------------------------------------
 \begin{frame}[fragile,allowframebreaks]{Node Componentの作成}
-  \textbf{ Node Component（ノードコンポーネント）}：\\
-  「ノード単体の見た目と挙動（色・形・サイズ・ラベル・Handle の配置など）」を定義する場所.
-  \vspace{1em}
-\begin{lstlisting}[language=Java,basicstyle=\ttfamily\small]
+	\textbf{ Node Component（ノードコンポーネント）}：\\
+	「ノード単体の見た目と挙動（色・形・サイズ・ラベル・Handle の配置など）」を定義する場所.
+	\vspace{1em}
+	\begin{lstlisting}[language=Java,basicstyle=\ttfamily\small]
 export default function CustomNode({ data, selected }: NodeProps) {
   return (
     <div
@@ -290,9 +474,9 @@ export default function CustomNode({ data, selected }: NodeProps) {
 
 %--------------------------------------------------
 \begin{frame}[fragile]{CustomNode の基本構造}
-\begin{columns}
-  \begin{column}{0.48\textwidth}
-\begin{lstlisting}[language=Java,basicstyle=\ttfamily\scriptsize]
+	\begin{columns}
+		\begin{column}{0.48\textwidth}
+			\begin{lstlisting}[language=Java,basicstyle=\ttfamily\scriptsize]
 export default function CustomNode(
   { data, selected }: NodeProps
 ) {
@@ -305,32 +489,32 @@ export default function CustomNode(
   )
 }
 \end{lstlisting}
-  \end{column}
+		\end{column}
 
-  \begin{column}{0.48\textwidth}
-  \begin{itemize}
-    \item \textbf{CustomNode}: \\
-    React Flow における「ノード1つの描画定義」を担うコンポーネント.
-    \item \textbf{NodeProps}:  
-    React Flow が各ノードに渡す情報の型.
-    \item 引数 \textbf{data}, \textbf{selected}:  
-    \begin{itemize}
-      \item \textbf{data.label}: ノードのラベル.
-      \item \textbf{selected}: ユーザーが選択中かどうか.
-    \end{itemize}
-    \item \textbf{<Handle>}：\\エッジ接続点.
-    1つのノード内に複数設置できる.
-  \end{itemize}
-  \end{column}
-\end{columns}
+		\begin{column}{0.48\textwidth}
+			\begin{itemize}
+				\item \textbf{CustomNode}: \\
+				      React Flow における「ノード1つの描画定義」を担うコンポーネント.
+				\item \textbf{NodeProps}:
+				      React Flow が各ノードに渡す情報の型.
+				\item 引数 \textbf{data}, \textbf{selected}:
+				      \begin{itemize}
+					      \item \textbf{data.label}: ノードのラベル.
+					      \item \textbf{selected}: ユーザーが選択中かどうか.
+				      \end{itemize}
+				\item \textbf{<Handle>}：\\エッジ接続点.
+				      1つのノード内に複数設置できる.
+			\end{itemize}
+		\end{column}
+	\end{columns}
 \end{frame}
 
 
 %--------------------------------------------------
 \begin{frame}[fragile]{ノード本体のスタイル}
-\begin{columns}
-  \begin{column}{0.48\textwidth}
-\begin{lstlisting}[language=Java,basicstyle=\ttfamily\scriptsize]
+	\begin{columns}
+		\begin{column}{0.48\textwidth}
+			\begin{lstlisting}[language=Java,basicstyle=\ttfamily\scriptsize]
 <div
   style={{
     background: selected ? "#FFD700" : "#89CFF0",
@@ -348,30 +532,30 @@ export default function CustomNode(
   {data.label}
 </div>
 \end{lstlisting}
-  \end{column}
+		\end{column}
 
-  \begin{column}{0.48\textwidth}
-  \begin{itemize}
-    \item background：
-      \begin{itemize}
-        \item 選択時：金色（\#FFD700）.
-        \item 非選択時：水色（\#89CFF0）.
-      \end{itemize}
-    \item \texttt{borderRadius: "50\%"}：円形ノード.
-    \item width × height：40px × 40px.
-    \item \texttt{display: flex} と中央揃えでラベルを中央配置.
-    \item \texttt{position: "relative"}：\\内部のハンドルを相対的に配置できるようにする.
-  \end{itemize}
-  \end{column}
-\end{columns}
+		\begin{column}{0.48\textwidth}
+			\begin{itemize}
+				\item background：
+				      \begin{itemize}
+					      \item 選択時：金色（\#FFD700）.
+					      \item 非選択時：水色（\#89CFF0）.
+				      \end{itemize}
+				\item \texttt{borderRadius: "50\%"}：円形ノード.
+				\item width × height：40px × 40px.
+				\item \texttt{display: flex} と中央揃えでラベルを中央配置.
+				\item \texttt{position: "relative"}：\\内部のハンドルを相対的に配置できるようにする.
+			\end{itemize}
+		\end{column}
+	\end{columns}
 \end{frame}
 
 
 %--------------------------------------------------
-\begin{frame}[fragile,allowframebreaks]{Handle の役割}
-\begin{columns}
-  \begin{column}{0.48\textwidth}
-\begin{lstlisting}[language=Java,basicstyle=\ttfamily\scriptsize]
+\begin{frame}[fragile]{Handle の役割}
+	\begin{columns}
+		\begin{column}{0.48\textwidth}
+			\begin{lstlisting}[language=Java,basicstyle=\ttfamily\scriptsize]
 <Handle
   type="source"
   id="center"
@@ -386,39 +570,70 @@ export default function CustomNode(
 />
 
 \end{lstlisting}
-  \end{column}
+		\end{column}
 
-  \begin{column}{0.58\textwidth}
-  \begin{itemize}
-        \item \texttt{type}:  \\
-          `"source"（線を出す）or "target"（線を受ける）.
-        \item \texttt{position}:\\  
-          接続位置（例：\texttt{Position.Left}, \texttt{Position.Right}）.
-        \item \texttt{id}:  \\
-          エッジの \texttt{sourceHandle} / \texttt{targetHandle} と対応.
-        \item \texttt{style}:  
-          CSS で位置や透明化を指定.
-    \item この例ではどちらの Handle もノード中央に配置.
-    \item 背景を透明にし,見えないが線を接続できる.
-  \end{itemize}
-  \end{column}
-\end{columns}
+		\begin{column}{0.58\textwidth}
+			\begin{itemize}
+				\item \texttt{type}:  \\
+				      `"source"（線を出す）or "target"（線を受ける）.
+				\item \texttt{position}:\\
+				      接続位置（例：\texttt{Position.Left}, \texttt{Position.Right}）.
+				\item \texttt{id}:  \\
+				      エッジの \texttt{sourceHandle} / \texttt{targetHandle} と対応.
+				\item \texttt{style}:
+				      CSS で位置や透明化を指定.
+				\item この例ではどちらの Handle もノード中央に配置.
+				\item 背景を透明にし,見えないが線を接続できる.
+			\end{itemize}
+		\end{column}
+	\end{columns}
 \end{frame}
 
+\begin{frame}{実行結果}
+	\begin{columns}
+		\begin{column}{0.48\textwidth}
+			\begin{figure}
+				\includegraphics[scale=0.3]{graph1.png}
+				\caption{修正前}
+			\end{figure}
+		\end{column}
+		\begin{column}{0.1\textwidth}
+			\LARGE  $\longrightarrow$
+		\end{column}
+		\begin{column}{0.48\textwidth}
+			\begin{figure}
+				\includegraphics[scale=0.3]{graph2.png}
+				\caption{修正後}
+			\end{figure}
+		\end{column}
+	\end{columns}
+	\centering \textbf{\rightarrow \ グラフらしくすることに成功.}
+\end{frame}
 
+\section{次回までの目標}
+
+\begin{frame}{今回の進捗状況}
+  \begin{enumerate}
+		\setlength{\parskip}{1.5em}
+		\item \sout{◎×問題は正答判定可能だが,数値の入力問題でも正答判定が不可能.}
+		\item \sout{それぞれの問題の正解・不正解が保存されない.}
+		\item \sout{React Flowで思ったようにグラフが描けない.}
+		\item 問題文と画像生成が連携されていない.
+		\item 問題がページ分割されずに一覧で出てくる.
+	\end{enumerate}
+
+  \vspace{1.5em}
+  \textbf{\rightarrow 残りの2つと◎×問題以外にも対応可にさせることに取り組む.}
+\end{frame}
 %--------------------------------------------------
-\begin{frame}{まとめ：React Flow と CustomNode の関係}
-\begin{block}{まとめ}
-\begin{itemize}
-  \item React Flow は「ノードとエッジ」で構成されるグラフ描画ライブラリ。
-  \item ノードの見た目を自由に作りたいとき、\texttt{CustomNode} を定義する。
-  \item \texttt{Handle} によりノード同士を接続可能。
-  \item 状態管理（選択・移動・接続）は React Flow が自動で行う。
-\end{itemize}
-\end{block}
+
+\begin{frame}[allowframebreaks]{参考文献}
+    \small
+    \bibliography{bibtex}
 \end{frame}
+
 
 \end{document}
 
-  
+
 
