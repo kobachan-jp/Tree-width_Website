@@ -45,7 +45,7 @@
 
 % タイトルフレーム
 \title{\Large 木幅アルゴリズムの学習システムの構築}
-\subtitle{データベース連携の修正と画像生成・サーバー選び}
+\subtitle{正答判定結果保持とグラフ画像生成の修正}
 \author{\small B4 小林紹子} % 必要に応じて変更・削除
 \date{\small\today} % 必要に応じて変更・削除
 
@@ -276,10 +276,10 @@
 	\end{itemize}
 \end{frame}
 
-\begin{frame}{Prisma CLIとは}
+\begin{frame}{Prisma CLI（Prisma command line interface）とは}
 	\begin{itemize}
 		\setlength{\parskip}{1em}
-		\item Prismaの各種操作をターミナルから実行するためのコマンド群．
+		\item Prismaの各種操作をターミナルから実行するためのコマンド群\cite{prisma}．
 		\item データベーススキーマの管理やクライアント生成を行う．
 		\item 例：
 		      \begin{itemize}

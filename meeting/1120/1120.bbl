@@ -6,4 +6,10 @@
   TypeScriptとReact/Next.jsでつくる実践Webアプリケーション開発}.
 \newblock \\株式会社技術評論社, 2022.
 
+\bibitem{prisma}
+Prisma.
+\newblock {Prisma CLI}.
+\newblock \\ \url{https://www.prisma.io/docs/orm/tools/prisma-cli}.
+\newblock アクセス日: 2025-11-14.
+
 \end{thebibliography}
