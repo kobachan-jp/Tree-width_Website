@@ -13,9 +13,16 @@ datasource db {
   url      = env("DATABASE_URL")　
 }
 
+enum ProblemCategory {
+  TrueOrFalse
+  Input
+  Choice
+}
+
 model Problem{
   id Int @id @default(autoincrement())
   text String
+  category ProblemCategory @default(TrueOrFalse)
   image String?
   answer Int
 }
