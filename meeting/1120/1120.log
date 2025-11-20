@@ -1,4 +1,4 @@
-This is LuaHBTeX, Version 1.22.0 (TeX Live 2025)  (format=lualatex 2025.4.24)  14 NOV 2025 18:44
+This is LuaHBTeX, Version 1.22.0 (TeX Live 2025)  (format=lualatex 2025.4.24)  14 NOV 2025 19:04
  restricted system commands enabled.
 **1120.tex
 (./1120.tex
@@ -1683,7 +1683,7 @@ Removing  `ltj.listings_unicode' from `process_input_buffer'.)
 [21
 
 ]
-<graph1.png, id=201, 533.995pt x 468.75125pt>
+<graph1.png, id=204, 533.995pt x 468.75125pt>
 File: graph1.png Graphic file (type png)
 <use graph1.png>
 Package luatex.def Info: graph1.png  used on input line 372.
@@ -1781,7 +1781,7 @@ File: graph1.png Graphic file (type png)
 <use graph1.png>
 Package luatex.def Info: graph1.png  used on input line 611.
 (luatex.def)             Requested size: 160.19974pt x 140.62645pt.
-<graph2.png, id=254, 533.995pt x 468.75125pt>
+<graph2.png, id=257, 533.995pt x 468.75125pt>
 File: graph2.png Graphic file (type png)
 <use graph2.png>
 Package luatex.def Info: graph2.png  used on input line 611.
@@ -1827,15 +1827,16 @@ Package rerunfilecheck Info: File `1120.out' has not changed.
 )
 
 Here is how much of LuaTeX's memory you used:
- 32048 strings out of 471941
- 933288,1373583 words of node,token memory allocated
- 10194 words of node memory still in use:
-   31 hlist, 8 vlist, 50 rule, 3 disc, 3 local_par, 88 glue, 11 kern, 29 penalty
-, 85 glyph, 3339 attribute, 67 glue_spec, 334 attribute_list, 8 write, 36 user_d
-efined, 2 pdf_dest, 14 pdf_colorstack nodes
-   avail lists: 1:29,2:180254,3:1156,4:17015,5:12138,6:103,7:10560,8:11,9:23988,
-10:36,11:746
- 57445 multiletter control sequences out of 65536+600000
+ 32053 strings out of 471941
+ 933283,1373583 words of node,token memory allocated
+ 15421 words of node memory still in use:
+   39 hlist, 8 vlist, 55 rule, 5 disc, 5 local_par, 2 math, 133 glue, 12 kern, 4
+5 penalty, 172 glyph, 5179 attribute, 67 glue_spec, 507 attribute_list, 8 write,
+ 42 user_defined, 1 pdf_start_link, 1 pdf_end_link, 3 pdf_dest, 1 pdf_action, 16
+ pdf_colorstack nodes
+   avail lists: 1:33,2:178241,3:1113,4:17007,5:12137,6:100,7:10426,8:47,9:23973,
+10:36,11:744
+ 57449 multiletter control sequences out of 65536+600000
  139 fonts using 84936191 bytes
  104i,13n,115p,1847b,1587s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/local/texlive/2025/texmf-dist/fonts/opentype/public/lm/lmmono12-regular.ot
@@ -1852,10 +1853,10 @@ c/lm/lmsans10-regular.otf></usr/local/texlive/2025/texmf-dist/fonts/opentype/pub
 lic/haranoaji/HaranoAjiMincho-Regular.otf></usr/local/texlive/2025/texmf-dist/fo
 nts/type1/public/amsfonts/cm/cmss10.pfb></usr/local/texlive/2025/texmf-dist/font
 s/type1/public/amsfonts/cm/cmsy10.pfb>
-Output written on 1120.pdf (35 pages, 312973 bytes).
+Output written on 1120.pdf (35 pages, 313879 bytes).
 
-PDF statistics: 363 PDF objects out of 1000 (max. 8388607)
- 274 compressed objects within 3 object streams
- 79 named destinations out of 1000 (max. 131072)
+PDF statistics: 368 PDF objects out of 1000 (max. 8388607)
+ 279 compressed objects within 3 object streams
+ 80 named destinations out of 1000 (max. 131072)
  72 words of extra memory for PDF output out of 10000 (max. 100000000)
 
