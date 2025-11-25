@@ -57,52 +57,27 @@
 	\tableofcontents
 \end{frame}
 
-\section*{前回までの課題}
-\begin{frame}{前回までの課題}
+\section{概要}
+\begin{frame}{前回までの進捗状況}
 	\begin{enumerate}
 		\setlength{\parskip}{1.5em}
-		\item ◎×問題は正答判定可能だが,数値の入力問題でも正答判定が不可能.
-		\item それぞれの問題の正解・不正解が保存されない.
-		\item React Flowで思ったようにグラフが描けない.
-		\item 問題文と画像生成が連携されていない.
-		\item 問題がページ分割されずに一覧で出てくる.
-		\item サーバーをどれにするか調査する.
+		\item ○×問題だけでなく,数値の入力問題でも正答判定を可能化.
+		\item それぞれの問題の正解・不正解を保存.
+		\item React Flowによるグラフ描画の調整.
 	\end{enumerate}
 \end{frame}
 
-\section{数値による正答判定可能}
-\begin{frame}[fragile]{Problemテーブルの修正}
-	\begin{columns}
-		\begin{column}{0.48\textwidth}
-			修正前:
-			\begin{lstlisting}[language=Java,basicstyle=\ttfamily\small]
-      model Problem{
-      id Int @id @default(autoincrement())
-      text String
-      image String?
-      answer Boolean
-      }
-    \end{lstlisting}
-		\end{column}
-		\begin{column}{0.48\textwidth}
-			変更後：
-			\begin{lstlisting}[language=Java,basicstyle=\ttfamily\small]
-      model Problem{
-      id Int @id @default(autoincrement())
-      text String
-      image String?
-      answer Int
-      }  
-    \end{lstlisting}
-		\end{column}
-	\end{columns}
-	\vspace{3em}
-	\centering  {\color{red}\textbf{\rightarrow answerの型をBoolean型からInt型に変更.}}\\
-	\centering \Rightarrow \ \ まだ問題ページから入力する欄は作れていない.\\
-	\centering \Rightarrow \ \ ◎×問題か入力問題かカテゴリ分けする必要あり.
-
+\begin{frame}{今回の進捗状況}
+	\begin{enumerate}
+		\setlength{\parskip}{1.5em}
+		\item 問題のカテゴリ別に解答欄を作成.
+		\item 問題文と画像生成の連携.
+		\item 問題ページの分割.
+		\item サーバー選びの調査.
+	\end{enumerate}
 \end{frame}
 
+\section{カテゴリ別の解答欄の作成}
 \begin{frame}[fragile]{データベースにカテゴリ属性追加}
 	\begin{columns}
 
@@ -113,7 +88,7 @@ model Problem{
   id Int @id @default(autoincrement())
   text String
   image String?
-  answer Boolean
+  answer Int
 }
 \end{lstlisting}
 		\end{column}
@@ -122,9 +97,9 @@ model Problem{
 			変更後：
 			\begin{lstlisting}[language=Java,basicstyle=\ttfamily\scriptsize]
 enum ProblemCategory {
-  TrueOrFalse
-  Input
-  Choice
+  TrueOrFalse 			//○×問題
+  Input				//入力問題
+  Choice			//選択問題
 }
 
 model Problem{
@@ -136,12 +111,46 @@ model Problem{
 }
 \end{lstlisting}
 		\end{column}
-
 	\end{columns}
 	\vspace{1em}
-	\centering \Rightarrow \ \ 次回までにカテゴリ別に解答欄を作成へ\\
+	\centering \Rightarrow \ \ カテゴリ別に解答欄を作成へ\\
 \end{frame}
 
+\begin{frame}[fragile,allowframebreaks]{case文による解答欄の判別}
+	\begin{lstlisting}[language=Java,basicstyle=\ttfamily\scriptsize]
+function renderAnswerUI(p: Problem) {
+  switch (p.category) {
+    case ProblemCategory.TrueOrFalse: // ○×問題の場合
+      return (
+        <div>
+          <button
+            onClick={() => handleAnswer(p.id, 1)}
+            style={{ ... }}>○</button>
+          <button
+            onClick={() => handleAnswer(p.id, 0)}
+            style={{ ... }}>×</button>
+        </div>
+      );
+// 入力問題の場合は入力された値を保存・送信する関数 handleAnswer を作成.
+    case ProblemCategory.Input: // 入力問題の場合
+      return (
+        <InputProblem
+          p={p}
+          handleAnswer={handleAnswer}
+        />);
+      
+    case ProblemCategory.Choice: // 選択問題の場合
+        //まだ選択肢を DB にどう入れるか未検討につき未完成 
+      return null;
+
+    default:
+      return null;
+  }
+}
+\end{lstlisting}
+
+\end{frame}
+\end{document}
 \section{問題別の正答判定結果保存}
 
 \begin{frame}{前回までの課題点}
