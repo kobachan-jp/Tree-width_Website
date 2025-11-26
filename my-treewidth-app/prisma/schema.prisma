@@ -68,14 +68,14 @@ model ChoiceOption {
 
 model Graph{
   id Int @id @default(autoincrement())
-  trueOrFalse TrueOrFalse[]
-  input       Input[]
-  choice      Choice[]
+  TrueOrFalse TrueOrFalse[]
+  Input       Input[]
+  Choice      Choice[]
 }
 
 model Tree{
   id Int @id @default(autoincrement())
-  trueOrFalse TrueOrFalse[]
-  input       Input[]
-  choice      Choice[]
+  TrueOrFalse TrueOrFalse[]
+  Input       Input[]
+  Choice      Choice[]
 }

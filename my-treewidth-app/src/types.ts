@@ -41,7 +41,7 @@ export type Choice = {
     tree: Tree;
     answer: number;
     reason: string;
-    options: ChoiceOption;
+    options: ChoiceOption[];
 }
 
 export type ChoiceOption = {
