@@ -21,8 +21,61 @@ enum ProblemCategory {
 
 model Problem{
   id Int @id @default(autoincrement())
-  text String
   category ProblemCategory @default(TrueOrFalse)
-  image String?
+  questionId Int @default(0)
+}
+
+model TrueOrFalse{
+  id Int @id @default(autoincrement())
+  text String
+  graphId Int
+  graph Graph @relation(fields:[graphId],references:[id])
+  treeId Int
+  tree Tree @relation(fields:[treeId],references:[id])
   answer Int
+  reason String
+}
+
+model Input{
+  id Int @id @default(autoincrement())
+  text String
+  graphId Int
+  graph Graph @relation(fields:[graphId],references:[id])
+  treeId Int
+  tree Tree @relation(fields:[treeId],references:[id])
+  answer Int
+  reason String
+}
+
+model Choice{
+  id Int @id @default(autoincrement())
+  text String
+  graphId Int
+  graph Graph @relation(fields:[graphId],references:[id])
+  treeId Int
+  tree Tree @relation(fields:[treeId],references:[id])
+  answer Int
+  reason String
+  options ChoiceOption[]
+}
+
+model ChoiceOption {
+  id        Int     @id @default(autoincrement())
+  content   String
+  choiceId  Int
+  choice    Choice  @relation(fields: [choiceId], references: [id])
+}
+
+model Graph{
+  id Int @id @default(autoincrement())
+  trueOrFalse TrueOrFalse[]
+  input       Input[]
+  choice      Choice[]
+}
+
+model Tree{
+  id Int @id @default(autoincrement())
+  trueOrFalse TrueOrFalse[]
+  input       Input[]
+  choice      Choice[]
 }
