@@ -77,6 +77,8 @@ model Graph{
   TrueOrFalse TrueOrFalse[]
   Input       Input[]
   Choice      Choice[]
+  nodes  Node[]　@relation("GraphNode")
+  edges  Edge[]  @relation("GraphEdge")
 }
 
 model Tree{
@@ -84,4 +86,32 @@ model Tree{
   TrueOrFalse TrueOrFalse[]
   Input       Input[]
   Choice      Choice[]
+  nodes   Node[]  @relation("TreeNode")
+  edges   Edge[]  @relation("TreeEdge")
+}
+
+model Node{
+  id Int @id @default(autoincrement())
+  nodeKey String
+  x Float
+  y Float
+  label String
+  graph Graph[] @relation("GraphNode")
+  tree Tree[] @relation("TreeNode")
+  edgesOut  Edge[]   @relation("EdgeSource")
+  edgesIn   Edge[]   @relation("EdgeTarget")
+}
+
+model Edge {
+  id        Int      @id @default(autoincrement())
+  edgeKey   String   
+  sourceId  Int
+  source    Node     @relation("EdgeSource", fields: [sourceId], references: [id])
+  targetId  Int
+  target    Node     @relation("EdgeTarget", fields: [targetId], references: [id])
+
+  label     String
+
+  graph     Graph[]    @relation("GraphEdge")
+  tree      Tree[]   @relation("TreeEdge")
 }
