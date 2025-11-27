@@ -4,10 +4,16 @@ export enum ProblemCategory {
   Choice = "Choice",
 }
 
+export type Section = {
+    id: number
+    problems: Problem[];
+}
 export type Problem = {
   id: number;
   category: ProblemCategory;
   questionId: number;
+  sectionId : number;
+  section: Section;
 };
 
 export type TrueOrFalse = {
