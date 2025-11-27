@@ -57,19 +57,27 @@
 	\tableofcontents
 \end{frame}
 
-\section*{前回までの課題}
-\begin{frame}{前回までの課題}
+\section*{前回までの進捗状況}
+\begin{frame}{前回までの進捗状況}
 	\begin{enumerate}
 		\setlength{\parskip}{1.5em}
-		\item ◎×問題は正答判定可能だが,数値の入力問題でも正答判定が不可能.
-		\item それぞれの問題の正解・不正解が保存されない.
-		\item React Flowで思ったようにグラフが描けない.
-		\item 問題文と画像生成が連携されていない.
-		\item 問題がページ分割されずに一覧で出てくる.
-		\item サーバーをどれにするか調査する.
+		\item ○×問題だけでなく,数値の入力問題でも正答判定を可能に.
+		\item それぞれの問題の正解・不正解を保存できるようにする.
+		\item React Flowによるグラフ描画をよりグラフらしくする.
 	\end{enumerate}
 \end{frame}
 
+\section*{今回の進捗状況}
+\begin{frame}{今回の進捗状況}
+	\begin{enumerate}
+		\setlength{\parskip}{1.5em}
+		\item 問題のカテゴリ別に解答欄を作成.
+		\item 問題文と画像生成の連携.
+		\item 問題ページの分割.
+		\item サーバー選びの調査.
+	\end{enumerate}
+\end{frame}
+\end{document}
 \section{数値による正答判定可能}
 \begin{frame}[fragile]{Problemテーブルの修正}
 	\begin{columns}

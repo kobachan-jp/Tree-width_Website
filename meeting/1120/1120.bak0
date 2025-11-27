@@ -66,7 +66,6 @@
 		\item React Flowで思ったようにグラフが描けない.
 		\item 問題文と画像生成が連携されていない.
 		\item 問題がページ分割されずに一覧で出てくる.
-		\item サーバーをどれにするか調査する.
 	\end{enumerate}
 \end{frame}
 
@@ -75,7 +74,7 @@
 	\begin{columns}
 		\begin{column}{0.48\textwidth}
 			修正前:
-			\begin{lstlisting}[language=Java,basicstyle=\ttfamily\small]
+			\begin{lstlisting}[language=Java][basicstyle=\ttfamily\small]
       model Problem{
       id Int @id @default(autoincrement())
       text String
@@ -86,7 +85,7 @@
 		\end{column}
 		\begin{column}{0.48\textwidth}
 			変更後：
-			\begin{lstlisting}[language=Java,basicstyle=\ttfamily\small]
+			\begin{lstlisting}[language=Java][basicstyle=\ttfamily\small]
       model Problem{
       id Int @id @default(autoincrement())
       text String
@@ -103,25 +102,23 @@
 
 \end{frame}
 
-\begin{frame}[fragile]{データベースにカテゴリ属性追加}
-	\begin{columns}
-
-		\begin{column}{0.38\textwidth}
+\begin{frame}{データベースにカテゴリ属性追加}
+  \begin{columns}
+		\begin{column}{0.48\textwidth}
 			修正前:
-			\begin{lstlisting}[language=Java,basicstyle=\ttfamily\scriptsize]
-model Problem{
-  id Int @id @default(autoincrement())
-  text String
-  image String?
-  answer Boolean
-}
-\end{lstlisting}
+			\begin{lstlisting}[language=Java][basicstyle=\ttfamily\small]
+      model Problem{
+      id Int @id @default(autoincrement())
+      text String
+      image String?
+      answer Boolean
+      }
+    \end{lstlisting}
 		\end{column}
-
-		\begin{column}{0.58\textwidth}
+		\begin{column}{0.48\textwidth}
 			変更後：
-			\begin{lstlisting}[language=Java,basicstyle=\ttfamily\scriptsize]
-enum ProblemCategory {
+			\begin{lstlisting}[language=Java][basicstyle=\ttfamily\small]
+      enum ProblemCategory {
   TrueOrFalse
   Input
   Choice
@@ -134,14 +131,12 @@ model Problem{
   image String?
   answer Int
 }
-\end{lstlisting}
+
+    \end{lstlisting}
 		\end{column}
-
 	\end{columns}
-	\vspace{1em}
-	\centering \Rightarrow \ \ 次回までにカテゴリ別に解答欄を作成へ\\
+	
 \end{frame}
-
 \section{問題別の正答判定結果保存}
 
 \begin{frame}{前回までの課題点}
@@ -653,24 +648,23 @@ export default function CustomNode(
 \section{次回までの目標}
 
 \begin{frame}{今回の進捗状況}
-	\begin{enumerate}
+  \begin{enumerate}
 		\setlength{\parskip}{1.5em}
 		\item \sout{◎×問題は正答判定可能だが,数値の入力問題でも正答判定が不可能.}
 		\item \sout{それぞれの問題の正解・不正解が保存されない.}
 		\item \sout{React Flowで思ったようにグラフが描けない.}
 		\item 問題文と画像生成が連携されていない.
 		\item 問題がページ分割されずに一覧で出てくる.
-		\item サーバーをどれにするか調査する.
 	\end{enumerate}
 
-	\vspace{1.5em}
-	\textbf{\rightarrow 残りの3つと◎×問題以外にも対応可にさせることに取り組む.}
+  \vspace{1.5em}
+  \textbf{\rightarrow 残りの2つと◎×問題以外にも対応可にさせることに取り組む.}
 \end{frame}
 %--------------------------------------------------
 
 \begin{frame}[allowframebreaks]{参考文献}
-	\small
-	\bibliography{bibtex}
+    \small
+    \bibliography{bibtex}
 \end{frame}
 
 
