@@ -1,7 +1,7 @@
 'use client'
-
+import { ProblemCategory } from '@prisma/client'
 import { useEffect, useState } from 'react'
-import { ProblemWithDetail } from '@/types'
+import { ProblemWithDetail} from '@/types'
 import ProblemList from '@/app/components/problems/ProblemList'
 
 export default function ProblemsPage({params}:{params:{sectionId:string}}) {
@@ -18,11 +18,11 @@ export default function ProblemsPage({params}:{params:{sectionId:string}}) {
       .then((data) => setProblems(data))
   }, [])
   //回答を送信し、正答判定を取得
-  async function handleAnswer(id: number, answer: number) {
+  async function handleAnswer(category:ProblemCategory,id: number, answer: number) {
     const res = await fetch('/api/problems/${sectionId}', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ id, answer }),
+      body: JSON.stringify({ category,id, answer }),
     })
     const data = await res.json()
     setMessages((prev) => ({

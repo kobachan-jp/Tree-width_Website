@@ -1,7 +1,6 @@
 import { NextResponse } from 'next/server'
 import prisma from '@/lib/prisma'
-import { ProblemCategory } from '@prisma/client/edge'
-import { Problem } from '@/types'
+import { Problem,ProblemCategory } from '@/types'
 
 //カテゴリ別に参照するテーブルを場合分けする
 //関数を変える
@@ -101,8 +100,28 @@ export async function GET(_: Request, { params }: { params: { sectionId: string 
 }
 
 export async function POST(req: Request) {
-  const { id, answer } = await req.json()
-  const problem = await prisma.problem.findUnique({ where: { id } })
+  const { category,id, answer } = await req.json()
+  let problem
+  switch(category){
+    case ProblemCategory.TrueOrFalse:
+        problem = await prisma.trueOrFalse.findUnique({
+            where:{id}
+        })
+        break;
+
+  case ProblemCategory.Input:
+        problem = await prisma.input.findUnique({
+            where:{id}
+        })
+        break;
+
+  case ProblemCategory.Choice:
+        problem = await prisma.choice.findUnique({
+            where:{id}
+        })
+        break;
+  }
+
 
   if (!problem) {
     return NextResponse.json({ correct: false, message: '問題が見つかりません' })
