@@ -12,9 +12,9 @@ export default function ProblemItem({
 }) {
   return (
     <div style={{ marginBottom: 30 }}>
-      <p>問題 {param.id}</p>
+      <p>問題 {p.id}</p>
       <p>{p.detail.text}</p>
-      {p.image && <img src={p.image} alt="問題画像" width={200} />}
+      {/*{p.image && <img src={p.image} alt="問題画像" width={200} />}*/}
 
       <AnswerUI p={p} handleAnswer={handleAnswer} />
 
