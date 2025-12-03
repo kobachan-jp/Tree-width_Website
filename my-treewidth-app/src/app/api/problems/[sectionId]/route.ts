@@ -1,8 +1,11 @@
 import {NextResponse} from "next/server";
 import prisma from "@/lib/prisma";
 
-export async function GET() {
-    const problems = await prisma.problem.findMany();
+export async function GET(_:Request, {params}:{params: {sectionId:string}}) {
+    const sectionId = Number(params.sectionId);
+    const problems = await prisma.problem.findMany({
+        where : {sectionId},
+    })
     return NextResponse.json(problems);
 }
 
