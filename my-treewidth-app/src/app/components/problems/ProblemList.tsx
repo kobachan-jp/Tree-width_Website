@@ -1,5 +1,5 @@
 import ProblemItem from './ProblemItem'
-import { ProblemWithDetail } from '@/types'
+import { ProblemWithDetail,ProblemCategory } from '@/types'
 
 export default function ProblemList({
   problems,
@@ -8,7 +8,7 @@ export default function ProblemList({
 }: {
   problems: ProblemWithDetail[]
   messages: { [id: number]: boolean | undefined }
-  handleAnswer: (id: number, answer: number) => void
+  handleAnswer: (category:ProblemCategory,id: number, answer: number) => void
 }) {
   return (
     <>

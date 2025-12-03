@@ -1,5 +1,5 @@
 import AnswerUI from './AnswerUI'
-import { ProblemWithDetail } from '@/types'
+import { ProblemWithDetail,ProblemCategory } from '@/types'
 
 export default function ProblemItem({
   p,
@@ -8,7 +8,7 @@ export default function ProblemItem({
 }: {
   p: ProblemWithDetail
   result: boolean | undefined
-  handleAnswer: (id: number, answer: number) => void
+  handleAnswer: (category:ProblemCategory,id: number, answer: number) => void
 }) {
   return (
     <div style={{ marginBottom: 30 }}>

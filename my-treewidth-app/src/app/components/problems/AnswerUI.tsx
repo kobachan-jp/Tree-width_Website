@@ -1,14 +1,13 @@
-import { ProblemCategory } from '@prisma/client'
 import InputProblem from './InputProblem'
 import TrueOrFalseProblem from './TrueOrFalseProblem'
-import { ProblemWithDetail } from '@/types'
+import { ProblemWithDetail,ProblemCategory } from '@/types'
 
 export default function AnswerUI({
   p,
   handleAnswer,
 }: {
   p: ProblemWithDetail
-  handleAnswer: (id: number, answer: number) => void
+  handleAnswer: (category:ProblemCategory,id: number, answer: number) => void
 }) {
   switch (p.category) {
     case ProblemCategory.TrueOrFalse:

@@ -1,4 +1,4 @@
-import { ProblemWithDetail } from '@/types'
+import { ProblemWithDetail ,ProblemCategory} from '@/types'
 import { useState } from 'react'
 
 export default function InputProblem({
@@ -6,7 +6,7 @@ export default function InputProblem({
   handleAnswer,
 }: {
   p: ProblemWithDetail
-  handleAnswer: (id: number, answer: number) => void
+  handleAnswer: (category:ProblemCategory,id: number, answer: number) => void
 }) {
   const [value, setValue] = useState<number | ''>('')
 
@@ -22,7 +22,7 @@ export default function InputProblem({
       <button
         onClick={() => {
           if (value !== '') {
-            handleAnswer(p.id, Number(value))
+            handleAnswer(ProblemCategory.Input,p.id, Number(value))
             setValue('') // 送信後に入力欄をクリアする場合
           }
         }}
