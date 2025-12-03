@@ -73,7 +73,7 @@ export async function GET(_: Request, { params }: { params: { sectionId: string 
   const category = Object.values(ProblemCategory)
 
   const problemDetails = await Promise.all(
-    problems.map(async (p: Problem) => {
+    problems.map(async (p) => {
       const handler = categoryHandlers[p.category]
 
       if (!handler) {

@@ -19,10 +19,8 @@ export type Problem = {
 export type TrueOrFalse = {
   id: number
   text: string
-  graphId: number
-  graph: Graph
-  treeId: number
-  tree: Tree
+  graph?: Graph
+  tree?: Tree
   answer: number
   reason: string
 }
@@ -30,10 +28,8 @@ export type TrueOrFalse = {
 export type Input = {
   id: number
   text: string
-  graphId: number
-  graph: Graph
-  treeId: number
-  tree: Tree
+  graph?: Graph
+  tree?: Tree
   answer: number
   reason: string
 }
@@ -41,10 +37,8 @@ export type Input = {
 export type Choice = {
   id: number
   text: string
-  graphId: number
-  graph: Graph
-  treeId: number
-  tree: Tree
+  graph?: Graph
+  tree?: Tree
   answer: number
   reason: string
   options: ChoiceOption[]
@@ -70,3 +64,7 @@ export type Tree = {
   Input: Input[]
   Choice: Choice[]
 }
+
+export type ProblemDetail = TrueOrFalse | Input | Choice
+
+export type ProblemWithDetail = Problem & { detail: ProblemDetail }
