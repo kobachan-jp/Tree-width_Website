@@ -1,18 +1,18 @@
-"use client"
-import React, { useEffect, useState } from "react"
-import ReactFlow, { Background } from "reactflow"
-import "reactflow/dist/style.css"
-import CustomNode from "../components/CustomNode"
+'use client'
+import React, { useEffect, useState } from 'react'
+import ReactFlow, { Background } from 'reactflow'
+import 'reactflow/dist/style.css'
+import CustomNode from '../components/CustomNode'
 
 export default function GraphPage() {
   const [nodes, setNodes] = useState<any[]>([])
   const [edges, setEdges] = useState<any[]>([])
   const [selectedNode, setSelectedNode] = useState<string | null>(null)
   const [loading, setLoading] = useState(true)
-//初回レンダリング時にサーバーからグラフデータを取得.
+  //初回レンダリング時にサーバーからグラフデータを取得.
   useEffect(() => {
     //GETリクエスト送信
-    fetch("/api/graph")
+    fetch('/api/graph')
       //fetchはレスポンスオブジェクトを返すのでJSON型に変換.
       .then((res) => res.json())
       .then((data) => {
@@ -26,7 +26,7 @@ export default function GraphPage() {
               type: "custom"   // 新しく追加されたプロパティ
             }*/
           ...n,
-          type: "custom",
+          type: 'custom',
         }))
         setNodes(customNodes)
         setEdges(data.edges)
@@ -42,8 +42,8 @@ export default function GraphPage() {
   if (loading) return <p>読み込み中...</p>
 
   return (
-    <div style={{ width: "100%", height: "100vh" }}>
-      <h2 style={{ textAlign: "center" }}>問題{selectedNode}</h2>
+    <div style={{ width: '100%', height: '100vh' }}>
+      <h2 style={{ textAlign: 'center' }}>問題{selectedNode}</h2>
       <ReactFlow
         nodeTypes={{ custom: CustomNode }}
         nodes={nodes.map((n) => ({
