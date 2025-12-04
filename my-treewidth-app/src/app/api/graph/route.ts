@@ -1,25 +1,25 @@
 // app/api/graph/route.ts
-import { NextResponse } from "next/server";
-import prisma from "@/lib/prisma";
+import { NextResponse } from 'next/server'
+import prisma from '@/lib/prisma'
 
 export async function GET() {
-  const graphId = 1;
+  const graphId = 1
 
   const graph = await prisma.graph.findUnique({
     where: { id: graphId },
     include: { nodes: true, edges: true }, // 関連も取得
-  });
+  })
 
   if (!graph) {
-    return NextResponse.json({ error: "Graph not found" }, { status: 404 });
+    return NextResponse.json({ error: 'Graph not found' }, { status: 404 })
   }
 
-  return NextResponse.json(graph);
+  return NextResponse.json(graph)
 }
 
-  // 例: シンプルな三角形のグラフをサーバーで定義
+// 例: シンプルな三角形のグラフをサーバーで定義
 
-  /*
+/*
   const graph = {
     nodes: [
       { id: "1", position: { x: 100, y: 100 }, data: { label: "x1" } },
@@ -34,5 +34,4 @@ export async function GET() {
     ],
     correct: "2", // たとえばBが正解という設定
   }
-*/  
-
+*/
