@@ -1,28 +1,32 @@
 'use client'
+import { useParams } from 'next/navigation'
 import { ProblemCategory } from '@prisma/client'
 import { useEffect, useState } from 'react'
-import { ProblemWithDetail} from '@/types'
+import { ProblemWithDetail } from '@/types'
 import ProblemList from '@/app/components/problems/ProblemList'
 
-export default function ProblemsPage({params}:{params:{sectionId:string}}) {
+export default function ProblemsPage() {
   //問題の配列を状態管理
   const [problems, setProblems] = useState<ProblemWithDetail[]>([])
   //正答判定をProblem.idをキーとするmapでbooleanまたはundefinedを管理
   const [messages, setMessages] = useState<{ [id: number]: boolean | undefined }>([])
 
+  const params = useParams<{ sectionId: string }>()
+  const sectionId = Number(params.sectionId)
   //GETリクエストで問題一覧を取得.
   useEffect(() => {
-    fetch('/api/problems/${sectionId}')
+    fetch(`/api/problems/${sectionId}`)
       //fetchはレスポンスオブジェクトを返すのでJSON型に変換.
       .then((res) => res.json())
       .then((data) => setProblems(data))
-  }, [])
+  }, [sectionId])
+
   //回答を送信し、正答判定を取得
-  async function handleAnswer(category:ProblemCategory,id: number, answer: number) {
-    const res = await fetch('/api/problems/${sectionId}', {
+  async function handleAnswer(category: ProblemCategory, id: number, answer: number) {
+    const res = await fetch(`/api/problems/${sectionId}`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ category,id, answer }),
+      body: JSON.stringify({ category, id, answer }),
     })
     const data = await res.json()
     setMessages((prev) => ({
@@ -33,11 +37,14 @@ export default function ProblemsPage({params}:{params:{sectionId:string}}) {
     }))
   }
 
-  const sectionId = Number(params.sectionId);
   return (
     <div style={{ padding: 20 }}>
       <h1>問題{sectionId}</h1>
-      <ProblemList problems={problems} messages={messages} handleAnswer={handleAnswer}></ProblemList>
+      <ProblemList
+        problems={problems}
+        messages={messages}
+        handleAnswer={handleAnswer}
+      ></ProblemList>
     </div>
   )
 }

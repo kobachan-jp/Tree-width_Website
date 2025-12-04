@@ -56,6 +56,8 @@ export type Graph = {
   TrueOrFalse: TrueOrFalse[]
   Input: Input[]
   Choice: Choice[]
+  nodes: Node[]
+  edges: Edge[]
 }
 
 export type Tree = {
@@ -63,6 +65,32 @@ export type Tree = {
   TrueOrFalse: TrueOrFalse[]
   Input: Input[]
   Choice: Choice[]
+  nodes: Node[]
+  edges: Edge[]
+}
+
+export type Node = {
+  id: number
+  nodeKey: string
+  x: number
+  y: number
+  label: string
+  graph: Graph[]
+  tree: Tree[]
+  edgesOut: Edge[]
+  edgesIn: Edge[]
+}
+
+export type Edge = {
+  id: number
+  edgeKey: string
+  sourceId: number
+  source: Node
+  target: Node
+  targetId: number
+  label: string
+  graph: Graph[]
+  tree: Tree[]
 }
 
 export type ProblemDetail = TrueOrFalse | Input | Choice

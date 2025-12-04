@@ -1,16 +1,16 @@
-import { ProblemWithDetail,ProblemCategory } from '@/types'
+import { ProblemWithDetail, ProblemCategory } from '@/types'
 
 export default function TrueOrFalseProblem({
   p,
   handleAnswer,
 }: {
   p: ProblemWithDetail
-  handleAnswer: (category:ProblemCategory,id: number, answer: number) => void
+  handleAnswer: (category: ProblemCategory, id: number, answer: number) => void
 }) {
   return (
     <div>
       <button
-        onClick={() => handleAnswer(ProblemCategory.TrueOrFalse,p.id, 1)}
+        onClick={() => handleAnswer(ProblemCategory.TrueOrFalse, p.id, 1)}
         style={{
           padding: '4px 10px',
           fontSize: '1em',
@@ -23,7 +23,7 @@ export default function TrueOrFalseProblem({
         ○
       </button>
       <button
-        onClick={() => handleAnswer(ProblemCategory.TrueOrFalse,p.id, 0)}
+        onClick={() => handleAnswer(ProblemCategory.TrueOrFalse, p.id, 0)}
         style={{
           padding: '4px 10px',
           fontSize: '1em',
