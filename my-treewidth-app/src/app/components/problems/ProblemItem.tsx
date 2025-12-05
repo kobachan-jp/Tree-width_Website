@@ -1,15 +1,15 @@
-import ReactFlow, { Background } from 'reactflow'
+import ReactFlow, { Background} from 'reactflow'
 import AnswerUI from './AnswerUI'
 import { ProblemWithDetail, ProblemCategory } from '@/types'
 import CustomNode from '../CustomNode'
 import { useMemo } from 'react'
+import 'reactflow/dist/style.css';
+import PaintGraph from '../graph/PaintGraph'
 
 
-const nodeTypes ={
-    custom: CustomNode,
-  };
-  
-
+const nodeTypes = {
+  custom: CustomNode,
+}
 export default function ProblemItem({
   p,
   result,
@@ -19,7 +19,7 @@ export default function ProblemItem({
   result: boolean | undefined
   handleAnswer: (category: ProblemCategory, id: number, answer: number) => void
 }) {
-  // ノードとエッジのメモ化
+/*  // ノードとエッジのメモ化
   const nodes = useMemo(() => {
     if (!p.detail.graph) return []
     return p.detail.graph.nodes.map((n: any) => ({
@@ -29,8 +29,8 @@ export default function ProblemItem({
       data: { label: n.label },
       type: 'custom',
     }))
-  }, [p.detail.graph?.nodes])  // ← nodes が変わった時だけ再生成
-
+  }, [p.detail.graph?.nodes]) // ← nodes が変わった時だけ再生成
+  
   const edges = useMemo(() => {
     if (!p.detail.graph) return []
     return p.detail.graph.edges.map((e: any) => ({
@@ -44,39 +44,33 @@ export default function ProblemItem({
       type: 'straight',
     }))
   }, [p.detail.graph?.edges])  // ← edges が変わった時だけ再生成
-
-  
-  // デバッグログ
-  if (p.detail.graph !== undefined) {
-    console.log('--- ノード位置 ---')
-    p.detail.graph.nodes.forEach((n) =>
-      console.log(`Node ID: ${n.nodeKey}, Position: (${n.x}, ${n.y})`),
-    )
-    console.log('--- エッジ位置 ---')
-    p.detail.graph.edges.forEach((n) =>
-      console.log(`edge ID: ${n.edgeKey}, source:${n.sourceId},target:${n.targetId}`),
-    )
-  }
-
+*/
   return (
     <div style={{ marginBottom: 30 }}>
-      <p>問題 {p.id}</p>
-      <p>{p.detail.text}</p>
-
+      <div style={{ display: 'flex', gap: '20px' }}>
+        <div style={{ flex: 1 }}>
+      <p style={{ marginBottom: '1em' }}>問題 {p.id}</p>
+      <p style={{ marginBottom: 30 }}>{p.detail.text}</p>
+      <AnswerUI p={p} handleAnswer={handleAnswer} />
+      {result !== undefined && <h3>{result ? '正解！' : '不正解'}</h3>}
+      </div>
+      <div style={{ flex: 1 }}>
+      {p.detail.graph !== undefined &&
+      <PaintGraph p={p}></PaintGraph>}
+      </div>
+      </div>
+{/*
       {p.detail.graph !== undefined && (
         <div style={{ width: '100%', height: '500px', border: '1px solid #ccc' }}>
-          <ReactFlow 
-          nodeTypes={nodeTypes}
-          nodes={nodes} 
-          edges={edges} fitView>
+          <ReactFlow nodeTypes={nodeTypes} nodes={nodes} edges={edges} fitView>
             <Background />
           </ReactFlow>
         </div>
       )}
+*/}
+      
 
-      <AnswerUI p={p} handleAnswer={handleAnswer} />
-
-      {result !== undefined && <h3>{result ? '正解！' : '不正解'}</h3>}
+      
     </div>
   )
 }

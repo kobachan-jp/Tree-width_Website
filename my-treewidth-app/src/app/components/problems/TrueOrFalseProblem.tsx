@@ -13,6 +13,8 @@ export default function TrueOrFalseProblem({
         onClick={() => handleAnswer(ProblemCategory.TrueOrFalse, p.id, 1)}
         style={{
           padding: '4px 10px',
+          marginRight:'10px',
+          marginLeft:'30px',
           fontSize: '1em',
           cursor: 'pointer',
           border: '2px solid #333', // 枠線の太さと色
