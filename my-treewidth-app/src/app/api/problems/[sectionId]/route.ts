@@ -12,17 +12,18 @@ const categoryHandlers = {
         graph: {
           include: {
             nodes: true,
-            edges: {
-              select: {
+            edges:true,
+/*            edges: {
+                select: {
                 id: true,
                 edgeKey: true,
-                label: true,
                 // ReactFlowに必要な外部キーを確実に取得
                 sourceId: true,
                 targetId: true,
                 // Edge モデルにある他の必要なフィールドもすべて true で指定
               },
-            },
+
+            },              */
           },
         },
         tree: {

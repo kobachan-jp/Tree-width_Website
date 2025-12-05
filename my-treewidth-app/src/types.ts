@@ -88,7 +88,7 @@ export type Edge = {
   source: Node
   target: Node
   targetId: number
-  label: string
+  label?: string
   graph: Graph[]
   tree: Tree[]
 }
