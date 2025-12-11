@@ -20,7 +20,7 @@ export default function ProblemsPage() {
       .then((res) => res.json())
       .then((data) => {
         setProblems(data)
-        setMessages({})
+        setMessages({}) //Sectionごとに回答保持をリセット（保存したければコメントアウト）
       })
   }, [sectionId])
 

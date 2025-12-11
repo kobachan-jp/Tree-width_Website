@@ -32,8 +32,9 @@ export default function ProblemItem({
           <AnswerUI p={p} handleAnswer={handleAnswer} />
           {result !== undefined && <h3>{result ? '正解！' : '不正解'}</h3>}
         </div>
+
         <div style={{ flex: 1 }}>
-          {p.detail.graph !== undefined && <PaintGraph p={p}></PaintGraph>}
+          <PaintGraph p={p}></PaintGraph>
         </div>
       </div>
     </div>

@@ -1,5 +1,5 @@
 import ReactFlow, { Background, Node as RFNode, Edge as RFEdge } from 'reactflow'
-import React, { useMemo, useState } from 'react'
+import React, { useMemo } from 'react'
 import CustomNode from '../CustomNode'
 import { ProblemWithDetail } from '@/types'
 import 'reactflow/dist/style.css'
@@ -9,6 +9,13 @@ const nodeTypes = {
 }
 
 export default function PaintGraph({ p }: { p: ProblemWithDetail }) {
+  const graph = p.detail.graph
+
+  if (!graph) return null
+  if ((!graph.nodes || graph.nodes.length === 0) && (!graph.edges || graph.edges.length === 0)) {
+    return null // ← 空のとき ReactFlow を描画しない
+  }
+
   const initialNodes = useMemo(() => {
     return p.detail.graph?.nodes.map((n: any) => ({
       ...n,
