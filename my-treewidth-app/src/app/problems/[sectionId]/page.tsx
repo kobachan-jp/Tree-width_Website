@@ -9,7 +9,7 @@ export default function ProblemsPage() {
   //問題の配列を状態管理
   const [problems, setProblems] = useState<ProblemWithDetail[]>([])
   //正答判定をProblem.idをキーとするmapでbooleanまたはundefinedを管理
-  const [messages, setMessages] = useState<{ [id: number]: boolean | undefined }>([])
+  const [messages, setMessages] = useState<{ [id: number]: boolean | undefined }>({})
 
   const params = useParams<{ sectionId: string }>()
   const sectionId = Number(params.sectionId)
@@ -18,28 +18,36 @@ export default function ProblemsPage() {
     fetch(`/api/problems/${sectionId}`)
       //fetchはレスポンスオブジェクトを返すのでJSON型に変換.
       .then((res) => res.json())
-      .then((data) => setProblems(data))
+      .then((data) => {
+        setProblems(data)
+        setMessages({})
+      })
   }, [sectionId])
 
   //回答を送信し、正答判定を取得
-  async function handleAnswer(category: ProblemCategory, id: number, answer: number) {
+  async function handleAnswer(
+    category: ProblemCategory,
+    problemId: number,
+    questionId: number,
+    answer: number,
+  ) {
     const res = await fetch(`/api/problems/${sectionId}`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ category, id, answer }),
+      body: JSON.stringify({ category, questionId, answer }),
     })
     const data = await res.json()
     setMessages((prev) => ({
       //全プロパティをコピー（既存の回答状況をコピー）
       ...prev,
       //新たに正答判定を追加
-      [id]: data.correct,
+      [problemId]: data.correct,
     }))
   }
 
   return (
     <div style={{ padding: 20 }}>
-      <h1>問題{sectionId}</h1>
+      <h1>Section{sectionId}</h1>
       <ProblemList
         problems={problems}
         messages={messages}

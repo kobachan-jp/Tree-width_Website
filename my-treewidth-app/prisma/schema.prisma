@@ -10,7 +10,7 @@ generator client {
 
 datasource db {
   provider = "sqlite"
-  url      = env("DATABASE_URL")　
+  url      = env("DATABASE_URL")
 }
 
 enum ProblemCategory {
@@ -34,10 +34,10 @@ model Problem{
 model TrueOrFalse{
   id Int @id @default(autoincrement())
   text String
-  graphId Int
-  graph Graph @relation(fields:[graphId],references:[id])
-  treeId Int
-  tree Tree @relation(fields:[treeId],references:[id])
+  graphId Int?
+  graph Graph? @relation(fields:[graphId],references:[id])
+  treeId Int?
+  tree Tree? @relation(fields:[treeId],references:[id])
   answer Int
   reason String
 }
@@ -45,10 +45,10 @@ model TrueOrFalse{
 model Input{
   id Int @id @default(autoincrement())
   text String
-  graphId Int
-  graph Graph @relation(fields:[graphId],references:[id])
-  treeId Int
-  tree Tree @relation(fields:[treeId],references:[id])
+  graphId Int?
+  graph Graph? @relation(fields:[graphId],references:[id])
+  treeId Int?
+  tree Tree? @relation(fields:[treeId],references:[id])
   answer Int
   reason String
 }
@@ -56,20 +56,22 @@ model Input{
 model Choice{
   id Int @id @default(autoincrement())
   text String
-  graphId Int
-  graph Graph @relation(fields:[graphId],references:[id])
-  treeId Int
-  tree Tree @relation(fields:[treeId],references:[id])
-  answer Int
+  graphId Int?
+  graph Graph? @relation(fields:[graphId],references:[id])
+  treeId Int?
+  tree Tree? @relation(fields:[treeId],references:[id])
+  answer Int　
+  answerOp ChoiceOption @relation("CorrectAnswer",fields:[answer], references:[id])
   reason String
-  options ChoiceOption[]
+  options ChoiceOption[] @relation("AllOptions")
 }
 
 model ChoiceOption {
   id        Int     @id @default(autoincrement())
   content   String
   choiceId  Int
-  choice    Choice  @relation(fields: [choiceId], references: [id])
+  choice    Choice  @relation("AllOptions",fields: [choiceId], references: [id])
+  correctAnswer Choice[] @relation("CorrectAnswer")
 }
 
 model Graph{ 
