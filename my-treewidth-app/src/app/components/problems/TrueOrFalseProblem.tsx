@@ -5,14 +5,21 @@ export default function TrueOrFalseProblem({
   handleAnswer,
 }: {
   p: ProblemWithDetail
-  handleAnswer: (category: ProblemCategory, id: number, answer: number) => void
+  handleAnswer: (
+    category: ProblemCategory,
+    problemId: number,
+    questionId: number,
+    answer: number,
+  ) => void
 }) {
   return (
     <div>
       <button
-        onClick={() => handleAnswer(ProblemCategory.TrueOrFalse, p.id, 1)}
+        onClick={() => handleAnswer(ProblemCategory.TrueOrFalse, p.id, p.questionId, 1)}
         style={{
           padding: '4px 10px',
+          marginRight: '10px',
+          marginLeft: '30px',
           fontSize: '1em',
           cursor: 'pointer',
           border: '2px solid #333', // 枠線の太さと色
@@ -23,7 +30,7 @@ export default function TrueOrFalseProblem({
         ○
       </button>
       <button
-        onClick={() => handleAnswer(ProblemCategory.TrueOrFalse, p.id, 0)}
+        onClick={() => handleAnswer(ProblemCategory.TrueOrFalse, p.id, p.questionId, 0)}
         style={{
           padding: '4px 10px',
           fontSize: '1em',

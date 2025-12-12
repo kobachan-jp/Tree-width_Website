@@ -39,8 +39,9 @@ export type Choice = {
   text: string
   graph?: Graph
   tree?: Tree
-  answer: number
   reason: string
+  answer: number
+  answerOp: ChoiceOption
   options: ChoiceOption[]
 }
 
@@ -88,7 +89,7 @@ export type Edge = {
   source: Node
   target: Node
   targetId: number
-  label: string
+  label?: string
   graph: Graph[]
   tree: Tree[]
 }

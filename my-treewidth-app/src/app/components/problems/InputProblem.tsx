@@ -6,10 +6,15 @@ export default function InputProblem({
   handleAnswer,
 }: {
   p: ProblemWithDetail
-  handleAnswer: (category: ProblemCategory, id: number, answer: number) => void
+  handleAnswer: (
+    category: ProblemCategory,
+    problemId: number,
+    questionId: number,
+    answer: number,
+  ) => void
 }) {
   const [value, setValue] = useState<number | ''>('')
-
+  console.log()
   return (
     <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
       <input
@@ -22,8 +27,7 @@ export default function InputProblem({
       <button
         onClick={() => {
           if (value !== '') {
-            handleAnswer(ProblemCategory.Input, p.id, Number(value))
-            setValue('') // 送信後に入力欄をクリアする場合
+            handleAnswer(ProblemCategory.Input, p.id, p.questionId, Number(value))
           }
         }}
         style={{

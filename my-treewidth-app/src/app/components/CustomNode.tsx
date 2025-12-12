@@ -9,8 +9,8 @@ export default function CustomNode({ data, selected }: NodeProps) {
       style={{
         background: selected ? '#FFD700' : '#89CFF0',
         borderRadius: '50%',
-        width: 40,
-        height: 40,
+        width: 50,
+        height: 50,
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
