@@ -35,10 +35,23 @@ export default function ProblemItem({
         </div>
       </div>
       <div style={{ textAlign: 'center' }}>
-        <p style={{ marginTop: '3em', marginBottom: '2em' }}>問題 {p.id}</p>
+        <p style={{ marginTop: '3em', marginBottom: '2em', fontWeight: 'bold', fontSize: '1em' }}>
+          問題 {p.id}
+        </p>
         <p style={{ marginBottom: 30 }}>{p.detail.text}</p>
         <AnswerUI p={p} handleAnswer={handleAnswer} />
-        {result !== undefined && <h3>{result ? '正解！' : '不正解'}</h3>}
+        {result !== undefined && (
+          <h3
+            style={{
+              marginTop: '3em',
+              fontWeight: 'bold',
+              fontSize: '1.5em',
+              color: result ? 'lightgreen' : 'blue',
+            }}
+          >
+            {result ? '正解！' : '不正解'}
+          </h3>
+        )}
       </div>
     </div>
   )

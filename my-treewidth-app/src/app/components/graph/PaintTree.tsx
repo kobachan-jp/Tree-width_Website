@@ -46,8 +46,12 @@ export default function PaintTree({ p }: { p: ProblemWithDetail }) {
 
   return (
     <div style={{ width: '100%', height: '500px', border: '1px solid #ccc' }}>
-      <ReactFlow nodeTypes={nodeTypes} nodes={initialNodes} edges={initialEdges} fitView>
-      </ReactFlow>
+      <ReactFlow
+        nodeTypes={nodeTypes}
+        nodes={initialNodes}
+        edges={initialEdges}
+        fitView
+      ></ReactFlow>
     </div>
   )
 }
