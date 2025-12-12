@@ -4,6 +4,7 @@ import { ProblemCategory } from '@prisma/client'
 import { useEffect, useState } from 'react'
 import { ProblemWithDetail } from '@/types'
 import ProblemList from '@/app/components/problems/ProblemList'
+import { useRouter } from 'next/navigation'
 
 export default function ProblemsPage() {
   //問題の配列を状態管理
@@ -45,6 +46,20 @@ export default function ProblemsPage() {
     }))
   }
 
+
+  const router = useRouter();
+
+  const handleNext = (e:any) => {
+    e.preventDefault()
+    router.push(`/problems/${sectionId+1}`)
+  }
+
+    const handlePrev = (e:any) => {
+    e.preventDefault()
+    router.push(`/problems/${sectionId-1}`)
+  }
+
+
   return (
     <div style={{ padding: 40 }}>
       <h1
@@ -62,6 +77,39 @@ export default function ProblemsPage() {
         messages={messages}
         handleAnswer={handleAnswer}
       ></ProblemList>
+     <div style={{ display: 'flex', alignItems: 'center', marginTop: '5em',justifyContent: 'space-between'}}>
+  <form onSubmit={handlePrev}>
+    <button
+      type="submit"
+      style={{
+        fontSize: '1.5em',
+        textDecoration: 'underline',
+        background: 'none',
+        border: 'none',
+        cursor: 'pointer',
+        marginLeft:'2em'
+      }}
+    >
+      Prev
+    </button>
+  </form>
+
+  <form onSubmit={handleNext}>
+    <button
+      type="submit"
+      style={{
+        fontSize: '1.5em',
+        textDecoration: 'underline',
+        background: 'none',
+        border: 'none',
+        cursor: 'pointer',
+        marginRight:'2em'
+              }}
+    >
+      Next
+    </button>
+  </form>
+</div>
     </div>
   )
 }
