@@ -5,6 +5,7 @@ import CustomNode from '../CustomNode'
 import { useMemo } from 'react'
 import 'reactflow/dist/style.css'
 import PaintGraph from '../graph/PaintGraph'
+import PaintTree from '../graph/PaintTree'
 
 const nodeTypes = {
   custom: CustomNode,
@@ -27,15 +28,17 @@ export default function ProblemItem({
     <div style={{ marginBottom: 30 }}>
       <div style={{ display: 'flex', gap: '20px' }}>
         <div style={{ flex: 1 }}>
-          <p style={{ marginBottom: '1em' }}>問題 {p.id}</p>
-          <p style={{ marginBottom: 30 }}>{p.detail.text}</p>
-          <AnswerUI p={p} handleAnswer={handleAnswer} />
-          {result !== undefined && <h3>{result ? '正解！' : '不正解'}</h3>}
-        </div>
-
-        <div style={{ flex: 1 }}>
           <PaintGraph p={p}></PaintGraph>
         </div>
+        <div style={{ flex: 1 }}>
+          <PaintTree p={p}></PaintTree>
+        </div>
+      </div>
+      <div style={{ textAlign: 'center' }}>
+        <p style={{ marginTop: '3em', marginBottom: '2em' }}>問題 {p.id}</p>
+        <p style={{ marginBottom: 30 }}>{p.detail.text}</p>
+        <AnswerUI p={p} handleAnswer={handleAnswer} />
+        {result !== undefined && <h3>{result ? '正解！' : '不正解'}</h3>}
       </div>
     </div>
   )
