@@ -47,7 +47,6 @@ export default function PaintGraph({ p }: { p: ProblemWithDetail }) {
   return (
     <div style={{ width: '100%', height: '500px', border: '1px solid #ccc' }}>
       <ReactFlow nodeTypes={nodeTypes} nodes={initialNodes} edges={initialEdges} fitView>
-        <Background />
       </ReactFlow>
     </div>
   )
