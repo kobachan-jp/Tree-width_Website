@@ -7,25 +7,47 @@ import ProblemList from '@/app/components/problems/ProblemList'
 import { useRouter } from 'next/navigation'
 
 export default function ProblemsPage() {
-  //問題の配列を状態管理
   const [problems, setProblems] = useState<ProblemWithDetail[]>([])
-  //正答判定をProblem.idをキーとするmapでbooleanまたはundefinedを管理
   const [messages, setMessages] = useState<{ [id: number]: boolean | undefined }>({})
+
+  const [hasNext, setHasNext] = useState(false) // ←★追加
+  const [hasPrev, setHasPrev] = useState(false) // ←★追加（必要なら）
 
   const params = useParams<{ sectionId: string }>()
   const sectionId = Number(params.sectionId)
-  //GETリクエストで問題一覧を取得.
+  const router = useRouter()
+
+  // --- 問題取得 ---
   useEffect(() => {
     fetch(`/api/problems/${sectionId}`)
-      //fetchはレスポンスオブジェクトを返すのでJSON型に変換.
       .then((res) => res.json())
       .then((data) => {
         setProblems(data)
-        setMessages({}) //Sectionごとに回答保持をリセット（保存したければコメントアウト）
+        setMessages({})
       })
   }, [sectionId])
 
-  //回答を送信し、正答判定を取得
+  // --- 次・前セクション存在チェック ---
+  useEffect(() => {
+    const next = sectionId + 1
+    const prev = sectionId - 1
+
+    // 次のセクションが存在するか
+    fetch(`/api/sections/${next}`)
+      .then((res) => setHasNext(res.ok))
+      .catch(() => setHasNext(false))
+
+    // 前のセクションが存在するか（1以下なら false）
+    if (prev <= 0) {
+      setHasPrev(false)
+    } else {
+      fetch(`/api/sections/${prev}`)
+        .then((res) => setHasPrev(res.ok))
+        .catch(() => setHasPrev(false))
+    }
+  }, [sectionId])
+
+  // --- 回答送信 ---
   async function handleAnswer(
     category: ProblemCategory,
     problemId: number,
@@ -38,24 +60,18 @@ export default function ProblemsPage() {
       body: JSON.stringify({ category, questionId, answer }),
     })
     const data = await res.json()
-    setMessages((prev) => ({
-      //全プロパティをコピー（既存の回答状況をコピー）
-      ...prev,
-      //新たに正答判定を追加
-      [problemId]: data.correct,
-    }))
+    setMessages((prev) => ({ ...prev, [problemId]: data.correct }))
   }
 
-  const router = useRouter()
-
+  // --- 移動 ---
   const handleNext = (e: any) => {
     e.preventDefault()
-    router.push(`/problems/${sectionId + 1}`)
+    if (hasNext) router.push(`/problems/${sectionId + 1}`)
   }
 
   const handlePrev = (e: any) => {
     e.preventDefault()
-    router.push(`/problems/${sectionId - 1}`)
+    if (hasPrev) router.push(`/problems/${sectionId - 1}`)
   }
 
   return (
@@ -64,17 +80,15 @@ export default function ProblemsPage() {
         style={{
           textAlign: 'center',
           fontWeight: 'bold',
-          fontSize: '2em', // 文字の大きさを調整
+          fontSize: '2em',
           marginBottom: '30px',
         }}
       >
-        Section{sectionId}
+        Section {sectionId}
       </h1>
-      <ProblemList
-        problems={problems}
-        messages={messages}
-        handleAnswer={handleAnswer}
-      ></ProblemList>
+
+      <ProblemList problems={problems} messages={messages} handleAnswer={handleAnswer} />
+
       <div
         style={{
           display: 'flex',
@@ -83,17 +97,25 @@ export default function ProblemsPage() {
           justifyContent: 'space-between',
         }}
       >
-        <form onSubmit={handlePrev}>
-          <button className="button-press" type="submit">
-            Prev
-          </button>
-        </form>
+        {/* Prev ボタン */}
+        {hasPrev ? (
+          <form onSubmit={handlePrev}>
+            <button className="button-press" type="submit">
+              Prev
+            </button>
+          </form>
+        ) : (
+          <div></div>
+        )}
 
-        <form onSubmit={handleNext}>
-          <button className="button-press" type="submit">
-            Next
-          </button>
-        </form>
+        {/* Next ボタン */}
+        {hasNext && (
+          <form onSubmit={handleNext}>
+            <button className="button-press" type="submit">
+              Next
+            </button>
+          </form>
+        )}
       </div>
     </div>
   )
