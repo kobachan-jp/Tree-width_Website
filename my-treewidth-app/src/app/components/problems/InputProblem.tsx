@@ -42,18 +42,11 @@ export default function InputProblem({
         style={{ padding: '4px 8px', fontSize: '1em', border: '2px solid black' }}
       />
       <button
+        className="problem-button"
         onClick={() => {
           if (value !== '') {
             handleAnswer(ProblemCategory.Input, p.id, p.questionId, Number(value))
           }
-        }}
-        style={{
-          padding: '6px 12px',
-          fontSize: '1em',
-          cursor: 'pointer',
-          border: '2px solid #333', // 枠線の太さと色
-          borderRadius: '4px', // 角の丸み
-          backgroundColor: '#fff', // 背景色
         }}
       >
         送信
