@@ -28,10 +28,11 @@ export default function ChoiceProblem({
     value: String(i.id),
   }))
   return (
-    <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+    <div>
+    <div style={{ display: 'flex', marginLeft:'10em',marginRight:'10em',alignItems: 'center', gap: '8px',marginBottom:'1.5em' }}>
       {radioButtons.map((radio) => {
         return (
-          <div className="col-4" key={radio.value}>
+          <div className="col-4" key={radio.value}style={{flex : 1}}>
             {/* checked属性に式を定義する */}
             <input
               className="form-check-input"
@@ -47,6 +48,8 @@ export default function ChoiceProblem({
           </div>
         )
       })}
+      </div>
+      <div style={{textAlign : 'right',marginRight:'14em'}}>
       <button
         onClick={() => {
           handleAnswer(ProblemCategory.Choice, p.id, p.questionId, Number(selected))
@@ -62,6 +65,7 @@ export default function ChoiceProblem({
       >
         送信
       </button>
+    </div>
     </div>
   )
 }
