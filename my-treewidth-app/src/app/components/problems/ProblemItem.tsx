@@ -45,7 +45,8 @@ export default function ProblemItem({
             style={{
               marginTop: '3em',
               fontWeight: 'bold',
-              fontSize: '1.5em',
+              fontSize: '1.2em',
+              marginLeft: '40em',
               color: result ? 'lightgreen' : 'blue',
             }}
           >
