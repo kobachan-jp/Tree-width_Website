@@ -46,8 +46,17 @@ export default function ProblemsPage() {
   }
 
   return (
-    <div style={{ padding: 20 }}>
-      <h1>Section{sectionId}</h1>
+    <div style={{ padding: 40 }}>
+      <h1
+        style={{
+          textAlign: 'center',
+          fontWeight: 'bold',
+          fontSize: '2em', // 文字の大きさを調整
+          marginBottom: '30px',
+        }}
+      >
+        Section{sectionId}
+      </h1>
       <ProblemList
         problems={problems}
         messages={messages}
