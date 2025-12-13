@@ -1,4 +1,4 @@
-This is LuaHBTeX, Version 1.22.0 (TeX Live 2025)  (format=lualatex 2025.4.24)  20 NOV 2025 16:28
+This is LuaHBTeX, Version 1.22.0 (TeX Live 2025)  (format=lualatex 2025.4.24)  13 DEC 2025 09:31
  restricted system commands enabled.
 **1201.tex
 (./1201.tex
@@ -1464,14 +1464,50 @@ LaTeX Font Info:    Font shape `JY3/mc/m/n' will be
 
 ]
 LaTeX Font Info:    Font shape `JT3/mc/m/n' will be
-(Font)              scaled to size 7.69775pt on input line 68.
+(Font)              scaled to size 7.69775pt on input line 71.
 LaTeX Font Info:    Font shape `JY3/mc/m/n' will be
-(Font)              scaled to size 7.69775pt on input line 68.
+(Font)              scaled to size 7.69775pt on input line 71.
 
 
 [4
 
 ]
+LaTeX Font Info:    Trying to load font information for U+msa on input line 83.
+
+ (/usr/local/texlive/2025/texmf-dist/tex/latex/amsfonts/umsa.fd
+File: umsa.fd 2013/01/14 v3.01 AMS symbols A
+)
+LaTeX Font Info:    Trying to load font information for U+msb on input line 83.
+
+
+(/usr/local/texlive/2025/texmf-dist/tex/latex/amsfonts/umsb.fd
+File: umsb.fd 2013/01/14 v3.01 AMS symbols B
+)
+LaTeX Font Info:    Font shape `JY3/gt/m/n' will be
+(Font)              scaled to size 10.53629pt on input line 83.
+(load cache: extra_haranoajigothic-medium.luc)
+LaTeX Font Info:    Font shape `JY3/gt/m/n' will be
+(Font)              scaled to size 7.69775pt on input line 83.
+LaTeX Font Info:    Font shape `JY3/gt/m/n' will be
+(Font)              scaled to size 5.77332pt on input line 83.
+LaTeX Font Info:    Font shape `TU/lmss/m/it' in size <10.95> not available
+(Font)              Font shape `TU/lmss/m/sl' tried instead on input line 83.
+(load cache: extra_lmsans10-oblique.luc)
+LaTeX Font Info:    Font shape `TU/lmss/m/it' in size <8> not available
+(Font)              Font shape `TU/lmss/m/sl' tried instead on input line 83.
+(load cache: extra_lmsans8-oblique.luc)
+LaTeX Font Info:    Font shape `TU/lmss/m/it' in size <6> not available
+(Font)              Font shape `TU/lmss/m/sl' tried instead on input line 83.
+(load cache: extra_lmsans10-bold.luc)
+LaTeX Font Info:    Font shape `JT3/mc/b/n' in size <10.95> not available
+(Font)              Font shape `JT3/gt/m/n' tried instead on input line 83.
+LaTeX Font Info:    Font shape `JT3/gt/m/n' will be
+(Font)              scaled to size 10.53629pt on input line 83.
+LaTeX Font Info:    Font shape `JY3/mc/b/n' in size <10.95> not available
+(Font)              Font shape `JY3/gt/m/n' tried instead on input line 83.
+LaTeX Font Info:    Font shape `JY3/gt/m/n' will be
+(Font)              scaled to size 10.53629pt on input line 83.
+
 
 [5
 
@@ -1480,74 +1516,154 @@ LaTeX Font Info:    Font shape `JY3/mc/m/n' will be
 [6
 
 ]
-\openout4 = 1201.vrb
- (./1201.vrb
-(/usr/local/texlive/2025/texmf-dist/tex/latex/listings/lstlang1.sty
-File: lstlang1.sty 2024/09/23 1.10c listings language file
-)(load cache: extra_lmmono10-regular.luc)(load cache: extra_lmmono8-regular.luc)
-Removing  `ltj.process_input_buffer' from `process_input_buffer'.
-Inserting `ltj.listings_unicode' in `process_input_buffer'.
-Inserting `ltj.process_input_buffer' in `process_input_buffer'.
-Removing  `ltj.listings_unicode' from `process_input_buffer'.
-LaTeX Font Info:    Trying to load font information for U+msa on input line 14.
+<table1.png, id=83, 575.14874pt x 164.86594pt>
+File: table1.png Graphic file (type png)
+<use table1.png>
+Package luatex.def Info: table1.png  used on input line 98.
+(luatex.def)             Requested size: 287.57367pt x 82.43275pt.
+<table2.png, id=84, 633.86812pt x 564.60938pt>
+File: table2.png Graphic file (type png)
+<use table2.png>
+Package luatex.def Info: table2.png  used on input line 98.
+(luatex.def)             Requested size: 190.1619pt x 169.38411pt.
 
-
-(/usr/local/texlive/2025/texmf-dist/tex/latex/amsfonts/umsa.fd
-File: umsa.fd 2013/01/14 v3.01 AMS symbols A
-)
-LaTeX Font Info:    Trying to load font information for U+msb on input line 14.
-
-
-(/usr/local/texlive/2025/texmf-dist/tex/latex/amsfonts/umsb.fd
-File: umsb.fd 2013/01/14 v3.01 AMS symbols B
-)
-LaTeX Font Info:    Font shape `JY3/gt/m/n' will be
-(Font)              scaled to size 10.53629pt on input line 14.
-(load cache: extra_haranoajigothic-medium.luc)
-LaTeX Font Info:    Font shape `JY3/gt/m/n' will be
-(Font)              scaled to size 7.69775pt on input line 14.
-LaTeX Font Info:    Font shape `JY3/gt/m/n' will be
-(Font)              scaled to size 5.77332pt on input line 14.
-LaTeX Font Info:    Font shape `TU/lmss/m/it' in size <10.95> not available
-(Font)              Font shape `TU/lmss/m/sl' tried instead on input line 14.
-(load cache: extra_lmsans10-oblique.luc)
-LaTeX Font Info:    Font shape `TU/lmss/m/it' in size <8> not available
-(Font)              Font shape `TU/lmss/m/sl' tried instead on input line 14.
-(load cache: extra_lmsans8-oblique.luc)
-LaTeX Font Info:    Font shape `TU/lmss/m/it' in size <6> not available
-(Font)              Font shape `TU/lmss/m/sl' tried instead on input line 14.
-Removing  `ltj.process_input_buffer' from `process_input_buffer'.
-Inserting `ltj.listings_unicode' in `process_input_buffer'.
-Inserting `ltj.process_input_buffer' in `process_input_buffer'.
-Removing  `ltj.listings_unicode' from `process_input_buffer'.)
 
 [7
 
-]
-\openout4 = 1201.vrb
- (./1201.vrb
-Removing  `ltj.process_input_buffer' from `process_input_buffer'.
-Inserting `ltj.listings_unicode' in `process_input_buffer'.
-Inserting `ltj.process_input_buffer' in `process_input_buffer'.
-LaTeX Font Info:    Font shape `TU/lmtt/bx/n' in size <8> not available
-(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 4.
-(load cache: extra_lmmonolt10-bold.luc)
-LaTeX Font Info:    Font shape `JT3/mc/b/n' in size <8> not available
-(Font)              Font shape `JT3/gt/m/n' tried instead on input line 4.
-LaTeX Font Info:    Font shape `JT3/gt/m/n' will be
-(Font)              scaled to size 7.69775pt on input line 4.
-LaTeX Font Info:    Font shape `JY3/mc/b/n' in size <8> not available
-(Font)              Font shape `JY3/gt/m/n' tried instead on input line 4.
-LaTeX Font Info:    Font shape `JY3/gt/m/n' will be
-(Font)              scaled to size 7.69775pt on input line 4.
-Removing  `ltj.listings_unicode' from `process_input_buffer'.)
+<./table1.png>]
 
 [8
 
-]
+
+<./table2.png>]
 
 [9
 
+]
+
+[10
+
+] (./1201.toc)
+
+[11
+
+]
+<ProblemItem.png, id=117, 360.34625pt x 235.88126pt>
+File: ProblemItem.png Graphic file (type png)
+<use ProblemItem.png>
+Package luatex.def Info: ProblemItem.png  used on input line 127.
+(luatex.def)             Requested size: 252.24065pt x 165.11575pt.
+
+
+[12
+
+<./ProblemItem.png>]
+<Graph_Tree.png, id=124, 1369.115pt x 899.36pt>
+File: Graph_Tree.png Graphic file (type png)
+<use Graph_Tree.png>
+Package luatex.def Info: Graph_Tree.png  used on input line 134.
+(luatex.def)             Requested size: 273.81815pt x 179.8688pt.
+
+
+[13
+
+<./Graph_Tree.png>]
+<TrueOrFalse.png, id=131, 703.62875pt x 215.80624pt>
+File: TrueOrFalse.png Graphic file (type png)
+<use TrueOrFalse.png>
+Package luatex.def Info: TrueOrFalse.png  used on input line 150.
+(luatex.def)             Requested size: 175.90675pt x 53.95142pt.
+LaTeX Font Info:    Font shape `JY3/mc/m/n' will be
+(Font)              scaled to size 6.73553pt on input line 150.
+LaTeX Font Info:    Font shape `JY3/gt/m/n' will be
+(Font)              scaled to size 13.85594pt on input line 150.
+LaTeX Font Info:    Font shape `JY3/gt/m/n' will be
+(Font)              scaled to size 9.6222pt on input line 150.
+LaTeX Font Info:    Font shape `JY3/gt/m/n' will be
+(Font)              scaled to size 6.73553pt on input line 150.
+LaTeX Font Info:    Font shape `TU/lmss/m/it' in size <14.4> not available
+(Font)              Font shape `TU/lmss/m/sl' tried instead on input line 150.
+(load cache: extra_lmsans12-oblique.luc)
+LaTeX Font Info:    Font shape `TU/lmss/m/it' in size <10> not available
+(Font)              Font shape `TU/lmss/m/sl' tried instead on input line 150.
+LaTeX Font Info:    Font shape `TU/lmss/m/it' in size <7> not available
+(Font)              Font shape `TU/lmss/m/sl' tried instead on input line 150.
+<TrueOrFalse2.png, id=132, 933.4875pt x 258.9675pt>
+File: TrueOrFalse2.png Graphic file (type png)
+<use TrueOrFalse2.png>
+Package luatex.def Info: TrueOrFalse2.png  used on input line 150.
+(luatex.def)             Requested size: 177.36447pt x 49.20433pt.
+
+
+[14
+
+<./TrueOrFalse.png><./TrueOrFalse2.png>]
+<Input.png, id=141, 933.4875pt x 258.9675pt>
+File: Input.png Graphic file (type png)
+<use Input.png>
+Package luatex.def Info: Input.png  used on input line 166.
+(luatex.def)             Requested size: 186.69418pt x 51.79257pt.
+
+Overfull \hbox (2.29335pt too wide) in paragraph at lines 166--166
+ [] 
+ []
+
+<Input2.png, id=142, 933.4875pt x 258.9675pt>
+File: Input2.png Graphic file (type png)
+<use Input2.png>
+Package luatex.def Info: Input2.png  used on input line 166.
+(luatex.def)             Requested size: 186.69418pt x 51.79257pt.
+
+Overfull \hbox (2.29335pt too wide) in paragraph at lines 166--166
+ [] 
+ []
+
+
+
+[15
+
+<./Input.png><./Input2.png>]
+<Choice.png, id=150, 933.4875pt x 258.9675pt>
+File: Choice.png Graphic file (type png)
+<use Choice.png>
+Package luatex.def Info: Choice.png  used on input line 182.
+(luatex.def)             Requested size: 186.69418pt x 51.79257pt.
+
+Overfull \hbox (2.29335pt too wide) in paragraph at lines 182--182
+ [] 
+ []
+
+<Choice2.png, id=151, 933.4875pt x 297.11pt>
+File: Choice2.png Graphic file (type png)
+<use Choice2.png>
+Package luatex.def Info: Choice2.png  used on input line 182.
+(luatex.def)             Requested size: 177.36447pt x 56.45148pt.
+
+
+[16
+
+<./Choice.png><./Choice2.png>]
+<Prev_Next.png, id=159, 1369.115pt x 164.615pt>
+File: Prev_Next.png Graphic file (type png)
+<use Prev_Next.png>
+Package luatex.def Info: Prev_Next.png  used on input line 190.
+(luatex.def)             Requested size: 410.73767pt x 49.38487pt.
+
+Overfull \hbox (19.19907pt too wide) in paragraph at lines 190--190
+ [] 
+ []
+
+
+
+[17
+
+<./Prev_Next.png>] (./1201.toc)
+
+[18
+
+]
+
+[19
 
 ]
 \tf@nav=\write8
@@ -1565,33 +1681,35 @@ LaTeX2e <2024-11-01> patch level 2
 L3 programming layer <2025-03-26>
  ***********
 Package rerunfilecheck Info: File `1201.out' has not changed.
-(rerunfilecheck)             Checksum: 167A7D58C0F35909E0ED0FFDEAD8E7EC;198.
+(rerunfilecheck)             Checksum: 3C0B1DB21CCE4B216B781C4B22F689C8;428.
 )
 
 Here is how much of LuaTeX's memory you used:
- 31476 strings out of 471941
- 597261,1373583 words of node,token memory allocated
- 69203 words of node memory still in use:
-   1254 hlist, 8 vlist, 620 rule, 54 disc, 11 local_par, 622 glue, 955 kern, 79 
-penalty, 129 glyph, 15925 attribute, 66 glue_spec, 1821 attribute_list, 4 write,
- 1261 user_defined, 98 pdf_colorstack nodes
-   avail lists: 1:40,2:84563,3:1082,4:11796,5:8117,6:74,7:6901,8:3,9:16340,10:32
-,11:474
- 57012 multiletter control sequences out of 65536+600000
- 67 fonts using 42099919 bytes
- 104i,13n,115p,1847b,1255s stack positions out of 10000i,1000n,20000p,200000b,200000s
-</usr/local/texlive/2025/texmf-dist/fonts/opentype/public/lm/lmmonolt10-bold.otf
-></usr/local/texlive/2025/texmf-dist/fonts/opentype/public/lm/lmsans17-regular.o
-tf></usr/local/texlive/2025/texmf-dist/fonts/opentype/public/lm/lmmono8-regular.
-otf></usr/local/texlive/2025/texmf-dist/fonts/opentype/public/lm/lmsans8-regular
-.otf></usr/local/texlive/2025/texmf-dist/fonts/opentype/public/lm/lmsans10-regul
-ar.otf></usr/local/texlive/2025/texmf-dist/fonts/opentype/public/haranoaji/Haran
-oAjiMincho-Regular.otf></usr/local/texlive/2025/texmf-dist/fonts/type1/public/am
-sfonts/cm/cmsy10.pfb>
-Output written on 1201.pdf (9 pages, 72091 bytes).
+ 31595 strings out of 471941
+ 125244,1144653 words of node,token memory allocated
+ 8376 words of node memory still in use:
+   36 hlist, 8 vlist, 34 rule, 4 local_par, 6 math, 82 glue, 7 kern, 29 penalty,
+ 37 glyph, 2704 attribute, 67 glue_spec, 282 attribute_list, 4 write, 43 user_de
+fined, 24 pdf_colorstack nodes
+   avail lists: 1:20,2:12409,3:1130,4:626,5:115,6:21,7:1503,8:3,9:695,10:32,11:3
+3
+ 57096 multiletter control sequences out of 65536+600000
+ 100 fonts using 59191047 bytes
+ 104i,13n,115p,1847b,982s stack positions out of 10000i,1000n,20000p,200000b,200000s
+</usr/local/texlive/2025/texmf-dist/fonts/opentype/public/lm/lmsans17-regular.ot
+f></usr/local/texlive/2025/texmf-dist/fonts/opentype/public/lm/lmsans10-bold.otf
+></usr/local/texlive/2025/texmf-dist/fonts/opentype/public/haranoaji/HaranoAjiGo
+thic-Medium.otf></usr/local/texlive/2025/texmf-dist/fonts/opentype/public/lm/lms
+ans8-regular.otf></usr/local/texlive/2025/texmf-dist/fonts/opentype/public/lm/lm
+sans10-regular.otf></usr/local/texlive/2025/texmf-dist/fonts/opentype/public/har
+anoaji/HaranoAjiMincho-Regular.otf></usr/local/texlive/2025/texmf-dist/fonts/typ
+e1/public/amsfonts/cm/cmss10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1
+/public/amsfonts/cm/cmss12.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/p
+ublic/amsfonts/cm/cmsy10.pfb>
+Output written on 1201.pdf (19 pages, 364014 bytes).
 
-PDF statistics: 127 PDF objects out of 1000 (max. 8388607)
- 90 compressed objects within 1 object stream
- 21 named destinations out of 1000 (max. 131072)
- 32 words of extra memory for PDF output out of 10000 (max. 100000000)
+PDF statistics: 234 PDF objects out of 1000 (max. 8388607)
+ 164 compressed objects within 2 object streams
+ 43 named destinations out of 1000 (max. 131072)
+ 48 words of extra memory for PDF output out of 10000 (max. 100000000)
 
