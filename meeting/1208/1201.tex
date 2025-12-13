@@ -1,0 +1,203 @@
+\documentclass[aspectratio=169]{beamer}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{graphicx}
+\usepackage{luatexja} 
+\usepackage{comment}
+\usepackage{bm}
+\usepackage{setspace}
+\usepackage{caption}
+\usepackage{hyperref}
+\usepackage{natbib}
+\usepackage{ulem}
+
+\bibliographystyle{unsrt}
+
+\usetheme{LightTheme}
+\setbeamertemplate{footline}[frame number]
+\setbeamertemplate{navigation symbols}{}
+\setlength{\baselineskip}{10pt}
+
+\usepackage{listings}
+\usepackage{xcolor}
+
+\lstset{
+  basicstyle=\ttfamily\footnotesize,
+  keywordstyle=\color{blue}\bfseries,
+  stringstyle=\color{orange},
+  commentstyle=\color{gray},
+  showstringspaces=false,
+  frame=single,
+  breaklines=true,
+  numbers=left,
+  numberstyle=\tiny,
+}
+
+\AtBeginSection[]{
+  \begin{frame}{目次}
+    \tableofcontents[currentsection]
+  \end{frame}
+}
+
+
+\begin{document}
+
+% タイトルフレーム
+\title{\Large 木幅アルゴリズムの学習システムの構築}
+\subtitle{問題表示画面作成}
+\author{\small B4 小林紹子} % 必要に応じて変更・削除
+\date{\small\today} % 必要に応じて変更・削除
+
+\begin{frame}
+	\titlepage
+\end{frame}
+
+\begin{frame}{目次}
+	\tableofcontents
+\end{frame}
+
+\section{概要}
+\begin{frame}{前回までの進捗状況と課題}
+	\begin{enumerate}
+		\setlength{\parskip}{1.5em}
+		\item \sout{◎×問題は正答判定可能だが,数値の入力問題でも正答判定が不可能.}
+		\item \sout{それぞれの問題の正解・不正解が保存されない.}
+		\item \sout{React Flowで思ったようにグラフが描けない.}
+		\item 問題文と画像生成が連携されていない.
+		\item 問題がページ分割されずに一覧で出てくる.
+		\item サーバーをどれにするか調査する.
+	\end{enumerate}
+\end{frame}
+
+
+\begin{frame}{今回の進捗状況}
+	\begin{enumerate}
+		\setlength{\parskip}{1.5em}
+		\item ○×問題以外にも対応できる解答欄作成.
+		\item 問題文と画像生成が連携.
+		\item 問題を一覧でなくページ分割させる.
+	\end{enumerate}
+	\vspace{1.5em}
+	$\rightarrow$\textbf{大幅なデータベース構成の変更とコンポーネント作成を行う.}
+\end{frame}
+
+\section{データベースの構成を変更}
+
+
+
+\begin{frame}[allowframebreaks]{データベース相関図}
+	\begin{figure}
+		\includegraphics[scale=0.5]{table1.png}
+		\caption{SectionとProblemの関係}
+	\end{figure}
+	\begin{figure}
+		\includegraphics[scale=0.3]{table2.png}
+		\caption{個々の問題と画像の関係}
+	\end{figure}
+\end{frame}
+
+\begin{frame}{問題取得までの流れ}
+	\begin{enumerate}
+		\setlength{\parskip}{1.5em}
+		\item SectionテーブルからProblemテーブルで問題のリストを取得.
+		\item ProblemテーブルのcategoryとquestionIdでカテゴリ別のテーブルを参照.\\\vspace{1em}
+		      $\implies$category別にAPIでテーブルを選択し,questionIdをそのテーブルの主キーとして参照させる.
+		\item それぞれの問題から問題文,答え,グラフなどのデータを表示.\\
+		\item グラフや木構造はノードやエッジの情報からReactFlowで描画させる.
+	\end{enumerate}
+\end{frame}
+
+\begin{frame}{データベース変更により前回までの課題All Clear}
+	\begin{enumerate}
+		\setlength{\parskip}{1.5em}
+		\item Sectionごとにページ分割（Sectionテーブル作成）.
+		\item 問題文と画像を連携（各カテゴリ別の問題テーブルとGraph＆Treeテーブルを外部キーで接続）.
+		\item 回答欄をカテゴリ別に適したものを表示（カテゴリ別に問題テーブルを作成）.
+	\end{enumerate}
+\end{frame}
+
+\section{現在の問題表示画面作成状況}
+
+\begin{frame}{問題の表示}
+	\begin{figure}
+		\includegraphics[scale=0.7]{ProblemItem.png}
+		\caption{各問題の配置}
+	\end{figure}
+\end{frame}
+
+\begin{frame}{グラフと木構造の表示}
+	\begin{figure}
+		\fbox{\includegraphics[scale=0.2]{Graph_Tree.png}}
+	\end{figure}
+	\center{problems/\$\{number\}がSectionテーブルのidと一致.}
+\end{frame}
+
+\begin{frame}{○×問題の場合}
+	\begin{columns}
+		\begin{column}{0.48\textwidth}
+			\begin{figure}
+				\fbox{\includegraphics[scale=0.25]{TrueOrFalse.png}}
+			\end{figure}
+		\end{column}
+		\Large$\implies$
+		\begin{column}{0.48\textwidth}
+			\begin{figure}
+				\fbox{\includegraphics[scale=0.19]{TrueOrFalse2.png}}
+			\end{figure}
+		\end{column}
+	\end{columns}
+\end{frame}
+
+\begin{frame}{入力問題の場合}
+	\begin{columns}
+		\begin{column}{0.48\textwidth}
+			\begin{figure}
+				\fbox{\includegraphics[scale=0.2]{Input.png}}
+			\end{figure}
+		\end{column}
+		\Large$\implies$
+		\begin{column}{0.48\textwidth}
+			\begin{figure}
+				\fbox{\includegraphics[scale=0.2]{Input2.png}}
+			\end{figure}
+		\end{column}
+	\end{columns}
+\end{frame}
+
+\begin{frame}{選択問題の場合}
+	\begin{columns}
+		\begin{column}{0.48\textwidth}
+			\begin{figure}
+				\fbox{\includegraphics[scale=0.2]{Choice.png}}
+			\end{figure}
+		\end{column}
+		\Large$\implies$
+		\begin{column}{0.48\textwidth}
+			\begin{figure}
+				\fbox{\includegraphics[scale=0.19]{Choice2.png}}
+			\end{figure}
+		\end{column}
+	\end{columns}
+\end{frame}
+
+\begin{frame}{ページ遷移}
+	\begin{figure}
+		\fbox{\includegraphics[scale=0.3]{Prev_Next.png}}
+	\end{figure}
+	\vspace{2em}
+	\center{それぞれSectionが存在する場合のみボタンが登場.}
+\end{frame}
+
+\section{今後の予定}
+
+\begin{frame}{今後の予定}
+	\begin{itemize}
+		\setlength{\parskip}{1.5em}
+		\item 問題追加画面作成.
+		\item データベースの構成変更.
+		\item CSSに凝る.
+	\end{itemize}
+\end{frame}
+\end{document}
+

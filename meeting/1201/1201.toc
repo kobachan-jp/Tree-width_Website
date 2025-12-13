@@ -1,2 +1,0 @@
-\beamer@sectionintoc {1}{概要}{3}{0}{1}
-\beamer@sectionintoc {2}{カテゴリ別の解答欄の作成}{6}{0}{2}

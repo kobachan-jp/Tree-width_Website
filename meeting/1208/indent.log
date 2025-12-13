@@ -1,6 +1,6 @@
 INFO:  latexindent version 3.23.6, 2024-01-17, a script to indent .tex files
        latexindent lives here: /usr/share/texlive/texmf-dist/scripts/latexindent/
-       Thu Nov 20 15:52:50 2025
+       Sat Dec 13 09:31:21 2025
        Filename: 1201.tex
 INFO:  Processing switches:
        -w|--overwrite: Overwrite mode active, will make a back up before overwriting
@@ -13,7 +13,8 @@ INFO:  YAML reading settings
        latexindent.pl didn't find indentconfig.yaml or .indentconfig.yaml
        see all possible locations: https://latexindentpl.readthedocs.io/en/latest/sec-appendices.html#indentconfig-options)
 INFO:  Backup procedure (-w flag active):
-       Backing up 1201.tex to ./1201.bak0...
+       ./1201.bak0 already exists, incrementing by 1 (see maxNumberOfBackUps)
+       Backing up 1201.tex to ./1201.bak1...
        1201.tex will be overwritten after indentation
 INFO:  Phase 1: searching for objects
 INFO:  Phase 2: finding surrounding indentation
