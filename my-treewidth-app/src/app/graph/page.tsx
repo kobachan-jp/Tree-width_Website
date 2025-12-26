@@ -5,6 +5,7 @@ import ReactFlow, { Background, Controls } from 'reactflow'
 import EditCustomNode from '@/components/edit/EditCustomNode'
 import 'reactflow/dist/style.css'
 import { useGraph } from '@/hooks/useGraph'
+import { useRouter } from 'next/navigation'
 
 const nodeType = {
   custom: EditCustomNode,
@@ -14,14 +15,14 @@ export default function GraphEditor() {
     useGraph()
 
   /* ------------------
-     保存
+     確認画面へ遷移
   ------------------ */
-  const saveGraph = async () => {
-    await fetch('/api/graph', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ nodes, edges }),
-    })
+
+  const router = useRouter()
+  const goConfirm = () => {
+    //sessionStorage:ブラウザにある保存領域,setItem(key,value)で文字列のみ保存できる故JSON文字列に変換
+    sessionStorage.setItem('graph', JSON.stringify({ nodes, edges }))
+    router.push('/graph/confirm')
   }
 
   return (
@@ -31,8 +32,8 @@ export default function GraphEditor() {
         <button onClick={addNode}>ノード追加</button>
         <button onClick={deleteSelected}>選択削除</button>
 
-        <button onClick={saveGraph} style={{ marginLeft: 8 }}>
-          保存
+        <button onClick={goConfirm} style={{ marginLeft: 8 }}>
+          確認
         </button>
       </div>
 
