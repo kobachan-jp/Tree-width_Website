@@ -1,65 +1,130 @@
-'use client'
-import React, { useEffect, useState } from 'react'
-import ReactFlow, { Background } from 'reactflow'
-import 'reactflow/dist/style.css'
-import CustomNode from '../components/CustomNode'
+'use client';
 
-export default function GraphPage() {
-  const [nodes, setNodes] = useState<any[]>([])
-  const [edges, setEdges] = useState<any[]>([])
-  const [selectedNode, setSelectedNode] = useState<string | null>(null)
-  const [loading, setLoading] = useState(true)
-  //初回レンダリング時にサーバーからグラフデータを取得.
-  useEffect(() => {
-    //GETリクエスト送信
-    fetch('/api/graph')
-      //fetchはレスポンスオブジェクトを返すのでJSON型に変換.
-      .then((res) => res.json())
-      .then((data) => {
-        //取得したデータをreact flow用にセット.
-        const customNodes = data.nodes.map((n) => ({
-          //...n は そのオブジェクトの全プロパティをコピー
-          /*{
-              id: "1",
-              position: { x: 100, y: 100 },
-              data: { label: "x1" },
-              type: "custom"   // 新しく追加されたプロパティ
-            }*/
-          ...n,
-          type: 'custom',
-        }))
-        setNodes(customNodes)
-        setEdges(data.edges)
-        setLoading(false)
-      })
-  }, [])
+import React, { useState } from 'react';
+import ReactFlow, {
+  addEdge,
+  applyNodeChanges,
+  applyEdgeChanges,
+  Node,
+  Edge,
+  Connection,
+  Background,
+  Controls,
+  NodeChange,
+  EdgeChange
+} from 'reactflow';
+import EditCustomNode from '@/components/edit/EditCustomNode';
+import 'reactflow/dist/style.css';
 
-  const handleNodeClick = (event: any, node: any) => {
-    setSelectedNode(node.id)
-    console.log(`選択された頂点: ${node.data.label}`)
-  }
+const nodeType = {
+  custom : EditCustomNode,
+}
+export default function GraphEditor() {
+  const [nodes, setNodes] = useState<Node[]>([]);
+  const [edges, setEdges] = useState<Edge[]>([]);
 
-  if (loading) return <p>読み込み中...</p>
+  /* ------------------
+     ノード追加
+  ------------------ */
+  const addNode = () => {
+    const id = crypto.randomUUID();
+
+    const newNode: Node = {
+      id,
+      type : 'custom',
+      position: {
+        x: 100 + nodes.length * 80,
+        y: 100,
+      },
+      data: { label: `v ${nodes.length + 1}` },
+    };
+
+    setNodes((nds) => [
+      ...nds,
+       newNode]);
+  };
+
+  /* ------------------
+     エッジ追加
+  ------------------ 
+  const addEdgeByButton = () => {
+    if (nodes.length < 2) return;
+
+    const source = nodes[nodes.length - 2].id;
+    const target = nodes[nodes.length - 1].id;
+
+    const newEdge: Edge = {
+      id: `e-${source}-${target}`,
+      source,
+      target,
+    };
+
+    setEdges((eds) => [...eds, newEdge]);
+  };
+
+  */
+
+  const deleteSelected = () => {
+  setNodes((nds) => nds.filter((n) => !n.selected));
+  setEdges((eds) => eds.filter((e) => !e.selected));
+};
+
+  /* ------------------
+     ReactFlow handlers
+  ------------------ */
+  const handleConnect = (connection: Connection) =>
+    setEdges((eds) => addEdge(
+      {
+        ...connection,
+//        type:'straight',
+       },
+        eds));
+
+  const onNodesChange = (changes: NodeChange[]) =>
+    setNodes((nds) => applyNodeChanges(changes, nds));
+
+  const onEdgesChange = (changes: EdgeChange[]) =>
+    setEdges((eds) => applyEdgeChanges(changes, eds));
+
+  /* ------------------
+     保存
+  ------------------ */
+  const saveGraph = async () => {
+    await fetch('/api/graph', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ nodes, edges }),
+    });
+  };
 
   return (
-    <div style={{ width: '100%', height: '100vh' }}>
-      <h2 style={{ textAlign: 'center' }}>問題{selectedNode}</h2>
+    <div style={{ width: '100%', height: '500px' }}>
+      {/* 操作ボタン */}
+      <div style={{ marginBottom: 8 }}>
+        <button onClick={addNode}>ノード追加</button>
+{/*        <button onClick={addEdgeByButton} style={{ marginLeft: 8 }}>
+          エッジ追加
+        </button>
+*/}        
+        <button onClick={deleteSelected}>選択削除</button>
+
+        <button onClick={saveGraph} style={{ marginLeft: 8 }}>
+          保存
+        </button>
+      </div>
+
       <ReactFlow
-        nodeTypes={{ custom: CustomNode }}
-        nodes={nodes.map((n) => ({
-          ...n,
-          selected: n.id === selectedNode,
-        }))}
+        nodes={nodes}
         edges={edges}
-        //onNodeClick は React Flow のイベントプロパティ.ノードをクリックしたときに呼ばれる.
-        onNodeClick={handleNodeClick}
-        onPaneClick={() => setSelectedNode(null)}
-        onNodeDoubleClick={() => setSelectedNode(null)}
-        //React Flow のプロパティで、グラフを画面に収めるための便利な設定.
+        nodeTypes={nodeType}
+        onNodesChange={onNodesChange}
+        onEdgesChange={onEdgesChange}
+        onConnect={handleConnect}
         fitView
       >
         <Background />
+        <Controls />
       </ReactFlow>
     </div>
-  )
+  );
 }
