@@ -1,6 +1,6 @@
-'use client';
+'use client'
 
-import React, { useState } from 'react';
+import React, { useState } from 'react'
 import ReactFlow, {
   addEdge,
   applyNodeChanges,
@@ -11,38 +11,36 @@ import ReactFlow, {
   Background,
   Controls,
   NodeChange,
-  EdgeChange
-} from 'reactflow';
-import EditCustomNode from '@/components/edit/EditCustomNode';
-import 'reactflow/dist/style.css';
+  EdgeChange,
+} from 'reactflow'
+import EditCustomNode from '@/components/edit/EditCustomNode'
+import 'reactflow/dist/style.css'
 
 const nodeType = {
-  custom : EditCustomNode,
+  custom: EditCustomNode,
 }
 export default function GraphEditor() {
-  const [nodes, setNodes] = useState<Node[]>([]);
-  const [edges, setEdges] = useState<Edge[]>([]);
+  const [nodes, setNodes] = useState<Node[]>([])
+  const [edges, setEdges] = useState<Edge[]>([])
 
   /* ------------------
      ノード追加
   ------------------ */
   const addNode = () => {
-    const id = crypto.randomUUID();
+    const id = crypto.randomUUID()
 
     const newNode: Node = {
       id,
-      type : 'custom',
+      type: 'custom',
       position: {
         x: 100 + nodes.length * 80,
         y: 100,
       },
       data: { label: `v ${nodes.length + 1}` },
-    };
+    }
 
-    setNodes((nds) => [
-      ...nds,
-       newNode]);
-  };
+    setNodes((nds) => [...nds, newNode])
+  }
 
   /* ------------------
      エッジ追加
@@ -65,26 +63,27 @@ export default function GraphEditor() {
   */
 
   const deleteSelected = () => {
-  setNodes((nds) => nds.filter((n) => !n.selected));
-  setEdges((eds) => eds.filter((e) => !e.selected));
-};
+    setNodes((nds) => nds.filter((n) => !n.selected))
+    setEdges((eds) => eds.filter((e) => !e.selected))
+  }
 
   /* ------------------
      ReactFlow handlers
   ------------------ */
   const handleConnect = (connection: Connection) =>
-    setEdges((eds) => addEdge(
-      {
-        ...connection,
-//        type:'straight',
-       },
-        eds));
+    setEdges((eds) =>
+      addEdge(
+        {
+          ...connection,
+          //        type:'straight',
+        },
+        eds,
+      ),
+    )
 
-  const onNodesChange = (changes: NodeChange[]) =>
-    setNodes((nds) => applyNodeChanges(changes, nds));
+  const onNodesChange = (changes: NodeChange[]) => setNodes((nds) => applyNodeChanges(changes, nds))
 
-  const onEdgesChange = (changes: EdgeChange[]) =>
-    setEdges((eds) => applyEdgeChanges(changes, eds));
+  const onEdgesChange = (changes: EdgeChange[]) => setEdges((eds) => applyEdgeChanges(changes, eds))
 
   /* ------------------
      保存
@@ -94,18 +93,18 @@ export default function GraphEditor() {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ nodes, edges }),
-    });
-  };
+    })
+  }
 
   return (
     <div style={{ width: '100%', height: '500px' }}>
       {/* 操作ボタン */}
       <div style={{ marginBottom: 8 }}>
         <button onClick={addNode}>ノード追加</button>
-{/*        <button onClick={addEdgeByButton} style={{ marginLeft: 8 }}>
+        {/*        <button onClick={addEdgeByButton} style={{ marginLeft: 8 }}>
           エッジ追加
         </button>
-*/}        
+*/}
         <button onClick={deleteSelected}>選択削除</button>
 
         <button onClick={saveGraph} style={{ marginLeft: 8 }}>
@@ -126,5 +125,5 @@ export default function GraphEditor() {
         <Controls />
       </ReactFlow>
     </div>
-  );
+  )
 }

@@ -67,7 +67,7 @@ export type GraphNode = {
   x: number
   y: number
   label: string
-  graphId : number
+  graphId: number
   graph: Graph
   edgesOut: GraphEdge[]
   edgesIn: GraphEdge[]
@@ -99,7 +99,7 @@ export type TreeNode = {
   x: number
   y: number
   label: string
-  treeId : number
+  treeId: number
   tree: Tree
   edgesOut: TreeEdge[]
   edgesIn: TreeEdge[]
@@ -113,7 +113,7 @@ export type TreeEdge = {
   target: Node
   targetId: number
   label?: string
-  treeId : number
+  treeId: number
   tree: Tree
 }
 
