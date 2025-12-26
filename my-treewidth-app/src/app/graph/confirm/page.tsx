@@ -1,15 +1,16 @@
 'use client'
 
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useState } from 'react'
 import ReactFlow, { Node, Edge } from 'reactflow'
 import CustomNode from '@/components/CustomNode'
+import { useRouter } from 'next/navigation'
 
 const nodeTypes = { custom: CustomNode }
 
 export default function Confirm() {
   const [nodes, setNodes] = useState<Node[]>([])
   const [edges, setEdges] = useState<Edge[]>([])
-
+  const router = useRouter()
   useEffect(() => {
     const data = sessionStorage.getItem('graph')
     if (data) {
@@ -30,8 +31,11 @@ export default function Confirm() {
   }, [])
 
   return (
-    <div style={{ width: '100%', height: '1000px', border: '1px solid #ccc' }}>
+    <div style={{ width: '50%', height: '600px', border: '1px solid #ccc' }}>
       <ReactFlow nodes={nodes} edges={edges} nodeTypes={nodeTypes} fitView></ReactFlow>
+      <button className="button-press" onClick={() => router.back()}>
+        戻る
+      </button>
     </div>
   )
 }

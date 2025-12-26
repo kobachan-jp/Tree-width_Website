@@ -10,14 +10,22 @@ import {
   applyEdgeChanges,
 } from 'reactflow'
 
+export type CustomNodeData = {
+  label: string
+}
+
 export function useGraph() {
-  const [nodes, setNodes] = useState<Node[]>([])
+  const [nodes, setNodes] = useState<Node<CustomNodeData>[]>([])
   const [edges, setEdges] = useState<Edge[]>([])
+
+  const updateNodeLabel = (id: string, label: string) => {
+    setNodes((nds) => nds.map((n) => (n.id === id ? { ...n, data: { ...n.data, label } } : n)))
+  }
 
   const addNode = () => {
     const id = crypto.randomUUID()
 
-    const newNode: Node = {
+    const newNode: Node<CustomNodeData> = {
       id,
       type: 'custom',
       position: {
@@ -53,6 +61,8 @@ export function useGraph() {
   return {
     nodes,
     edges,
+    setEdges,
+    setNodes,
     addNode,
     deleteSelected,
     handleConnect,

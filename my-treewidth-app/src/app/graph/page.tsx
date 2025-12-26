@@ -1,18 +1,40 @@
 'use client'
 
-import React from 'react'
+import React, { useEffect } from 'react'
 import ReactFlow, { Background, Controls } from 'reactflow'
 import EditCustomNode from '@/components/edit/EditCustomNode'
 import 'reactflow/dist/style.css'
 import { useGraph } from '@/hooks/useGraph'
 import { useRouter } from 'next/navigation'
 
-const nodeType = {
-  custom: EditCustomNode,
+const nodeTypes = {
+  custom: (props: NodeProps<CustomNodeData>) => (
+    <EditCustomNode {...props} onChangeLabel={updateNodeLabel} />
+  ),
 }
+
 export default function GraphEditor() {
-  const { nodes, edges, addNode, handleConnect, deleteSelected, onNodesChange, onEdgesChange } =
-    useGraph()
+  const {
+    nodes,
+    edges,
+    setNodes,
+    setEdges,
+    addNode,
+    handleConnect,
+    deleteSelected,
+    onNodesChange,
+    onEdgesChange,
+  } = useGraph()
+
+  //復元されたとき用
+  useEffect(() => {
+    const data = sessionStorage.getItem('graph')
+    if (data) {
+      const parsed = JSON.parse(data)
+      setNodes(parsed.nodes)
+      setEdges(parsed.edges)
+    }
+  }, [])
 
   /* ------------------
      確認画面へ遷移
