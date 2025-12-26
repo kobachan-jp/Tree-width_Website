@@ -1,64 +1,75 @@
 'use client'
-import React, { useEffect, useState } from 'react'
-import ReactFlow, { Background } from 'reactflow'
-import 'reactflow/dist/style.css'
-import CustomNode from '../components/CustomNode'
 
-export default function GraphPage() {
-  const [nodes, setNodes] = useState<any[]>([])
-  const [edges, setEdges] = useState<any[]>([])
-  const [selectedNode, setSelectedNode] = useState<string | null>(null)
-  const [loading, setLoading] = useState(true)
-  //初回レンダリング時にサーバーからグラフデータを取得.
+import React, { useEffect } from 'react'
+import ReactFlow, { Background, Controls } from 'reactflow'
+import EditCustomNode from '@/components/edit/EditCustomNode'
+import 'reactflow/dist/style.css'
+import { useGraph } from '@/hooks/useGraph'
+import { useRouter } from 'next/navigation'
+
+const nodeTypes = {
+  custom: (props: NodeProps<CustomNodeData>) => (
+    <EditCustomNode {...props} onChangeLabel={updateNodeLabel} />
+  ),
+}
+
+export default function GraphEditor() {
+  const {
+    nodes,
+    edges,
+    setNodes,
+    setEdges,
+    addNode,
+    handleConnect,
+    deleteSelected,
+    onNodesChange,
+    onEdgesChange,
+  } = useGraph()
+
+  //復元されたとき用
   useEffect(() => {
-    //GETリクエスト送信
-    fetch('/api/graph')
-      //fetchはレスポンスオブジェクトを返すのでJSON型に変換.
-      .then((res) => res.json())
-      .then((data) => {
-        //取得したデータをreact flow用にセット.
-        const customNodes = data.nodes.map((n) => ({
-          //...n は そのオブジェクトの全プロパティをコピー
-          /*{
-              id: "1",
-              position: { x: 100, y: 100 },
-              data: { label: "x1" },
-              type: "custom"   // 新しく追加されたプロパティ
-            }*/
-          ...n,
-          type: 'custom',
-        }))
-        setNodes(customNodes)
-        setEdges(data.edges)
-        setLoading(false)
-      })
+    const data = sessionStorage.getItem('graph')
+    if (data) {
+      const parsed = JSON.parse(data)
+      setNodes(parsed.nodes)
+      setEdges(parsed.edges)
+    }
   }, [])
 
-  const handleNodeClick = (event: any, node: any) => {
-    setSelectedNode(node.id)
-    console.log(`選択された頂点: ${node.data.label}`)
+  /* ------------------
+     確認画面へ遷移
+  ------------------ */
+
+  const router = useRouter()
+  const goConfirm = () => {
+    //sessionStorage:ブラウザにある保存領域,setItem(key,value)で文字列のみ保存できる故JSON文字列に変換
+    sessionStorage.setItem('graph', JSON.stringify({ nodes, edges }))
+    router.push('/graph/confirm')
   }
 
-  if (loading) return <p>読み込み中...</p>
-
   return (
-    <div style={{ width: '100%', height: '100vh' }}>
-      <h2 style={{ textAlign: 'center' }}>問題{selectedNode}</h2>
+    <div style={{ width: '100%', height: '1000px' }}>
+      {/* 操作ボタン */}
+      <div style={{ marginBottom: 8 }}>
+        <button onClick={addNode}>ノード追加</button>
+        <button onClick={deleteSelected}>選択削除</button>
+
+        <button onClick={goConfirm} style={{ marginLeft: 8 }}>
+          確認
+        </button>
+      </div>
+
       <ReactFlow
-        nodeTypes={{ custom: CustomNode }}
-        nodes={nodes.map((n) => ({
-          ...n,
-          selected: n.id === selectedNode,
-        }))}
+        nodes={nodes}
         edges={edges}
-        //onNodeClick は React Flow のイベントプロパティ.ノードをクリックしたときに呼ばれる.
-        onNodeClick={handleNodeClick}
-        onPaneClick={() => setSelectedNode(null)}
-        onNodeDoubleClick={() => setSelectedNode(null)}
-        //React Flow のプロパティで、グラフを画面に収めるための便利な設定.
+        nodeTypes={nodeType}
+        onNodesChange={onNodesChange}
+        onEdgesChange={onEdgesChange}
+        onConnect={handleConnect}
         fitView
       >
         <Background />
+        <Controls />
       </ReactFlow>
     </div>
   )

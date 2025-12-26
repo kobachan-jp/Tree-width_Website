@@ -49,7 +49,7 @@ export type ChoiceOption = {
   id: number
   content: string
   choiceId: number
-  choice: Choice
+  correctAnswer: Choice[]
 }
 
 export type Graph = {
@@ -57,8 +57,31 @@ export type Graph = {
   TrueOrFalse: TrueOrFalse[]
   Input: Input[]
   Choice: Choice[]
-  nodes: Node[]
-  edges: Edge[]
+  nodes: GraphNode[]
+  edges: GraphEdge[]
+}
+
+export type GraphNode = {
+  id: number
+  nodeKey: string
+  x: number
+  y: number
+  label: string
+  graphId: number
+  graph: Graph
+  edgesOut: GraphEdge[]
+  edgesIn: GraphEdge[]
+}
+
+export type GraphEdge = {
+  id: number
+  edgeKey: string
+  sourceId: number
+  source: GraphNode
+  target: GraphNode
+  targetId: number
+  label?: string
+  graph: Graph
 }
 
 export type Tree = {
@@ -66,23 +89,23 @@ export type Tree = {
   TrueOrFalse: TrueOrFalse[]
   Input: Input[]
   Choice: Choice[]
-  nodes: Node[]
-  edges: Edge[]
+  nodes: TreeNode[]
+  edges: TreeEdge[]
 }
 
-export type Node = {
+export type TreeNode = {
   id: number
   nodeKey: string
   x: number
   y: number
   label: string
-  graph: Graph[]
-  tree: Tree[]
-  edgesOut: Edge[]
-  edgesIn: Edge[]
+  treeId: number
+  tree: Tree
+  edgesOut: TreeEdge[]
+  edgesIn: TreeEdge[]
 }
 
-export type Edge = {
+export type TreeEdge = {
   id: number
   edgeKey: string
   sourceId: number
@@ -90,8 +113,8 @@ export type Edge = {
   target: Node
   targetId: number
   label?: string
-  graph: Graph[]
-  tree: Tree[]
+  treeId: number
+  tree: Tree
 }
 
 export type ProblemDetail = TrueOrFalse | Input | Choice

@@ -3,7 +3,7 @@ import { useParams } from 'next/navigation'
 import { ProblemCategory } from '@prisma/client'
 import { useEffect, useState } from 'react'
 import { ProblemWithDetail } from '@/types'
-import ProblemList from '@/app/components/problems/ProblemList'
+import ProblemList from '@/components/problems/ProblemList'
 import { useRouter } from 'next/navigation'
 
 export default function ProblemsPage() {

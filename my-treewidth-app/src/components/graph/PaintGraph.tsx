@@ -1,4 +1,4 @@
-import ReactFlow, { Background, Node as RFNode, Edge as RFEdge } from 'reactflow'
+import ReactFlow from 'reactflow'
 import React, { useMemo } from 'react'
 import CustomNode from '../CustomNode'
 import { ProblemWithDetail } from '@/types'

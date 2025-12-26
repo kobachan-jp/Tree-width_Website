@@ -1,0 +1,32 @@
+.node {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: #89cff0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  position: relative;
+  border: 2px solid transparent;
+  transition: border-color 0.15s;
+}
+
+/* 選択中 */
+.selected {
+  background: #ffd700;
+}
+
+/* 接続候補として触れられたとき */
+.node:has(.react-flow__handle-connecting),
+.node:has(.react-flow__handle-valid) {
+  border-color: #ff0000;
+}
+
+/* ノード全体を覆う透明ハンドル */
+.handle {
+  position: absolute;
+  inset: 0;
+  background: transparent;
+  border: none;
+}
