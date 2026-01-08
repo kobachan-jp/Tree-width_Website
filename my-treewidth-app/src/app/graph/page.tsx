@@ -29,13 +29,17 @@ export default function GraphEditor() {
   }
   //復元されたとき用
   useEffect(() => {
+    const needsRestore = sessionStorage.getItem('needs_restore')
     const data = sessionStorage.getItem('graph')
     if (data) {
       const parsed = JSON.parse(data)
       setNodes(parsed.nodes)
       setEdges(parsed.edges)
+      //reloadしたら削除
+      sessionStorage.removeItem('needs_restore')
+      sessionStorage.removeItem('graph')
     }
-  }, [])
+  }, [setNodes, setEdges])
 
   /* ------------------
      確認画面へ遷移
@@ -45,6 +49,7 @@ export default function GraphEditor() {
   const goConfirm = () => {
     //sessionStorage:ブラウザにある保存領域,setItem(key,value)で文字列のみ保存できる故JSON文字列に変換
     sessionStorage.setItem('graph', JSON.stringify({ nodes, edges }))
+    sessionStorage.setItem('needs_restore', 'true')
     router.push('/graph/confirm')
   }
 
