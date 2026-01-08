@@ -34,8 +34,10 @@ export default function GraphEditor() {
       const parsed = JSON.parse(data)
       setNodes(parsed.nodes)
       setEdges(parsed.edges)
+      //reloadしたら削除
+      sessionStorage.removeItem('graph')
     }
-  }, [])
+  }, [setNodes, setEdges])
 
   /* ------------------
      確認画面へ遷移
