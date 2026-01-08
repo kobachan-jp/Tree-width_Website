@@ -1,17 +1,12 @@
 'use client'
 
 import React, { useEffect } from 'react'
-import ReactFlow, { Background, Controls } from 'reactflow'
+import ReactFlow, { Background, Controls, NodeProps } from 'reactflow'
 import EditCustomNode from '@/components/edit/EditCustomNode'
 import 'reactflow/dist/style.css'
 import { useGraph } from '@/hooks/useGraph'
 import { useRouter } from 'next/navigation'
-
-const nodeTypes = {
-  custom: (props: NodeProps<CustomNodeData>) => (
-    <EditCustomNode {...props} onChangeLabel={updateNodeLabel} />
-  ),
-}
+import { CustomNodeData } from '@/hooks/useGraph'
 
 export default function GraphEditor() {
   const {
@@ -24,8 +19,14 @@ export default function GraphEditor() {
     deleteSelected,
     onNodesChange,
     onEdgesChange,
+    updateNodeLabel,
   } = useGraph()
 
+  const nodeTypes = {
+    custom: (props: NodeProps<CustomNodeData>) => (
+      <EditCustomNode {...props} onChangeLabel={updateNodeLabel} />
+    ),
+  }
   //復元されたとき用
   useEffect(() => {
     const data = sessionStorage.getItem('graph')
@@ -62,7 +63,7 @@ export default function GraphEditor() {
       <ReactFlow
         nodes={nodes}
         edges={edges}
-        nodeTypes={nodeType}
+        nodeTypes={nodeTypes}
         onNodesChange={onNodesChange}
         onEdgesChange={onEdgesChange}
         onConnect={handleConnect}

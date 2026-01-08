@@ -68,5 +68,6 @@ export function useGraph() {
     handleConnect,
     onNodesChange,
     onEdgesChange,
+    updateNodeLabel,
   }
 }
