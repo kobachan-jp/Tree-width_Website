@@ -7,7 +7,7 @@ import 'reactflow/dist/style.css'
 import { useGraph } from '@/hooks/useGraph'
 import { useRouter } from 'next/navigation'
 import { CustomNodeData } from '@/hooks/useGraph'
-import { ClearButton } from '@/components/edit/ClearButton'
+import { ReactFlowButton } from '@/components/edit/ReactFlowButton'
 
 export default function GraphEditor() {
   const {
@@ -21,7 +21,7 @@ export default function GraphEditor() {
     onNodesChange,
     onEdgesChange,
     updateNodeLabel,
-    ClearGraph,
+    clearGraph,
   } = useGraph()
 
   const nodeTypes = {
@@ -31,15 +31,12 @@ export default function GraphEditor() {
   }
   //復元されたとき用
   useEffect(() => {
-    const needsRestore = sessionStorage.getItem('needs_restore')
     const data = sessionStorage.getItem('graph')
     if (data) {
       const parsed = JSON.parse(data)
       setNodes(parsed.nodes)
       setEdges(parsed.edges)
       //reloadしたら削除
-      sessionStorage.removeItem('needs_restore')
-      sessionStorage.removeItem('graph')
     }
   }, [setNodes, setEdges])
 
@@ -56,29 +53,46 @@ export default function GraphEditor() {
   }
 
   return (
-    <div style={{ width: '100%', height: '1000px' }}>
-      {/* 操作ボタン */}
-      <div style={{ marginBottom: 8 }}>
-        <button onClick={addNode}>ノード追加</button>
-        <button onClick={deleteSelected}>選択削除</button>
-        <ClearButton onClear={ClearGraph} label="クリア"></ClearButton>
-        <button onClick={goConfirm} style={{ marginLeft: 8 }}>
-          確認
-        </button>
+    <div
+      style={{
+        width: '80%',
+        height: '800px',
+        border: '5px solid #ccc',
+        boxSizing: 'border-box',
+        display: 'flex',
+      }}
+    >
+      {/* 左：操作パネル */}
+      <div
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          gap: 10,
+          padding: 8,
+          width: 200,
+        }}
+      >
+        <ReactFlowButton onAction={addNode} label="ノード追加" />
+        <ReactFlowButton onAction={deleteSelected} label="削除" />
+        <ReactFlowButton onAction={clearGraph} label="クリア" />
+        <ReactFlowButton onAction={goConfirm} label="確認画面へ" />
       </div>
 
-      <ReactFlow
-        nodes={nodes}
-        edges={edges}
-        nodeTypes={nodeTypes}
-        onNodesChange={onNodesChange}
-        onEdgesChange={onEdgesChange}
-        onConnect={handleConnect}
-        fitView
-      >
-        <Background />
-        <Controls />
-      </ReactFlow>
+      {/* 右：ReactFlow */}
+      <div style={{ flex: 1 }}>
+        <ReactFlow
+          nodes={nodes}
+          edges={edges}
+          nodeTypes={nodeTypes}
+          onNodesChange={onNodesChange}
+          onEdgesChange={onEdgesChange}
+          onConnect={handleConnect}
+          fitView
+        >
+          <Background />
+          <Controls />
+        </ReactFlow>
+      </div>
     </div>
   )
 }

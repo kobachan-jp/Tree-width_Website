@@ -54,7 +54,7 @@ export function useGraph() {
       ),
     )
 
-  const ClearGraph = () => {
+  const clearGraph = () => {
     setNodes([])
     setEdges([])
   }
@@ -71,7 +71,7 @@ export function useGraph() {
     addNode,
     deleteSelected,
     handleConnect,
-    ClearGraph,
+    clearGraph,
     onNodesChange,
     onEdgesChange,
     updateNodeLabel,
