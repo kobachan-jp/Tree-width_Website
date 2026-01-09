@@ -54,6 +54,11 @@ export function useGraph() {
       ),
     )
 
+  const clearGraph = () => {
+    setNodes([])
+    setEdges([])
+  }
+
   const onNodesChange = (changes: NodeChange[]) => setNodes((nds) => applyNodeChanges(changes, nds))
 
   const onEdgesChange = (changes: EdgeChange[]) => setEdges((eds) => applyEdgeChanges(changes, eds))
@@ -66,6 +71,7 @@ export function useGraph() {
     addNode,
     deleteSelected,
     handleConnect,
+    clearGraph,
     onNodesChange,
     onEdgesChange,
     updateNodeLabel,

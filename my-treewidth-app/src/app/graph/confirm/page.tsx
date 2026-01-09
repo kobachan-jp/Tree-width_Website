@@ -31,7 +31,7 @@ export default function Confirm() {
   }, [])
 
   return (
-    <div style={{ width: '50%', height: '600px', border: '1px solid #ccc' }}>
+    <div style={{ width: '50%', height: '600px', border: '5px solid #ccc' }}>
       <ReactFlow nodes={nodes} edges={edges} nodeTypes={nodeTypes} fitView></ReactFlow>
       <button className="button-press" onClick={() => router.back()}>
         戻る
