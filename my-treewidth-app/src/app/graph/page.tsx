@@ -7,6 +7,7 @@ import 'reactflow/dist/style.css'
 import { useGraph } from '@/hooks/useGraph'
 import { useRouter } from 'next/navigation'
 import { CustomNodeData } from '@/hooks/useGraph'
+import { ClearButton } from '@/components/edit/ClearButton'
 
 export default function GraphEditor() {
   const {
@@ -20,6 +21,7 @@ export default function GraphEditor() {
     onNodesChange,
     onEdgesChange,
     updateNodeLabel,
+    ClearGraph,
   } = useGraph()
 
   const nodeTypes = {
@@ -59,7 +61,7 @@ export default function GraphEditor() {
       <div style={{ marginBottom: 8 }}>
         <button onClick={addNode}>ノード追加</button>
         <button onClick={deleteSelected}>選択削除</button>
-
+        <ClearButton onClear={ClearGraph} label="クリア"></ClearButton>
         <button onClick={goConfirm} style={{ marginLeft: 8 }}>
           確認
         </button>
