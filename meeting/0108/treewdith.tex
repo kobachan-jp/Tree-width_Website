@@ -1,0 +1,236 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{luatexja} 
+\usepackage{amsmath, amssymb}
+\usepackage{geometry}
+\usepackage{graphicx}
+\geometry{margin=2cm}
+
+\begin{document}
+
+% --- PAGE 2 ---
+\section*{木幅チュートリアル I}
+\subsection*{説明1：木分解と木幅の定義}
+\begin{itemize}
+    \item 問題1, 2: 木分解の条件1の確認
+    \item 問題3, 4: 木分解の条件2の確認
+    \item 問題5--8: 木分解の条件3の確認
+\end{itemize}
+
+\hrule
+% --- PAGE 3 ---
+\section*{木幅チュートリアル II}
+\subsection*{説明1. グラフのセパレーション}
+\begin{itemize}
+    \item 問題1--3: セパレーションの定義確認
+\end{itemize}
+
+\subsection*{説明2. セパレーションとセパレータ}
+\begin{itemize}
+    \item 問題4--6: セパレーションとセパレータの理解
+\end{itemize}
+
+\subsection*{説明3. 木分解とセパレーション}
+\begin{itemize}
+    \item 問題7--8: 木分解の辺に対応するセパレーションの確認
+    \item 問題9--12: 木分解のセパレーションと条件3との関係の確認
+\end{itemize}
+
+\subsection*{説明4. 「セパレーション定理」の証明}
+\begin{itemize}
+    \item 問題13--15: セパレーション定理の証明の理解
+\end{itemize}
+
+\hrule
+% --- PAGE 4 ---
+\section*{木幅チュートリアル III}
+\subsection*{説明：木分解上の動的計画法}
+\begin{itemize}
+    \item 例：グラフの3彩色問題
+    \item 問題1--4: 木分解によって定義される部分問題の理解
+    \item 問題5--10: 木分解上の動的計画法の実行例
+\end{itemize}
+
+\hrule
+% --- PAGE 5 ---
+\section*{説明 I: 木分解と木幅の定義}
+グラフ $G$ の木分解とは、木$T$と$T$のノードへのバッグ割り当て$\{X_p\}_{p \in V(G)}$の対で,次の3条件を満たすものを言う.
+ここで,$X_p$ は$T$のノード $p$ に割り当てられた $G$ の頂点集合で,「バッグ」と呼ばれる.
+
+\begin{itemize}
+    \item \textbf{条件1:} $\bigcup_{p \in V(T)} X_p = V(G)$
+    \item \textbf{条件2:} $G$ のどの辺 $\{u, v\}$に対しても,$u, v \in X_p$ であるような $p \in V(T)$ が存在する.
+    \item \textbf{条件3:} $T$ において $p$ と $q$ を結ぶパス上のどのノード $r$ においても $v \in X_r$ に属す.
+\end{itemize}
+
+% --- PAGE 6 ---
+\subsection*{説明（続き）}
+木分解の「幅」は,もし$v \in V(G)$が$X_p$と$X_q$に属するならば,バッグの大きさ（頂点数）の最大値-1$(\max_{p \in V(T)} |X_p| - 1)$ と定義される.\\
+グラフ $G$ の「木幅」は,$G$ の幅kの木分解が存在するようなkの最小値と定義される.
+
+\hrule
+% --- PAGE 7 ---
+\section*{問題 1-1}
+右図のグラフ $G$ に対して、木TとTの頂点へのバッグ割り当て $\{X_p\ p \in V(T)\}$ が図のように与えられている.\\
+問い：このバッグ割り当ては木分解の条件1を満たしているか？
+
+\begin{figure}
+  \includegraphics[scale=0.5]{treewidth.png}
+  \caption{図G}
+\end{figure}
+\begin{itemize}
+    \item $X_1 = \{a, b, c\}$
+    \item $X_2 = \{b, c, d, e\}$
+    \item $X_3 = \{c, e, f\}$
+    \item $X_4 = \{\}$
+    \item $X_5 = \{c, h, i\}$
+\end{itemize}
+
+\noindent
+\textbf{解答候補：}
+\begin{enumerate}
+    \item 満たしている
+    \item 頂点 $b$ を含むバッグが2つ以上あるので満たしていない
+    \item 頂点 $g$ がどのバッグにも含まれないので満たしていない
+    \item バッグ$X_4$に属す頂点がないので満たしていない
+\end{enumerate}
+
+\hrule
+% --- PAGE 8 ---
+\section*{問題 1-3}
+\begin{figure}
+  \includegraphics[scale=0.5]{treewidth.png}
+  \caption{図G}
+\end{figure}
+\begin{itemize}
+    \item $X_1 = \{a, b, c\}$
+    \item $X_2 = \{b, c, d, e\}$
+    \item $X_3 = \{c, e, f\}$
+    \item $X_4 = \{f,g\}$
+    \item $X_5 = \{c, h, i\}$
+\end{itemize}
+グラフ $G$ に対して木TとTの頂点へのバッグ割り当て${X_p} p \in V(T)$が図のように与えられている.\\
+問い：このバッグ割り当ては木分解の条件2を満たしているか？
+（中略：$X_p$ の構成）
+\begin{enumerate}
+    \item 満たしている
+    \item 辺 $(f, g)$ の両端点を含むバッグがないので満たしていない
+    \item 辺 $(c, f)$ の両端点を含むバッグがないので満たしていない
+    \item バッグ $X_2$ に属す頂点 $c, d$ の間に辺があるので満たしていない
+\end{enumerate}
+
+\section*{問題 1-5}
+\begin{figure}
+  \includegraphics[scale=0.5]{treewidth.png}
+  \caption{図G}
+\end{figure}
+\begin{itemize}
+    \item $X_1 = \{a, b, c\}$
+    \item $X_2 = \{b, d, e\}$
+    \item $X_3 = \{c, e, f\}$
+    \item $X_4 = \{e, f, g\}$
+    \item $X_5 = \{c, h, i\}$
+\end{itemize}
+右図のグラフ $G$ に対して,木 $T$ と$T$の頂点へのバッグの割り当て $\{X_p\}$ が図のように与えられている.\\
+\textbf{問い：} このバッグ割り当ては\textbf{木分解の条件3}を満たしているか？\\
+木のエッジ：$(1, 2), (2, 3), (3, 4), (3, 5)$
+
+\textbf{選択肢と判定:}
+\begin{enumerate}
+    \item 満たしている
+    \item 頂点 $c$ が $X_1$ と $X_5$ に属しているのに,$X_4$ に属していないので,満たしていない
+    \item 頂点 $c$ が $X_1$ と $X_5$ に属しているのに,$X_2$ に属していないので、満たしていない
+    \item 頂点 $g$ は $X_4$ にしか属していないので,満たしていない
+\end{enumerate}
+
+\section*{説明 Ⅱ-1：グラフのセパレーション}
+グラフ $G$ の\textbf{セパレーション}とは,$G$ の頂点集合の対 $(U, V)$ で,次の2条件を満たすものを言う：
+\begin{enumerate}
+    \item $U \cup V = V(G)$
+    \item $U \setminus V$ と $V \setminus U$ の間に辺はない
+\end{enumerate}
+
+\section*{問題 Ⅱ-1}
+\begin{figure}
+  \includegraphics[scale=0.5]{treewidth2.png}
+  \caption{図G}
+\end{figure}
+右図のグラフ $G$ において,$U = \{a, b, c, d, e\}$, $V = \{ d, e, f, g, h\}$ とおく. \\
+\textbf{問い：} $(U, V)$ は $G$ のセパレーションか？
+
+\begin{enumerate}
+    \item セパレーションである
+    \item $U \cap V$ が空でないからセパレーションでない
+    \item $U$ にも $V$ にも属さない頂点があるからセパレーションでない
+    \item $c \in V \setminus U$ と $h \in V \setminus U$ の間に辺がないからセパレーションでない
+    \item $c \in U \setminus V$ と $f \in V \setminus U$ の間に辺があるからセパレーションでない
+\end{enumerate}
+
+\section*{説明 Ⅱ-2：セパレーションとセパレータ}
+$(U, V)$ が $G$ のセパレーションであるとき,$U \cap V$ をこのセパレーションの\textbf{セパレータ}と呼ぶ.\\
+$U \setminus V \neq \emptyset$ かつ $V \setminus U \neq \emptyset$ であるとき,セパレータ $U \cap V$ を $G$ から取り除くと,$G$ は2つ以上の連結成分に分かれる.
+
+\section*{問題 Ⅱ-3}
+右図のグラフ $G$ において,$U = \{a, b, c, d, e, f\}$, $V = \{e, f, g, h, i\}$ とおく. \\
+セパレーション $(U, V)$ のセパレータは次のいずれか？
+
+\begin{enumerate}
+    \item $\{a, c, g, h\}$
+    \item $\{c, d, e\}$
+    \item $\{b, e, f\}$ (e,f)では？
+    \item $\{d, e, h\}$
+\end{enumerate}
+
+\section*{説明 Ⅱ-3：木分解とセパレーション}
+$G$ の木分解を $(T, \{X_p\}_{p \in V(T)})$ とする.$(p, q)$ を $T$ の辺とする.\\
+$T$ からこの辺を取り除いてできる2つの部分木を $T_{pq}, T_{qp}$ と呼ぶ（$T_{pq}$ は $p$ を含む方,$T_{qp}$ は $q$ を含む方）. \\
+$U_{pq} = \bigcup_{r \in V(T_{pq})} X_r$, $U_{pq} = \bigcup_{r \in V(T_{qp})} X_r$ とおくと, \\
+$(U_{pq}, U_{qp})$ は $G$ のセパレーションであり,$X_p \cap X_q$ はそのセパレータである.
+
+\section*{問題 Ⅱ-7}
+\begin{figure}
+  \includegraphics[scale=0.5]{treewidth.png}
+  \caption{図G}
+\end{figure}
+グラフ $G$ とその木分解 $(T, \{X_p\} p \in V(T))$ が与えられている.辺 $(2, 3)$ に対応するセパレーション $(U_{23}, U_{32})$ は次のいずれか？
+\begin{itemize}
+    \item $X_1=\{a,b,c\}, X_2=\{b,c,d,e\}, X_3=\{c,e,f\}, X_4=\{e,f,g\}, X_5=\{c,g,h,i\}$
+    \item 辺: $(1,2), (2,3), (3,4), (3,5)$
+\end{itemize}
+
+\begin{enumerate}
+    \item $(\{a,b,c\}, \{b,c,d,e,f,g,h,i\})$
+    \item $(\{a,b,c,d,e\}, \{b,d,c,e,f,g,h,i\})$
+    \item $(\{a,b,c,d,e,f,g\}, \{b,c,d,e,f,g,h,i\})$
+    \item $(\{a,b,c,d,e,f,g\}, \{c,e,g,h,i\})$
+\end{enumerate}
+
+\section*{問題 Ⅱ-8}
+\begin{figure}
+  \includegraphics[scale=0.5]{treewidth.png}
+  \caption{図G}
+\end{figure}
+右図のグラフ $G$ において,与えられた $\{X_p\}$ は条件3を満たさないため木分解ではない. \\
+そのため,$U_{pq} \cap V_{qp} \neq X_p \cap X_q$ であるような辺 $(p, q)$ が存在する.それはどれか？（複数選択）
+
+\begin{enumerate}
+    \item $(1, 2)$
+    \item $(2, 3)$
+    \item $(2, 4)$
+    \item $(3, 5)$
+\end{enumerate}
+
+\section*{説明 Ⅱ-4：「セパレーション定理」の証明}
+\textbf{定理：} $(T, \{X_p\} p \in V(T))$ が $G$ の木分解であるとき,$T$ のすべての辺 $(p, q)$ に対して $(U_{pq}, V_{pq})$ は $G$ のセパレーションであり,そのセパレータ $U_{pq} \cap V_{pq}$ は $X_p \cap X_q$ に等しい.
+
+\textbf{証明：} \\
+$X_p \cap X_q \subseteq U_{pq} \cap V_{pq}$ は明らかである.もし $U_{pq} \cap U_{pq}$ に属し, $X_p \cap X_q$ に属さない頂点 $v$ があったとすると,それは木分解の条件3に矛盾する.ゆえに $X_p \cap X_q = U_{pq} \cap V_{pq}$ である.
+
+次に $(U_{pq}, V_{pq})$ がGのセパレーションであることを示す. \\
+$U_{pq} \cup V_{pq} = V(G)$ は木分解の条件1より成り立つ. \\
+次に $G$ の辺 $(u, v)$ で、$v,u \in U_{pq} \setminus V_{pq}$ かつ $v \in V_{pq} \setminus U_{pq}$ であるものが存在すると仮定して矛盾を導く. \\
+$u \in X_{r}$ となる $T_{pq}$ のノード$r$を $r_u$ と,$v \in X_{r}$ であるような$T_{qp}$ のノード$r$を $r_v$ とおく.\\
+木分解の条件2より $\{u, v\} \subseteq X_r$ となる $T$ のノード $r$ が存在する.もし $r \in T_{pq}$ に属すならば,辺 $(p, q)$ は $r$ と $r_v$ を結ぶパス上にある. \\
+木分解の条件3より $v \in X_p \cap X_q = U_{pq} \cup U_{qp}$ であり,$v \in V_{pq} \setminus V_{qp}$ という仮定に矛盾する.$r \in T_{qp}$ の場合も同様である.
+
+\end{document}

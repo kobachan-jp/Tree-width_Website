@@ -1,0 +1,268 @@
+\documentclass[aspectratio=169]{beamer}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{graphicx}
+\usepackage{luatexja} 
+\usepackage{comment}
+\usepackage{bm}
+\usepackage{setspace}
+\usepackage{caption}
+\usepackage{hyperref}
+\usepackage{natbib}
+\usepackage{ulem}
+
+\bibliographystyle{unsrt}
+
+\usetheme{LightTheme}
+\setbeamertemplate{footline}[frame number]
+\setbeamertemplate{navigation symbols}{}
+\setlength{\baselineskip}{10pt}
+
+\usepackage{listings}
+\usepackage{xcolor}
+
+\lstset{
+  basicstyle=\ttfamily\footnotesize,
+  keywordstyle=\color{blue}\bfseries,
+  stringstyle=\color{orange},
+  commentstyle=\color{gray},
+  showstringspaces=false,
+  frame=single,
+  breaklines=true,
+  numbers=left,
+  numberstyle=\tiny,
+}
+
+\AtBeginSection[]{
+  \begin{frame}{目次}
+    \tableofcontents[currentsection]
+  \end{frame}
+}
+
+
+\begin{document}
+
+% タイトルフレーム
+\title{美術館記録アプリ}
+\author{ B4-15-26 小林紹子} % 必要に応じて変更・削除
+\date{\small\today} % 必要に応じて変更・削除
+
+\begin{frame}
+	\titlepage
+\end{frame}
+
+\begin{frame}{目次}
+	\tableofcontents
+\end{frame}
+
+\section{題材の説明}
+\begin{frame}{題材の説明}
+	\begin{itemize}
+		\setlength{\parskip}{0.5em}
+		\item 美術館情報を管理・閲覧できるWebアプリ
+		\item 主な機能：
+		      \begin{itemize}
+			      \item 美術館・博物館の一覧表示
+			      \item 展覧会の一覧表示
+			      \item 詳細ページで情報確認
+			      \item 登録・編集・削除
+		      \end{itemize}
+		\item データベース：SQLite
+		\item 使用技術：
+		      \begin{itemize}
+			      \item フレームワーク：Next.js
+			      \item ORM：Prisma 
+		      \end{itemize}
+	\end{itemize}
+\end{frame}
+
+\section{CRUD操作}
+\begin{frame}[allowframebreaks]{REST API の設計}
+	\small{Next.jsのApp Routerの規則よりファイル構造がそのままパスになるため/api/rest/ができてしまった.}
+	\begin{itemize}
+		\setlength{\parskip}{1em}
+		\item GETリクエスト
+		      \begin{itemize}
+			      \item /api/rest/museums $\implies$ 美術館一覧取得
+			      \item /api/rest/museums/:id $\implies$ 該当する美術館の情報取得
+			      \item /api/rest/exhibitions $\implies$ 展覧会一覧取得
+			      \item /api/rest/exhibitions/:id $\implies$ 該当する展覧会の情報取得
+		      \end{itemize}
+
+		\item POSTリクエスト
+		      \begin{itemize}
+			      \item /api/rest/museums $\implies$ 美術館を登録
+			      \item /api/rest/exhibitions $\implies$ 展覧会を登録
+		      \end{itemize}
+		\newpage					
+		\item PUTリクエスト
+		      \begin{itemize}
+			      \item /api/rest/museums/:id $\implies$ 該当する美術館の情報更新
+			      \item /api/rest/exhibitions/:id $\implies$ 該当する展覧会の情報更新
+		      \end{itemize}
+
+		\item DELETEリクエスト
+		      \begin{itemize}
+			      \item /api/rest/museums/:id $\implies$ 該当する美術館の情報削除
+			      \item /api/rest/exhibitions/:id $\implies$ 該当する展覧会の情報削除
+		      \end{itemize}
+
+	\end{itemize}
+\end{frame}
+
+
+\section{GraphQL Schemaの設計}
+\begin{frame}{DB設計}
+	\begin{columns}
+		\begin{column}{0.48\textwidth}
+			\begin{figure}
+		\includegraphics[scale=0.32]{museumModel.png}
+		\caption{Museumテーブル}
+	\end{figure}		
+		\end{column}
+		\begin{column}{0.48\textwidth}
+			\begin{figure}
+		\includegraphics[scale=0.32]{exhibitionModel.png}
+		\caption{Exhibitionテーブル}
+	\end{figure}		
+		\end{column}
+	\end{columns}
+	\center{Museum（1）$\iff$ Exhibition(多)}
+\end{frame}
+
+\begin{frame}{GraphQL設計（Schema）}
+	\begin{figure}
+		\includegraphics[scale=0.4]{graphql-schema.png}
+		\caption{Schema設計}
+	\end{figure}
+	
+\end{frame}
+
+\begin{frame}{各クエリ(一部)}
+	エンドポイント：'/api/graphql'
+	\begin{columns}
+		\begin{column}{0.3\textwidth}
+			\begin{figure}
+				\includegraphics[scale=0.5]{app-query.png}
+				\caption{最新登録展覧会}
+			\end{figure}
+		\end{column}
+		\begin{column}{0.25\textwidth}
+			\begin{figure}
+				\includegraphics[scale=0.5]{exhibitions-query.png}
+				\caption{展覧会一覧}
+			\end{figure}
+		\end{column}
+		\begin{column}{0.35\textwidth}
+			\begin{figure}
+				\includegraphics[scale=0.5]{exhibitionId-query.png}
+				\caption{展覧会詳細}
+			\end{figure}
+		\end{column}
+	\end{columns}
+\end{frame}
+
+\section{RESTとGraphQLの比較・検討・考察}
+
+\begin{frame}[allowframebreaks]{アンダーフェッチ（TOPページにおいて）}
+	\begin{figure}
+		\fbox{\includegraphics[scale=0.6]{toppage.png}}
+	\end{figure}
+	展覧会の開催場所がほしい.
+		\begin{figure}
+			\fbox{\includegraphics[scale=0.6]{underfetch.png}}
+			\caption{RESTの場合}
+		\end{figure}
+		$\implies$ museumIdまでは得られるがname（美術館名）までは取得できない.\\
+		$\implies$ nameを得るにはGET（/api/rest/museums/4）などする必要あり.\\
+		$\implies$ {\color{red}N+1問題の発生}\\
+		
+		\begin{columns}
+			\begin{column}{0.3\textwidth}
+				\begin{figure}
+					\includegraphics[scale=0.3]{app-query.png}
+					\caption{クエリ}
+				\end{figure}
+			\end{column}
+			\begin{column}{0.7\textwidth}
+				\begin{figure}
+					\fbox{\includegraphics[scale=0.6]{underfetch-graqhql.png}}
+					\caption{GraphQLの場合}
+				\end{figure}
+			\end{column}
+		\end{columns}
+		$\implies$ アンダーフェッチの解消
+\end{frame}
+
+\begin{frame}[allowframebreaks]{オーバーフェッチ（展覧会の一覧表示）}
+	\begin{figure}
+		\fbox{\includegraphics[scale=0.5]{exhibitions.png}}
+		\caption{展覧会一覧表示}
+	\end{figure}
+	必要なもの：Exhibition.idとExhibition.titleのみ\\
+	\newpage
+	\begin{figure}
+		\fbox{\includegraphics[scale=0.6]{rest-exhibitions.png}}
+		\caption{RESTの場合}
+	\end{figure}
+	$\implies$ オーバフェッチの発生
+
+	\begin{figure}
+		\fbox{\includegraphics[scale=0.6]{graphql-exbitions.png}}
+		\caption{GraphQLの場合}
+	\end{figure}
+	$\implies$ オーバフェッチの解消
+\end{frame}
+
+\begin{frame}{RESTとGraphQLの比較（展覧会一覧表示画面）}
+    \centering
+    \begin{table}
+        \begin{tabular}{lcc}
+            \hline
+            \textbf{比較項目} & \textbf{REST} & \textbf{GraphQL} \\ \hline
+            呼び出し回数      & 3            & 1              \\
+            レスポンス量      & 7.97KB               & 1.10KB              \\
+						サイズ						& 12.01KB									&	739Byte						\\\hline
+        \end{tabular}
+        \caption{システム変更前後のパフォーマンス比較}
+    \end{table}
+		$\implies$ 他のページでも一覧取得では同じような差がでた.
+\end{frame}
+
+\begin{frame}{考察：RESTとGraphQLの比較}
+  \begin{itemize}
+		\setlength{\parskip}{1em}
+    \item \textbf{小規模構成における有意差}
+      \begin{itemize}
+        \item わずか2テーブルの構成でも,回数・通信量ともに顕著な差を確認.
+        \item これは、GraphQLのクエリ最適化が最小構成から有効であることを示す.
+      \end{itemize}
+    \item \textbf{実運用の場合}
+      \begin{itemize}
+        \item テーブル数やリレーションが増加する実環境では,この差はさらに顕著になると推測される.
+      \end{itemize}
+    \item \textbf{結論}
+      \begin{itemize}
+        \item 特定フィールドの抽出や複数リソースの統合において,GraphQLは極めて高い通信効率を持つ.
+      \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\section{RESTとGraphQL の適性}
+\begin{frame}{本アプリにおける技術選定}
+  \begin{block}{結論：GraphQLの採用が適している}
+    美術館アプリのような複雑なデータ関連性を持つシステムでは,\textbf{GraphQLの採用が通信効率および開発効率の両面で優位}.
+  \end{block}
+
+  \begin{itemize}
+		\setlength{\parskip}{1em}
+    \item \textbf{リソースの統合:} \\将来的に作品詳細画面で「作者」や「関連作品」を一度に取得できるため,REST特有の「何度もリクエストを送る手間」を排除.
+    \item \textbf{通信量の最適化:} \\必要なフィールドを絞り込めるGraphQLは,ユーザーの通信制限や端末負荷を軽減.
+    \item \textbf{将来性:} \\今後テーブル数や機能が増加しても,今回の実験結果が示す通り,RESTに比べてパフォーマンスの悪化を最小限に抑制.
+  \end{itemize}
+\end{frame}
+
+\end{document}
+
+

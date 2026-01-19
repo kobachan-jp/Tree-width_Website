@@ -1,7 +1,7 @@
-This is LuaHBTeX, Version 1.22.0 (TeX Live 2025)  (format=lualatex 2025.4.24)  16 JAN 2026 18:40
+This is LuaHBTeX, Version 1.22.0 (TeX Live 2025)  (format=lualatex 2025.4.24)  14 JAN 2026 13:23
  restricted system commands enabled.
-**0108.tex
-(./0108.tex
+**museum-demo.tex
+(./museum-demo.tex
 LaTeX2e <2024-11-01> patch level 2
 L3 programming layer <2025-03-26>
 Lua module: luaotfload 2024-12-03 v3.29 Lua based OpenType font support
@@ -1264,8 +1264,8 @@ File: lstmisc.sty 2024/09/23 1.10c (Carsten Heinz)
 \lst@WFtoken=\toks62
 \lst@WF=\write6
 ))
-(./0108.aux)
-\openout1 = 0108.aux
+(./museum-demo.aux)
+\openout1 = museum-demo.aux
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 44.
 LaTeX Font Info:    ... okay on input line 44.
@@ -1354,10 +1354,10 @@ e
 ))
 Package hyperref Info: Link coloring OFF on input line 44.
 
-(./0108.out) (./0108.out)
+(./museum-demo.out) (./museum-demo.out)
 \@outlinefile=\write7
 
-\openout7 = 0108.out
+\openout7 = museum-demo.out
 LaTeX Font Info:    Overwriting symbol font `operators' in version `normal'
 (Font)                  OT1/cmr/m/n --> OT1/cmss/m/n on input line 44.
 LaTeX Font Info:    Overwriting symbol font `operators' in version `bold'
@@ -1425,7 +1425,7 @@ Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: listings package is loaded.
 Package caption Info: End \AtBeginDocument code.
 \c@lstlisting=\count387
- (./0108.nav)(load cache: extra_lmsans8-regular.luc)
+ (./museum-demo.nav)(load cache: extra_lmsans8-regular.luc)
 LaTeX Font Info:    Font shape `JT3/mc/m/n' will be
 (Font)              scaled to size 5.77332pt on input line 44.
 LaTeX Font Info:    Font shape `JY3/mc/m/n' will be
@@ -1433,208 +1433,254 @@ LaTeX Font Info:    Font shape `JY3/mc/m/n' will be
 
 
 Package hyperref Warning: Option `pdfauthor' has already been used,
-(hyperref)                setting the option has no effect on input line 49.
+(hyperref)                setting the option has no effect on input line 48.
 
 (load cache: extra_lmsans17-regular.luc)
 LaTeX Font Info:    Font shape `JT3/mc/m/n' will be
-(Font)              scaled to size 16.62714pt on input line 54.
+(Font)              scaled to size 16.62714pt on input line 53.
 LaTeX Font Info:    Font shape `JY3/mc/m/n' will be
-(Font)              scaled to size 16.62714pt on input line 54.
-(load cache: extra_lmsans12-regular.luc)
-LaTeX Font Info:    Font shape `JT3/mc/m/n' will be
-(Font)              scaled to size 13.85594pt on input line 54.
-LaTeX Font Info:    Font shape `JY3/mc/m/n' will be
-(Font)              scaled to size 13.85594pt on input line 54.
-
-
-LaTeX Font Info:    Font shape `JT3/mc/m/n' will be
-(Font)              scaled to size 3.84888pt on input line 54.
-LaTeX Font Info:    Font shape `JY3/mc/m/n' will be
-(Font)              scaled to size 3.84888pt on input line 54.
-[1
-
-{/usr/local/texlive/2025/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
-(./0108.toc)
-
-[2
-
-] (./0108.toc)
-
-[3
-
-]
-LaTeX Font Info:    Font shape `JT3/mc/m/n' will be
-(Font)              scaled to size 7.69775pt on input line 70.
-LaTeX Font Info:    Font shape `JY3/mc/m/n' will be
-(Font)              scaled to size 7.69775pt on input line 70.
-
-
-[4
-
-]
-
-[5
-
-] (./0108.toc)
-
-[6
-
-]
-<makegraph1.png, id=72, 512.66531pt x 293.59688pt>
-File: makegraph1.png Graphic file (type png)
-<use makegraph1.png>
-Package luatex.def Info: makegraph1.png  used on input line 91.
-(luatex.def)             Requested size: 281.96678pt x 161.47878pt.
-
-Overfull \vbox (10.27483pt too high) detected at line 91
- []
-
-
-
-[7
-
-<./makegraph1.png>]
-<makegraph2.png, id=78, 683.55376pt x 391.4625pt>
-File: makegraph2.png Graphic file (type png)
-<use makegraph2.png>
-Package luatex.def Info: makegraph2.png  used on input line 104.
-(luatex.def)             Requested size: 273.41666pt x 156.58221pt.
-<makegraph3.png, id=79, 683.55376pt x 391.4625pt>
-File: makegraph3.png Graphic file (type png)
-<use makegraph3.png>
-Package luatex.def Info: makegraph3.png  used on input line 104.
-(luatex.def)             Requested size: 239.24739pt x 137.01392pt.
-LaTeX Font Info:    Trying to load font information for U+msa on input line 104
-.
+(Font)              scaled to size 16.62714pt on input line 53.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 53.
 
 (/usr/local/texlive/2025/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 104
-.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 53.
+
 
 (/usr/local/texlive/2025/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
+LaTeX Font Info:    Font shape `JY3/mc/m/n' will be
+(Font)              scaled to size 11.54663pt on input line 53.
 LaTeX Font Info:    Font shape `JY3/gt/m/n' will be
-(Font)              scaled to size 10.53629pt on input line 104.
+(Font)              scaled to size 16.62714pt on input line 53.
 (load cache: extra_haranoajigothic-medium.luc)
 LaTeX Font Info:    Font shape `JY3/gt/m/n' will be
-(Font)              scaled to size 7.69775pt on input line 104.
+(Font)              scaled to size 11.54663pt on input line 53.
 LaTeX Font Info:    Font shape `JY3/gt/m/n' will be
-(Font)              scaled to size 5.77332pt on input line 104.
-LaTeX Font Info:    Font shape `TU/lmss/m/it' in size <10.95> not available
-(Font)              Font shape `TU/lmss/m/sl' tried instead on input line 104.
+(Font)              scaled to size 9.6222pt on input line 53.
+(load cache: extra_lmsans12-regular.luc)
+LaTeX Font Info:    Font shape `TU/lmss/m/it' in size <17.28> not available
+(Font)              Font shape `TU/lmss/m/sl' tried instead on input line 53.
+(load cache: extra_lmsans17-oblique.luc)
+LaTeX Font Info:    Font shape `TU/lmss/m/it' in size <12> not available
+(Font)              Font shape `TU/lmss/m/sl' tried instead on input line 53.
+(load cache: extra_lmsans12-oblique.luc)
+LaTeX Font Info:    Font shape `TU/lmss/m/it' in size <10> not available
+(Font)              Font shape `TU/lmss/m/sl' tried instead on input line 53.
 (load cache: extra_lmsans10-oblique.luc)
+
+LaTeX Font Info:    Font shape `JT3/mc/m/n' will be
+(Font)              scaled to size 3.84888pt on input line 53.
+LaTeX Font Info:    Font shape `JY3/mc/m/n' will be
+(Font)              scaled to size 3.84888pt on input line 53.
+[1
+
+{/usr/local/texlive/2025/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
+(./museum-demo.toc)
+
+[2
+
+] (./museum-demo.toc)
+
+[3
+
+]
+LaTeX Font Info:    Font shape `JY3/mc/m/n' will be
+(Font)              scaled to size 7.69775pt on input line 78.
+LaTeX Font Info:    Font shape `JY3/gt/m/n' will be
+(Font)              scaled to size 10.53629pt on input line 78.
+LaTeX Font Info:    Font shape `JY3/gt/m/n' will be
+(Font)              scaled to size 7.69775pt on input line 78.
+LaTeX Font Info:    Font shape `JY3/gt/m/n' will be
+(Font)              scaled to size 5.77332pt on input line 78.
+LaTeX Font Info:    Font shape `TU/lmss/m/it' in size <10.95> not available
+(Font)              Font shape `TU/lmss/m/sl' tried instead on input line 78.
 LaTeX Font Info:    Font shape `TU/lmss/m/it' in size <8> not available
-(Font)              Font shape `TU/lmss/m/sl' tried instead on input line 104.
+(Font)              Font shape `TU/lmss/m/sl' tried instead on input line 78.
 (load cache: extra_lmsans8-oblique.luc)
 LaTeX Font Info:    Font shape `TU/lmss/m/it' in size <6> not available
-(Font)              Font shape `TU/lmss/m/sl' tried instead on input line 104.
+(Font)              Font shape `TU/lmss/m/sl' tried instead on input line 78.
+LaTeX Font Info:    Font shape `JY3/mc/m/n' will be
+(Font)              scaled to size 6.73553pt on input line 78.
+LaTeX Font Info:    Font shape `JY3/mc/m/n' will be
+(Font)              scaled to size 4.8111pt on input line 78.
+LaTeX Font Info:    Font shape `JY3/gt/m/n' will be
+(Font)              scaled to size 6.73553pt on input line 78.
+LaTeX Font Info:    Font shape `JY3/gt/m/n' will be
+(Font)              scaled to size 4.8111pt on input line 78.
+LaTeX Font Info:    Font shape `TU/lmss/m/it' in size <7> not available
+(Font)              Font shape `TU/lmss/m/sl' tried instead on input line 78.
+LaTeX Font Info:    Font shape `TU/lmss/m/it' in size <5> not available
+(Font)              Font shape `TU/lmss/m/sl' tried instead on input line 78.
 
+
+[4
+
+] (./museum-demo.toc)
+
+[5
+
+]
+
+[6
+
+]
+
+[7
+
+
+] (./museum-demo.toc)
 
 [8
 
-<./makegraph2.png>]
+]
+<museumModel.png, id=106, 556.0775pt x 229.85875pt>
+File: museumModel.png Graphic file (type png)
+<use museumModel.png>
+Package luatex.def Info: museumModel.png  used on input line 132.
+(luatex.def)             Requested size: 177.94843pt x 73.55629pt.
+<exhibitionModel.png, id=107, 559.08875pt x 261.97874pt>
+File: exhibitionModel.png Graphic file (type png)
+<use exhibitionModel.png>
+Package luatex.def Info: exhibitionModel.png  used on input line 132.
+(luatex.def)             Requested size: 178.91205pt x 83.8349pt.
+
 
 [9
 
+<./museumModel.png><./exhibitionModel.png>]
+<graphql-schema.png, id=115, 480.79625pt x 443.6575pt>
+File: graphql-schema.png Graphic file (type png)
+<use graphql-schema.png>
+Package luatex.def Info: graphql-schema.png  used on input line 140.
+(luatex.def)             Requested size: 192.31508pt x 177.45984pt.
 
-<./makegraph3.png>]
-<makegraph4.png, id=95, 683.55376pt x 391.4625pt>
-File: makegraph4.png Graphic file (type png)
-<use makegraph4.png>
-Package luatex.def Info: makegraph4.png  used on input line 114.
-(luatex.def)             Requested size: 273.41666pt x 156.58221pt.
-
-Overfull \vbox (4.90512pt too high) detected at line 114
+Overfull \vbox (3.1184pt too high) detected at line 140
  []
 
 
 
 [10
 
-<./makegraph4.png>]
-<remodeEdge1.png, id=102, 683.55376pt x 391.4625pt>
-File: remodeEdge1.png Graphic file (type png)
-<use remodeEdge1.png>
-Package luatex.def Info: remodeEdge1.png  used on input line 141.
-(luatex.def)             Requested size: 273.41666pt x 156.58221pt.
-<removeEdge2.png, id=103, 683.55376pt x 391.4625pt>
-File: removeEdge2.png Graphic file (type png)
-<use removeEdge2.png>
-Package luatex.def Info: removeEdge2.png  used on input line 141.
-(luatex.def)             Requested size: 273.41666pt x 156.58221pt.
-<removeNode1.png, id=104, 683.55376pt x 391.4625pt>
-File: removeNode1.png Graphic file (type png)
-<use removeNode1.png>
-Package luatex.def Info: removeNode1.png  used on input line 141.
-(luatex.def)             Requested size: 273.41666pt x 156.58221pt.
-<removeNode2.png, id=105, 683.55376pt x 391.4625pt>
-File: removeNode2.png Graphic file (type png)
-<use removeNode2.png>
-Package luatex.def Info: removeNode2.png  used on input line 141.
-(luatex.def)             Requested size: 273.41666pt x 156.58221pt.
+<./graphql-schema.png>]
+<app-query.png, id=122, 269.005pt x 277.035pt>
+File: app-query.png Graphic file (type png)
+<use app-query.png>
+Package luatex.def Info: app-query.png  used on input line 164.
+(luatex.def)             Requested size: 134.50217pt x 138.51715pt.
+
+Overfull \hbox (14.99937pt too wide) in paragraph at lines 164--164
+ [] 
+ []
+
+<exhibitions-query.png, id=123, 187.70125pt x 150.5625pt>
+File: exhibitions-query.png Graphic file (type png)
+<use exhibitions-query.png>
+Package luatex.def Info: exhibitions-query.png  used on input line 164.
+(luatex.def)             Requested size: 93.85039pt x 75.28105pt.
+<exhibitionId-query.png, id=124, 285.065pt x 349.305pt>
+File: exhibitionId-query.png Graphic file (type png)
+<use exhibitionId-query.png>
+Package luatex.def Info: exhibitionId-query.png  used on input line 164.
+(luatex.def)             Requested size: 142.53215pt x 174.65207pt.
+
+Overfull \hbox (3.11122pt too wide) in paragraph at lines 164--164
+ [] 
+ []
 
 
-[11
-
-]
-
-[12
-
-
-<./remodeEdge1.png>]
-
-[13
-
-
-<./removeEdge2.png>]
-
-[14
-
-
-<./removeNode1.png>]
-
-[15
-
-
-<./removeNode2.png>]
-<comfirm1.png, id=136, 915.42pt x 694.595pt>
-File: comfirm1.png Graphic file (type png)
-<use comfirm1.png>
-Package luatex.def Info: comfirm1.png  used on input line 163.
-(luatex.def)             Requested size: 164.7685pt x 125.0217pt.
-<comfirm2.png, id=137, 915.42pt x 694.595pt>
-File: comfirm2.png Graphic file (type png)
-<use comfirm2.png>
-Package luatex.def Info: comfirm2.png  used on input line 163.
-(luatex.def)             Requested size: 164.7685pt x 125.0217pt.
-
-Overfull \vbox (1.54462pt too high) detected at line 163
+Overfull \vbox (32.24814pt too high) detected at line 164
  []
 
 
 
+[11
+
+<./app-query.png><./exhibitions-query.png><./exhibitionId-query.png>]
+(./museum-demo.toc)
+
+[12
+
+]
+<toppage.png, id=144, 555.07375pt x 170.6375pt>
+File: toppage.png Graphic file (type png)
+<use toppage.png>
+Package luatex.def Info: toppage.png  used on input line 196.
+(luatex.def)             Requested size: 333.0468pt x 102.38327pt.
+<underfetch.png, id=145, 611.28375pt x 121.45375pt>
+File: underfetch.png Graphic file (type png)
+<use underfetch.png>
+Package luatex.def Info: underfetch.png  used on input line 196.
+(luatex.def)             Requested size: 366.77307pt x 72.87279pt.
+File: app-query.png Graphic file (type png)
+<use app-query.png>
+Package luatex.def Info: app-query.png  used on input line 196.
+(luatex.def)             Requested size: 80.70212pt x 83.11113pt.
+<underfetch-graqhql.png, id=146, 633.36626pt x 86.3225pt>
+File: underfetch-graqhql.png Graphic file (type png)
+<use underfetch-graqhql.png>
+Package luatex.def Info: underfetch-graqhql.png  used on input line 196.
+(luatex.def)             Requested size: 380.02269pt x 51.79388pt.
+
+Overfull \hbox (107.9869pt too wide) in paragraph at lines 196--196
+ [] 
+ []
+
+
+
+[13
+
+<./toppage.png>]
+
+[14
+
+
+<./underfetch.png>]
+
+[15
+
+
+<./underfetch-graqhql.png>]
+<exhibitions.png, id=166, 611.28375pt x 253.94875pt>
+File: exhibitions.png Graphic file (type png)
+<use exhibitions.png>
+Package luatex.def Info: exhibitions.png  used on input line 216.
+(luatex.def)             Requested size: 305.64113pt x 126.97406pt.
+<rest-exhibitions.png, id=167, 611.28375pt x 124.465pt>
+File: rest-exhibitions.png Graphic file (type png)
+<use rest-exhibitions.png>
+Package luatex.def Info: rest-exhibitions.png  used on input line 216.
+(luatex.def)             Requested size: 366.77307pt x 74.67957pt.
+<graphql-exbitions.png, id=168, 545.03625pt x 145.54375pt>
+File: graphql-exbitions.png Graphic file (type png)
+<use graphql-exbitions.png>
+Package luatex.def Info: graphql-exbitions.png  used on input line 216.
+(luatex.def)             Requested size: 327.02428pt x 87.3269pt.
+
+
 [16
 
-<./comfirm1.png><./comfirm2.png>]
+<./exhibitions.png>]
 
 [17
 
-] (./0108.toc)
+
+<./rest-exhibitions.png>]
 
 [18
 
-](load cache: extra_lmsans10-bold.luc)
+
+<./graphql-exbitions.png>](load cache: extra_lmsans10-bold.luc)
 LaTeX Font Info:    Font shape `JT3/mc/b/n' in size <10.95> not available
-(Font)              Font shape `JT3/gt/m/n' tried instead on input line 184.
+(Font)              Font shape `JT3/gt/m/n' tried instead on input line 231.
 LaTeX Font Info:    Font shape `JT3/gt/m/n' will be
-(Font)              scaled to size 10.53629pt on input line 184.
+(Font)              scaled to size 10.53629pt on input line 231.
 LaTeX Font Info:    Font shape `JY3/mc/b/n' in size <10.95> not available
-(Font)              Font shape `JY3/gt/m/n' tried instead on input line 184.
+(Font)              Font shape `JY3/gt/m/n' tried instead on input line 231.
 LaTeX Font Info:    Font shape `JY3/gt/m/n' will be
-(Font)              scaled to size 10.53629pt on input line 184.
+(Font)              scaled to size 10.53629pt on input line 231.
 
 
 [19
@@ -1643,36 +1689,44 @@ LaTeX Font Info:    Font shape `JY3/gt/m/n' will be
 
 [20
 
+] (./museum-demo.toc)
+
+[21
+
+]
+
+[22
+
 ]
 \tf@nav=\write8
 
-\openout8 = 0108.nav
+\openout8 = museum-demo.nav
 \tf@toc=\write9
 
-\openout9 = 0108.toc
+\openout9 = museum-demo.toc
 \tf@snm=\write10
 
-\openout10 = 0108.snm
- (./0108.aux)
+\openout10 = museum-demo.snm
+ (./museum-demo.aux)
  ***********
 LaTeX2e <2024-11-01> patch level 2
 L3 programming layer <2025-03-26>
  ***********
-Package rerunfilecheck Info: File `0108.out' has not changed.
-(rerunfilecheck)             Checksum: D63F392CC7EEB65000DC3DA6FAD759A4;281.
+Package rerunfilecheck Info: File `museum-demo.out' has not changed.
+(rerunfilecheck)             Checksum: 0B33F943482442E26F82A05922C57239;618.
 )
 
 Here is how much of LuaTeX's memory you used:
- 31546 strings out of 471941
+ 31697 strings out of 471941
  125244,1144653 words of node,token memory allocated
- 16515 words of node memory still in use:
-   43 hlist, 8 vlist, 90 rule, 3 disc, 5 local_par, 8 math, 157 glue, 11 kern, 3
-8 penalty, 138 glyph, 5544 attribute, 67 glue_spec, 544 attribute_list, 4 write,
- 48 user_defined, 28 pdf_colorstack nodes
-   avail lists: 1:19,2:9010,3:1121,4:617,5:113,6:35,7:841,8:3,9:587,10:34,11:6
- 57053 multiletter control sequences out of 65536+600000
- 65 fonts using 41853023 bytes
- 104i,13n,115p,1847b,1133s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 37857 words of node memory still in use:
+   87 hlist, 11 vlist, 224 rule, 10 local_par, 8 math, 387 glue, 7 kern, 66 pena
+lty, 270 glyph, 13119 attribute, 66 glue_spec, 1258 attribute_list, 4 write, 83 
+user_defined, 127 pdf_literal, 34 pdf_colorstack nodes
+   avail lists: 1:19,2:6874,3:958,4:592,5:108,6:36,7:1636,8:3,9:760,10:37,11:66
+ 57182 multiletter control sequences out of 65536+600000
+ 124 fonts using 72054663 bytes
+ 104i,13n,115p,1854b,1148s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/local/texlive/2025/texmf-dist/fonts/opentype/public/lm/lmsans10-bold.otf><
 /usr/local/texlive/2025/texmf-dist/fonts/opentype/public/haranoaji/HaranoAjiGoth
 ic-Medium.otf></usr/local/texlive/2025/texmf-dist/fonts/opentype/public/lm/lmsan
@@ -1682,10 +1736,10 @@ sans10-regular.otf></usr/local/texlive/2025/texmf-dist/fonts/opentype/public/har
 anoaji/HaranoAjiMincho-Regular.otf></usr/local/texlive/2025/texmf-dist/fonts/typ
 e1/public/amsfonts/cm/cmss10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1
 /public/amsfonts/cm/cmsy10.pfb>
-Output written on 0108.pdf (20 pages, 258744 bytes).
+Output written on museum-demo.pdf (22 pages, 334037 bytes).
 
-PDF statistics: 221 PDF objects out of 1000 (max. 8388607)
- 152 compressed objects within 2 object streams
- 44 named destinations out of 1000 (max. 131072)
- 40 words of extra memory for PDF output out of 10000 (max. 100000000)
+PDF statistics: 265 PDF objects out of 1000 (max. 8388607)
+ 189 compressed objects within 2 object streams
+ 50 named destinations out of 1000 (max. 131072)
+ 56 words of extra memory for PDF output out of 10000 (max. 100000000)
 
