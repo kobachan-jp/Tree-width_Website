@@ -111,6 +111,26 @@
 	\end{itemize}
 \end{frame}
 
+\begin{frame}[allowframebreaks]{TOP画面}
+	\begin{figure}
+		\fbox{\includegraphics[scale=0.25]{top.png}}
+	\end{figure}
+	\begin{itemize}
+		\setlength{\parskip}{1em}
+		\item 最新登録展覧会5件を表示.
+		\item RESTとGraphQLでは取得した展覧会数が異なる.
+		\item また,取得したデータベースのフィールド数も異なる.
+		\item その他のページでもフィールド数の比較が一番下に出るようになっている.
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{気に入っている部分}
+	\begin{figure}
+		\fbox{\includegraphics[scale=0.15]{map.png}}
+	\end{figure}
+	美術館詳細ページでは地図の出力とオフィシャルサイトへの移動ができるようにした.\\
+\end{frame}
+
 
 \section{GraphQL Schemaの設計}
 \begin{frame}{DB設計}
