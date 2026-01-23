@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useCallback, useState } from 'react'
 import {
   Node,
   Edge,
@@ -14,13 +14,20 @@ export type CustomNodeData = {
   label: string
 }
 
-export function useGraph() {
+export function useGraph(labelPrefix: string) {
   const [nodes, setNodes] = useState<Node<CustomNodeData>[]>([])
   const [edges, setEdges] = useState<Edge[]>([])
 
-  const updateNodeLabel = (id: string, label: string) => {
-    setNodes((nds) => nds.map((n) => (n.id === id ? { ...n, data: { ...n.data, label } } : n)))
-  }
+  const updateNodeLabel = useCallback((id: string, nextLabel: string) => {
+    setNodes((nds) =>
+      nds.map((node) => {
+        if (node.id === id) {
+          return { ...node, data: { ...node.data, label: nextLabel } }
+        }
+        return node
+      }),
+    )
+  }, [])
 
   const addNode = () => {
     const id = crypto.randomUUID()
@@ -29,10 +36,10 @@ export function useGraph() {
       id,
       type: 'custom',
       position: {
-        x: 100 + nodes.length * 80,
+        x: 100,
         y: 100,
       },
-      data: { label: `v ${nodes.length + 1}` },
+      data: { label: `${labelPrefix}${nodes.length + 1}` },
     }
 
     setNodes((nds) => [...nds, newNode])
@@ -48,7 +55,6 @@ export function useGraph() {
       addEdge(
         {
           ...connection,
-          //        type:'straight',
         },
         eds,
       ),

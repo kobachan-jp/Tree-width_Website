@@ -1,4 +1,4 @@
-This is LuaHBTeX, Version 1.22.0 (TeX Live 2025)  (format=lualatex 2025.4.24)  14 JAN 2026 13:23
+This is LuaHBTeX, Version 1.22.0 (TeX Live 2025)  (format=lualatex 2025.4.24)  19 JAN 2026 20:16
  restricted system commands enabled.
 **museum-demo.tex
 (./museum-demo.tex
@@ -1531,171 +1531,196 @@ LaTeX Font Info:    Font shape `TU/lmss/m/it' in size <5> not available
 [7
 
 
-] (./museum-demo.toc)
+]
+<top.png, id=96, 951.555pt x 704.6325pt>
+File: top.png Graphic file (type png)
+<use top.png>
+Package luatex.def Info: top.png  used on input line 125.
+(luatex.def)             Requested size: 237.88817pt x 176.1577pt.
+
 
 [8
 
-]
-<museumModel.png, id=106, 556.0775pt x 229.85875pt>
-File: museumModel.png Graphic file (type png)
-<use museumModel.png>
-Package luatex.def Info: museumModel.png  used on input line 132.
-(luatex.def)             Requested size: 177.94843pt x 73.55629pt.
-<exhibitionModel.png, id=107, 559.08875pt x 261.97874pt>
-File: exhibitionModel.png Graphic file (type png)
-<use exhibitionModel.png>
-Package luatex.def Info: exhibitionModel.png  used on input line 132.
-(luatex.def)             Requested size: 178.91205pt x 83.8349pt.
-
+<./top.png>]
 
 [9
 
-<./museumModel.png><./exhibitionModel.png>]
-<graphql-schema.png, id=115, 480.79625pt x 443.6575pt>
-File: graphql-schema.png Graphic file (type png)
-<use graphql-schema.png>
-Package luatex.def Info: graphql-schema.png  used on input line 140.
-(luatex.def)             Requested size: 192.31508pt x 177.45984pt.
 
-Overfull \vbox (3.1184pt too high) detected at line 140
- []
-
+]
+<map.png, id=107, 705.63625pt x 813.0375pt>
+File: map.png Graphic file (type png)
+<use map.png>
+Package luatex.def Info: map.png  used on input line 132.
+(luatex.def)             Requested size: 105.84087pt x 121.95036pt.
 
 
 [10
 
-<./graphql-schema.png>]
-<app-query.png, id=122, 269.005pt x 277.035pt>
-File: app-query.png Graphic file (type png)
-<use app-query.png>
-Package luatex.def Info: app-query.png  used on input line 164.
-(luatex.def)             Requested size: 134.50217pt x 138.51715pt.
-
-Overfull \hbox (14.99937pt too wide) in paragraph at lines 164--164
- [] 
- []
-
-<exhibitions-query.png, id=123, 187.70125pt x 150.5625pt>
-File: exhibitions-query.png Graphic file (type png)
-<use exhibitions-query.png>
-Package luatex.def Info: exhibitions-query.png  used on input line 164.
-(luatex.def)             Requested size: 93.85039pt x 75.28105pt.
-<exhibitionId-query.png, id=124, 285.065pt x 349.305pt>
-File: exhibitionId-query.png Graphic file (type png)
-<use exhibitionId-query.png>
-Package luatex.def Info: exhibitionId-query.png  used on input line 164.
-(luatex.def)             Requested size: 142.53215pt x 174.65207pt.
-
-Overfull \hbox (3.11122pt too wide) in paragraph at lines 164--164
- [] 
- []
-
-
-Overfull \vbox (32.24814pt too high) detected at line 164
- []
-
-
+<./map.png>] (./museum-demo.toc)
 
 [11
 
-<./app-query.png><./exhibitions-query.png><./exhibitionId-query.png>]
-(./museum-demo.toc)
+]
+<museumModel.png, id=125, 556.0775pt x 229.85875pt>
+File: museumModel.png Graphic file (type png)
+<use museumModel.png>
+Package luatex.def Info: museumModel.png  used on input line 152.
+(luatex.def)             Requested size: 177.94843pt x 73.55629pt.
+<exhibitionModel.png, id=126, 559.08875pt x 261.97874pt>
+File: exhibitionModel.png Graphic file (type png)
+<use exhibitionModel.png>
+Package luatex.def Info: exhibitionModel.png  used on input line 152.
+(luatex.def)             Requested size: 178.91205pt x 83.8349pt.
+
 
 [12
 
-]
-<toppage.png, id=144, 555.07375pt x 170.6375pt>
-File: toppage.png Graphic file (type png)
-<use toppage.png>
-Package luatex.def Info: toppage.png  used on input line 196.
-(luatex.def)             Requested size: 333.0468pt x 102.38327pt.
-<underfetch.png, id=145, 611.28375pt x 121.45375pt>
-File: underfetch.png Graphic file (type png)
-<use underfetch.png>
-Package luatex.def Info: underfetch.png  used on input line 196.
-(luatex.def)             Requested size: 366.77307pt x 72.87279pt.
-File: app-query.png Graphic file (type png)
-<use app-query.png>
-Package luatex.def Info: app-query.png  used on input line 196.
-(luatex.def)             Requested size: 80.70212pt x 83.11113pt.
-<underfetch-graqhql.png, id=146, 633.36626pt x 86.3225pt>
-File: underfetch-graqhql.png Graphic file (type png)
-<use underfetch-graqhql.png>
-Package luatex.def Info: underfetch-graqhql.png  used on input line 196.
-(luatex.def)             Requested size: 380.02269pt x 51.79388pt.
+<./museumModel.png><./exhibitionModel.png>]
+<graphql-schema.png, id=134, 480.79625pt x 443.6575pt>
+File: graphql-schema.png Graphic file (type png)
+<use graphql-schema.png>
+Package luatex.def Info: graphql-schema.png  used on input line 160.
+(luatex.def)             Requested size: 192.31508pt x 177.45984pt.
 
-Overfull \hbox (107.9869pt too wide) in paragraph at lines 196--196
- [] 
+Overfull \vbox (3.1184pt too high) detected at line 160
  []
 
 
 
 [13
 
-<./toppage.png>]
+<./graphql-schema.png>]
+<app-query.png, id=141, 269.005pt x 277.035pt>
+File: app-query.png Graphic file (type png)
+<use app-query.png>
+Package luatex.def Info: app-query.png  used on input line 184.
+(luatex.def)             Requested size: 134.50217pt x 138.51715pt.
+
+Overfull \hbox (14.99937pt too wide) in paragraph at lines 184--184
+ [] 
+ []
+
+<exhibitions-query.png, id=142, 187.70125pt x 150.5625pt>
+File: exhibitions-query.png Graphic file (type png)
+<use exhibitions-query.png>
+Package luatex.def Info: exhibitions-query.png  used on input line 184.
+(luatex.def)             Requested size: 93.85039pt x 75.28105pt.
+<exhibitionId-query.png, id=143, 285.065pt x 349.305pt>
+File: exhibitionId-query.png Graphic file (type png)
+<use exhibitionId-query.png>
+Package luatex.def Info: exhibitionId-query.png  used on input line 184.
+(luatex.def)             Requested size: 142.53215pt x 174.65207pt.
+
+Overfull \hbox (3.11122pt too wide) in paragraph at lines 184--184
+ [] 
+ []
+
+
+Overfull \vbox (32.24814pt too high) detected at line 184
+ []
+
+
 
 [14
 
-
-<./underfetch.png>]
+<./app-query.png><./exhibitions-query.png><./exhibitionId-query.png>]
+(./museum-demo.toc)
 
 [15
 
+]
+<toppage.png, id=163, 555.07375pt x 170.6375pt>
+File: toppage.png Graphic file (type png)
+<use toppage.png>
+Package luatex.def Info: toppage.png  used on input line 216.
+(luatex.def)             Requested size: 333.0468pt x 102.38327pt.
+<underfetch.png, id=164, 611.28375pt x 121.45375pt>
+File: underfetch.png Graphic file (type png)
+<use underfetch.png>
+Package luatex.def Info: underfetch.png  used on input line 216.
+(luatex.def)             Requested size: 366.77307pt x 72.87279pt.
+File: app-query.png Graphic file (type png)
+<use app-query.png>
+Package luatex.def Info: app-query.png  used on input line 216.
+(luatex.def)             Requested size: 80.70212pt x 83.11113pt.
+<underfetch-graqhql.png, id=165, 633.36626pt x 86.3225pt>
+File: underfetch-graqhql.png Graphic file (type png)
+<use underfetch-graqhql.png>
+Package luatex.def Info: underfetch-graqhql.png  used on input line 216.
+(luatex.def)             Requested size: 380.02269pt x 51.79388pt.
 
-<./underfetch-graqhql.png>]
-<exhibitions.png, id=166, 611.28375pt x 253.94875pt>
-File: exhibitions.png Graphic file (type png)
-<use exhibitions.png>
-Package luatex.def Info: exhibitions.png  used on input line 216.
-(luatex.def)             Requested size: 305.64113pt x 126.97406pt.
-<rest-exhibitions.png, id=167, 611.28375pt x 124.465pt>
-File: rest-exhibitions.png Graphic file (type png)
-<use rest-exhibitions.png>
-Package luatex.def Info: rest-exhibitions.png  used on input line 216.
-(luatex.def)             Requested size: 366.77307pt x 74.67957pt.
-<graphql-exbitions.png, id=168, 545.03625pt x 145.54375pt>
-File: graphql-exbitions.png Graphic file (type png)
-<use graphql-exbitions.png>
-Package luatex.def Info: graphql-exbitions.png  used on input line 216.
-(luatex.def)             Requested size: 327.02428pt x 87.3269pt.
+Overfull \hbox (107.9869pt too wide) in paragraph at lines 216--216
+ [] 
+ []
+
 
 
 [16
 
-<./exhibitions.png>]
+<./toppage.png>]
 
 [17
 
 
-<./rest-exhibitions.png>]
+<./underfetch.png>]
 
 [18
 
 
-<./graphql-exbitions.png>](load cache: extra_lmsans10-bold.luc)
-LaTeX Font Info:    Font shape `JT3/mc/b/n' in size <10.95> not available
-(Font)              Font shape `JT3/gt/m/n' tried instead on input line 231.
-LaTeX Font Info:    Font shape `JT3/gt/m/n' will be
-(Font)              scaled to size 10.53629pt on input line 231.
-LaTeX Font Info:    Font shape `JY3/mc/b/n' in size <10.95> not available
-(Font)              Font shape `JY3/gt/m/n' tried instead on input line 231.
-LaTeX Font Info:    Font shape `JY3/gt/m/n' will be
-(Font)              scaled to size 10.53629pt on input line 231.
+<./underfetch-graqhql.png>]
+<exhibitions.png, id=184, 611.28375pt x 253.94875pt>
+File: exhibitions.png Graphic file (type png)
+<use exhibitions.png>
+Package luatex.def Info: exhibitions.png  used on input line 236.
+(luatex.def)             Requested size: 305.64113pt x 126.97406pt.
+<rest-exhibitions.png, id=185, 611.28375pt x 124.465pt>
+File: rest-exhibitions.png Graphic file (type png)
+<use rest-exhibitions.png>
+Package luatex.def Info: rest-exhibitions.png  used on input line 236.
+(luatex.def)             Requested size: 366.77307pt x 74.67957pt.
+<graphql-exbitions.png, id=186, 545.03625pt x 145.54375pt>
+File: graphql-exbitions.png Graphic file (type png)
+<use graphql-exbitions.png>
+Package luatex.def Info: graphql-exbitions.png  used on input line 236.
+(luatex.def)             Requested size: 327.02428pt x 87.3269pt.
 
 
 [19
 
-]
+<./exhibitions.png>]
 
 [20
 
-] (./museum-demo.toc)
+
+<./rest-exhibitions.png>]
 
 [21
 
-]
+
+<./graphql-exbitions.png>](load cache: extra_lmsans10-bold.luc)
+LaTeX Font Info:    Font shape `JT3/mc/b/n' in size <10.95> not available
+(Font)              Font shape `JT3/gt/m/n' tried instead on input line 251.
+LaTeX Font Info:    Font shape `JT3/gt/m/n' will be
+(Font)              scaled to size 10.53629pt on input line 251.
+LaTeX Font Info:    Font shape `JY3/mc/b/n' in size <10.95> not available
+(Font)              Font shape `JY3/gt/m/n' tried instead on input line 251.
+LaTeX Font Info:    Font shape `JY3/gt/m/n' will be
+(Font)              scaled to size 10.53629pt on input line 251.
+
 
 [22
+
+]
+
+[23
+
+] (./museum-demo.toc)
+
+[24
+
+]
+
+[25
 
 ]
 \tf@nav=\write8
@@ -1717,14 +1742,14 @@ Package rerunfilecheck Info: File `museum-demo.out' has not changed.
 )
 
 Here is how much of LuaTeX's memory you used:
- 31697 strings out of 471941
+ 31730 strings out of 471941
  125244,1144653 words of node,token memory allocated
  37857 words of node memory still in use:
    87 hlist, 11 vlist, 224 rule, 10 local_par, 8 math, 387 glue, 7 kern, 66 pena
 lty, 270 glyph, 13119 attribute, 66 glue_spec, 1258 attribute_list, 4 write, 83 
 user_defined, 127 pdf_literal, 34 pdf_colorstack nodes
    avail lists: 1:19,2:6874,3:958,4:592,5:108,6:36,7:1636,8:3,9:760,10:37,11:66
- 57182 multiletter control sequences out of 65536+600000
+ 57205 multiletter control sequences out of 65536+600000
  124 fonts using 72054663 bytes
  104i,13n,115p,1854b,1148s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/local/texlive/2025/texmf-dist/fonts/opentype/public/lm/lmsans10-bold.otf><
@@ -1736,10 +1761,10 @@ sans10-regular.otf></usr/local/texlive/2025/texmf-dist/fonts/opentype/public/har
 anoaji/HaranoAjiMincho-Regular.otf></usr/local/texlive/2025/texmf-dist/fonts/typ
 e1/public/amsfonts/cm/cmss10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1
 /public/amsfonts/cm/cmsy10.pfb>
-Output written on museum-demo.pdf (22 pages, 334037 bytes).
+Output written on museum-demo.pdf (25 pages, 620419 bytes).
 
-PDF statistics: 265 PDF objects out of 1000 (max. 8388607)
- 189 compressed objects within 2 object streams
- 50 named destinations out of 1000 (max. 131072)
+PDF statistics: 284 PDF objects out of 1000 (max. 8388607)
+ 201 compressed objects within 3 object streams
+ 56 named destinations out of 1000 (max. 131072)
  56 words of extra memory for PDF output out of 10000 (max. 100000000)
 
