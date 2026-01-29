@@ -1,3 +1,4 @@
 \beamer@sectionintoc {1}{研究目的}{3}{0}{1}
 \beamer@sectionintoc {2}{グラフ理論の基礎知識}{4}{0}{2}
 \beamer@sectionintoc {3}{木幅（treewidth）}{6}{0}{3}
+\beamer@subsectionintoc {3}{1}{木分解(tree-decomposition)}{9}{0}{3}
