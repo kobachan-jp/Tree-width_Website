@@ -97,65 +97,26 @@
 
 \begin{frame}{木幅（treewidth）とは}
     \begin{itemize}
-        \setlength{\parskip}{1em}
-        \item 定義：頂点集合の木構造を用いて定義される正の整数\cite{david2025treewidth}.
-        \item グラフを木のように分解できる度合い.
+        \setlength{\parskip}{0.8em}
+        \item 定義：頂点集合の木構造を用いて定義される正の整数の値\cite{david2025treewidth}.
+        \item 「グラフを木のように分解できる度合い」を示す.
         \item 値が小さいほど「木」に近い.
-        \item グラフ構造理論やアルゴリズムのパラメータ化計算量理論において中心的な概念.
-        \item 応用分野としてはベイズ推論や制御理論などに使われる.
+        \item グラフ構造理論などの中心的な概念（応用分野：ベイズ推論や制御理論）.
     \end{itemize}
+    \begin{figure}
+    \vspace{1em}
+    \includegraphics[width=0.65\textwidth]{example_treewidth.png}
+    \caption{木幅の例}
+    \end{figure}
 \end{frame}
 
 
-\begin{frame}{木幅が計算量に与える影響}
+\begin{frame}{木幅による NP 困難性の緩和}
   \begin{columns}[T]
     \begin{column}{0.48\textwidth}
       \begin{itemize}
         \setlength{\itemsep}{0.8em}
-        \item \textbf{巡回セールスマン問題（TSP）}
-        \item 一般のグラフでは NP 困難
-        \item 計算量
-            \begin{itemize}
-                \setlength{\itemsep}{0.8em}
-                \item 素朴なアリゴリズム：\(n!n^{O(1)}\)
-                \item 現在知られている厳密解法はいずれも指数時間を要する.
-                \item 木幅 \(k\) である場合：\(2^{O(k)} n^{O(1)}\)
-            \end{itemize}
-      \end{itemize}
-        \vspace{0.5em}
-        \centering
-        \includegraphics[scale=0.3]{TravelingSalesmanProblem.png}
-    \end{column}
-
-    \begin{column}{0.04\textwidth}
-      \centering
-      \vrule width 0.4pt height 0.85\textheight
-    \end{column}
-
-    \begin{column}{0.48\textwidth}
-      \begin{itemize}
-        \setlength{\itemsep}{0.8em}
-        \item \textbf{グラフ彩色問題}
-        \item \(k\)-彩色判定は NP 完全（\(k \ge 3\)）
-        \item 計算量
-            \begin{itemize}
-                \item 現在知られている解法はいずれも指数時間を要する.
-                \item 木幅 \(k\) である場合：\(2^{2k} n^{O(1)}\)
-            \end{itemize}
-      \end{itemize}
-       \vspace{1.5em}
-        \centering
-        \includegraphics[scale=0.5]{GraphColor.png}
-    \end{column}
-  \end{columns}
-\end{frame}
-
-\begin{frame}{木幅が計算量に与える影響(訂正版)}
-  \begin{columns}[T]
-    \begin{column}{0.48\textwidth}
-      \begin{itemize}
-        \setlength{\itemsep}{0.8em}
-        \item \textbf{巡回セールスマン問題（TSP）\cite{held1962dynamic}}
+        \item \textbf{巡回セールスマン問題（TSP）\cite{bodlaender2015deterministic}}
         \item 一般のグラフではNP困難
         \item 計算量
             \begin{itemize}
@@ -178,13 +139,13 @@
     \begin{column}{0.48\textwidth}
       \begin{itemize}
         \setlength{\itemsep}{0.8em}
-        \item \textbf{グラフ彩色問題 \cite{jansen1997generalized}}
+        \item \textbf{グラフ彩色問題 \cite{kloks1994treewidth}}
         \item \(k\)-彩色判定は NP 完全（\(k \ge 3\)）
         \item 計算量
             \begin{itemize}
                 \setlength{\itemsep}{0.8em}
                 \item 現在知られている解法はいずれも指数時間を要する.
-                \item 木幅 \(k\) である場合：\(2^{O(k)} n^{O(1)}\)
+                \item 木幅 \(w\) である場合：\(n^{O(1)} k^w\)
             \end{itemize}
       \end{itemize}
        \vspace{1.5em}
@@ -196,9 +157,19 @@
 \end{frame}
 
 
+
+
+\begin{frame}{木幅アルゴリズム}
+    \begin{enumerate}
+        \setlength{\parskip}{0.5em}
+        \item バッグ(bag)と呼ばれる頂点集合を考える.
+        \item そのバッグから木構造を作成.
+    \end{enumerate}
+    \centering
+    \textbf{木幅＝”バッグのうち要素数が最大のもの”ー１}
+\end{frame}
+
 \end{document}
-
-
 \subsection{木分解(tree-decomposition)}
 \begin{frame}{木分解(tree-decomposition)とは}
     「木幅：頂点集合の木構造(tree of sets)を用いて定義される正の整数」とあった.\\

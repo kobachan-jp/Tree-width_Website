@@ -1,4 +1,4 @@
-This is LuaHBTeX, Version 1.22.0 (TeX Live 2025)  (format=lualatex 2025.4.24)  27 JAN 2026 19:09
+This is LuaHBTeX, Version 1.22.0 (TeX Live 2025)  (format=lualatex 2025.4.24)  29 JAN 2026 16:05
  restricted system commands enabled.
 **workshop.tex
 (./workshop.tex
@@ -1520,25 +1520,42 @@ LaTeX Font Info:    Font shape `JY3/gt/m/n' will be
 <./closets.png>]
 
 Package natbib Warning: Citation `david2025treewidth' on page 6 undefined on in
-put line 107.
+put line 111.
+
+<example_treewidth.png, id=71, 699.61375pt x 223.83624pt>
+File: example_treewidth.png Graphic file (type png)
+<use example_treewidth.png>
+Package luatex.def Info: example_treewidth.png  used on input line 111.
+(luatex.def)             Requested size: 258.91765pt x 82.8386pt.
+
+Overfull \vbox (14.16362pt too high) detected at line 111
+ []
 
 
 
 [6
 
-]
-<TravelingSalesmanProblem.png, id=76, 410.53375pt x 244.915pt>
+<./example_treewidth.png>]
+
+Package natbib Warning: Citation `bodlaender2015deterministic' on page 7 undefi
+ned on input line 157.
+
+<TravelingSalesmanProblem.png, id=78, 410.53375pt x 244.915pt>
 File: TravelingSalesmanProblem.png Graphic file (type png)
 <use TravelingSalesmanProblem.png>
-Package luatex.def Info: TravelingSalesmanProblem.png  used on input line 151.
+Package luatex.def Info: TravelingSalesmanProblem.png  used on input line 157.
 (luatex.def)             Requested size: 123.16107pt x 73.47505pt.
-<GraphColor.png, id=77, 188.705pt x 160.6pt>
+
+Package natbib Warning: Citation `kloks1994treewidth' on page 7 undefined on in
+put line 157.
+
+<GraphColor.png, id=79, 188.705pt x 160.6pt>
 File: GraphColor.png Graphic file (type png)
 <use GraphColor.png>
-Package luatex.def Info: GraphColor.png  used on input line 151.
+Package luatex.def Info: GraphColor.png  used on input line 157.
 (luatex.def)             Requested size: 94.35226pt x 80.29979pt.
 
-Overfull \vbox (16.40596pt too high) detected at line 151
+Overfull \vbox (16.40596pt too high) detected at line 157
  []
 
 
@@ -1546,26 +1563,8 @@ Overfull \vbox (16.40596pt too high) detected at line 151
 [7
 
 <./TravelingSalesmanProblem.png><./GraphColor.png>]
-
-Package natbib Warning: Citation `held1962dynamic' on page 8 undefined on input
- line 196.
-
-File: TravelingSalesmanProblem.png Graphic file (type png)
-<use TravelingSalesmanProblem.png>
-Package luatex.def Info: TravelingSalesmanProblem.png  used on input line 196.
-(luatex.def)             Requested size: 123.16107pt x 73.47505pt.
-
-Package natbib Warning: Citation `jansen1997generalized' on page 8 undefined on
- input line 196.
-
-File: GraphColor.png Graphic file (type png)
-<use GraphColor.png>
-Package luatex.def Info: GraphColor.png  used on input line 196.
-(luatex.def)             Requested size: 94.35226pt x 80.29979pt.
-
-Overfull \vbox (16.59796pt too high) detected at line 196
- []
-
+LaTeX Font Info:    Font shape `JT3/mc/m/n' will be
+(Font)              scaled to size 7.69775pt on input line 170.
 
 
 [8
@@ -1594,16 +1593,15 @@ Package rerunfilecheck Info: File `workshop.out' has not changed.
 )
 
 Here is how much of LuaTeX's memory you used:
- 29680 strings out of 471941
+ 29703 strings out of 471941
  125244,953878 words of node,token memory allocated
- 32081 words of node memory still in use:
-   118 hlist, 11 vlist, 131 rule, 1 disc, 18 local_par, 36 math, 345 glue, 32 ke
-rn, 82 penalty, 201 glyph, 10884 attribute, 66 glue_spec, 1080 attribute_list, 4
- write, 111 user_defined, 32 pdf_literal, 62 pdf_colorstack, 2 pdf_setmatrix, 2 
-pdf_save, 2 pdf_restore nodes
-   avail lists: 1:19,2:11279,3:1039,4:556,5:93,6:40,7:1388,8:10,9:639,10:35,11:5
-
- 55272 multiletter control sequences out of 65536+600000
+ 11523 words of node memory still in use:
+   36 hlist, 8 vlist, 66 rule, 4 local_par, 119 glue, 7 kern, 30 penalty, 69 gly
+ph, 3811 attribute, 66 glue_spec, 381 attribute_list, 4 write, 41 user_defined, 
+28 pdf_colorstack nodes
+   avail lists: 1:19,2:14670,3:1129,4:660,5:109,6:54,7:1746,8:10,9:774,10:35,11:
+6
+ 55297 multiletter control sequences out of 65536+600000
  104 fonts using 67109103 bytes
  104i,13n,115p,1851b,1119s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/local/texlive/2025/texmf-dist/fonts/opentype/public/lm/lmsans8-oblique.otf
@@ -1619,9 +1617,9 @@ c/haranoaji/HaranoAjiMincho-Regular.otf></usr/local/texlive/2025/texmf-dist/font
 s/type1/public/amsfonts/cm/cmss10.pfb></usr/local/texlive/2025/texmf-dist/fonts/
 type1/public/amsfonts/cm/cmss8.pfb></usr/local/texlive/2025/texmf-dist/fonts/typ
 e1/public/amsfonts/cm/cmsy10.pfb>
-Output written on workshop.pdf (8 pages, 257703 bytes).
+Output written on workshop.pdf (8 pages, 275020 bytes).
 
-PDF statistics: 161 PDF objects out of 1000 (max. 8388607)
+PDF statistics: 163 PDF objects out of 1000 (max. 8388607)
  103 compressed objects within 2 object streams
  20 named destinations out of 1000 (max. 131072)
  40 words of extra memory for PDF output out of 10000 (max. 100000000)
