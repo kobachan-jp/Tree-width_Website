@@ -23,8 +23,17 @@
 \headcommand {\beamer@framepages {7}{7}}
 \headcommand {\slideentry {3}{0}{3}{8/8}{}{0}}
 \headcommand {\beamer@framepages {8}{8}}
-\headcommand {\beamer@partpages {1}{8}}
-\headcommand {\beamer@subsectionpages {6}{8}}
 \headcommand {\beamer@sectionpages {6}{8}}
-\headcommand {\beamer@documentpages {8}}
-\headcommand {\gdef \inserttotalframenumber {8}}
+\headcommand {\beamer@subsectionpages {6}{8}}
+\headcommand {\sectionentry {4}{木分解(tree-decomposition)}{9}{木分解(tree-decomposition)}{0}}
+\headcommand {\slideentry {4}{0}{1}{9/9}{}{0}}
+\headcommand {\beamer@framepages {9}{9}}
+\headcommand {\slideentry {4}{0}{2}{10/10}{}{0}}
+\headcommand {\beamer@framepages {10}{10}}
+\headcommand {\slideentry {4}{0}{3}{11/11}{}{0}}
+\headcommand {\beamer@framepages {11}{11}}
+\headcommand {\beamer@partpages {1}{11}}
+\headcommand {\beamer@subsectionpages {9}{11}}
+\headcommand {\beamer@sectionpages {9}{11}}
+\headcommand {\beamer@documentpages {11}}
+\headcommand {\gdef \inserttotalframenumber {11}}

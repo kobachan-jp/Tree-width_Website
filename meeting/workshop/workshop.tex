@@ -156,34 +156,90 @@
   \end{columns}
 \end{frame}
 
-
-
-
-\begin{frame}{木幅アルゴリズム}
+\begin{frame}{木幅の求め方}
+    \begin{columns}
+        \begin{column}{0.58\textwidth}
+    \textbf{木幅アルゴリズム}
+    \vspace{1em}
     \begin{enumerate}
         \setlength{\parskip}{0.5em}
-        \item バッグ(bag)と呼ばれる頂点集合を考える.
-        \item そのバッグから木構造を作成.
+      \item 頂点を部分集合（袋：bag）に分ける.
+      \item 袋同士を木構造で接続する.
+      \item 袋サイズの\textbf{最大値 − 1} が木幅.
     \end{enumerate}
+    \end{column}
+    \begin{column}{0.48\textwidth}
+        \begin{figure}
+            \includegraphics[scale=0.3]{5-nodes-tree-diagrams.png}
+            \caption{例}
+        \end{figure}
+    \end{column}
+\end{columns}
+  {※ 1・2 をまとめたものを \textbf{木分解（tree-decomposition）} と呼ぶ.}
+\end{frame}
+
+\section{木分解(tree-decomposition)}
+\begin{frame}{木分解(tree-decomposition)の3つの条件}
+    以下の全ての条件を満たしているとき,木分解から木幅を求めることができる.
+    \begin{columns}
+        \begin{column}{0.58\textwidth}
+           \begin{itemize}
+             \item \textbf{条件1（頂点の網羅）}  \\
+                グラフのすべての頂点は，どこかの袋に必ず入っている.
+             \item \textbf{条件2（辺の保存）}  \\
+                辺でつながっている2つの頂点は，同じ袋に一度は一緒に現れる.
+             \item \textbf{条件3（連続性）}  \\
+                ある頂点を含む袋は，木の上で途切れずにつながっている.
+            \end{itemize} 
+        \end{column}
+        \begin{column}{0.48\textwidth}
+            \begin{figure}
+                \includegraphics[width=\textwidth]{tree-decomposition-rule.png}
+                \caption{木分解の条件}
+            \end{figure}
+        \end{column}
+    \end{columns}
+
+\end{frame}
+
+\begin{frame}{木分解(tree-decomposition)の3つの条件（例）}
     \centering
-    \textbf{木幅＝”バッグのうち要素数が最大のもの”ー１}
+    \textbf{条件1：頂点の網羅, 条件2：辺の保存, 条件3：連続性}
+    \begin{columns}
+        \begin{column}{0.48\textwidth}
+        \begin{figure}
+            \includegraphics[scale=0.3]{5-nodes-tree-diagrams.png}
+            \caption*{例（再掲）}
+        \end{figure}
+    \end{column}
+    \begin{column}{0.68\textwidth}
+        \begin{figure}
+            \includegraphics[scale=0.35]{tree-decomposition-rule.png}
+            \caption*{木分解の条件（再掲）}
+        \end{figure}
+    \end{column}
+\end{columns}
+\end{frame}
+
+
+\begin{frame}{木幅の求め方（例）}
+    \begin{columns}
+        \begin{column}{0.48\textwidth}
+        \begin{figure}
+            \includegraphics[scale=0.3]{5-nodes-tree-diagrams.png}
+            \caption*{例（再掲）}
+        \end{figure}
+    \end{column}
+    \begin{column}{0.68\textwidth}
+        \begin{figure}
+            \includegraphics[scale=0.32]{5-nodes-tree-decomposition.png}
+            \caption{左図の木分解}
+        \end{figure}
+    \end{column}
+\end{columns}
 \end{frame}
 
 \end{document}
-\subsection{木分解(tree-decomposition)}
-\begin{frame}{木分解(tree-decomposition)とは}
-    「木幅：頂点集合の木構造(tree of sets)を用いて定義される正の整数」とあった.\\
-    \Rrightarrow 頂点集合の木構造(tree of sets) == 木分解
-    \vspace{2em}
-    \begin{itemize}
-        \setlength{\parskip}{2em}
-        \item バッグ(bag)と呼ばれる頂点集合を考える.
-        \item それをそれぞれのノードと考え,グラフを木のように見せるイメージ.
-        \item 木幅はそのバッグのうち要素数が最大のものから１引いた数となる.
-        \item 木分解の求め方は以下のようになる.
-    \end{itemize}
-\end{frame}
-
 \begin{frame}{定義3.1.1\cite{heinz2013tree}}
         グラフ $G=(V,E)$ の木分解 (tree-decomposition)とは，木 $T$ と，$T$ の各頂点 $t$ に対応する頂点集合 $V_t$ の族 $\mathcal{V}=(V_t)_{t\in V(T)}$ からなる組 $(T,\mathcal{V})$ であって，次の性質を満たすものである.
         \vspace{1em}
