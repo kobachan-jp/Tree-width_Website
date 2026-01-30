@@ -12,7 +12,8 @@
 \usepackage{natbib}         % BibTeX用
 \bibliographystyle{unsrt}    % スタイルを指定
 
-\usetheme{LightTheme}
+\usetheme{Dresden}
+%\usetheme{LightTheme}
 \setbeamertemplate{footline}[framenumber]
 \setbeamertemplate{caption}[numbered]
 \setbeamertemplate{navigation symbols}{}
@@ -240,110 +241,74 @@
 \end{frame}
 
 \section{木幅学習システムの開発}
-\end{document}
-\begin{frame}{定義3.1.1\cite{heinz2013tree}}
-	グラフ $G=(V,E)$ の木分解 (tree-decomposition)とは，木 $T$ と，$T$ の各頂点 $t$ に対応する頂点集合 $V_t$ の族 $\mathcal{V}=(V_t)_{t\in V(T)}$ からなる組 $(T,\mathcal{V})$ であって，次の性質を満たすものである.
-	\vspace{1em}
-	\begin{enumerate}
-		{\small
-		\setlength{\parskip}{1em}
-		\item[(TD1)] $\displaystyle\textstyle\bigcup_{t\in V(T)} V_t = V$.\ (すべての頂点は少なくとも1つのバッグに現れる.)
-		\item[(TD2)] 任意の辺 $uv\in E$ に対して，ある $t\in V(T)$ が存在し，$u,v\in V_t$ となる.\\(各辺の両端点は少なくとも1つの同じバッグに含まれる.)
-		\item[(TD3)] 任意の $t_1,t_2,t_3\in V(T)$ に対して，もし $t_2$ が $t_1$ と $t_3$ を結ぶ経路上にあるならば，
-		      \[ V_{t_1}\cap V_{t_3} \subseteq V_{t_2}. \]
-		      (ある頂点 $v\in V$ が複数のバッグに現れるとき，それらのバッグは $T$ 上で連結な部分木を形成する（"接続性条件"）．)
-		      }
-	\end{enumerate}
+
+\begin{frame}{木幅学習システムの開発}
+		開発目的：木幅や木分解の定義理解を促進.
+		\vspace{1em}
+		\begin{columns}
+			\begin{column}{0.5\textwidth}
+				\textbf{使用技術}
+				\vspace{0.5em}
+				\begin{itemize}
+		\setlength{\parskip}{0.5em}
+		\item 言語：TypeScript
+		\item フレームワーク：Next.js (UI：React)
+		\item データベース：SQlite
+		\item ORM：Prisma
+		\item グラフ描画：React Flow
+	\end{itemize}
+			\end{column}
+
+			
+		\begin{column}{0.04\textwidth}
+			\centering
+			\vrule width 0.4pt height 0.6\textheight
+		\end{column}
+
+		\begin{column}{0.4\textwidth}
+				\textbf{主な機能}
+				\vspace{0.5em}
+				\begin{itemize}
+		\setlength{\parskip}{0.5em}
+					\item 木幅の定義の説明・例題.
+					\item 問題表示・管理.
+					\item 回答判定.
+					\item 問題追加・編集.
+	\end{itemize}
+			\end{column}
+
+		\end{columns}
 \end{frame}
 
-\begin{frame}{例}
-	5頂点の以下のグラフで以下のような木構造を考える.
+\begin{frame}{学習システム一例（回答判定画面）}
+	
+\end{frame}
+
+\begin{frame}{学習システム一例（問題追加（グラフ描画））}
 	\begin{columns}
+			\begin{column}{0.48\textwidth}
+				\begin{figure}
+					\includegraphics[scale=0.3]{graph-edit1.png}
+					\caption{グラフ描画}
+				\end{figure}
+			\end{column}
+		\begin{column}{0.04\textwidth}
+			\centering
+			\vrule width 0.4pt height 0.8\textheight
+		\end{column}
 		\begin{column}{0.48\textwidth}
 			\begin{figure}
-				\includegraphics[scale=0.3]{5_treewidth.png}
+				\includegraphics[scale=0.4]{graph-edit2.png}
+				\caption{確認画面}
 			\end{figure}
-		\end{column}
-		\begin{column}{0.2\textwidth}
-			\begin{figure}
-				\includegraphics[scale=0.3]{5_treewidth_2.png}
-			\end{figure}
-		\end{column}
-		\begin{column}{0.28\textwidth}
-			\begin{itemize}
-				\item $X_1=\{v_1,v_2,v_5\}$
-				\item $X_2=\{v_2,v_3,v_5\}$
-				\item $X_3=\{v_3,v_4,v_5\}$
-			\end{itemize}
-		\end{column}
-	\end{columns}
-	\begin{itemize}
-
-		\item TD1(すべての頂点は少なくとも1つのバッグに現れる)\ ◎
-		\item TD2(各辺の両端点は少なくとも1つの同じバッグに含まれる.)\ ◎
-		\item TD3(ある頂点 $v\in V$ が複数のバッグに現れるとき，それらのバッグは $T$ 上で連結な部分木を形成する．)\ ◎
-		\item よって,TD1,TD2,TD3をすべて満たしているため木幅は3-1=2となる.
-	\end{itemize}
-
+			\end{column}
+		\end{columns}
 \end{frame}
 
+\end{document}
 
-\section{研究背景}
-\begin{frame}{研究背景}
-	\begin{itemize}
-		\setlength{\parskip}{1.5em}
-		\item 木幅はグラフ構造理論などアルゴリズム設計で重要な概念.
-		\item しかし,
-		      \begin{itemize}
-			      \setlength{\parskip}{1em}
-			      \item 理解が難しい（抽象的な概念,木分解の構築の難しさ）
-			      \item 日本語で学べる教材や可視化・インタラクティブな教材が少ない.
-		      \end{itemize}
-		\item \Rightarrow 「木幅アルゴリズムを直感的に学べる教材」が求められている.
-	\end{itemize}
-\end{frame}
 
-\section{研究目的}
-\begin{frame}{研究目的}
-	\begin{itemize}
-		\setlength{\parskip}{1.5em}
-		\item 木幅や木分解の理解を支援する学習サイトを開発する.
-		\item 対象：アルゴリズムをある程度学習している人（例：情報系学生）.
-		\item 目的：
-		      \begin{itemize}
-			      \setlength{\parskip}{1.5em}
-			      \item 定義の理解促進.
-			      \item アルゴリズムの可視化による直感的理解.
-		      \end{itemize}
-	\end{itemize}
-\end{frame}
 
-\section{提案内容}
-\begin{frame}{提案内容(木幅アルゴリズムの学習支援サイト)}
-	\begin{itemize}
-		\setlength{\parskip}{1em}
-		\item コンセプト：見て・触って・理解する
-		\item 提案機能（予定）：
-		      \begin{enumerate}
-			      \setlength{\parskip}{1em}
-			      \item 木分解の基礎理論まとめ
-			      \item 木分解構築の練習モード（入力\rightarrow 採点）
-			      \item アルゴリズム可視化（動的）
-		      \end{enumerate}
-	\end{itemize}
-\end{frame}
-
-\begin{frame}{提案内容（使用技術）}
-	\begin{itemize}
-		\setlength{\parskip}{1em}
-		\item \textbf{TypeScript}：静的型付けにより、安全で保守性の高いフロントエンド開発を実現
-		\item \textbf{React}：ユーザーがグラフを操作できる動的なUIの構築に使用
-		\item \textbf{React Flow}：ノードの追加・移動・接続など、グラフ描画機能を簡便に実装
-		\item \textbf{Express (Node.js)}：バックエンドで木分解・木幅の判定ロジックを処理
-		\item \textbf{SQlite}：問題データの保存
-		\item \textbf{HTML / CSS}：全体のページデザインとレイアウト
-	\end{itemize}
-\end{frame}
 
 \section{今後の予定}
 \begin{frame}{今後の予定}
