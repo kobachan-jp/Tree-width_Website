@@ -1,0 +1,42 @@
+\begin{thebibliography}{1}
+
+\bibitem{wilson1979introduction}
+Robin~J Wilson.
+\newblock {\em Introduction to graph theory}.
+\newblock Pearson Education India, 1979.
+
+\bibitem{bondy1976graph}
+John~Adrian Bondy, Uppaluri Siva~Ramachandra Murty, et~al.
+\newblock {\em Graph theory with applications}, volume 290.
+\newblock Macmillan London, 1976.
+
+\bibitem{bodlaender1997treewidth}
+Hans~L Bodlaender.
+\newblock Treewidth: Algorithmic techniques and results.
+\newblock In {\em International symposium on mathematical foundations of
+  computer science}, pages 19--36. Springer, 1997.
+
+\bibitem{david2025treewidth}
+David Eppstein.
+\newblock What is treewidth?
+\newblock In {\em Notices of the American Mathematical Society}, volume~72,
+  pages 172--175. American Mathematical Society, 2025.
+
+\bibitem{bodlaender2015deterministic}
+Hans~L Bodlaender, Marek Cygan, Stefan Kratsch, and Jesper Nederlof.
+\newblock Deterministic single exponential time algorithms for connectivity
+  problems parameterized by treewidth.
+\newblock {\em Information and Computation}, 243:86--111, 2015.
+
+\bibitem{kloks1994treewidth}
+Ton Kloks.
+\newblock {\em Treewidth: computations and approximations}.
+\newblock Springer, 1994.
+
+\bibitem{heinz2013tree}
+Miriam Heinz.
+\newblock {\em Tree decomposition: graph minor theory and algorithmic
+  implications}.
+\newblock PhD thesis, 2013.
+
+\end{thebibliography}

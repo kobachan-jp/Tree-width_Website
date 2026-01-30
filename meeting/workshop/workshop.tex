@@ -12,8 +12,7 @@
 \usepackage{natbib}         % BibTeX用
 \bibliographystyle{unsrt}    % スタイルを指定
 
-\usetheme{Dresden}
-%\usetheme{LightTheme}
+\usetheme{LightTheme}
 \setbeamertemplate{footline}[framenumber]
 \setbeamertemplate{caption}[numbered]
 \setbeamertemplate{navigation symbols}{}
@@ -48,6 +47,8 @@
 		      \end{itemize}
 		\item \Rightarrow 木幅や木分解の定義理解を促進する学習システムを開発.
 	\end{itemize}
+
+
 \end{frame}
 
 
@@ -69,7 +70,7 @@
 					      \item 枝の数は,\ $"node - 1"$.
 					      \item 葉以外の頂点を一つ削除すると,木は複数の連結成分に分裂.
 					      \item 一般的に計算困難な問題が木では効率的に解決できることがある\cite{bodlaender1997treewidth}.
-					      \item 例）巡回セールスマン問題, グラフ彩色問題
+					      \item \hspace{2em}例）巡回セールスマン問題, グラフ彩色問題
 				      \end{itemize}
 			\end{itemize}
 		\end{column}
@@ -83,6 +84,7 @@
 			\end{figure}
 		\end{column}
 	\end{columns}
+
 \end{frame}
 
 \begin{frame}{グラフを木と見なす}
@@ -155,6 +157,7 @@
 		\end{column}
 
 	\end{columns}
+
 \end{frame}
 
 \begin{frame}{木幅の求め方}
@@ -200,7 +203,6 @@
 			\end{figure}
 		\end{column}
 	\end{columns}
-
 \end{frame}
 
 \begin{frame}{木分解(tree-decomposition)の3つの条件（例）}
@@ -243,55 +245,52 @@
 \section{木幅学習システムの開発}
 
 \begin{frame}{木幅学習システムの開発}
-		開発目的：木幅や木分解の定義理解を促進.
-		\vspace{1em}
-		\begin{columns}
-			\begin{column}{0.5\textwidth}
-				\textbf{使用技術}
-				\vspace{0.5em}
-				\begin{itemize}
-		\setlength{\parskip}{0.5em}
-		\item 言語：TypeScript
-		\item フレームワーク：Next.js (UI：React)
-		\item データベース：SQlite
-		\item ORM：Prisma
-		\item グラフ描画：React Flow
-	\end{itemize}
-			\end{column}
+	開発目的：木幅や木分解の定義理解を促進.
+	\vspace{1em}
+	\begin{columns}
+		\begin{column}{0.5\textwidth}
+			\textbf{使用技術}
+			\vspace{0.5em}
+			\begin{itemize}
+				\setlength{\parskip}{0.5em}
+				\item 言語：TypeScript
+				\item フレームワーク：Next.js (UI：React)
+				\item データベース：SQlite
+				\item ORM：Prisma
+				\item グラフ描画：React Flow
+			\end{itemize}
+		\end{column}
 
-			
+
 		\begin{column}{0.04\textwidth}
 			\centering
 			\vrule width 0.4pt height 0.6\textheight
 		\end{column}
 
 		\begin{column}{0.4\textwidth}
-				\textbf{主な機能}
-				\vspace{0.5em}
-				\begin{itemize}
-		\setlength{\parskip}{0.5em}
-					\item 木幅の定義の説明・例題.
-					\item 問題表示・管理.
-					\item 回答判定.
-					\item 問題追加・編集.
-	\end{itemize}
-			\end{column}
+			\textbf{主な機能}
+			\vspace{0.5em}
+			\begin{itemize}
+				\setlength{\parskip}{0.5em}
+				\item 木幅の定義の説明・例題.
+				\item 問題表示・管理.
+				\item 回答判定.
+				\item 問題追加・編集.
+			\end{itemize}
+		\end{column}
 
-		\end{columns}
+	\end{columns}
 \end{frame}
 
-\begin{frame}{学習システム一例（回答判定画面）}
-	
-\end{frame}
 
 \begin{frame}{学習システム一例（問題追加（グラフ描画））}
 	\begin{columns}
-			\begin{column}{0.48\textwidth}
-				\begin{figure}
-					\includegraphics[scale=0.3]{graph-edit1.png}
-					\caption{グラフ描画}
-				\end{figure}
-			\end{column}
+		\begin{column}{0.48\textwidth}
+			\begin{figure}
+				\includegraphics[scale=0.3]{graph-edit1.png}
+				\caption{グラフ描画}
+			\end{figure}
+		\end{column}
 		\begin{column}{0.04\textwidth}
 			\centering
 			\vrule width 0.4pt height 0.8\textheight
@@ -301,8 +300,33 @@
 				\includegraphics[scale=0.4]{graph-edit2.png}
 				\caption{確認画面}
 			\end{figure}
-			\end{column}
-		\end{columns}
+		\end{column}
+	\end{columns}
+\end{frame}
+
+\section{今後の課題とまとめ}
+\begin{frame}{今後の課題とまとめ}
+	\begin{itemize}
+		\setlength{\parskip}{1em}
+		\item \textbf{今後の課題}
+		      \begin{itemize}
+			      \setlength{\parskip}{0.5em}
+			      \item システム構築：ユーザー登録などの機能拡張.
+			      \item アルゴリズム：適切な木幅を求めるアルゴリズムの改良.
+		      \end{itemize}
+		\item \textbf{まとめ}
+		      \begin{itemize}
+			      \setlength{\parskip}{0.5em}
+			      \item 木分解の条件など木幅の概念を解説.
+			      \item 初学者にも理解できるような学習システムの構築を行った.
+		      \end{itemize}
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{参考文献}
+	\small
+	\bibliography{bibtex}
 \end{frame}
 
 \end{document}
@@ -310,30 +334,6 @@
 
 
 
-\section{今後の予定}
-\begin{frame}{今後の予定}
-	\begin{itemize}
-		\setlength{\parskip}{1em}
-		\item 問題はある程度作成済み.
-		\item 今後はまずはフロントエンドをやりながら,バッグエンドを作っていく予定.
-	\end{itemize}
-\end{frame}
 
-
-
-\begin{comment}
-\section{院での研究課題  }
-\begin{frame}{院進後の研究課題(木幅アルゴリズムの改良)}
-	\begin{itemize}
-		\setlength{\parskip}{2em}
-		\item 木幅アルゴリズムの改良を玉木久夫教授と共に行う.
-		\item 玉木教授からは,教授の考えたアルゴリズムをプログラム化したり,一緒に考えたりすると言われている.
-	\end{itemize}
-\end{frame}
-\end{comment}
-\begin{frame}[allowframebreaks]{参考文献}
-	\small
-	\bibliography{bibtex}
-\end{frame}
 
 \end{document}
