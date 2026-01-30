@@ -1,6 +1,6 @@
 INFO:  latexindent version 3.23.6, 2024-01-17, a script to indent .tex files
        latexindent lives here: /usr/share/texlive/texmf-dist/scripts/latexindent/
-       Thu Jan 29 20:54:30 2026
+       Sat Jan 31 01:41:31 2026
        Filename: workshop.tex
 INFO:  Processing switches:
        -w|--overwrite: Overwrite mode active, will make a back up before overwriting
@@ -13,7 +13,12 @@ INFO:  YAML reading settings
        latexindent.pl didn't find indentconfig.yaml or .indentconfig.yaml
        see all possible locations: https://latexindentpl.readthedocs.io/en/latest/sec-appendices.html#indentconfig-options)
 INFO:  Backup procedure (-w flag active):
-       Backing up workshop.tex to ./workshop.bak0...
+       ./workshop.bak0 already exists, incrementing by 1 (see maxNumberOfBackUps)
+       ./workshop.bak1 already exists, incrementing by 1 (see maxNumberOfBackUps)
+       ./workshop.bak2 already exists, incrementing by 1 (see maxNumberOfBackUps)
+       ./workshop.bak3 already exists, incrementing by 1 (see maxNumberOfBackUps)
+       ./workshop.bak4 already exists, incrementing by 1 (see maxNumberOfBackUps)
+       Backing up workshop.tex to ./workshop.bak5...
        workshop.tex will be overwritten after indentation
 INFO:  Phase 1: searching for objects
 INFO:  Phase 2: finding surrounding indentation

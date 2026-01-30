@@ -3,3 +3,4 @@
 \beamer@sectionintoc {3}{木幅（treewidth）}{6}{0}{3}
 \beamer@subsectionintoc {3}{1}{木分解(tree-decomposition)}{9}{0}{3}
 \beamer@sectionintoc {4}{木幅学習システムの開発}{12}{0}{4}
+\beamer@sectionintoc {5}{今後の課題とまとめ}{14}{0}{5}
