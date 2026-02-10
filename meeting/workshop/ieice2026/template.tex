@@ -1,0 +1,118 @@
+%%「論文」，「レター」，「レター（C分冊）」，「技術研究報告」などのテンプレート
+%% v3.4 [2023/09/12]
+%% 1. 「論文」
+\documentclass[paper]{ieicej}
+%\documentclass[invited]{ieicej}% 招待論文
+%\documentclass[survey]{ieicej}% サーベイ論文
+%\documentclass[comment]{ieicej}% 解説論文
+\usepackage[dvipdfmx]{graphicx,xcolor}
+\usepackage[fleqn]{amsmath}
+%\usepackage{amsthm}
+\usepackage{newtxtext}% 英数字フォントの設定を変更しないでください
+\usepackage[varg]{newtxmath}% % 英数字フォントの設定を変更しないでください
+%\usepackage{amssymb}
+%\usepackage{bm}
+\setcounter{page}{1}
+
+\field{}
+\jtitle[木幅学習システムの構築]{木幅学習システムの構築}
+\jsubtitle{高効率なグラフ解析に向けた木幅概念の学習システム構築}
+\etitle{Development of a Learning System for Treewidth}
+\esubtitle{Constructing a System for Acquiring the Concept of Treewidth for Highly Efficient Graph Analysis}
+\authorlist{%
+ \authorentry{}{}{}\MembershipNumber{}
+ %\authorentry{和文著者名}{英文著者名}{所属ラベル}\MembershipNumber{}
+ %\authorentry[メールアドレス]{和文著者名}{英文著者名}{所属ラベル}\MembershipNumber{}
+ %\authorentry{和文著者名}{英文著者名}{所属ラベル}[現在の所属ラベル]\MembershipNumber{}
+}
+\affiliate[]{}{}
+%\affiliate[所属ラベル]{和文所属}{英文所属}
+%\paffiliate[]{}
+%\paffiliate[現在の所属ラベル]{和文所属}
+\jalcdoi{???????????}% ← このままにしておいてください
+
+\begin{document}
+\begin{abstract}
+木幅は,グラフ理論やアルゴリズム設計において重要な概念である.
+しかし,木幅の抽象的な概念や日本語で学べる教材が少ないなどという問題がある.
+したがって,今回は木幅や木分解の定義理解を促進するWebアプリケーションによる学習システムを構築した.
+\end{abstract}
+\begin{keyword}
+木幅,木分解,Next.js,ReactFlow
+\end{keyword}
+\begin{eabstract}
+%英文アブストラクト 100 words
+\end{eabstract}
+\begin{ekeyword}
+%英文キーワード
+\end{ekeyword}
+\maketitle
+
+\section{はじめに}
+木幅は,グラフ理論やアルゴリズム設計において重要な概念である.
+しかし,木幅の抽象的な概念や木分解の構築の難しさにより認知が低く,日本語で学べる教材や可視的に学ぶことができる機会が少ない.
+したがって,今回は木幅や木分解の定義の理解を促進する学習システムを構築した.
+\section{木と閉路}
+閉路とは，始点と終点が一致し，それ以外の頂点を重複せずに通る道である.
+グラフ理論において，閉路の存在はグラフ構造の複雑さを特徴づける重要な要素の一つであり，多くの計算問題において困難性の原因となる.
+
+一方，木とは，閉路を含まず，かつ連結である無向グラフである.
+木は極めて単純な構造を持つグラフであり，以下の性質が知られている.
+\begin{itemize}
+  \item 木は閉路を含まない連結グラフである.
+  \item 任意の二頂点間にただ一つの単純路が存在する.
+  \item 任意の辺を一つ削除すると，グラフは非連結になる.
+\end{itemize}
+
+特に，任意の二頂点間に単純路が一意に定まるという性質は，木構造における情報の伝播や分割を容易にしている.
+さらに，木において葉（次数1の頂点）以外の任意の頂点を一つ削除すると，グラフは複数の連結成分に分割される.
+この性質により，木は自然な再帰構造を持ち，分割統治法や動的計画法を適用しやすい対象となる.
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=0.5\textwidth]{../tree.png}
+  \caption{木と閉路のあるグラフ}
+\end{figure}
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=0.4\textwidth]{../tree_instruction.png}
+  \caption{木構造の用語}
+\end{figure}
+このような構造的単純性のため，最大独立点問題など多くの計算困難な問題であっても，入力グラフが木である場合には多項式時間，あるいは線形時間で解くことが可能である.
+一方で，一般のグラフは閉路を多く含み，木のような単純な構造を持たない場合が多い.
+そのため，任意の一般グラフに対して，直接木と同様のアルゴリズムを適用することは困難である.
+
+そこで，一般グラフを「完全な木」ではなく，「木に近い構造」として捉え，その上で計算を行う枠組みが考えられてきた.
+この考え方を形式化した概念の一つが**木分解（tree-decomposition）**である.
+
+\section{木分解（tree-decomposition）}
+木分解とは，一般のグラフの頂点集合を部分集合の集まりとして分割し，それらの関係を木構造で表現する手法である.
+これにより，元のグラフの構造的複雑さを，木構造上で扱うことが可能となる.
+木分解は，一般グラフ上の問題を木構造上の問題として扱うための基盤となる概念であり，を測る指標として木幅が定義される.
+木分解は以下のように定義される.\cite{heinz2013tree}
+\subsection{定義}
+\section{まとめ}
+
+\ack %% 謝辞
+
+%\bibliographystyle{sieicej}
+\begin{thebibliography}{9}% 文献数が10未満の時 {9}
+\bibitem{heinz2013tree}
+Heinz, Miriam,
+``Tree decompositiHeinz, Miriamon: graph minor theory and algorithmic implications``,
+2013.
+\end{thebibliography}
+
+\appendix
+\section{}
+
+%% 著者紹介・顔写真の掲載はC分冊の場合は任意です．
+\begin{biography}
+\profile{}{}{}
+%\profile{会員種別}{名前}{紹介文}% 顔写真あり
+%\profile*{会員種別}{名前}{紹介文}% 顔写真なし
+\end{biography}
+
+\end{document}
+
+
+
