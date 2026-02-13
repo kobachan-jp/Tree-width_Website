@@ -45,7 +45,7 @@ export default function PaintGraph({ p }: { p: ProblemWithDetail }) {
   }, [p.detail.graph?.edges]) // ← edges が変わった時だけ再生成
 
   return (
-    <div style={{ width: '100%', height: '500px', border: '1px solid #ccc' }}>
+    <div style={{ width: '100%', height: '700px', border: '1px solid #ccc' }}>
       <ReactFlow
         nodeTypes={nodeTypes}
         nodes={initialNodes}

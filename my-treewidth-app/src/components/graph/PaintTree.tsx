@@ -1,11 +1,11 @@
 import ReactFlow, { Background } from 'reactflow'
 import React, { useMemo } from 'react'
-import CustomNode from '../CustomNode'
+import CustomTreeNode from '../CustomTreeNode'
 import { ProblemWithDetail } from '@/types'
 import 'reactflow/dist/style.css'
 
 const nodeTypes = {
-  custom: CustomNode,
+  custom: CustomTreeNode,
 }
 
 export default function PaintTree({ p }: { p: ProblemWithDetail }) {
@@ -45,7 +45,7 @@ export default function PaintTree({ p }: { p: ProblemWithDetail }) {
   }, [p.detail.tree?.edges]) // ← edges が変わった時だけ再生成
 
   return (
-    <div style={{ width: '100%', height: '500px', border: '1px solid #ccc' }}>
+    <div style={{ width: '100%', height: '700px', border: '1px solid #ccc' }}>
       <ReactFlow
         nodeTypes={nodeTypes}
         nodes={initialNodes}
