@@ -13,7 +13,7 @@ export default function TrueOrFalseProblem({
   ) => void
 }) {
   return (
-    <div style={{ display: 'flex', gap: '0px', justifyContent: 'center', marginLeft: '20em' }}>
+    <div style={{ display: 'flex', gap: '0px', justifyContent: 'center', marginLeft: '10em' }}>
       <div style={{ flex: 1 }}>
         <button
           className="problem-button"

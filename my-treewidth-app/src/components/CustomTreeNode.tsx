@@ -3,23 +3,24 @@ import React from 'react'
 import { Handle, Position, NodeProps } from 'reactflow'
 
 // ✅ NodeProps 型を明示的に使う
-export default function CustomNode({ data, selected }: NodeProps) {
+export default function CustomTreeNode({ data, selected }: NodeProps) {
   return (
-    <div
+   <div
       style={{
-        background: selected ? '#FFD700' : '#89CFF0',
-        borderRadius: '50%',
-        width: 40,
-        height: 40,
+        background: selected ? '#FF69B4' : '#32CD32',
+        width: 45,
+        height: 45,
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
-        fontWeight: 'normal',
-        color: '#000',
         position: 'relative',
+        transform: 'rotate(45deg)', // 親を45度回転
       }}
     >
-      {data.label}
+      {/* ▼ テキストを逆方向に45度回転させて水平に戻す */}
+      <div style={{ transform: 'rotate(-45deg)', fontWeight: 'normal', color: '#000' }}>
+        {data.label}
+      </div>
 
       {/* ▼ 中央の透明なハンドル（source） */}
       <Handle
