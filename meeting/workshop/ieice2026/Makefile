@@ -2,7 +2,7 @@
 TEX     = platex
 DVIPDF  = dvipdfmx
 BIB     = pbibtex
-TARGET  = template
+TARGET  = 0212
 
 # ===== デフォルト =====
 all: $(TARGET).pdf

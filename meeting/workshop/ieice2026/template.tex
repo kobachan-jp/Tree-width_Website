@@ -6,19 +6,25 @@
 %\documentclass[survey]{ieicej}% サーベイ論文
 %\documentclass[comment]{ieicej}% 解説論文
 \usepackage[dvipdfmx]{graphicx,xcolor}
+\usepackage{placeins}
 \usepackage[fleqn]{amsmath}
-%\usepackage{amsthm}
+\usepackage{amsthm}
+\newtheorem{definition}{定義}
 \usepackage{newtxtext}% 英数字フォントの設定を変更しないでください
 \usepackage[varg]{newtxmath}% % 英数字フォントの設定を変更しないでください
 %\usepackage{amssymb}
 %\usepackage{bm}
+\usepackage{url}
+\urlstyle{rm}
 \setcounter{page}{1}
 
 \field{}
-\jtitle[木幅学習システムの構築]{木幅学習システムの構築}
-\jsubtitle{高効率なグラフ解析に向けた木幅概念の学習システム構築}
-\etitle{Development of a Learning System for Treewidth}
-\esubtitle{Constructing a System for Acquiring the Concept of Treewidth for Highly Efficient Graph Analysis}
+\jtitle[木幅学習システムの構築]{木幅学習システムの構築\\
+\normalsize{高効率なグラフ解析に向けた木幅概念の学習システム構築}
+}
+\etitle{Development of a Learning System for Treewidth\\
+\normalsize{Constructing a System for Acquiring the Concept of Treewidth for Highly Efficient Graph Analysis}
+}
 \authorlist{%
  \authorentry{}{}{}\MembershipNumber{}
  %\authorentry{和文著者名}{英文著者名}{所属ラベル}\MembershipNumber{}
@@ -49,20 +55,36 @@
 \maketitle
 
 \section{はじめに}
-木幅は,グラフ理論やアルゴリズム設計において重要な概念である.
+グラフ理論\cite{wilson1979introduction}は,ディペンダブルコンピューティングの分野では,信頼性解析に,ソフトウェアの分野では,コンパイラのレジスタ割り当て,スケジューリング
+など多くの分野の基礎的な理論として重用されてきた.
+
+一般に解くのが難しい問題でも,グラフが木であれば容易に解けることがわかっている問題も多い.
+木幅は,グラフ理論やアルゴリズム設計において一つの重要な概念である.
+木幅とは,そのグラフがどれだけ木に近いかを表す指標である.
+グラフを木分解とは,部分集合（バッグと呼ぶ）に分けて木で接続する方法で,その部分集合の最大要素数−１を木幅と定義している\cite{}. 
+これが小さいと,木分解のバッグに含まれる超点数が少ないので、効率的に解けることがしられている\cite{robertson1986graph}.
+例えば,最大独立集合問題,グラフ彩色問題,最短経路問題などへの応用が知られている.
+
+また、木幅が小さいと各バッグ内の状態の組み合わせが少ないので動的計画法が使いやす位という特徴もある.
+これ以外にも多くの問題で木幅の概念を活用すれば,効率よく解けるかもしれない.
 しかし,木幅の抽象的な概念や木分解の構築の難しさにより認知が低く,日本語で学べる教材や可視的に学ぶことができる機会が少ない.
-したがって,今回は木幅や木分解の定義の理解を促進する学習システムを構築した.
-\section{木と閉路}
+そこで,木幅や木分解の定義の理解を促進する学習システムを構築したので,報告する.
+
+\section{木幅（treewidth）とは}
+本節では,グラフ理論の基本的な用語について概説する.詳細は文献\cite{wilson1979introduction}を参照されたい. 
+
+\subsection{木と閉路}
 閉路とは，始点と終点が一致し，それ以外の頂点を重複せずに通る道である.
 グラフ理論において，閉路の存在はグラフ構造の複雑さを特徴づける重要な要素の一つであり，多くの計算問題において困難性の原因となる.
 
 一方，木とは，閉路を含まず，かつ連結である無向グラフである.
-木は極めて単純な構造を持つグラフであり，以下の性質が知られている.
+木は極めて単純な構造を持つグラフであり，以下の性質が知られている\cite{wilson1979introduction}.
 \begin{itemize}
   \item 木は閉路を含まない連結グラフである.
   \item 任意の二頂点間にただ一つの単純路が存在する.
   \item 任意の辺を一つ削除すると，グラフは非連結になる.
 \end{itemize}
+図\ref{tab:tree}に木と閉路のあるグラフを示す.
 
 特に，任意の二頂点間に単純路が一意に定まるという性質は，木構造における情報の伝播や分割を容易にしている.
 さらに，木において葉（次数1の頂点）以外の任意の頂点を一つ削除すると，グラフは複数の連結成分に分割される.
@@ -71,6 +93,7 @@
   \centering
   \includegraphics[width=0.5\textwidth]{../tree.png}
   \caption{木と閉路のあるグラフ}
+  \label{tab:tree}
 \end{figure}
 \begin{figure}[t]
   \centering
@@ -82,25 +105,226 @@
 そのため，任意の一般グラフに対して，直接木と同様のアルゴリズムを適用することは困難である.
 
 そこで，一般グラフを「完全な木」ではなく，「木に近い構造」として捉え，その上で計算を行う枠組みが考えられてきた.
-この考え方を形式化した概念の一つが**木分解（tree-decomposition）**である.
+この考え方を形式化した概念の一つが木分解（tree-decomposition）である.
 
-\section{木分解（tree-decomposition）}
+\subsection{木分解（tree-decomposition）}
 木分解とは，一般のグラフの頂点集合を部分集合の集まりとして分割し，それらの関係を木構造で表現する手法である.
 これにより，元のグラフの構造的複雑さを，木構造上で扱うことが可能となる.
 木分解は，一般グラフ上の問題を木構造上の問題として扱うための基盤となる概念であり，を測る指標として木幅が定義される.
-木分解は以下のように定義される.\cite{heinz2013tree}
-\subsection{定義}
+木分解は以下のように定義される\cite{robertson1986graph}.
+
+\begin{definition}
+$V$をグラフ$G$の頂点集合,$E$を辺の集合とする.また,$I$を木$T$の頂点集合,$F$を辺の集合とする.
+グラフ $G = (V, E)$ の\textbf{木分解（tree decomposition）}とは，
+木 $T = (I, F)$ と，各 $i \in I$ に対応する頂点集合$\{ X_i \mid i \in I \}$\it(bags（バッグ）と呼ばれる)からなる組$(\{X_i \mid i \in I\},\ T)$
+であって，次の条件を満たすものをいう．
+
+\item[(TD1)] 全ての頂点がどこかのバッグに含まれる.
+  \[
+    \bigcup_{i \in I} X_i = V
+  \]
+
+      
+  
+  \item[(TD2)] グラフGの辺を構成する頂点は必ず同じバッグに含まれる.
+ \[
+  \forall (u,w) \in E,\ \exists i \in I \text{ で } u \in X_i \text{ かつ } w \in X_i
+\]
+    
+
+  \item[(TD3)] 同一頂点を含むバッグ$X$は木$T$ 上で連結である.
+  \[
+  \forall i,j,k \in I,\ 
+  j \in \mathrm{path}_T(i,k)
+  \Rightarrow
+  X_i \cap X_k \subseteq X_j
+\]
+ここで$\mathrm{path}_T(i,k)$は,木Tにおいて頂点$i$から頂点$k$を結ぶ唯一の単純路を意味する.    
+  \end{definition}
+
+
+\subsection{木幅（treewidth）}
+
+木分解を用いることで，一般のグラフを木構造として扱うことが可能になるが，
+その際に重要となるのが「どれだけ小さな部分集合で分解できるか」である．
+直感的には，木分解における各バッグの大きさが小さいほど，
+元のグラフは「木に近い構造」を持つと考えられる．
+
+この考えを定量的に表した指標が\textbf{木幅（treewidth）}である．
+
+\begin{definition}
+木分解 $(\{X_i \mid i \in I\}, T)$ の\textbf{幅}とは，
+\[
+\max_{i \in I} (|X_i| - 1)
+\]
+で定義される値である．
+\end{definition}
+
+ここで，各 $X_i$ は木分解におけるバッグを表し，
+その大きさ $|X_i|$ は同時に扱う必要のある頂点数を意味する．
+定義において $-1$ を行うのは，
+木に対して木幅が1となるように調整するためである．
+
+次に，グラフ全体に対する木幅を定義する．
+
+\begin{definition}
+グラフ $G$ の\textbf{木幅（treewidth）}とは，
+$G$ のすべての木分解の幅の最小値である．
+\end{definition}
+
+木幅はグラフの不変量であり，
+グラフがどの程度「木に近い構造を持つか」を表す指標である．
+木幅が小さいグラフほど，
+木構造上で有効な分割統治法や動的計画法を適用しやすい．
+
+また，木分解は部分木の集合として捉えることもできる．
+木分解の定義における条件 (TD3) により，
+ある頂点 $v \in V(G)$ を含むバッグの集合は
+木 $T$ 上で連結な部分木 $T_v$ を形成する．
+さらに，条件 (TD2) により，
+辺 $uv \in E(G)$ に対しては
+部分木 $T_u$ と $T_v$ が共通のバッグを持つことが保証される．
+
+図3の場合,これらの条件を満たす木分解の一例は図4のようになる.
+頂点集合$X_i$において(TD1),(TD2)が満たされていることがわかる.
+また,図4の点線は,バッグ$X$が(TD3)を満たしてること示している.
+したがって,この木分解の幅は2であり,他の木分解の幅も同値となるため,この木幅は2となる.
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.3\textwidth]{../5-nodes-tree-diagrams.png}
+  \caption{5頂点のグラフの場合}
+\end{figure}  
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=0.35\textwidth]{../tree-decomposition-rule.png}
+  \caption{木分解の例}
+\end{figure}
+
+\FloatBarrier
+\section{学習支援システムの設計}
+
+本研究では，木幅および木分解の定義理解を目的として，
+問題演習を通じて学習を支援するシステムを設計・実装する．
+本システムは，木分解に関する定義や性質を段階的に確認できる
+問題形式を採用することで，学習者の理解を促進することを目的とする．
+
+\subsection{設計方針}
+木幅および木分解の理解には，定義を正確に把握し，
+それを具体的なグラフ構造に適用する力が求められる．
+しかし，従来の学習では定義を読んだだけでは理解が定着しにくいという課題がある．
+
+そこで本システムでは，以下の方針に基づいて設計を行った．
+\begin{itemize}
+  \item 木分解の定義や性質を，問題形式で確認できるようにする.
+  \item 様々な問題形式を用いて，理解度を即時に確認できるようにする.
+  \item 問題は段階的に難易度を上げ，定義理解から応用へと導く構成とする.
+  \item 画面上でグラフの頂点や辺をクリックでインタラクティブに選択できるようにする.
+\end{itemize}
+
+本システムは，いきなり木分解の構築を求めるのではなく，
+定義理解を確認する問題演習を通じて，
+学習者が必要な前提知識を段階的に獲得できる点に特徴がある．
+また,学習者がインタラクティブにグラフや木構造に触れられるようにするためには
+グラフや木構造の頂点や辺の情報を保持しておく必要がある.
+したがって,問題作成時には画像を挿入するのではなく,ツールを利用してグラフを生成できるようにしている.
+
+\subsection{問題形式の構成}
+本システムでは，主に以下の問題形式を実装している．
+
+\subsubsection{○×問題}
+○×問題では，木分解や木幅に関する命題を提示し，
+学習者がその正誤を選択する．
+これにより，定義の誤解や曖昧な理解を顕在化させることができる．
+
+例として，「あるグラフの木幅が1であるとき，そのグラフは必ず木である」
+といった命題を扱う．
+
+\subsubsection{入力問題}
+入力問題では，学習者が数値や簡単な記号を入力することで解答を行う．
+例えば，提示されたグラフに対して，
+その木幅や特定の木分解における幅を求めさせる問題を用意している．
+この形式により，単なる選択ではなく，
+定義に基づいた計算や判断を要求することができる．
+
+\subsubsection{選択問題}
+選択問題では，複数の選択肢の中から正しいものを選ばせることで，
+木分解や木幅に関する理解を確認する．
+この形式は，単純な正誤判定よりも多様な誤答パターンを提示できるため，
+学習者が自身の誤解の内容を把握しやすいという利点がある．
+
+例えば，木分解の条件（TD1--TD3）に関する説明のうち，
+正しいものを選択させる問題や，
+提示された木分解が正しいかどうかを選択肢から判断させる問題を扱っている．
+
+\subsection{使用技術}
+本Webシステムの実装には，表\ref{tab:tech}に示す技術を用いた.
+以下に，各技術の選定理由を述べる.
+\begin{table}[h]
+  \centering
+  \caption{本Webシステムで使用した技術}
+  \label{tab:tech}
+  \begin{tabular}{ll}
+    \hline
+    区分 & 使用技術 \\ \hline
+    実行環境 & Node.js \\
+    プログラミング言語 & TypeScript \\
+    フレームワーク & Next.js \\
+    UI ライブラリ & React \\
+    データベース & SQLite \\
+    ORM & Prisma \\
+    グラフ描画ライブラリ & ReactFlow \\
+    \hline
+  \end{tabular}
+\end{table}
+
+Node.js\cite{nodejs} は,JavaScriptという言語を用いてサーバー側の処理を実行できる環境である.
+非同期処理を効率よく行える点から採用した.
+また,フロントエンド（ブラウザで動く部分）と同じ言語でサーバー処理を書けるため,開発が容易である.
+Next.js\cite{Next.js} と組み合わせることで,ページ遷移やデータ管理の実装が簡単になり,Webアプリケーション全体の構築効率が向上する.
+
+TypeScript\cite{TypeScript} は、JavaScriptに型付けの機能を追加した言語である.
+型付けによってプログラムのミスを防ぎやすくなり,複雑なデータ構造を扱う本システムにおいて安全性と保守性を向上させる.
+
+Next.jsはReact\cite{React}を基盤としたWebフレームワークであり,Webページの構築や状態管理を容易にする.
+本研究では,学習者がグラフ構造を操作する画面を構築する際に便利であるため採用した.
+
+React はコンポーネント指向のユーザインタフェース（UI）ライブラリであり,
+画面の状態変化に応じて動的に表示を更新できる.
+これにより,学習者が操作した結果をリアルタイムに画面へ反映できる.
+
+SQLite\cite{sqlite} は軽量な組込み型データベースであり,追加のデータベースサーバを必要としない.
+本研究では小規模なデータ管理を想定しており,SQLiteで十分な性能を得られる.
+
+Prisma\cite{Prisma} はTypeScriptと親和性の高いORM（データベース操作をコードで簡単に行える仕組み）である.
+これにより,データベースのスキーマとアプリケーションコード間の不整合を防ぎつつ,安全にデータ操作を行える.
+
+ReactFlow\cite{reactflow} は,ノードとエッジからなるグラフ構造を直感的に描画・操作できるライブラリである.
+本研究では,木分解や木幅の学習支援を目的として学習者がグラフを動的に編集・確認できる点で有用である.
+
+\subsection{実装状況}
+本システムでは，現時点で以下の機能を実装している．
+\begin{itemize}
+  \item 問題提示（○×・入力・選択問題）.
+  \item 解答・正誤判定.
+  \item 問題ごとの解説表示.
+  \item インタラクティブなグラフを含めた問題追加.
+\end{itemize}
+
+\section{今後の課題}
+\begin{itemize}
+  \item 問題生成の自動化
+  \item 学習者の解答履歴を用いた理解度分析
+  \item 複雑なグラフ構造や木分解の操作の拡張
+\end{itemize}
+
+
 \section{まとめ}
 
 \ack %% 謝辞
 
-%\bibliographystyle{sieicej}
-\begin{thebibliography}{9}% 文献数が10未満の時 {9}
-\bibitem{heinz2013tree}
-Heinz, Miriam,
-``Tree decompositiHeinz, Miriamon: graph minor theory and algorithmic implications``,
-2013.
-\end{thebibliography}
+\bibliographystyle{unsrt}
+\bibliography{refs}
 
 \appendix
 \section{}

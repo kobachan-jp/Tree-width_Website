@@ -1,0 +1,86 @@
+\begin{thebibliography}{10}
+
+\bibitem{wilson1979introduction}
+Robin~J Wilson.
+\newblock {\em Introduction to graph theory}.
+\newblock Pearson Education India, 1979.
+
+\bibitem{robertson1986graph}
+Neil Robertson and Paul~D. Seymour.
+\newblock Graph minors. ii. algorithmic aspects of tree-width.
+\newblock {\em Journal of algorithms}, 7(3):309--322, 1986.
+
+\bibitem{diestel2025graph}
+Reinhard Diestel.
+\newblock {\em Graph theory}.
+\newblock Springer Nature, 2025.
+
+\bibitem{bodlaender2010treewidth}
+Hans~L Bodlaender and Arie~MCA Koster.
+\newblock Treewidth computations i. upper bounds.
+\newblock {\em Information and Computation}, 208(3):259--275, 2010.
+
+\bibitem{nodejs}
+{OpenJS Foundation and Node.js contributors}.
+\newblock Node.js^^c2^^aeとは.
+\newblock \url{https://nodejs.org/ja/about}, 2026.
+\newblock Accessed: 2026-2-11.
+
+\bibitem{Next.js}
+Inc. Vercel.
+\newblock Next.js docs.
+\newblock \url{https://nextjs.org/docs}, 2025.
+\newblock Accessed: 2026-2-11.
+
+\bibitem{TypeScript}
+Microsoft.
+\newblock Typescript for the new programmer.
+\newblock
+  \url{https://www.typescriptlang.org/docs/handbook/typescript-from-scratch.html},
+  2026.
+\newblock Accessed: 2026-2-11.
+
+\bibitem{React}
+Inc Meta~Platforms.
+\newblock React reference overview.
+\newblock \url{https://ja.react.dev/reference/react}, 2026.
+\newblock Accessed: 2026-2-11.
+
+\bibitem{React/Next.js}
+手島~拓也 他.
+\newblock {\em TypeScriptとReact/Next.jsでつくる実践Webアプリケーション開発}.
+\newblock 技術評論社, 2022.
+
+\bibitem{React2025}
+山田 祥寛.
+\newblock {\em
+  改訂新版 これからはじめるReact実践入門 コンポーネントの基本からNext.jsによるアプリ開発まで}.
+\newblock SBクリエイティブ, 2025.
+
+\bibitem{Webprogramming}
+西畑~一馬 他.
+\newblock {\em プロフェッショナルWebプログラミング React}.
+\newblock エムディエヌコーポレーション, 2025.
+
+\bibitem{sqlite}
+{SQLite Consortium}.
+\newblock About sqlite.
+\newblock \url{https://www.sqlite.org/about.html}, 2025.
+\newblock Accessed: 2026-2-11.
+
+\bibitem{Prisma}
+Inc. Prisma~Data.
+\newblock What is prisma orm?
+\newblock
+  \url{https://www.prisma.io/docs/orm/overview/introduction/what-is-prisma},
+  2025.
+\newblock Accessed: 2026-2-11.
+
+\bibitem{reactflow}
+{xyflow team}.
+\newblock Overview: Terms and definitions.
+\newblock \url{https://reactflow.dev/learn/concepts/terms-and-definitions},
+  2026.
+\newblock Accessed: 2026-2-11.
+
+\end{thebibliography}
