@@ -19,16 +19,10 @@ enum ProblemCategory {
   Choice
 }
 
-model Section{
-  id Int @id @default(autoincrement())
-  problems Problem[]
-}
 model Problem{
   id Int @id @default(autoincrement())
   category ProblemCategory @default(TrueOrFalse)
   questionId Int 
-  sectionId Int
-  section Section? @relation(fields:[sectionId], references:[id])
 }
 
 model TrueOrFalse{

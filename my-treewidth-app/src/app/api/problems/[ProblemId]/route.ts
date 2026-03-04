@@ -64,37 +64,35 @@ const categoryHandlers = {
   //このオブジェクトの値とキーは変更されない定数とする
 } as const
 
-export async function GET(_: Request, props: { params: Promise<{ sectionId: string }> }) {
-  //[SectionId]の取得
+export async function GET(_: Request, props: { params: Promise<{ ProblemId: string }> }) {
+  //[ProblemId]の取得
   const resolvedParams = await props.params
-  const sectionId = Number(resolvedParams.sectionId)
+  const ProblemId = Number(resolvedParams.ProblemId)
 
-  if (isNaN(sectionId) || sectionId <= 0) {
-    return NextResponse.json({ error: '無効な Section ID です' }, { status: 400 })
+  if (isNaN(ProblemId) || ProblemId <= 0) {
+    return NextResponse.json({ error: '無効な Problem ID です' }, { status: 400 })
   }
 
-  const problems = await prisma.problem.findMany({
-    where: { sectionId },
+  const problem = await prisma.problem.findMany({
+    where: { id : ProblemId },
   })
   //ProblemCategory型を全て配列として取り出す
   const category = Object.values(ProblemCategory)
 
-  const problemDetails = await Promise.all(
-    problems.map(async (p) => {
-      const handler = categoryHandlers[p.category]
+  const problemDetail =
+    const handler = categoryHandlers[problem.category]
 
       if (!handler) {
-        throw new Error(`Not Found for Category: ${p.category}`)
+        throw new Error(`Not Found for Category: ${problem.category}`)
       }
 
-      const detail = await handler(p.questionId)
+      const detail = await handler(problem.questionId)
 
       return {
         ...p,
         detail,
       }
     }),
-  )
 
   return NextResponse.json(problemDetails)
 }
