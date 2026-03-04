@@ -1,6 +1,8 @@
-\beamer@sectionintoc {1}{研究目的}{3}{0}{1}
-\beamer@sectionintoc {2}{グラフ理論の基礎知識}{4}{0}{2}
-\beamer@sectionintoc {3}{木幅（treewidth）}{6}{0}{3}
-\beamer@subsectionintoc {3}{1}{木分解(tree-decomposition)}{9}{0}{3}
-\beamer@sectionintoc {4}{木幅学習システムの開発}{12}{0}{4}
-\beamer@sectionintoc {5}{今後の課題とまとめ}{14}{0}{5}
+\beamer@sectionintoc {1}{はじめに}{3}{0}{1}
+\beamer@sectionintoc {2}{木と閉路}{5}{0}{2}
+\beamer@sectionintoc {3}{木分解（tree decomposition）}{8}{0}{3}
+\beamer@sectionintoc {4}{木幅（treewidth）}{11}{0}{4}
+\beamer@sectionintoc {5}{木幅学習システムの開発}{14}{0}{5}
+\beamer@sectionintoc {6}{今後の課題}{19}{0}{6}
+\beamer@sectionintoc {7}{まとめ}{21}{0}{7}
+\beamer@sectionintoc {8}{参考文献}{23}{0}{8}
