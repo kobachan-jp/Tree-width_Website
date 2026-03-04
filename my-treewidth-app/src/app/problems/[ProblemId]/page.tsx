@@ -13,24 +13,24 @@ export default function ProblemsPage() {
   const [hasNext, setHasNext] = useState(false) // ←★追加
   const [hasPrev, setHasPrev] = useState(false) // ←★追加（必要なら）
 
-  const params = useParams<{ sectionId: string }>()
-  const sectionId = Number(params.sectionId)
+  const params = useParams<{ ProblemId: string }>()
+  const ProblemId = Number(params.ProblemId)
   const router = useRouter()
 
   // --- 問題取得 ---
   useEffect(() => {
-    fetch(`/api/problems/${sectionId}`)
+    fetch(`/api/problems/${ProblemId}`)
       .then((res) => res.json())
       .then((data) => {
         setProblems(data)
         setMessages({})
       })
-  }, [sectionId])
+  }, [ProblemId])
 
   // --- 次・前セクション存在チェック ---
   useEffect(() => {
-    const next = sectionId + 1
-    const prev = sectionId - 1
+    const next = ProblemId + 1
+    const prev = ProblemId - 1
 
     // 次のセクションが存在するか
     fetch(`/api/sections/${next}`)
@@ -45,7 +45,7 @@ export default function ProblemsPage() {
         .then((res) => setHasPrev(res.ok))
         .catch(() => setHasPrev(false))
     }
-  }, [sectionId])
+  }, [ProblemId])
 
   // --- 回答送信 ---
   async function handleAnswer(
@@ -54,7 +54,7 @@ export default function ProblemsPage() {
     questionId: number,
     answer: number,
   ) {
-    const res = await fetch(`/api/problems/${sectionId}`, {
+    const res = await fetch(`/api/problems/${ProblemId}`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ category, questionId, answer }),
@@ -66,12 +66,12 @@ export default function ProblemsPage() {
   // --- 移動 ---
   const handleNext = (e: any) => {
     e.preventDefault()
-    if (hasNext) router.push(`/problems/${sectionId + 1}`)
+    if (hasNext) router.push(`/problems/${ProblemId + 1}`)
   }
 
   const handlePrev = (e: any) => {
     e.preventDefault()
-    if (hasPrev) router.push(`/problems/${sectionId - 1}`)
+    if (hasPrev) router.push(`/problems/${ProblemId - 1}`)
   }
 
   return (
@@ -84,7 +84,7 @@ export default function ProblemsPage() {
           marginBottom: '30px',
         }}
       >
-        Section {sectionId}
+        Section {ProblemId}
       </h1>
 
       <ProblemList problems={problems} messages={messages} handleAnswer={handleAnswer} />
