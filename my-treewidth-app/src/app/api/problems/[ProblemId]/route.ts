@@ -73,28 +73,27 @@ export async function GET(_: Request, props: { params: Promise<{ ProblemId: stri
     return NextResponse.json({ error: '無効な Problem ID です' }, { status: 400 })
   }
 
-  const problem = await prisma.problem.findMany({
-    where: { id : ProblemId },
+  const problem = await prisma.problem.findUnique({
+    where: { id: ProblemId },
   })
-  //ProblemCategory型を全て配列として取り出す
-  const category = Object.values(ProblemCategory)
 
-  const problemDetail =
-    const handler = categoryHandlers[problem.category]
+  if (!problem) {
+    return NextResponse.json({ error: 'Problem not found' }, { status: 404 })
+  }
+  const handler = categoryHandlers[problem.category]
 
-      if (!handler) {
-        throw new Error(`Not Found for Category: ${problem.category}`)
-      }
+  if (!handler) {
+    throw new Error(`Not Found for Category: ${problem.category}`)
+  }
 
-      const detail = await handler(problem.questionId)
+  const detail = await handler(problem.questionId)
 
-      return {
-        ...p,
-        detail,
-      }
-    }),
+  const problemDetail = {
+    ...problem,
+    detail,
+  }
 
-  return NextResponse.json(problemDetails)
+  return NextResponse.json(problemDetail)
 }
 
 export async function POST(req: Request, props: { params: Promise<{ sectionId: string }> }) {
