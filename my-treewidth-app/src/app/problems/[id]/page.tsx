@@ -50,7 +50,6 @@ export default function ProblemsPage() {
   // --- 回答送信 ---
   async function handleAnswer(
     category: ProblemCategory,
-    problemId: number,
     questionId: number,
     answer: number,
   ) {
@@ -60,7 +59,7 @@ export default function ProblemsPage() {
       body: JSON.stringify({ category, questionId, answer }),
     })
     const data = await res.json()
-    setMessages((prev) => ({ ...prev, [problemId]: data.correct }))
+    setMessages((prev) => ({ ...prev, [id]: data.correct }))
   }
 
   // --- 移動 ---
@@ -84,7 +83,7 @@ export default function ProblemsPage() {
           marginBottom: '30px',
         }}
       >
-        Section {id}
+        問題 {id}
       </h1>
 
       <ProblemList problems={problems} messages={messages} handleAnswer={handleAnswer} />

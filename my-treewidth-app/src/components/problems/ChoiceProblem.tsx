@@ -32,12 +32,12 @@ export default function ChoiceProblem({
       <div
         style={{
           display: 'flex',
-        flexDirection: 'column', // ★ これで縦並びになる
-        alignItems: 'flex-start', // ★ 左揃えにする（中央にしたい場合は 'center'）
-        justifyContent: 'center',
-        margin: '0 auto 2em',  // ★ 中央寄せ (上下 左右 下の余白)
-        gap: '20px',             // ★ 選択肢ごとの間隔
-        fontSize: '24px'
+          flexDirection: 'column', // ★ これで縦並びになる
+          alignItems: 'flex-start', // ★ 左揃えにする（中央にしたい場合は 'center'）
+          justifyContent: 'center',
+          margin: '0 auto 2em', // ★ 中央寄せ (上下 左右 下の余白)
+          gap: '20px', // ★ 選択肢ごとの間隔
+          fontSize: '24px',
         }}
       >
         {radioButtons.map((radio) => {

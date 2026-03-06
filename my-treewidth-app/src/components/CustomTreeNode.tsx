@@ -5,7 +5,7 @@ import { Handle, Position, NodeProps } from 'reactflow'
 // ✅ NodeProps 型を明示的に使う
 export default function CustomTreeNode({ data, selected }: NodeProps) {
   return (
-   <div
+    <div
       style={{
         background: selected ? '#FF69B4' : '#32CD32',
         width: 45,
