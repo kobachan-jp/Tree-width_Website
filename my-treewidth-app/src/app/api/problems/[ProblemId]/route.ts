@@ -64,17 +64,17 @@ const categoryHandlers = {
   //このオブジェクトの値とキーは変更されない定数とする
 } as const
 
-export async function GET(_: Request, props: { params: Promise<{ id: string }> }) {
-  //[id]の取得
+export async function GET(_: Request, props: { params: Promise<{ ProblemId: string }> }) {
+  //[ProblemId]の取得
   const resolvedParams = await props.params
-  const id = Number(resolvedParams.id)
+  const ProblemId = Number(resolvedParams.ProblemId)
 
-  if (isNaN(id) || id <= 0) {
+  if (isNaN(ProblemId) || ProblemId <= 0) {
     return NextResponse.json({ error: '無効な Problem ID です' }, { status: 400 })
   }
 
   const problem = await prisma.problem.findUnique({
-    where: { id: id },
+    where: { id: ProblemId },
   })
 
   if (!problem) {
@@ -96,14 +96,14 @@ export async function GET(_: Request, props: { params: Promise<{ id: string }> }
   return NextResponse.json(problemDetail)
 }
 
-export async function POST(req: Request, props: { params: Promise<{ id: string }> }) {
+export async function POST(req: Request, props: { params: Promise<{ ProblemId: string }> }) {
   const { category, questionId, answer } = await req.json()
   const resolvedParams = await props.params
-  const id = Number(resolvedParams.id)
+  const ProblemId = Number(resolvedParams.ProblemId)
   console.log('answer time')
 
   const problem = await prisma.problem.findUnique({
-    where: { id },
+    where: { id: ProblemId },
   })
 
   let question
