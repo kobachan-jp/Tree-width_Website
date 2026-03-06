@@ -96,41 +96,44 @@ export async function GET(_: Request, props: { params: Promise<{ ProblemId: stri
   return NextResponse.json(problemDetail)
 }
 
-export async function POST(req: Request, props: { params: Promise<{ sectionId: string }> }) {
+export async function POST(req: Request, props: { params: Promise<{ ProblemId: string }> }) {
   const { category, questionId, answer } = await req.json()
   const resolvedParams = await props.params
-  const sectionId = Number(resolvedParams.sectionId)
+  const ProblemId = Number(resolvedParams.ProblemId)
   console.log('answer time')
-  const section = await prisma.section.findUnique({
-    where: { id: sectionId },
+
+  const problem = await prisma.problem.findUnique({
+    where: { id: ProblemId },
   })
-  let problem
+
+  let question
   switch (category) {
     case ProblemCategory.TrueOrFalse:
-      problem = await prisma.trueOrFalse.findUnique({
+      question = await prisma.trueOrFalse.findUnique({
         where: { id: questionId },
       })
+
       break
 
     case ProblemCategory.Input:
-      problem = await prisma.input.findUnique({
+      question = await prisma.input.findUnique({
         where: { id: questionId },
       })
       break
 
     case ProblemCategory.Choice:
-      problem = await prisma.choice.findUnique({
+      question = await prisma.choice.findUnique({
         where: { id: questionId },
       })
       break
   }
-  if (!problem) {
+  if (!question) {
     return NextResponse.json({ correct: false, message: '問題が見つかりません' })
   }
 
-  const correct = problem.answer === answer
+  const correct = String(question.answer).trim() === String(answer).trim()
   return NextResponse.json({
     correct,
-    section,
+    problem,
   })
 }
