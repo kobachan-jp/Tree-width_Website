@@ -1,0 +1,33 @@
+.node {
+  background: #32cd32;
+  width: 45px;
+  height: 45px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  transform: rotate(45deg);
+}
+
+.nodeLabel {
+  transform: rotate(-45deg);
+  color: black;
+}
+
+.selected {
+  background: #ff69b4;
+}
+
+.sourceHandle,
+.targetHandle {
+  position: absolute;
+  inset: 0;
+  background: transparent;
+  border: none;
+  pointer-events: all;
+}
+
+.node:has(.react-flow__handle-connecting),
+.node:has(.react-flow__handle-valid) {
+  border-color: red;
+}

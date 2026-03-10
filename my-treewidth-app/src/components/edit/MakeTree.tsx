@@ -2,7 +2,7 @@
 
 import React, { useEffect, useMemo } from 'react'
 import ReactFlow, { Background, Controls, NodeProps } from 'reactflow'
-import EditCustomNode from '@/components/edit/EditCustomNode'
+import EditCustomTreeNode from './EditCustomTreeNode'
 import 'reactflow/dist/style.css'
 import { useGraph } from '@/hooks/useGraph'
 import { CustomNodeData } from '@/hooks/useGraph'
@@ -27,7 +27,7 @@ export default function MakeGraph() {
   const nodeTypes = useMemo(
     () => ({
       custom: (props: NodeProps<CustomNodeData>) => (
-        <EditCustomNode {...props} onChangeLabel={updateNodeLabel} />
+        <EditCustomTreeNode {...props} onChangeLabel={updateNodeLabel} />
       ),
     }),
     [updateNodeLabel],
