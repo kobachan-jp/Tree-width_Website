@@ -8,12 +8,7 @@ export default function AnswerUI({
   handleAnswer,
 }: {
   p: ProblemWithDetail
-  handleAnswer: (
-    category: ProblemCategory,
-    problemId: number,
-    questionId: number,
-    answer: number,
-  ) => void
+  handleAnswer: (category: ProblemCategory, questionId: number, answer: number) => void
 }) {
   switch (p.category) {
     case ProblemCategory.TrueOrFalse:

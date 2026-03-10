@@ -6,11 +6,7 @@ export default function InputProblem({
   handleAnswer,
 }: {
   p: ProblemWithDetail
-  handleAnswer: (
-    category: ProblemCategory,
-    questionId: number,
-    answer: number,
-  ) => void
+  handleAnswer: (category: ProblemCategory, questionId: number, answer: number) => void
 }) {
   const [value, setValue] = useState<string | ''>('')
 

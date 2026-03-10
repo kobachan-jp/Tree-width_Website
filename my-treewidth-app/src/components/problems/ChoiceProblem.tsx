@@ -10,11 +10,7 @@ export default function ChoiceProblem({
   handleAnswer,
 }: {
   p: ProblemWithDetail
-  handleAnswer: (
-    category: ProblemCategory,
-    questionId: number,
-    answer: number,
-  ) => void
+  handleAnswer: (category: ProblemCategory, questionId: number, answer: number) => void
 }) {
   const [selected, setSelected] = useState('1')
   const changeValue = (event: React.ChangeEvent<HTMLInputElement>) =>

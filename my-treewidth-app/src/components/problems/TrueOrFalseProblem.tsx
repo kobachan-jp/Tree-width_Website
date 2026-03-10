@@ -5,11 +5,7 @@ export default function TrueOrFalseProblem({
   handleAnswer,
 }: {
   p: ProblemWithDetail
-  handleAnswer: (
-    category: ProblemCategory,
-    questionId: number,
-    answer: number,
-  ) => void
+  handleAnswer: (category: ProblemCategory, questionId: number, answer: number) => void
 }) {
   return (
     <div style={{ display: 'flex', gap: '0px', justifyContent: 'center', marginLeft: '10em' }}>
