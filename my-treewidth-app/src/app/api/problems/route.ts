@@ -3,14 +3,14 @@ import prisma from '@/lib/prisma'
 
 export async function GET(req: Request, { params }: { params: { id: string } }) {
   const id = Number((await params).id)
-  console.log(id)
-  const section = await prisma.section.findUnique({
+
+  const problem = await prisma.problem.findUnique({
     where: { id },
   })
-  console.log(section)
-  if (!section) {
+
+  if (!problem) {
     return NextResponse.json({ error: 'Not found' }, { status: 404 })
   }
 
-  return NextResponse.json(section)
+  return NextResponse.json(problem)
 }

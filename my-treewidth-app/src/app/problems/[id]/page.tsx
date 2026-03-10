@@ -13,27 +13,27 @@ export default function ProblemsPage() {
   const [hasNext, setHasNext] = useState(false) // ←★追加
   const [hasPrev, setHasPrev] = useState(false) // ←★追加（必要なら）
 
-  const params = useParams<{ ProblemId: string }>()
-  const ProblemId = Number(params.ProblemId)
+  const params = useParams<{ id: string }>()
+  const id = Number(params.id)
   const router = useRouter()
 
   // --- 問題取得 ---
   useEffect(() => {
-    fetch(`/api/problems/${ProblemId}`)
+    fetch(`/api/problems/${id}`)
       .then((res) => res.json())
       .then((data) => {
         setProblems(data)
         setMessages({})
       })
-  }, [ProblemId])
+  }, [id])
 
   // --- 次・前セクション存在チェック ---
   useEffect(() => {
-    const next = ProblemId + 1
-    const prev = ProblemId - 1
+    const next = id + 1
+    const prev = id - 1
 
     // 次のセクションが存在するか
-    fetch(`/api/sections/${next}`)
+    fetch(`/api/problems/${next}`)
       .then((res) => setHasNext(res.ok))
       .catch(() => setHasNext(false))
 
@@ -41,37 +41,36 @@ export default function ProblemsPage() {
     if (prev <= 0) {
       setHasPrev(false)
     } else {
-      fetch(`/api/sections/${prev}`)
+      fetch(`/api/problems/${prev}`)
         .then((res) => setHasPrev(res.ok))
         .catch(() => setHasPrev(false))
     }
-  }, [ProblemId])
+  }, [id])
 
   // --- 回答送信 ---
   async function handleAnswer(
     category: ProblemCategory,
-    problemId: number,
     questionId: number,
     answer: number,
   ) {
-    const res = await fetch(`/api/problems/${ProblemId}`, {
+    const res = await fetch(`/api/problems/${id}`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ category, questionId, answer }),
     })
     const data = await res.json()
-    setMessages((prev) => ({ ...prev, [problemId]: data.correct }))
+    setMessages((prev) => ({ ...prev, [id]: data.correct }))
   }
 
   // --- 移動 ---
   const handleNext = (e: any) => {
     e.preventDefault()
-    if (hasNext) router.push(`/problems/${ProblemId + 1}`)
+    if (hasNext) router.push(`/problems/${id + 1}`)
   }
 
   const handlePrev = (e: any) => {
     e.preventDefault()
-    if (hasPrev) router.push(`/problems/${ProblemId - 1}`)
+    if (hasPrev) router.push(`/problems/${id - 1}`)
   }
 
   return (
@@ -84,7 +83,7 @@ export default function ProblemsPage() {
           marginBottom: '30px',
         }}
       >
-        Section {ProblemId}
+        問題 {id}
       </h1>
 
       <ProblemList problems={problems} messages={messages} handleAnswer={handleAnswer} />
