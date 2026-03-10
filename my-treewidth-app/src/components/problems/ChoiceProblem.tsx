@@ -12,7 +12,6 @@ export default function ChoiceProblem({
   p: ProblemWithDetail
   handleAnswer: (
     category: ProblemCategory,
-    problemId: number,
     questionId: number,
     answer: number,
   ) => void
@@ -63,7 +62,7 @@ export default function ChoiceProblem({
         <button
           className="problem-button"
           onClick={() => {
-            handleAnswer(ProblemCategory.Choice, p.id, p.questionId, Number(selected))
+            handleAnswer(ProblemCategory.Choice, p.questionId, Number(selected))
           }}
         >
           送信

@@ -18,7 +18,6 @@ export default function ProblemItem({
   result: boolean | undefined
   handleAnswer: (
     category: ProblemCategory,
-    problemId: number,
     questionId: number,
     answer: number,
   ) => void

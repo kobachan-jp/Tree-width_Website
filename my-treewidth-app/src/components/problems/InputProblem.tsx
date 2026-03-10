@@ -8,7 +8,6 @@ export default function InputProblem({
   p: ProblemWithDetail
   handleAnswer: (
     category: ProblemCategory,
-    problemId: number,
     questionId: number,
     answer: number,
   ) => void
@@ -18,7 +17,7 @@ export default function InputProblem({
   const handleSubmit = (e: any) => {
     e.preventDefault()
     if (value !== '') {
-      handleAnswer(ProblemCategory.Input, p.id, p.questionId, Number(value))
+      handleAnswer(ProblemCategory.Input, p.questionId, Number(value))
     }
   }
 
@@ -45,7 +44,7 @@ export default function InputProblem({
         className="problem-button"
         onClick={() => {
           if (value !== '') {
-            handleAnswer(ProblemCategory.Input, p.id, p.questionId, Number(value))
+            handleAnswer(ProblemCategory.Input, p.questionId, Number(value))
           }
         }}
       >
