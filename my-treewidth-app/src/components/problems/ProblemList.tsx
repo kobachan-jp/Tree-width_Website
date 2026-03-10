@@ -2,24 +2,22 @@ import ProblemItem from './ProblemItem'
 import { ProblemWithDetail, ProblemCategory } from '@/types'
 
 export default function ProblemList({
-  problems,
+  problem,
   messages,
   handleAnswer,
 }: {
-  problems: ProblemWithDetail[]
+  problem: ProblemWithDetail
   messages: { [id: number]: boolean | undefined }
-  handleAnswer: (
-    category: ProblemCategory,
-    problemId: number,
-    questionId: number,
-    answer: number,
-  ) => void
+  handleAnswer: (category: ProblemCategory, questionId: number, answer: number) => void
 }) {
   return (
     <>
-      {problems.map((p) => (
-        <ProblemItem key={p.id} p={p} result={messages[p.id]} handleAnswer={handleAnswer} />
-      ))}
+      <ProblemItem
+        key={problem.id}
+        p={problem}
+        result={messages[problem.id]}
+        handleAnswer={handleAnswer}
+      />
     </>
   )
 }

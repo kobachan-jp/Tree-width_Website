@@ -5,19 +5,14 @@ export default function TrueOrFalseProblem({
   handleAnswer,
 }: {
   p: ProblemWithDetail
-  handleAnswer: (
-    category: ProblemCategory,
-    problemId: number,
-    questionId: number,
-    answer: number,
-  ) => void
+  handleAnswer: (category: ProblemCategory, questionId: number, answer: number) => void
 }) {
   return (
     <div style={{ display: 'flex', gap: '0px', justifyContent: 'center', marginLeft: '10em' }}>
       <div style={{ flex: 1 }}>
         <button
           className="problem-button"
-          onClick={() => handleAnswer(ProblemCategory.TrueOrFalse, p.id, p.questionId, 1)}
+          onClick={() => handleAnswer(ProblemCategory.TrueOrFalse, p.questionId, 1)}
           style={{
             display: 'flex',
             width: '90px', // ← 枠の横幅を固定
@@ -36,7 +31,7 @@ export default function TrueOrFalseProblem({
       <div style={{ flex: 1 }}>
         <button
           className="problem-button"
-          onClick={() => handleAnswer(ProblemCategory.TrueOrFalse, p.id, p.questionId, 0)}
+          onClick={() => handleAnswer(ProblemCategory.TrueOrFalse, p.questionId, 0)}
           style={{
             display: 'flex',
             width: '90px', // ← 枠の横幅を固定

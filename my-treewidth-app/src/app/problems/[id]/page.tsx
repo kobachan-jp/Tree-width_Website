@@ -7,7 +7,7 @@ import ProblemList from '@/components/problems/ProblemList'
 import { useRouter } from 'next/navigation'
 
 export default function ProblemsPage() {
-  const [problems, setProblems] = useState<ProblemWithDetail[]>([])
+  const [problem, setProblems] = useState<ProblemWithDetail | null>(null)
   const [messages, setMessages] = useState<{ [id: number]: boolean | undefined }>({})
 
   const [hasNext, setHasNext] = useState(false) // ←★追加
@@ -48,11 +48,7 @@ export default function ProblemsPage() {
   }, [id])
 
   // --- 回答送信 ---
-  async function handleAnswer(
-    category: ProblemCategory,
-    questionId: number,
-    answer: number,
-  ) {
+  async function handleAnswer(category: ProblemCategory, questionId: number, answer: number) {
     const res = await fetch(`/api/problems/${id}`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -85,8 +81,7 @@ export default function ProblemsPage() {
       >
         問題 {id}
       </h1>
-
-      <ProblemList problems={problems} messages={messages} handleAnswer={handleAnswer} />
+      {problem && <ProblemList problem={problem} messages={messages} handleAnswer={handleAnswer} />}
 
       <div
         style={{

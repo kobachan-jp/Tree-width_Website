@@ -16,26 +16,10 @@ export default function ProblemItem({
 }: {
   p: ProblemWithDetail
   result: boolean | undefined
-  handleAnswer: (
-    category: ProblemCategory,
-    problemId: number,
-    questionId: number,
-    answer: number,
-  ) => void
+  handleAnswer: (category: ProblemCategory, questionId: number, answer: number) => void
 }) {
   return (
     <div style={{ marginBottom: 30 }}>
-      <p
-        style={{
-          marginTop: '3em',
-          marginBottom: '2em',
-          fontWeight: 'bold',
-          fontSize: '1em',
-          textAlign: 'center',
-        }}
-      >
-        問題 {p.id}
-      </p>
       <div style={{ display: 'flex', gap: '20px' }}>
         <div style={{ flex: 1 }}>
           <PaintGraph p={p}></PaintGraph>
