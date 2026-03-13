@@ -1,4 +1,4 @@
-This is LuaHBTeX, Version 1.22.0 (TeX Live 2025)  (format=lualatex 2026.1.31)  13 MAR 2026 17:26
+This is LuaHBTeX, Version 1.22.0 (TeX Live 2025)  (format=lualatex 2026.1.31)  13 MAR 2026 17:42
  restricted system commands enabled.
 **workshop.tex
 (./workshop.tex
@@ -2030,12 +2030,6 @@ LaTeX Font Info:    Kanji font shape `JY3/mc/m/it' undefined
 
 
 ]
-warning  (pdf backend): ignoring duplicate destination with the name 'sum<1>'
-
-warning  (pdf backend): ignoring duplicate destination with the name 'sum'
-[26
-
-]
 \tf@nav=\write7
 
 \openout7 = workshop.nav
@@ -2059,14 +2053,15 @@ Package rerunfilecheck Info: File `workshop.out' has not changed.
 )
 
 Here is how much of LuaTeX's memory you used:
- 31613 strings out of 476076
+ 31611 strings out of 476076
  125244,1144653 words of node,token memory allocated
- 18855 words of node memory still in use:
-   47 hlist, 11 vlist, 124 rule, 4 local_par, 202 glue, 9 kern, 40 penalty, 132 
-glyph, 6350 attribute, 72 glue_spec, 614 attribute_list, 8 write, 48 user_define
-d, 30 pdf_colorstack nodes
-   avail lists: 1:5,2:22762,3:774,4:701,5:149,6:51,7:3681,8:73,9:815,10:40,11:16
-2
+ 40379 words of node memory still in use:
+   67 hlist, 8 vlist, 88 rule, 39 disc, 8 local_par, 6 math, 301 glue, 34 kern, 
+85 penalty, 670 glyph, 13786 attribute, 72 glue_spec, 1314 attribute_list, 4 wri
+te, 72 user_defined, 3 pdf_start_link, 3 pdf_end_link, 7 pdf_dest, 3 pdf_action,
+ 32 pdf_colorstack nodes
+   avail lists: 1:5,2:14626,3:730,4:675,5:123,6:44,7:3038,8:73,9:824,10:40,11:12
+3
  53017 multiletter control sequences out of 65536+600000
  120 fonts using 79543135 bytes
  105i,13n,115p,2031b,1201s stack positions out of 10000i,1000n,20000p,200000b,200000s
@@ -2086,10 +2081,10 @@ ype1/public/amsfonts/cm/cmss10.pfb></usr/local/texlive/2025/texmf-dist/fonts/typ
 e1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1
 /public/amsfonts/cm/cmsy8.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/pu
 blic/amsfonts/symbols/msam10.pfb>
-Output written on workshop.pdf (26 pages, 554213 bytes).
+Output written on workshop.pdf (25 pages, 552744 bytes).
 
-PDF statistics: 377 PDF objects out of 1000 (max. 8388607)
- 282 compressed objects within 3 object streams
- 79 named destinations out of 1000 (max. 131072)
+PDF statistics: 372 PDF objects out of 1000 (max. 8388607)
+ 278 compressed objects within 3 object streams
+ 77 named destinations out of 1000 (max. 131072)
  110 words of extra memory for PDF output out of 10000 (max. 100000000)
 
