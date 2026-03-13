@@ -1,4 +1,4 @@
-\begin{thebibliography}{12}
+\begin{thebibliography}{13}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \expandafter\ifx\csname urlstyle\endcsname\relax
@@ -9,6 +9,12 @@
 John~Adrian Bondy, Uppaluri Siva~Ramachandra Murty, et~al.
 \newblock \emph{Graph theory with applications}, volume 290.
 \newblock Macmillan London, 1976.
+
+\bibitem[Halin(1976)]{halin1976s}
+Rudolf Halin.
+\newblock S-functions for graphs.
+\newblock \emph{Journal of geometry}, 8\penalty0 (1-2):\penalty0 171--186,
+  1976.
 
 \bibitem[Meta~Platforms(2026)]{React}
 Inc Meta~Platforms.
