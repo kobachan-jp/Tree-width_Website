@@ -1,7 +1,7 @@
 'use client'
 
 import { Handle, Position, NodeProps } from 'reactflow'
-import styles from './editCustomNode.module.css'
+import styles from './editCustomGraphNode.module.css'
 import { CustomNodeData } from '@/hooks/useGraph'
 
 type Props = NodeProps<CustomNodeData> & {
@@ -9,7 +9,7 @@ type Props = NodeProps<CustomNodeData> & {
   onChangeLabel: (id: string, label: string) => void
 }
 
-export default function EditCustomNode({ id, data, selected, onChangeLabel }: Props) {
+export default function EditCustomGraphNode({ id, data, selected, onChangeLabel }: Props) {
   const handleDoubleClick = (e: React.MouseEvent) => {
     // ReactFlow側のダブルクリックイベントと衝突しないよう伝播を止める
     e.stopPropagation()

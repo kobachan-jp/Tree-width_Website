@@ -122,12 +122,21 @@
   \item \Rightarrow 再帰構造を持ち，動的計画法が適用しやすい.
 
   \item 一方，一般のグラフは閉路を含み，
-        木と同様のアルゴリズムを適用ことは困難.
+        木と同様のアルゴリズムの適用は困難.
 
-\vspace{2em}
+\vspace{1.5em}
 \end{itemize}
 		\centering
-	  \textbf{一般グラフを「木に近い構造」として扱う枠組み \quad \Rrightarrow \quad \color{blue}{木分解}}
+	  \textbf{一般グラフを「木に近い構造」として扱う枠組み \quad \Rrightarrow \quad \color{blue}{木分解}}\\
+    {\tiny N. Robertson and P. D. Seymour, ``Graph minors. II. Algorithmic aspects of tree-width,'' \textit{Journal of Algorithms}, vol. 7, no. 3, pp. 309--322, 1986.}
+  
+\vspace{1em}
+\footnotesize{
+\begin{itemize}
+    \item \textbf{起源}: 1976年に \alert{Halin} が \alert{$S$-functions} を定義．無限グラフの端（ends）を分離する構造として，現在の木分解と実質的に同等の概念を初めて提唱した．
+    \item \textbf{確立}: 1986年に \alert{Robertson \& Seymour} が \alert{木分解} として再定義．グラフ・マイナー定理の証明に導入し，同時にNP困難な問題へのアルゴリズム的有用性を確立した．
+}
+\end{itemize}
 \end{frame}
 
 \section{木分解（tree decomposition）}
