@@ -29,7 +29,7 @@
 \title{木幅学習システムの構築}
 \subtitle{高効率なグラフ解析に向けた木幅概念の学習システム構築}
 \author{明治大学理工学部情報科学科\\ 小林紹子\quad 玉木久夫\quad 井口幸洋} % 必要に応じて変更・削除
-\date{\today} % 必要に応じて変更・削除
+\date{March 16, 2026}
 
 \begin{frame}[plain]
   \titlepage
@@ -115,7 +115,7 @@
 
 \begin{frame}{木構造はなぜ扱いやすいか}
 \begin{itemize}
-  \setlength{\parskip}{1em}
+  \setlength{\parskip}{0.5em}
 
   \item 木は閉路を持たず，構造が単純.
   \item 頂点や辺を削除すると，自然にグラフが分割される.
@@ -124,19 +124,22 @@
   \item 一方，一般のグラフは閉路を含み，
         木と同様のアルゴリズムの適用は困難.
 
-\vspace{1.5em}
+\vspace{0.7em}
 \end{itemize}
 		\centering
-	  \textbf{一般グラフを「木に近い構造」として扱う枠組み \quad \Rrightarrow \quad \color{blue}{木分解}}\\
-    {\tiny N. Robertson and P. D. Seymour, ``Graph minors. II. Algorithmic aspects of tree-width,'' \textit{Journal of Algorithms}, vol. 7, no. 3, pp. 309--322, 1986.}
+	  \textbf{一般グラフを「木に近い構造」として扱う枠組み \quad \Rrightarrow \quad \color{blue}{木分解}}\cite{robertson1986graph}\\
+    
   
-\vspace{1em}
-\footnotesize{
+\vspace{0.7em}
+\small
 \begin{itemize}
-    \item \textbf{起源}: 1976年に \alert{Halin} が \alert{$S$-functions} を定義．無限グラフの端（ends）を分離する構造として，現在の木分解と実質的に同等の概念を初めて提唱した．
-    \item \textbf{確立}: 1986年に \alert{Robertson \& Seymour} が \alert{木分解} として再定義．グラフ・マイナー定理の証明に導入し，同時にNP困難な問題へのアルゴリズム的有用性を確立した．
-}
+  \setlength{\parskip}{0.5em}
+    \item \textbf{起源}: 1976年に \alert{Halin} が \alert{$S$-functions} を定義\cite{halin1976s}．無限グラフの端を分離する構造として，現在の木分解と実質的に同等の概念を初めて提唱．
+    \item \textbf{確立}: 1986年に \alert{Robertson \& Seymour} が \alert{木分解} として再定義．グラフ・マイナー定理の証明に導入し，同時にNP困難な問題へのアルゴリズム的有用性を確立．
 \end{itemize}
+\vfill
+\raggedright
+{\scriptsize [7] N. Robertson and P. D. Seymour, ``Graph minors. II. Algorithmic aspects of tree-width,'' \textit{Journal of Algorithms}, vol. 7, no. 3, pp. 309--322, 1986.}
 \end{frame}
 
 \section{木分解（tree decomposition）}
@@ -146,7 +149,7 @@
 \vspace{1em}
 \begin{block}{木分解の定義}
 グラフ $G=(V,E)$ に対し，
-木 $T=(I,F)$ とバッグ集合 $\{X_i \mid i\in I\}$ が
+木 $T=(I,F)$ とバッグと呼ばれる部分集合 $\{X_i \mid i\in I\}$ が
 次を満たすとき，これを\textbf{木分解}という\cite{robertson1986graph}．
 \vspace{1em}
 \begin{itemize}
@@ -196,8 +199,8 @@
 \section{木幅（treewidth）}
 \begin{frame}{木幅（treewidth）とは}
 \begin{itemize}
-  \setlength{\parskip}{1em}
-  \item 木分解において重要なのは「部分集合の大きさ」＝「バッグの大きさ」.
+  \setlength{\parskip}{0.5em}
+  \item 木分解において重要なのは「部分集合の大きさ」＝「バッグに入れた頂点の個数」.
   \item この大きさを「幅（width）」という.
   \item バッグが小さいほど，木に近い構造を持つと考えられる.
 \end{itemize}
@@ -208,12 +211,13 @@
 \[
 \max_{i\in I} (|X_i|-1)
 \]
+
 \end{block}
 
-\vspace{2em}
+\vspace{1em}
 \begin{block}{木幅の定義}
 	\centering
-すべての場合における木分解の幅の最小値.
+すべての場合における木分解の幅の最小値.（※木の木幅は1）
 \end{block}
 \end{frame}
 
@@ -322,9 +326,8 @@
 
 \begin{frame}{学習システム一例（入力問題）}
 	\begin{figure}
-  \includegraphics[width=0.8\textwidth,height=0.85\textheight,
-  keepaspectratio,trim=0 0 0 3cm,clip]{./ieice2026/Input.png}  
-  \caption{選択問題の例}
+  \includegraphics[width=0.8\textwidth,height=0.85\textheight]{./ieice2026/Input.png}  
+  \caption{入力問題の例}
   \label{Choice}
 \end{figure}
 
@@ -412,7 +415,7 @@
   \setlength{\parskip}{0.5em}
   \item 木幅・木分解は，一般グラフを「木に近い構造」として捉えるための重要な概念である.
   \item 定義理解の難しさに着目し，問題演習とインタラクティブ操作を通じた学習支援システムを構築した.
-  \item 視覚的・操作的な学習により，木幅・木分解の直感的理解を支援できると期待される.
+  \item 視覚的・操作的な学習により，木幅・木分解の直感的理解を支援できると考えられる.
 \end{itemize}
 
 \end{frame}
@@ -424,5 +427,4 @@
   \bibliography{refs}
 \end{frame}
 
-\againframe{sum}
 \end{document}

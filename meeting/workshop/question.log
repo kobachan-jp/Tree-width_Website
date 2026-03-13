@@ -1,7 +1,7 @@
-This is LuaHBTeX, Version 1.22.0 (TeX Live 2025)  (format=lualatex 2026.1.31)  13 MAR 2026 17:42
+This is LuaHBTeX, Version 1.22.0 (TeX Live 2025)  (format=lualatex 2026.1.31)  13 MAR 2026 18:46
  restricted system commands enabled.
-**workshop.tex
-(./workshop.tex
+**question.tex
+(./question.tex
 LaTeX2e <2025-11-01>
 L3 programming layer <2026-01-19>
 Lua module: luaotfload 2024-12-03 v3.29 Lua based OpenType font support
@@ -1573,15 +1573,8 @@ luaotfload | resolve : sequence of 3 lookups yielded nothing appropriate.
 Package beamerthememetropolis Warning: Could not find Fira Mono fonts on input 
 line 95.
 
-)) (./workshop.aux
-
-LaTeX Warning: Label `sum<1>' multiply defined.
-
-
-LaTeX Warning: Label `sum' multiply defined.
-
-)
-\openout1 = workshop.aux
+)) (./question.aux)
+\openout1 = question.aux
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 26.
 LaTeX Font Info:    ... okay on input line 26.
@@ -1666,10 +1659,10 @@ e
 ))
 Package hyperref Info: Link coloring OFF on input line 26.
 
-(./workshop.out) (./workshop.out)
+(./question.out) (./question.out)
 \@outlinefile=\write6
 
-\openout6 = workshop.out
+\openout6 = question.out
 LaTeX Font Info:    Overwriting symbol font `operators' in version `normal'
 (Font)                  OT1/cmr/m/n --> OT1/cmss/m/n on input line 26.
 LaTeX Font Info:    Overwriting symbol font `operators' in version `bold'
@@ -1735,7 +1728,7 @@ Dictionary: translator-theorem-dictionary, Language: English
 )
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: End \AtBeginDocument code.
- (./workshop.nav)(load cache: extra_lmsans8-regular.luc)
+ (./question.nav)(load cache: extra_lmsans8-regular.luc)
 LaTeX Font Info:    Font shape `JT3/mc/m/n' will be
 (Font)              scaled to size 5.77332pt on input line 26.
 LaTeX Font Info:    Font shape `JY3/mc/m/n' will be
@@ -1747,344 +1740,128 @@ LaTeX Font Info:    Font shape `JY3/mc/m/n' will be
 
 
 Package hyperref Warning: Option `pdfauthor' has already been used,
-(hyperref)                setting the option has no effect on input line 31.
+(hyperref)                setting the option has no effect on input line 30.
 
 (load cache: extra_lmsans12-regular.luc)
 LaTeX Font Info:    Font shape `JT3/mc/m/n' will be
-(Font)              scaled to size 13.85594pt on input line 46.
+(Font)              scaled to size 13.85594pt on input line 35.
 LaTeX Font Info:    Font shape `JY3/mc/m/n' will be
-(Font)              scaled to size 13.85594pt on input line 46.
+(Font)              scaled to size 13.85594pt on input line 35.
 LaTeX Font Info:    Font shape `JT3/mc/b/n' in size <14.4> not available
-(Font)              Font shape `JT3/gt/m/n' tried instead on input line 46.
+(Font)              Font shape `JT3/gt/m/n' tried instead on input line 35.
 LaTeX Font Info:    Font shape `JT3/gt/m/n' will be
-(Font)              scaled to size 13.85594pt on input line 46.
+(Font)              scaled to size 13.85594pt on input line 35.
 LaTeX Font Info:    Font shape `JY3/mc/b/n' in size <14.4> not available
-(Font)              Font shape `JY3/gt/m/n' tried instead on input line 46.
+(Font)              Font shape `JY3/gt/m/n' tried instead on input line 35.
 LaTeX Font Info:    Font shape `JY3/gt/m/n' will be
-(Font)              scaled to size 13.85594pt on input line 46.
-LaTeX Font Info:    Font shape `JT3/mc/m/n' will be
-(Font)              scaled to size 11.54663pt on input line 46.
-LaTeX Font Info:    Font shape `JY3/mc/m/n' will be
-(Font)              scaled to size 11.54663pt on input line 46.
-<olive.png, id=45, 192.72pt x 225.84375pt>
-File: olive.png Graphic file (type png)
-<use olive.png>
-Package luatex.def Info: olive.png  used on input line 46.
-(luatex.def)             Requested size: 108.12054pt x 126.70251pt.
+(Font)              scaled to size 13.85594pt on input line 35.
 
-Overfull \vbox (36.27985pt too high) detected at line 46
+Overfull \vbox (15.63992pt too high) detected at line 35
  []
 
 [1
 
-{/usr/local/texlive/2025/texmf-var/fonts/map/pdftex/updmap/pdftex.map}<./olive.p
-ng>] (./workshop.toc)
-LaTeX Font Info:    Font shape `JT3/mc/b/n' in size <12> not available
-(Font)              Font shape `JT3/gt/m/n' tried instead on input line 61.
-LaTeX Font Info:    Font shape `JT3/gt/m/n' will be
-(Font)              scaled to size 11.54663pt on input line 61.
-LaTeX Font Info:    Font shape `JY3/mc/b/n' in size <12> not available
-(Font)              Font shape `JY3/gt/m/n' tried instead on input line 61.
-LaTeX Font Info:    Font shape `JY3/gt/m/n' will be
-(Font)              scaled to size 11.54663pt on input line 61.
-LaTeX Font Info:    Font shape `JT3/mc/m/n' will be
-(Font)              scaled to size 3.84888pt on input line 61.
-LaTeX Font Info:    Font shape `JY3/mc/m/n' will be
-(Font)              scaled to size 3.84888pt on input line 61.
- [2
-
-]
-LaTeX Font Info:    Trying to load font information for U+msa on input line 63.
+{/usr/local/texlive/2025/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
+LaTeX Font Info:    Trying to load font information for U+msa on input line 47.
 
 
 (/usr/local/texlive/2025/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 63.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 47.
 
 
 (/usr/local/texlive/2025/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
 LaTeX Font Info:    Font shape `JY3/gt/m/n' will be
-(Font)              scaled to size 7.69775pt on input line 63.
+(Font)              scaled to size 7.69775pt on input line 47.
 LaTeX Font Info:    Font shape `JY3/gt/m/n' will be
-(Font)              scaled to size 5.77332pt on input line 63.
+(Font)              scaled to size 5.77332pt on input line 47.
 LaTeX Font Info:    Font shape `TU/lmss/m/it' in size <10.95> not available
-(Font)              Font shape `TU/lmss/m/sl' tried instead on input line 63.
+(Font)              Font shape `TU/lmss/m/sl' tried instead on input line 47.
 (load cache: extra_lmsans10-oblique.luc)
 LaTeX Font Info:    Font shape `TU/lmss/m/it' in size <8> not available
-(Font)              Font shape `TU/lmss/m/sl' tried instead on input line 63.
+(Font)              Font shape `TU/lmss/m/sl' tried instead on input line 47.
 (load cache: extra_lmsans8-oblique.luc)
 LaTeX Font Info:    Font shape `TU/lmss/m/it' in size <6> not available
-(Font)              Font shape `TU/lmss/m/sl' tried instead on input line 63.
- [3
+(Font)              Font shape `TU/lmss/m/sl' tried instead on input line 47.
+LaTeX Font Info:    Font shape `JT3/mc/m/n' will be
+(Font)              scaled to size 11.54663pt on input line 47.
+LaTeX Font Info:    Font shape `JY3/mc/m/n' will be
+(Font)              scaled to size 11.54663pt on input line 47.
+LaTeX Font Info:    Font shape `JT3/mc/b/n' in size <12> not available
+(Font)              Font shape `JT3/gt/m/n' tried instead on input line 47.
+LaTeX Font Info:    Font shape `JT3/gt/m/n' will be
+(Font)              scaled to size 11.54663pt on input line 47.
+LaTeX Font Info:    Font shape `JY3/mc/b/n' in size <12> not available
+(Font)              Font shape `JY3/gt/m/n' tried instead on input line 47.
+LaTeX Font Info:    Font shape `JY3/gt/m/n' will be
+(Font)              scaled to size 11.54663pt on input line 47.
 
-]
-Overfull \vbox (1.85234pt too high) detected at line 81
+Overfull \vbox (7.54553pt too high) detected at line 47
  []
 
-[4
+LaTeX Font Info:    Font shape `JT3/mc/m/n' will be
+(Font)              scaled to size 3.84888pt on input line 47.
+LaTeX Font Info:    Font shape `JY3/mc/m/n' will be
+(Font)              scaled to size 3.84888pt on input line 47.
+[2
+
+] [3
+
+] [4
 
 ] [5
 
-]
-<tree.png, id=102, 474.27188pt x 177.66376pt>
-File: tree.png Graphic file (type png)
-<use tree.png>
-Package luatex.def Info: tree.png  used on input line 114.
-(luatex.def)             Requested size: 189.70538pt x 71.06424pt.
-LaTeX Font Info:    Font shape `JT3/mc/b/n' in size <10> not available
-(Font)              Font shape `JT3/gt/m/n' tried instead on input line 114.
-LaTeX Font Info:    Font shape `JT3/gt/m/n' will be
-(Font)              scaled to size 9.6222pt on input line 114.
-LaTeX Font Info:    Font shape `JY3/mc/b/n' in size <10> not available
-(Font)              Font shape `JY3/gt/m/n' tried instead on input line 114.
-LaTeX Font Info:    Font shape `JY3/gt/m/n' will be
-(Font)              scaled to size 9.6222pt on input line 114.
-<tree_instruction.png, id=103, 421.575pt x 175.65625pt>
-File: tree_instruction.png Graphic file (type png)
-<use tree_instruction.png>
-Package luatex.def Info: tree_instruction.png  used on input line 114.
-(luatex.def)             Requested size: 189.70699pt x 79.04457pt.
+] [6
 
-Overfull \vbox (28.09161pt too high) detected at line 114
- []
-
-[6
-
-<./tree.png><./tree_instruction.png>]
-LaTeX Font Info:    Font shape `JY3/mc/m/n' will be
-(Font)              scaled to size 6.73553pt on input line 143.
-LaTeX Font Info:    Font shape `JY3/mc/m/n' will be
-(Font)              scaled to size 4.8111pt on input line 143.
-LaTeX Font Info:    Font shape `JY3/gt/m/n' will be
-(Font)              scaled to size 6.73553pt on input line 143.
-LaTeX Font Info:    Font shape `JY3/gt/m/n' will be
-(Font)              scaled to size 4.8111pt on input line 143.
-LaTeX Font Info:    Font shape `TU/lmss/m/it' in size <10> not available
-(Font)              Font shape `TU/lmss/m/sl' tried instead on input line 143.
-LaTeX Font Info:    Font shape `TU/lmss/m/it' in size <7> not available
-(Font)              Font shape `TU/lmss/m/sl' tried instead on input line 143.
-LaTeX Font Info:    Font shape `TU/lmss/m/it' in size <5> not available
-(Font)              Font shape `TU/lmss/m/sl' tried instead on input line 143.
-LaTeX Font Info:    Kanji font shape `JY3/mc/m/it' undefined
-(Font)              No change on input line 143.
-
-Overfull \vbox (22.98476pt too high) detected at line 143
- []
-
-[7
-
-] [8
-
-] [9
-
-](load cache: extra_lmsans9-regular.luc)
-LaTeX Font Info:    Font shape `JT3/mc/m/n' will be
-(Font)              scaled to size 8.65997pt on input line 197.
-LaTeX Font Info:    Font shape `JY3/mc/m/n' will be
-(Font)              scaled to size 8.65997pt on input line 197.
-LaTeX Font Info:    Font shape `JY3/gt/m/n' will be
-(Font)              scaled to size 8.65997pt on input line 197.
-LaTeX Font Info:    Font shape `TU/lmss/m/it' in size <9> not available
-(Font)              Font shape `TU/lmss/m/sl' tried instead on input line 197.
-(load cache: extra_lmsans9-oblique.luc)
-<5-nodes-tree-diagrams.png, id=144, 544.0325pt x 543.02875pt>
-File: 5-nodes-tree-diagrams.png Graphic file (type png)
-<use 5-nodes-tree-diagrams.png>
-Package luatex.def Info: 5-nodes-tree-diagrams.png  used on input line 197.
-(luatex.def)             Requested size: 137.11185pt x 136.86066pt.
-<tree-decomposition-rule.png, id=145, 581.17125pt x 471.7625pt>
-File: tree-decomposition-rule.png Graphic file (type png)
-<use tree-decomposition-rule.png>
-Package luatex.def Info: tree-decomposition-rule.png  used on input line 197.
-(luatex.def)             Requested size: 168.59741pt x 136.86066pt.
-
-Overfull \vbox (32.99495pt too high) detected at line 197
- []
-
-[10
-
-<./5-nodes-tree-diagrams.png><./tree-decomposition-rule.png>] [11
-
-] [12
-
-]
-File: 5-nodes-tree-diagrams.png Graphic file (type png)
-<use 5-nodes-tree-diagrams.png>
-Package luatex.def Info: 5-nodes-tree-diagrams.png  used on input line 249.
-(luatex.def)             Requested size: 136.96243pt x 136.70706pt.
-File: tree-decomposition-rule.png Graphic file (type png)
-<use tree-decomposition-rule.png>
-Package luatex.def Info: tree-decomposition-rule.png  used on input line 249.
-(luatex.def)             Requested size: 168.4112pt x 136.70706pt.
-
-Overfull \vbox (18.2889pt too high) detected at line 249
- []
-
-[13
-
-] [14
-
-] [15
-
-] [16
-
-]
-<./ieice2026/Input.png, id=211, 429.605pt x 316.18124pt>
-File: ./ieice2026/Input.png Graphic file (type png)
-<use ./ieice2026/Input.png>
-Package luatex.def Info: ./ieice2026/Input.png  used on input line 334.
-(luatex.def)             Requested size: 318.67624pt x 193.81105pt.
-
-Overfull \vbox (31.4693pt too high) detected at line 334
- []
-
-[17
-
-<./ieice2026/Input.png>]
-<graph-edit1.png, id=219, 684.30656pt x 573.64313pt>
-File: graph-edit1.png Graphic file (type png)
-<use graph-edit1.png>
-Package luatex.def Info: graph-edit1.png  used on input line 354.
-(luatex.def)             Requested size: 205.29355pt x 172.09425pt.
-
-Overfull \hbox (14.09273pt too wide) in paragraph at lines 354--354
- [] 
- []
-
-<graph-edit2.png, id=220, 421.575pt x 428.35031pt>
-File: graph-edit2.png Graphic file (type png)
-<use graph-edit2.png>
-Package luatex.def Info: graph-edit2.png  used on input line 354.
-(luatex.def)             Requested size: 168.627pt x 171.33708pt.
-
-Overfull \vbox (22.56042pt too high) detected at line 354
- []
-
-[18
-
-<./graph-edit1.png><./graph-edit2.png>] [19
-
-]
-<AI.png, id=236, 221.82875pt x 217.81375pt>
-File: AI.png Graphic file (type png)
-<use AI.png>
-Package luatex.def Info: AI.png  used on input line 408.
-(luatex.def)             Requested size: 67.71683pt x 66.48793pt.
-
-Overfull \hbox (23.89932pt too wide) detected at line 408
-[][][][][][][][][][][][] [][][][][][][]
- []
-
-<analysis.png, id=237, 228.855pt x 176.66pt>
-File: analysis.png Graphic file (type png)
-<use analysis.png>
-Package luatex.def Info: analysis.png  used on input line 408.
-(luatex.def)             Requested size: 81.26102pt x 62.72685pt.
-
-Overfull \hbox (23.89932pt too wide) detected at line 408
-[][][][][][][][][][][][] [][][][][][][]
- []
-
-<puzzule.png, id=238, 192.72pt x 225.84375pt>
-File: puzzule.png Graphic file (type png)
-<use puzzule.png>
-Package luatex.def Info: puzzule.png  used on input line 408.
-(luatex.def)             Requested size: 81.26102pt x 95.22589pt.
-
-Overfull \hbox (23.89932pt too wide) detected at line 408
-[][][][][][][][][][][][] [][][][][][][]
- []
-
-
-Overfull \vbox (33.84573pt too high) detected at line 408
- []
-
-[20
-
-<./AI.png><./analysis.png><./puzzule.png>] [21
-
-] [22
-
-] [23
-
-] (./workshop.bbl
-LaTeX Font Info:    Kanji font shape `JY3/mc/m/it' undefined
-(Font)              No change on input line 10.
-LaTeX Font Info:    Kanji font shape `JY3/mc/m/it' undefined
-(Font)              No change on input line 16.
-LaTeX Font Info:    Kanji font shape `JY3/mc/m/it' undefined
-(Font)              No change on input line 50.
-LaTeX Font Info:    Kanji font shape `JY3/mc/m/it' undefined
-(Font)              No change on input line 67.
-LaTeX Font Info:    Kanji font shape `JY3/mc/m/it' undefined
-(Font)              No change on input line 80.
-LaTeX Font Info:    Kanji font shape `JY3/mc/m/it' undefined
-(Font)              No change on input line 86.
-)
-[24
-
-] [25
-
+] [7
 
 ]
 \tf@nav=\write7
 
-\openout7 = workshop.nav
+\openout7 = question.nav
 \tf@toc=\write8
 
-\openout8 = workshop.toc
+\openout8 = question.toc
 \tf@snm=\write9
 
-\openout9 = workshop.snm
- (./workshop.aux)
+\openout9 = question.snm
+ (./question.aux)
  ***********
 LaTeX2e <2025-11-01>
 L3 programming layer <2026-01-19>
  ***********
-
-
-LaTeX Warning: There were multiply-defined labels.
-
-Package rerunfilecheck Info: File `workshop.out' has not changed.
-(rerunfilecheck)             Checksum: 8C0AD7B3C75EEED6980FE61BC15E4C85;802.
+Package rerunfilecheck Info: File `question.out' has not changed.
+(rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
 )
 
 Here is how much of LuaTeX's memory you used:
- 31611 strings out of 476076
+ 31007 strings out of 476076
  125244,1144653 words of node,token memory allocated
- 40379 words of node memory still in use:
-   67 hlist, 8 vlist, 88 rule, 39 disc, 8 local_par, 6 math, 301 glue, 34 kern, 
-85 penalty, 670 glyph, 13786 attribute, 72 glue_spec, 1314 attribute_list, 4 wri
-te, 72 user_defined, 3 pdf_start_link, 3 pdf_end_link, 7 pdf_dest, 3 pdf_action,
- 32 pdf_colorstack nodes
-   avail lists: 1:5,2:14626,3:730,4:675,5:123,6:44,7:3038,8:73,9:824,10:40,11:12
-3
- 53017 multiletter control sequences out of 65536+600000
- 120 fonts using 79543135 bytes
- 105i,13n,115p,2031b,1201s stack positions out of 10000i,1000n,20000p,200000b,200000s
-</usr/local/texlive/2025/texmf-dist/fonts/opentype/public/lm/lmmono9-regular.otf
-></usr/local/texlive/2025/texmf-dist/fonts/opentype/public/lm/lmsans9-oblique.ot
-f></usr/local/texlive/2025/texmf-dist/fonts/opentype/public/lm/lmsans9-regular.o
-tf></usr/local/texlive/2025/texmf-dist/fonts/opentype/public/lm/lmsans8-oblique.
-otf></usr/local/texlive/2025/texmf-dist/fonts/opentype/public/lm/lmsans10-obliqu
-e.otf></usr/local/texlive/2025/texmf-dist/fonts/opentype/public/lm/lmsans10-bold
-.otf></usr/local/texlive/2025/texmf-dist/fonts/opentype/public/lm/lmsans8-regula
-r.otf></usr/local/texlive/2025/texmf-dist/fonts/opentype/public/lm/lmsans10-regu
-lar.otf></usr/local/texlive/2025/texmf-dist/fonts/opentype/public/haranoaji/Hara
-noAjiMincho-Regular.otf></usr/local/texlive/2025/texmf-dist/fonts/opentype/publi
-c/haranoaji/HaranoAjiGothic-Medium.otf></usr/local/texlive/2025/texmf-dist/fonts
-/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2025/texmf-dist/fonts/t
-ype1/public/amsfonts/cm/cmss10.pfb></usr/local/texlive/2025/texmf-dist/fonts/typ
-e1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1
-/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/pu
-blic/amsfonts/symbols/msam10.pfb>
-Output written on workshop.pdf (25 pages, 552744 bytes).
+ 23763 words of node memory still in use:
+   48 hlist, 8 vlist, 166 rule, 1 disc, 7 local_par, 247 glue, 12 kern, 54 penal
+ty, 201 glyph, 8031 attribute, 72 glue_spec, 769 attribute_list, 4 write, 49 use
+r_defined, 30 pdf_colorstack nodes
+   avail lists: 1:4,2:11344,3:129,4:337,5:81,6:24,7:1217,8:9,9:651,10:36,11:11
+ 52512 multiletter control sequences out of 65536+600000
+ 68 fonts using 49643327 bytes
+ 105i,13n,115p,2031b,719s stack positions out of 10000i,1000n,20000p,200000b,200000s
+</usr/local/texlive/2025/texmf-dist/fonts/opentype/public/lm/lmsans8-regular.otf
+></usr/local/texlive/2025/texmf-dist/fonts/opentype/public/lm/lmsans10-bold.otf>
+</usr/local/texlive/2025/texmf-dist/fonts/opentype/public/lm/lmsans8-oblique.otf
+></usr/local/texlive/2025/texmf-dist/fonts/opentype/public/lm/lmsans10-oblique.o
+tf></usr/local/texlive/2025/texmf-dist/fonts/opentype/public/lm/lmsans10-regular
+.otf></usr/local/texlive/2025/texmf-dist/fonts/opentype/public/haranoaji/HaranoA
+jiMincho-Regular.otf></usr/local/texlive/2025/texmf-dist/fonts/opentype/public/h
+aranoaji/HaranoAjiGothic-Medium.otf></usr/local/texlive/2025/texmf-dist/fonts/ty
+pe1/public/amsfonts/cm/cmss10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type
+1/public/amsfonts/cm/cmsy10.pfb>
+Output written on question.pdf (7 pages, 118588 bytes).
 
-PDF statistics: 372 PDF objects out of 1000 (max. 8388607)
- 278 compressed objects within 3 object streams
- 77 named destinations out of 1000 (max. 131072)
- 110 words of extra memory for PDF output out of 10000 (max. 100000000)
+PDF statistics: 110 PDF objects out of 1000 (max. 8388607)
+ 71 compressed objects within 1 object stream
+ 15 named destinations out of 1000 (max. 131072)
+ 16 words of extra memory for PDF output out of 10000 (max. 100000000)
 
