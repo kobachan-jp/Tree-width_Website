@@ -1,0 +1,104 @@
+\documentclass[aspectratio=169]{beamer}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{graphicx}
+\usepackage{luatexja} 
+\usepackage{comment}
+\usepackage{bm}
+\usepackage{setspace}
+\usepackage{caption}
+\usepackage{xcolor}
+\usepackage[numbers]{natbib}
+\usepackage{tikz}
+\usetheme{metropolis}
+\usefonttheme{default}
+%\usetheme{LightTheme}
+\setbeamertemplate{footline}[framenumber]
+\setbeamertemplate{caption}[numbered]
+\setbeamertemplate{navigation symbols}{}
+\setlength{\baselineskip}{10pt}
+\setbeamertemplate{bibliography item}{}
+% プリアンブルに追加
+\setbeamercolor{block title}{bg=green!50, fg=black} % タイトル背景は薄緑、文字は黒
+\setbeamercolor{block body}{bg=green!10, fg=black}  % 本文背景も薄緑、文字は黒
+\setbeamertemplate{blocks}[rounded][shadow=false]     % 角丸にして影なし
+\begin{document}
+
+% タイトルフレーム
+\title{質疑応答用追加スライド}
+\author{明治大学理工学部情報科学科\\ 小林紹子\quad 玉木久夫\quad 井口幸洋} % 必要に応じて変更・削除
+\date{March 16, 2026}
+
+\begin{frame}[plain]
+  \titlepage
+\end{frame}
+
+\begin{frame}{木幅を求める主なアルゴリズム}
+\begin{itemize}
+  \setlength{\parskip}{0.5em}
+    \item \textbf{動的計画法}：\\ $O(2^n)$ 程度の計算量で厳密解を導出する手法. 小規模グラフへの適用が主.
+    \item \textbf{分枝限定法}：\\探索空間を限定して厳密解を求める手法. グラフの構造特性を利用した枝刈りによる効率化.
+    \item \textbf{近似アルゴリズム}：\\ 多項式時間で木幅の上界を求める手法. 大規模グラフにおける実用的な指標として利用.
+    \item \textbf{FPT（固定パラメータ可変）アルゴリズム}：\\木幅 $k$ が定数である場合に線形時間で判定を行う手法. 理論的な最適計算量の実現.
+\end{itemize}
+\vspace{0.5cm}
+
+\end{frame}
+
+\begin{frame}{ディペンダブルコンピューティングにおける木幅の応用}
+\begin{itemize}
+   \setlength{\parskip}{0.5em}
+    \item \textbf{信頼性解析の基礎}：\\グラフ理論はネットワークの故障解析や到達可能性など, ディペンダブルコンピューティングにおける信頼性評価の基礎理論である.
+    \item \textbf{NP困難問題の解決}：\\ネットワーク信頼性などの計算は一般にNP困難である. グラフの木幅が小さい場合, 動的計画法による効率的な解析が可能.
+    \item \textbf{構造的解析の利点}：\\木分解によるグラフのセパレータ分割. 大規模で複雑なシステムにおける計算量の削減と信頼性評価の実現.
+\end{itemize}
+\vspace{0.5cm}
+
+\end{frame}
+
+\begin{frame}{木分解と動的計画法による計算量削減}
+\begin{itemize}
+    \item \textbf{一般グラフの課題}：\\頂点数 $n$ に対し $2^n$ などの指数時間が必要.
+    \item \textbf{木分解による定式化}：\\グラフを木構造へ分解. 各バッグ（部分問題）を木幅 $k$ に基づいて定義.
+    \item \textbf{計算量の転換}：\\$O(2^n)$ から $O(f(k) \cdot n)$ への劇的な改善.
+    \item \textbf{メリット}：\\ グラフが巨大化しても, 木幅 $k$ が小さければ現実的な時間での解析が可能.
+\end{itemize}
+\vspace{0.3cm}
+
+\end{frame}
+
+\begin{frame}{木幅が小さいと何が嬉しいのか}
+\begin{itemize}
+  \setlength{\parskip}{0.5em}
+    \item \textbf{計算量の大幅な削減}：\\一般グラフでは指数時間を要する問題（最大独立集合問題など）が, 木幅 $k$ のグラフに対しては $O(f(k) \cdot n)$ といった計算量で解けるようになる.
+    \item \textbf{動的計画法の適用}：\\グラフを木構造に分解し, 各バッグ（セパレータ）ごとに部分問題を解くことで, 効率的なボトムアップ計算を実現.
+    \item \textbf{現実的な問題への応用}：\\ 大規模な通信ネットワークや回路設計における信頼性評価など, 本来は計算不可能な規模の問題が解析対象となる.
+\end{itemize}
+\vspace{0.5cm}
+\end{frame}
+
+% スライド1：フロントエンドとUI構築
+\begin{frame}{フロントエンド構成と可視化技術}
+\begin{itemize}
+  \setlength{\parskip}{0.5em}
+    \item \textbf{React}：\\ コンポーネント指向による学習画面の柔軟な管理. 状態管理を用いたインタラクティブなUIの実現.
+    \item \textbf{ReactFlow}：\\ ノードとエッジを用いたグラフ可視化ライブラリ. 木分解における「バッグ」と「頂点」の対応関係を直感的に表現.
+    \item \textbf{TypeScript}：\\ JavaScriptに対する静的型付けの導入. 開発時の型エラー検知によるバグの未然防止. 複雑なアルゴリズム実装におけるコードの堅牢性と保守性の向上.
+\end{itemize}
+\vspace{0.3cm}
+
+\end{frame}
+
+% スライド2：バックエンドとデータベース
+\begin{frame}{バックエンドおよびデータ管理}
+\begin{itemize}
+  \setlength{\parskip}{0.5em}
+    \item \textbf{Next.js}：\\ フロントエンドとサーバーサイドを統合したフレームワーク. APIルーティングによるサーバー機能の効率的な構築.
+    \item \textbf{Prisma}：\\ 型安全なデータベース操作を実現するORM. TypeScriptとの高い親和性によるデータモデルの管理.
+    \item \textbf{開発の全体最適}：\\ フロントエンドからデータベースまでを一つの型システムで一貫管理. 型定義の共有による開発効率と安全性の最大化.
+\end{itemize}
+\vspace{0.3cm}
+
+\end{frame}
+\end{document}
