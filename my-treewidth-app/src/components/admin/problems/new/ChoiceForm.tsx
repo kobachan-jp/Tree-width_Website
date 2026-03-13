@@ -8,7 +8,8 @@ export type ChoiceOption = {
   isCorrect: boolean
 }
 
-export function ChoiceForm({ onUpdate }: { onUpdate: (options: ChoiceOption[]) => void }) {
+export function ChoiceForm({ onUpdate
+ }: { onUpdate: (options: ChoiceOption[]) => void }) {
   const [options, setOptions] = useState<ChoiceOption[]>([
     { id: Date.now(), content: '', isCorrect: true },
   ])

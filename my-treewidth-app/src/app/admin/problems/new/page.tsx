@@ -1,11 +1,13 @@
 'use client'
 
 import { useState } from 'react'
+import { useRouter } from 'next/navigation' // 追加
 import { RenderFormFields } from '@/components/admin/problems/new/RenderFormFields'
 import MakeGraph from '@/components/edit/MakeGraph'
 import MakeTree from '@/components/edit/MakeTree'
 
 export default function NewProblemPage() {
+  const router = useRouter() // routerを使えるようにする
   const [text, setText] = useState('')
 
   // ラジオボタンの状態を管理 (true: 作成する, false: 作成しない)
@@ -16,7 +18,7 @@ export default function NewProblemPage() {
   const handleGraphChange = (val: boolean) => {
     setUseGraph(val)
     if (!val) {
-      sessionStorage.removeItem('graph') // 「作成しない」なら即座に消去
+      sessionStorage.removeItem('graph')
     }
   }
 
@@ -24,8 +26,19 @@ export default function NewProblemPage() {
   const handleTreeChange = (val: boolean) => {
     setUseTree(val)
     if (!val) {
-      sessionStorage.removeItem('tree') // 「作成しない」なら即座に消去
+      sessionStorage.removeItem('tree')
     }
+  }
+
+  // ★ 追加：確認画面へ遷移する関数
+  const handleGoToConfirm = () => {
+    // sessionStorageに「グラフ・木を使うかどうか」と「問題文」を保存
+    sessionStorage.setItem('use_graph', JSON.stringify(useGraph))
+    sessionStorage.setItem('use_tree', JSON.stringify(useTree))
+    sessionStorage.setItem('problem_text', text)
+
+    // 確認画面（confirmページ）に飛ばす
+    router.push('/admin/problems/confirm')
   }
 
   return (
@@ -71,7 +84,7 @@ export default function NewProblemPage() {
 
       {/* 問題文セクション */}
       <div style={{ marginBottom: '20px' }}>
-        <label style={{ display: 'block' }}>問題文</label>
+        <label style={{ display: 'block', fontWeight: 'bold' }}>問題文</label>
         <textarea
           value={text}
           onChange={(e) => setText(e.target.value)}
@@ -79,16 +92,34 @@ export default function NewProblemPage() {
             width: '100%',
             height: '100px',
             padding: '8px',
-            // ここに枠線の指定を追加
-            border: '2px solid black', // 太さ、種類、色を指定
-            borderRadius: '4px', // 角を少し丸くすると綺麗です
-            outline: 'none', // クリック時の青い枠を消したい場合
+            border: '2px solid black',
+            borderRadius: '4px',
+            outline: 'none',
           }}
         />
       </div>
 
       {/* 3. 詳細設定コンポーネント */}
       <RenderFormFields />
+
+      {/* ★ 追加：確認画面へのボタン */}
+      <div style={{ marginTop: '40px', textAlign: 'center' }}>
+        <button
+          onClick={handleGoToConfirm}
+          style={{
+            padding: '12px 30px',
+            fontSize: '16px',
+            backgroundColor: '#32CD32',
+            color: 'white',
+            border: 'none',
+            borderRadius: '5px',
+            cursor: 'pointer',
+            fontWeight: 'bold',
+          }}
+        >
+          確認画面へ
+        </button>
+      </div>
     </div>
   )
 }
