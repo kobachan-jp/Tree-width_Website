@@ -1,4 +1,4 @@
-This is LuaHBTeX, Version 1.22.0 (TeX Live 2025)  (format=lualatex 2026.1.31)  13 MAR 2026 17:16
+This is LuaHBTeX, Version 1.22.0 (TeX Live 2025)  (format=lualatex 2026.1.31)  13 MAR 2026 17:26
  restricted system commands enabled.
 **workshop.tex
 (./workshop.tex
@@ -1932,35 +1932,35 @@ Overfull \vbox (18.2889pt too high) detected at line 249
 ] [16
 
 ]
-<./ieice2026/Input.png, id=211, 1391.1975pt x 1189.44376pt>
+<./ieice2026/Input.png, id=211, 429.605pt x 316.18124pt>
 File: ./ieice2026/Input.png Graphic file (type png)
 <use ./ieice2026/Input.png>
-Package luatex.def Info: ./ieice2026/Input.png  used on input line 335.
-(luatex.def)             Requested size: 244.20619pt x 193.8075pt.
+Package luatex.def Info: ./ieice2026/Input.png  used on input line 334.
+(luatex.def)             Requested size: 318.67624pt x 193.81105pt.
 
-Overfull \vbox (31.46574pt too high) detected at line 335
+Overfull \vbox (31.4693pt too high) detected at line 334
  []
 
 [17
 
 <./ieice2026/Input.png>]
-<graph-edit1.png, id=221, 684.30656pt x 573.64313pt>
+<graph-edit1.png, id=219, 684.30656pt x 573.64313pt>
 File: graph-edit1.png Graphic file (type png)
 <use graph-edit1.png>
-Package luatex.def Info: graph-edit1.png  used on input line 355.
+Package luatex.def Info: graph-edit1.png  used on input line 354.
 (luatex.def)             Requested size: 205.29355pt x 172.09425pt.
 
-Overfull \hbox (14.09273pt too wide) in paragraph at lines 355--355
+Overfull \hbox (14.09273pt too wide) in paragraph at lines 354--354
  [] 
  []
 
-<graph-edit2.png, id=222, 421.575pt x 428.35031pt>
+<graph-edit2.png, id=220, 421.575pt x 428.35031pt>
 File: graph-edit2.png Graphic file (type png)
 <use graph-edit2.png>
-Package luatex.def Info: graph-edit2.png  used on input line 355.
+Package luatex.def Info: graph-edit2.png  used on input line 354.
 (luatex.def)             Requested size: 168.627pt x 171.33708pt.
 
-Overfull \vbox (22.56042pt too high) detected at line 355
+Overfull \vbox (22.56042pt too high) detected at line 354
  []
 
 [18
@@ -1968,38 +1968,38 @@ Overfull \vbox (22.56042pt too high) detected at line 355
 <./graph-edit1.png><./graph-edit2.png>] [19
 
 ]
-<AI.png, id=238, 221.82875pt x 217.81375pt>
+<AI.png, id=236, 221.82875pt x 217.81375pt>
 File: AI.png Graphic file (type png)
 <use AI.png>
-Package luatex.def Info: AI.png  used on input line 409.
+Package luatex.def Info: AI.png  used on input line 408.
 (luatex.def)             Requested size: 67.71683pt x 66.48793pt.
 
-Overfull \hbox (23.89932pt too wide) detected at line 409
+Overfull \hbox (23.89932pt too wide) detected at line 408
 [][][][][][][][][][][][] [][][][][][][]
  []
 
-<analysis.png, id=239, 228.855pt x 176.66pt>
+<analysis.png, id=237, 228.855pt x 176.66pt>
 File: analysis.png Graphic file (type png)
 <use analysis.png>
-Package luatex.def Info: analysis.png  used on input line 409.
+Package luatex.def Info: analysis.png  used on input line 408.
 (luatex.def)             Requested size: 81.26102pt x 62.72685pt.
 
-Overfull \hbox (23.89932pt too wide) detected at line 409
+Overfull \hbox (23.89932pt too wide) detected at line 408
 [][][][][][][][][][][][] [][][][][][][]
  []
 
-<puzzule.png, id=240, 192.72pt x 225.84375pt>
+<puzzule.png, id=238, 192.72pt x 225.84375pt>
 File: puzzule.png Graphic file (type png)
 <use puzzule.png>
-Package luatex.def Info: puzzule.png  used on input line 409.
+Package luatex.def Info: puzzule.png  used on input line 408.
 (luatex.def)             Requested size: 81.26102pt x 95.22589pt.
 
-Overfull \hbox (23.89932pt too wide) detected at line 409
+Overfull \hbox (23.89932pt too wide) detected at line 408
 [][][][][][][][][][][][] [][][][][][][]
  []
 
 
-Overfull \vbox (33.84573pt too high) detected at line 409
+Overfull \vbox (33.84573pt too high) detected at line 408
  []
 
 [20
@@ -2086,10 +2086,10 @@ ype1/public/amsfonts/cm/cmss10.pfb></usr/local/texlive/2025/texmf-dist/fonts/typ
 e1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1
 /public/amsfonts/cm/cmsy8.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/pu
 blic/amsfonts/symbols/msam10.pfb>
-Output written on workshop.pdf (26 pages, 620825 bytes).
+Output written on workshop.pdf (26 pages, 554213 bytes).
 
-PDF statistics: 379 PDF objects out of 1000 (max. 8388607)
- 283 compressed objects within 3 object streams
+PDF statistics: 377 PDF objects out of 1000 (max. 8388607)
+ 282 compressed objects within 3 object streams
  79 named destinations out of 1000 (max. 131072)
- 120 words of extra memory for PDF output out of 10000 (max. 100000000)
+ 110 words of extra memory for PDF output out of 10000 (max. 100000000)
 
